@@ -2,6 +2,8 @@ package zork;
 
 import java.util.ArrayList;
 
+import zork.entites.Enemy;
+
 public class Room {
 
   private String roomName;
