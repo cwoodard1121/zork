@@ -20,4 +20,68 @@ public class Player extends Entity {
         this.weapon = weapon;
         this.primeCounter = primeCounter;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public String getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(String weapon) {
+        this.weapon = weapon;
+    }
+
+    public ArrayList<Item> getInventory() {
+        return inventory;
+    }
+
+    public void addItem(Item i) {
+        this.inventory.add(i);
+    }
+
+    public void removeItem(double id) {
+        for(int i = 0; i < inventory.size(); i++) {
+            if(inventory.get(i).getId() == id) inventory.remove(inventory);
+        }
+    }
+
+    public int getPrimeCounter() {
+        return primeCounter;
+    }
+
+    public void setPrimeCounter(int primeCounter) {
+        this.primeCounter = primeCounter;
+    }
+
+    
 }
