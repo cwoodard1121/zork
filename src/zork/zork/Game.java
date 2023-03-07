@@ -14,13 +14,17 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import zork.Constants.PlayerConstants;
+import zork.entites.Player;
+
 public class Game {
 
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
+  private final Player player;
 
   private Parser parser;
   private Room currentRoom;
-  int i = 0;
+  
 
   /**
    * Create the game and initialise its internal map.
@@ -32,7 +36,13 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    parser = new Parser();
+    this.parser = new Parser();
+    this.player = new Player(0, 0, PlayerConstants.DEFAULT_HEALTH, 0,null, null, 0);
+    
+  }
+
+  public Player getPlayer() {
+    return player;
   }
 
   private void initRooms(String fileName) throws Exception {
