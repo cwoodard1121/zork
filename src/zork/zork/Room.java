@@ -6,6 +6,8 @@ public class Room {
 
   private String roomName;
   private String description;
+  private ArrayList<Item> groundItems;
+  private ArrayList<
   private ArrayList<Exit> exits;
 
   public ArrayList<Exit> getExits() {
