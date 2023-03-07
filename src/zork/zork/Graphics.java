@@ -28,12 +28,22 @@ public class Graphics {
         File f = new File(new File("").getAbsolutePath().concat("\\bin\\zork\\data\\cutscene.txt"));
         BufferedReader reader = new BufferedReader(new FileReader(f));
         String line = null;
+        boolean isText = true;
         while((line = reader.readLine()) != null) {
-
+            if(line.contains("@")) {
+                isText = !isText;
+            }
             if(line.contains("&")) {
                 Thread.sleep(frameTime);
             } else {
-                System.out.println(line);
+                for (int i = 0; i < line.length(); i++) {
+                    System.out.print(line.charAt(i));
+                    if((Character.isLetter(line.charAt(i)) && isText)) {
+                        Thread.sleep(75);
+                    }
+                }
+                System.out.println();
+                //System.out.println(line);
             }
         }
         Thread.sleep(frameTime);
