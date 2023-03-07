@@ -1,8 +1,13 @@
 package zork;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.json.simple.JSONArray;
@@ -30,8 +35,14 @@ public class Game {
   }
 
   private void initRooms(String fileName) throws Exception {
-    Path path = Path.of(fileName);
-    String jsonString = new String(Files.readAllBytes(path));
+    File f = new File(fileName);
+    BufferedReader reader = new BufferedReader(new FileReader(f));
+    String line = null;
+    StringBuilder b = new StringBuilder();
+    while((line = reader.readLine()) != null) {
+      b.append(line);
+    }
+    String jsonString = b.toString();
     JSONParser parser = new JSONParser();
     JSONObject json = (JSONObject) parser.parse(jsonString);
 
