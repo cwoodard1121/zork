@@ -1,5 +1,5 @@
 package zork;
-
+import java.io.*;
 
 public class Graphics {
     private Game game;
@@ -22,4 +22,29 @@ public class Graphics {
         return null;
     }
     
+    public void showCutScene(long frameTime) throws InterruptedException, IOException {
+        
+        
+        File f = new File(new File("").getAbsolutePath().concat("\\bin\\zork\\data\\cutscene.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader(f));
+        String line = null;
+        while((line = reader.readLine()) != null) {
+
+            if(line.contains("&")) {
+                Thread.sleep(frameTime);
+            } else {
+                System.out.println(line);
+            }
+        }
+        Thread.sleep(frameTime);
+
+    }
 }
+
+
+
+
+
+
+
+

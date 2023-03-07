@@ -28,7 +28,7 @@ public class Game {
    */
   public Game() {
     try {
-      initRooms("src\\zork\\data\\rooms.json");
+      initRooms("rooms.json");
       currentRoom = roomMap.get("Bedroom");
     } catch (Exception e) {
       e.printStackTrace();
@@ -36,8 +36,10 @@ public class Game {
     parser = new Parser();
   }
 
+    
+
   private void initRooms(String fileName) throws Exception {
-    File f = new File(fileName);
+    File f = new File(new File("").getAbsolutePath().concat("\\bin\\zork\\data\\" + fileName));
     BufferedReader reader = new BufferedReader(new FileReader(f));
     String line = null;
     StringBuilder b = new StringBuilder();
@@ -78,6 +80,7 @@ public class Game {
    * Main play routine. Loops until end of play.
    */
   public void play() {
+    
     printWelcome();
 
     boolean finished = false;
@@ -97,13 +100,17 @@ public class Game {
   /**
    * Print out the opening message for the player.
    */
+
+  private void handleException(Exception e) {
+    // TODO: FINISH
+  }
+
   private void printWelcome() {
-    System.out.println();
-    System.out.println("Welcome to Zork!");
-    System.out.println("Zork is a new, incredibly boring adventure game.");
-    System.out.println("Type 'help' if you need help.");
-    System.out.println();
-    System.out.println(currentRoom.longDescription());
+    try {
+      renderer.showCutScene(1500);
+    } catch (Exception e) {
+      handleException(e);
+    }
   }
 
   /**
