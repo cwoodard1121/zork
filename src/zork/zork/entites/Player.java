@@ -21,32 +21,61 @@ public class Player extends Entity {
         this.moves = move;
     }
 
-    public int getHealth(){
-        return health;
-    }
-
-    public int getDamage(){
-        return damage;
-    }
-
-    public int getX(){
+    public int getX() {
         return x;
     }
 
-    public int getY(){
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
         return y;
     }
 
-    public ArrayList<String> getMoves(){
-        return moves;
+    public void setY(int y) {
+        this.y = y;
     }
 
-    public ArrayList<Item> getInventory(){
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+
+
+    public ArrayList<Item> getInventory() {
         return inventory;
     }
 
-    public int numPrime(){
+    public void addItem(Item i) {
+        this.inventory.add(i);
+    }
+
+    public void removeItem(double id) {
+        for(int i = 0; i < inventory.size(); i++) {
+            if(inventory.get(i).getId() == id) inventory.remove(inventory);
+        }
+    }
+
+    public int getPrimeCounter() {
         return primeCounter;
     }
 
+    public void setPrimeCounter(int primeCounter) {
+        this.primeCounter = primeCounter;
+    }
+
+    
 }

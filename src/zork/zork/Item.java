@@ -4,19 +4,24 @@ public class Item extends OpenableObject {
   private int weight;
   private String name;
   private boolean isOpenable;
+  private double id;
 
 
   public Item(int weight, String name, boolean isOpenable) {
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
-
+    this.id = (Math.random() * (Integer.MAX_VALUE - 1));
   }
 
   public void open() {
     if (!isOpenable)
       System.out.println("The " + name + " cannot be opened.");
 
+  }
+
+  public double getId() {
+    return id;
   }
 
   public int getWeight() {
