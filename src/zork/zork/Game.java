@@ -15,7 +15,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class Game {
-
+  private final Graphics renderer = new Graphics(this);
+  
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
 
   private Parser parser;
