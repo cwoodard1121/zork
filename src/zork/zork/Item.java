@@ -5,10 +5,12 @@ public class Item extends OpenableObject {
   private String name;
   private boolean isOpenable;
 
+
   public Item(int weight, String name, boolean isOpenable) {
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
+
   }
 
   public void open() {
@@ -40,5 +42,6 @@ public class Item extends OpenableObject {
   public void setOpenable(boolean isOpenable) {
     this.isOpenable = isOpenable;
   }
+
 
 }

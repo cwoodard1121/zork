@@ -14,6 +14,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import zork.entites.Player;
+
 public class Game {
 
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
