@@ -9,6 +9,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import zork.openableobjects.Chest;
+
 public class Game {
 
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
@@ -30,8 +32,9 @@ public class Game {
   }
 
   private void initRooms(String fileName) throws Exception {
-    Path path = Path.of(fileName);
-    String jsonString = Files.readString(path);
+    // Path path = Path.of(fileName);
+    // String jsonString = new String(Files.readAllBytes(path));
+    String jsonString = "";
     JSONParser parser = new JSONParser();
     JSONObject json = (JSONObject) parser.parse(jsonString);
 
