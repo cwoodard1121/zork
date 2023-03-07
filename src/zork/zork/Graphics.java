@@ -1,8 +1,5 @@
 package zork;
 
-import java.io.PrintStream;
-
-import java.io.PrintStream;
 
 public class Graphics {
     private Game game;
@@ -19,7 +16,10 @@ public class Graphics {
 
 
     public String createBorder(int length, int height) {
-        StringBuilder
+        StringBuilder borderBuilder = new StringBuilder();
+        // borderBuilder.append()
+        //TODO: FINISH
+        return null;
     }
     
 }
