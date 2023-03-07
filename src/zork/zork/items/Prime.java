@@ -22,7 +22,8 @@ public class Prime extends Item {
         this.fromStore = fromStore;
     }
 
-    
+
+
 
     
 }
