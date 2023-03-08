@@ -11,16 +11,15 @@ public class Player extends Entity {
     private Location location;
     private Room currentRoom;
     private int health;
-    private int damage;
-    private String weapon;
     private ArrayList<Item> inventory;
+    private ArrayList<String> moves;
     private int primeCounter;
 
-    public Player(Location location, Room currentRoom, int health, int damage, String weapon, ArrayList<Item> inventory, int primeCounter){
+    public Player(Location location, Room currentRoom, int health, String weapon, ArrayList<Item> inventory, int primeCounter){
         super(location, currentRoom, health, inventory);
-        this.damage = damage;
         this.weapon = weapon;
         this.primeCounter = primeCounter;
+        this.moves = move;
     }
 
     public Location getLocation() {
@@ -45,22 +44,6 @@ public class Player extends Entity {
 
     public void setHealth(int health) {
         this.health = health;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public String getWeapon() {
-        return weapon;
-    }
-
-    public void setWeapon(String weapon) {
-        this.weapon = weapon;
     }
 
     public ArrayList<Item> getInventory() {
