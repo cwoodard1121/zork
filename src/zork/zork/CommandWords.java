@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 import zork.commands.Go;
 
-public class CommandWords {
-  // a constant array that holds all valid command words
-  private static final HashMap<String,Command> commands = new HashMap<>();
+public class Commands {
+  // a constant array that holds all valid commands
+  public static final HashMap<String,Command> commands = new HashMap<>();
 
 
 
