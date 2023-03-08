@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import datatypes.Location;
 import zork.Entity;
 import zork.Item;
+import zork.Moves;
 import zork.Room;
 
 public class Player extends Entity {
@@ -12,12 +13,11 @@ public class Player extends Entity {
     private Room currentRoom;
     private int health;
     private ArrayList<Item> inventory;
-    private ArrayList<String> moves;
+    private ArrayList<Moves> moves;
     private int primeCounter;
 
-    public Player(Location location, Room currentRoom, int health, String weapon, ArrayList<Item> inventory, int primeCounter){
+    public Player(Location location, Room currentRoom, int health, int damage, ArrayList<Item> inventory, int primeCounter, ArrayList<Moves> move){
         super(location, currentRoom, health, inventory);
-        this.weapon = weapon;
         this.primeCounter = primeCounter;
         this.moves = move;
     }
