@@ -2,21 +2,16 @@ package zork.entites;
 
 import java.util.ArrayList;
 
+import datatypes.Location;
 import zork.Entity;
 import zork.Item;
+import zork.Room;
 
 public class Enemy extends Entity {
-    private int x;
-    private int y;
     private int health;
     private ArrayList<String> moves;
     private ArrayList<Item> inventory;
 
-    public Enemy(int x, int y, int health, String weapon, ArrayList<Item> inventory, ArrayList<String> move){
-        super(x, y, health, inventory);
-        this.moves = move;
-        
-    }
 
     public static void fight(){
         //when fighting item has to be a weapon 
@@ -26,17 +21,16 @@ public class Enemy extends Entity {
         return health;
     }
 
-    public int getX(){
-        return x;
-    }
-
-    public int getY(){
-        return y;
-    }
 
     public ArrayList<String> getMoves(){
         return moves;
     }
+
+    public Enemy(Location location, Room currentRoom, int health, String weapon, ArrayList<Item> inventory){
+        super(location, currentRoom, health, inventory);
+        this.weapon = weapon;
+    }
+
 
     public ArrayList<Item> getInventory(){
         return inventory;

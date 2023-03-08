@@ -2,38 +2,41 @@ package zork.entites;
 
 import java.util.ArrayList;
 
+import datatypes.Location;
 import zork.Entity;
 import zork.Item;
+import zork.Room;
 
 public class Player extends Entity {
-    private int x;
-    private int y;
+    private Location location;
+    private Room currentRoom;
     private int health;
     private ArrayList<Item> inventory;
     private ArrayList<String> moves;
     private int primeCounter;
 
-    public Player(int x, int y, int health, ArrayList<Item> inventory, int primeCounter, ArrayList<String> move){
-        super(x, y, health, inventory);
+    public Player(Location location, Room currentRoom, int health, String weapon, ArrayList<Item> inventory, int primeCounter){
+        super(location, currentRoom, health, inventory);
+        this.weapon = weapon;
         this.primeCounter = primeCounter;
         this.moves = move;
     }
 
-    public int getX() {
-        return x;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public int getY() {
-        return y;
+    public Room getRoom() {
+        return this.currentRoom;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
+    public void changeRoom(Room r) {
+        this.currentRoom = r;
+    } 
 
     public int getHealth() {
         return health;
@@ -53,7 +56,7 @@ public class Player extends Entity {
 
     public void removeItem(double id) {
         for(int i = 0; i < inventory.size(); i++) {
-            if(inventory.get(i).getId() == id) inventory.remove(inventory);
+            if(inventory.get(i).getId() == id) inventory.remove(i);
         }
     }
 

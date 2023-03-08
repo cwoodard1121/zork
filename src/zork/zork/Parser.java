@@ -3,17 +3,17 @@ package zork;
 import java.util.Scanner;
 
 public class Parser {
-  private CommandWords commands; // holds all valid command words
   private Scanner in;
+  private String[] args;
 
   public Parser() {
-    commands = new CommandWords();
     in = new Scanner(System.in);
   }
 
   public Command getCommand() throws java.io.IOException {
-    String inputLine = "";
     String[] words;
+    String inputLine = "";
+    Command c = new Command();
 
     System.out.print("> "); // print prompt
 
@@ -21,21 +21,24 @@ public class Parser {
 
     words = inputLine.split(" ");
 
-    String word1 = words[0];
-    String word2 = null;
-    if (words.length > 1)
-      word2 = words[1];
-
-    if (commands.isCommand(word1))
-      return new Command(word1, word2);
-    else
-      return new Command(null, word2);
+    int i = 1;
+    for(String word : words) {
+      if(i == 1) {
+        c = Constants.CommandConstants.commands.get(word);
+        i++;
+        continue;
+      }
+      args[i] = word;
+      i++;
+    }
+    return c;
   }
 
   /**
    * Print out a list of valid command words.
    */
-  public void showCommands() {
-    commands.showAll();
+
+  public String[] getParams() {
+    return args;
   }
 }
