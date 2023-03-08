@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Parser {
   private CommandWords commands; // holds all valid command words
   private Scanner in;
+  private String[] args;
 
   public Parser() {
     commands = new CommandWords();
@@ -14,6 +15,7 @@ public class Parser {
   public Command getCommand() throws java.io.IOException {
     String inputLine = "";
     String[] words;
+    Command c = new Command();
 
     System.out.print("> "); // print prompt
 
@@ -21,15 +23,17 @@ public class Parser {
 
     words = inputLine.split(" ");
 
-    String word1 = words[0];
-    String word2 = null;
-    if (words.length > 1)
-      word2 = words[1];
-
-    if (commands.isCommand(word1))
-      return new Command(word1, word2);
-    else
-      return new Command(null, word2);
+    int i = 1;
+    for(String word : words) {
+      if(i == 1) {
+        c = new Command(word);
+        i++;
+        continue;
+      }
+      args[i] = word;
+      i++;
+    }
+    return c;
   }
 
   /**
@@ -37,5 +41,9 @@ public class Parser {
    */
   public void showCommands() {
     commands.showAll();
+  }
+
+  public String[] getParams() {
+    return args;
   }
 }
