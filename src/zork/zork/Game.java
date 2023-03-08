@@ -42,7 +42,7 @@ public class Game {
       e.printStackTrace();
     }
     this.parser = new Parser();
-    this.player = new Player(new Location(0, 0), new Room(), PlayerConstants.DEFAULT_HEALTH, 0, new ArrayList<Item>(), 0, new ArrayList<String>());
+    this.player = new Player(new Location(0, 0), new Room(), PlayerConstants.DEFAULT_HEALTH, 0, new ArrayList<Item>(), 0, new ArrayList<Moves>());
     
   }
 
