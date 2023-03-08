@@ -9,13 +9,11 @@ public class Enemy extends Entity {
     private int x;
     private int y;
     private int health;
-    private int damage;
     private ArrayList<String> moves;
     private ArrayList<Item> inventory;
 
-    public Enemy(int x, int y, int health, int damage, String weapon, ArrayList<Item> inventory, ArrayList<String> move){
+    public Enemy(int x, int y, int health, String weapon, ArrayList<Item> inventory, ArrayList<String> move){
         super(x, y, health, inventory);
-        this.damage = damage;
         this.moves = move;
         
     }
@@ -26,10 +24,6 @@ public class Enemy extends Entity {
 
     public int getHealth(){
         return health;
-    }
-
-    public int getDamage(){
-        return damage;
     }
 
     public int getX(){
