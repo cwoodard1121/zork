@@ -27,6 +27,12 @@ public class Enemy extends Entity {
         return moves;
     }
 
+    public Enemy(Location location, Room currentRoom, int health, String weapon, ArrayList<Item> inventory){
+        super(location, currentRoom, health, inventory);
+        
+    }
+
+
     public ArrayList<Item> getInventory(){
         return inventory;
     }
