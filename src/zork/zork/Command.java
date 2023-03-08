@@ -1,46 +1,27 @@
 package zork;
 
 public class Command {
-  private String commandWord;
-  private String secondWord;
+  private String name;
 
   /**
-   * Create a command object. First and second word must be supplied, but either
-   * one (or both) can be null. The command word should be null to indicate that
-   * this was a command that is not recognised by this game.
+   * Create a command object. Only need to supply the name and then use override the
+   * runCommand method for it to actually do stuff.
    */
-  public Command(String firstWord, String secondWord) {
-    commandWord = firstWord;
-    this.secondWord = secondWord;
+  public Command(String name) {
+    this.name = name;
   }
 
+  /* Blank constructor for unknown commands. */
+  public Command() {}
+
+  
   /**
-   * Return the command word (the first word) of this command. If the command was
-   * not understood, the result is null.
+   * 
+   * @param args
+   * @return Console otuput
    */
-  public String getCommandWord() {
-    return commandWord;
+  public String runCommand(String... args) {
+    return "Invalid command: " + name;
   }
 
-  /**
-   * Return the second word of this command. Returns null if there was no second
-   * word.
-   */
-  public String getSecondWord() {
-    return secondWord;
-  }
-
-  /**
-   * Return true if this command was not understood.
-   */
-  public boolean isUnknown() {
-    return (commandWord == null);
-  }
-
-  /**
-   * Return true if the command has a second word.
-   */
-  public boolean hasSecondWord() {
-    return (secondWord != null);
-  }
 }
