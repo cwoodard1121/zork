@@ -7,7 +7,7 @@ public class storyBoard {
      * --North leads to bus terminal
      * --South leads to subways (closed due to common TTC safety issue, soft locked)
      * --west leads to faculty rest area
-     * --east leads back to go trains (soft locked)
+     * --east leads back to go trains
      * 
      * (North of York Mills(terminal))
      * --Yonge street shuttle bus
