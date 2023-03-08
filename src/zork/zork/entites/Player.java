@@ -45,7 +45,6 @@ public class Player extends Entity {
         this.health = health;
     }
 
-
     public ArrayList<Item> getInventory() {
         return inventory;
     }

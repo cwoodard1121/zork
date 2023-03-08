@@ -12,8 +12,9 @@ public class Enemy extends Entity {
     private ArrayList<String> moves;
     private ArrayList<Item> inventory;
 
-    public Enemy(Location location, Room currentRoom, int health, String weapon, ArrayList<Item> inventory){
+    public Enemy(Location location, Room currentRoom, int health, ArrayList<Item> inventory, ArrayList<String> moves){
         super(location, currentRoom, health, inventory);
+        this.moves = moves;
     }
 
 
