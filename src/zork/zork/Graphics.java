@@ -29,21 +29,30 @@ public class Graphics {
         BufferedReader reader = new BufferedReader(new FileReader(f));
         String line = null;
         boolean isText = true;
+        boolean isTextBypass = false;
         while((line = reader.readLine()) != null) {
             if(line.contains("@")) {
                 isText = !isText;
-            }
-            if(line.contains("&")) {
+                continue;
+            } if(line.contains("&")) {
                 Thread.sleep(frameTime);
-            } else {
+                continue;
+            } if(line.contains("~")) {
+                isTextBypass = !isTextBypass;
+                continue;
+            }
+            
+            else {
                 for (int i = 0; i < line.length(); i++) {
                     System.out.print(line.charAt(i));
-                    if((Character.isLetter(line.charAt(i)) && isText)) {
-                        Thread.sleep(150);
+                    if(((Character.isLetter(line.charAt(i)) && isText) || isTextBypass)) {
+                        Thread.sleep(75);
                     }
                 }
                 System.out.println();
-                //System.out.println(line);
+            } if(line.contains("~")) {
+                isTextBypass = !isTextBypass;
+                continue;
             }
         }
         Thread.sleep(frameTime);
