@@ -1,13 +1,28 @@
 package zork;
 
+import java.util.HashMap;
+
+import zork.commands.Go;
+
 public class CommandWords {
   // a constant array that holds all valid command words
-  private static final String validCommands[] = { "go", "quit", "help", "eat" };
+  private static final HashMap<String,Command> commands = new HashMap<>();
 
+
+
+  /**
+   * PUT COMMAND DEFINITIONS IN THIS STATIC
+   * static blocks allow you to quickly define things as soon as the class is accessed
+   * allowing things to be initialized right before we need them
+   */
+  static {
+    commands.put("go", new Go("go"));
+  }
   /**
    * Constructor - initialise the command words.
    */
   public CommandWords() {
+  
     // nothing to do at the moment...
   }
 
@@ -16,21 +31,14 @@ public class CommandWords {
    * false if it isn't.
    **/
   public boolean isCommand(String aString) {
-    for (String c : validCommands) {
-      if (c.equals(aString))
-        return true;
-    }
-    // if we get here, the string was not found in the commands
-    return false;
+    //TODO: FIX
+    return true;
   }
 
   /*
    * Print all valid commands to System.out.
    */
   public void showAll() {
-    for (String c : validCommands) {
-      System.out.print(c + "  ");
-    }
-    System.out.println();
+    //TODO: FIX
   }
 }
