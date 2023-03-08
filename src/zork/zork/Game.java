@@ -36,8 +36,8 @@ public class Game {
    */
   public Game() {
     try {
-      initRooms("src\\zork\\data\\rooms.json");
-      currentRoom = roomMap.get("Bedroom");
+      // initRooms("src\\zork\\data\\rooms.json");
+      // currentRoom = roomMap.get("Bedroom");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -121,15 +121,13 @@ public class Game {
     System.out.println("Zork is a new, incredibly boring adventure game.");
     System.out.println("Type 'help' if you need help.");
     System.out.println();
-    System.out.println(currentRoom.longDescription());
   }
 
   /**
-   * Given a command, process (that is: execute) the command. If this command ends
-   * the game, true is returned, otherwise false is returned.
+   * Given a command, process (that is: execute) the command.
    */
   private void processCommand(Command command, String[] args) {
-    command.runCommand(args);
+    System.out.println(command.runCommand(args));
   }
 
   // implementations of user commands:

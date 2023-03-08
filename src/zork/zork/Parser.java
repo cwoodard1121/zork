@@ -13,8 +13,8 @@ public class Parser {
   }
 
   public Command getCommand() throws java.io.IOException {
-    String inputLine = "";
     String[] words;
+    String inputLine = "";
     Command c = new Command();
 
     System.out.print("> "); // print prompt
@@ -26,7 +26,7 @@ public class Parser {
     int i = 1;
     for(String word : words) {
       if(i == 1) {
-        c = new Command(word);
+        c = CommandWords.commands.get(word);
         i++;
         continue;
       }
