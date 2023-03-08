@@ -39,7 +39,7 @@ public class Graphics {
                 for (int i = 0; i < line.length(); i++) {
                     System.out.print(line.charAt(i));
                     if((Character.isLetter(line.charAt(i)) && isText)) {
-                        Thread.sleep(75);
+                        Thread.sleep(150);
                     }
                 }
                 System.out.println();
