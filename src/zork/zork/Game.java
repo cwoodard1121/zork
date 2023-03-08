@@ -20,7 +20,7 @@ import zork.entites.Player;
 
 public class Game {
 
-
+  private final Graphics renderer = new Graphics(this);
   public static Game game = new Game();
   public static boolean finished = false;
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
@@ -38,6 +38,7 @@ public class Game {
     try {
       // initRooms("src\\zork\\data\\rooms.json");
       // currentRoom = roomMap.get("Bedroom");
+
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -54,8 +55,10 @@ public class Game {
     return player;
   }
 
+    
+
   private void initRooms(String fileName) throws Exception {
-    File f = new File(fileName);
+    File f = new File(new File("").getAbsolutePath().concat("\\bin\\zork\\data\\" + fileName));
     BufferedReader reader = new BufferedReader(new FileReader(f));
     String line = null;
     StringBuilder b = new StringBuilder();
@@ -96,6 +99,7 @@ public class Game {
    * Main play routine. Loops until end of play.
    */
   public void play() {
+    
     printWelcome();
 
     while (!finished) {
@@ -115,12 +119,26 @@ public class Game {
   /**
    * Print out the opening message for the player.
    */
+
+  private void handleException(Exception e) {
+    // TODO: FINISH
+  }
+
   private void printWelcome() {
+    titleCard c = new titleCard();
+    c.printTitle();
+    try {
+      renderer.showCutScene(1500);
+    } catch (Exception e) {
+      handleException(e);
+    }
+
     System.out.println();
-    System.out.println("Welcome to Zork!");
     System.out.println("Zork is a new, incredibly boring adventure game.");
     System.out.println("Type 'help' if you need help.");
     System.out.println();
+
+
   }
 
   /**
