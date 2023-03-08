@@ -9,13 +9,11 @@ import zork.Room;
 
 public class Enemy extends Entity {
     private int health;
-    private int damage;
     private ArrayList<String> moves;
     private ArrayList<Item> inventory;
 
-    public Enemy(Location location, Room currentRoom, int health, int damage, String weapon, ArrayList<Item> inventory){
+    public Enemy(Location location, Room currentRoom, int health, String weapon, ArrayList<Item> inventory){
         super(location, currentRoom, health, inventory);
-        this.damage = damage;
     }
 
 
@@ -23,9 +21,6 @@ public class Enemy extends Entity {
         return health;
     }
 
-    public int getDamage(){
-        return damage;
-    }
 
     public ArrayList<String> getMoves(){
         return moves;
