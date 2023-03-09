@@ -1,6 +1,8 @@
 package zork;
 import java.io.*;
 
+import javax.xml.transform.stream.StreamSource;
+
 public class Graphics {
     private Game game;
 
@@ -20,6 +22,14 @@ public class Graphics {
         // borderBuilder.append()
         //TODO: FINISH
         return null;
+    }
+
+    public void slowTextSpeed(String text, int delay) throws InterruptedException {
+        for(int i = 0; i < text.length(); i++) {
+            System.out.print(text.charAt(i));
+            Thread.sleep(delay);
+        }
+        System.out.println();
     }
     
     public void showCutScene(long frameTime) throws InterruptedException, IOException {

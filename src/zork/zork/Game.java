@@ -97,8 +97,9 @@ public class Game {
 
   /**
    * Main play routine. Loops until end of play.
+   * @throws InterruptedException
    */
-  public void play() {
+  public void play() throws InterruptedException {
     
     printWelcome();
 
@@ -124,7 +125,7 @@ public class Game {
     // TODO: FINISH
   }
 
-  private void printWelcome() {
+  private void printWelcome() throws InterruptedException {
     titleCard c = new titleCard();
     c.printTitle();
     try {
@@ -133,7 +134,6 @@ public class Game {
       handleException(e);
     }
 
-    System.out.println();
     System.out.println("Zork is a new, incredibly boring adventure game.");
     System.out.println("Type 'help' if you need help.");
     System.out.println();

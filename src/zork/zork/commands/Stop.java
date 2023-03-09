@@ -3,14 +3,15 @@ package zork.commands;
 import zork.Command;
 import zork.Game;
 
-public class Start extends Command {
-    public Start(String name) {
+public class Stop extends Command{
+    public Stop (String name) {
         super(name);
     }
 
     @Override
     public String runCommand(String... args) {
-        return "Starting Game...";
+      Game.getGame().finished = true;
+      return "Exitting game...";  
     }
 
     
