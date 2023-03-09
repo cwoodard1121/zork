@@ -56,12 +56,24 @@ public class Player extends Entity {
         this.health = health;
     }
 
+    public ArrayList<Moves> getMoves() {
+        return moves;
+    }
+
+    public void setMoves(ArrayList<Moves> moves) {
+        this.moves = moves;
+    }
+
     public ArrayList<Item> getInventory() {
         return inventory;
     }
 
     public void addItem(Item i) {
         this.inventory.add(i);
+    }
+
+    public void addMoves(Moves i) {
+        this.moves.add(i);
     }
 
     public void removeItem(double id) {
