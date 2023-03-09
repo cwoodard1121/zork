@@ -13,6 +13,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import sun.audio.*;
 
 import datatypes.SoundPlayerUsingClip;
 import zork.commands.EnterSubway;
@@ -40,22 +41,19 @@ public class Constants {
         playSound("subway.wav");
     }
 
+    public static synchronized void playTitleSound() {
+        
+    }
+
     public static synchronized void playSound(String soundName) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    File soundFile = new File("C:\\Users\\cwoodard\\Desktop\\zork repo\\zork\\bin\\zork\\data\\" + soundName);
-                    System.out.println(soundFile.getPath());
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(getClass().getClassLoader().getResourceAsStream("subway.wav"));
-                    AudioFormat audioFormat = inputStream.getFormat();
-                    DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
-                    Clip clip = (Clip) AudioSystem.getLine(info);
-                    clip.addLineListener(new SoundPlayerUsingClip());
-                    clip.open(inputStream);
-                    clip.start();
-                    clip.close();
-                    inputStream.close();
+                    File soundFile = new File(new File(".").getPath() + "\\bin\\zork\\data\\" + soundName);
+                    FileInputStream stream = new FileInputStream(soundFile);
+                    AudioStream audioStream = new AudioStream(stream);
+                    AudioPlayer.player.start(audioStream);
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
