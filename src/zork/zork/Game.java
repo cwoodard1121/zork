@@ -38,6 +38,7 @@ public class Game {
    * Create the game and initialise its internal map.
    */
   public Game() {
+    Constants.initCommands();
     try {
       // initRooms("src\\zork\\data\\rooms.json");
       // currentRoom = roomMap.get("Bedroom");
