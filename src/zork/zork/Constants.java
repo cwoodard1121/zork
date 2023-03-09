@@ -3,6 +3,7 @@ package zork;
 import java.util.HashMap;
 
 import zork.commands.Go;
+import zork.commands.Stop;
 
 public class Constants {
     public static final class PlayerConstants {
@@ -17,5 +18,6 @@ public class Constants {
          */
     public static void initCommands() {
         CommandConstants.commands.put("go", new Go("go"));
+        CommandConstants.commands.put("stop", new Stop("stop"));
     }
 }
