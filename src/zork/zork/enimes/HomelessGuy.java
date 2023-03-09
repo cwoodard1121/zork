@@ -12,8 +12,8 @@ import zork.Room;
 
 public class HomelessGuy extends Enemy {
 
-    public HomelessGuy(Location location, Room currentRoom, int health, ArrayList<Item> inventory, ArrayList<Moves> moves, int money){
-        super(location, currentRoom, health, inventory, moves, money);
+    public HomelessGuy(Location location, Room currentRoom, int health, ArrayList<Item> inventory, ArrayList<Moves> moves, int money, int speed){
+        super(location, currentRoom, health, inventory, moves, money, speed);
     }
 
     public void create() {
@@ -27,6 +27,7 @@ public class HomelessGuy extends Enemy {
         ArrayList<Moves> attacks = new ArrayList<>(); attacks.add(punch);
         setMoves(attacks);
         setMoney(2.50);
+        setSpeed(8);
 
     }
     

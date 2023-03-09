@@ -15,12 +15,14 @@ public class Enemy extends Entity {
     private ArrayList<Item> inventory;
     private ArrayList<Moves> moves;
     private double moneyDroped;
+    private int speed;
 
 
-    public Enemy(Location location, Room currentRoom, int health, ArrayList<Item> inventory, ArrayList<Moves> moves, int money){
+    public Enemy(Location location, Room currentRoom, int health, ArrayList<Item> inventory, ArrayList<Moves> moves, int money, int speed){
         super(location, currentRoom, health, inventory);
         this.moves = moves;
         this.moneyDroped = money;
+        this.speed = speed;
     }
 
 
@@ -60,6 +62,16 @@ public class Enemy extends Entity {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+
+    public int getSpeed() {
+        return speed;
+    }
+
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
 
