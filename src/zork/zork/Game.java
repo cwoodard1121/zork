@@ -10,6 +10,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,6 +25,7 @@ public class Game {
   private final Graphics renderer = new Graphics(this);
   public static Game game = new Game();
   public static boolean finished = false;
+  public static boolean isTesting = true;
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
 
   private final Player player;
@@ -107,6 +110,7 @@ public class Game {
       Command command;
       try {
         command = parser.getCommand();
+        System.out.println(command.getName());
         String[] params = parser.getParams();
         processCommand(command,params);
       } catch (IOException e) {
@@ -126,13 +130,24 @@ public class Game {
   }
 
   private void printWelcome() throws InterruptedException {
+    if(isTesting) return;
+    Scanner in = new Scanner(System.in);
     titleCard c = new titleCard();
     c.printTitle();
-    try {
-      renderer.showCutScene(1500);
-    } catch (Exception e) {
-      handleException(e);
+    boolean hasStart = false;
+    while(!hasStart) {
+      String result = in.nextLine().toLowerCase();
+      if(result.equals("start")) {
+        hasStart = true;
+        try {
+          renderer.showCutScene(1500);
+        } catch (Exception e) {
+          handleException(e);
+        }
+      } else {
+        System.out.println("Please ender a valid command");
     }
+   }
 
     System.out.println("Zork is a new, incredibly boring adventure game.");
     System.out.println("Type 'help' if you need help.");

@@ -24,4 +24,8 @@ public class Command {
     return "Invalid command: " + name;
   }
 
+  public String getName() {
+    return name;
+  }
+
 }

@@ -21,6 +21,7 @@ public class Parser {
 
     words = inputLine.split(" ");
 
+    if(words.length > 1) {
     int i = 1;
     for(String word : words) {
       if(i == 1) {
@@ -30,6 +31,9 @@ public class Parser {
       }
       args[i] = word;
       i++;
+    }
+    } else {
+      c = Constants.CommandConstants.commands.get(words[0]);
     }
     return c;
   }
