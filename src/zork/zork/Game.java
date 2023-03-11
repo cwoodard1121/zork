@@ -133,11 +133,13 @@ public class Game {
     if(isTesting) return;
     Scanner in = new Scanner(System.in);
     titleCard c = new titleCard();
+    Constants.playTitleSound();
     c.printTitle();
     boolean hasStart = false;
     while(!hasStart) {
       String result = in.nextLine().toLowerCase();
       if(result.equals("start")) {
+        Constants.SoundConstants.playSounds.replace("mainmenu.wav", true, false);
         hasStart = true;
         try {
           renderer.showCutScene(1500);

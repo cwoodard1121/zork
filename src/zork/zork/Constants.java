@@ -25,6 +25,10 @@ public class Constants {
         public static final int DEFAULT_HEALTH = 100;
     }
 
+    public static final class SoundConstants {
+        public static final HashMap<String,Boolean> playSounds = new HashMap<>();
+    }
+
     public static final class CommandConstants {
         public static final HashMap<String,Command> commands = new HashMap<>();
     }
@@ -38,14 +42,15 @@ public class Constants {
     }
 
     public static synchronized void subwaySound() {
-        playSound("subway.wav");
+        playSound("subway.wav",3);
     }
 
     public static synchronized void playTitleSound() {
-        
+        playSound("mainmenu.wav",51);
     }
 
-    public static synchronized void playSound(String soundName) {
+    public static synchronized void playSound(String soundName, int seconds) {
+        Constants.SoundConstants.playSounds.put(soundName, true);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -54,6 +59,12 @@ public class Constants {
                     FileInputStream stream = new FileInputStream(soundFile);
                     AudioStream audioStream = new AudioStream(stream);
                     AudioPlayer.player.start(audioStream);
+                    int i = 0;
+                    while(i < seconds && Constants.SoundConstants.playSounds.get(soundName)) {
+                        i++;
+                        Thread.sleep(1000);
+                    }
+                    AudioPlayer.player.stop(audioStream);
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
