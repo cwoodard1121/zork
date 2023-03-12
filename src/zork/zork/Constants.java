@@ -42,14 +42,16 @@ public class Constants {
     }
 
     public static synchronized void subwaySound() {
-        playSound("subway.wav",3);
+        playSound("subway.wav",3,false);
     }
 
     public static synchronized void playTitleSound() {
-        playSound("mainmenu.wav",51);
+        playSound("mainmenu.wav",25,true);
     }
 
-    public static synchronized void playSound(String soundName, int seconds) {
+
+    public static synchronized void playSound(String soundName, int secs, boolean loop) {
+        final int seconds = secs;
         Constants.SoundConstants.playSounds.put(soundName, true);
         new Thread(new Runnable() {
             @Override
@@ -60,9 +62,24 @@ public class Constants {
                     AudioStream audioStream = new AudioStream(stream);
                     AudioPlayer.player.start(audioStream);
                     int i = 0;
-                    while(i < seconds && Constants.SoundConstants.playSounds.get(soundName)) {
-                        i++;
-                        Thread.sleep(1000);
+                    if(loop) {
+                        while(Constants.SoundConstants.playSounds.get(soundName)) {
+                            if(i >= seconds) {
+                                AudioPlayer.player.stop(audioStream);
+                                soundFile = new File(new File(".").getPath() + "\\bin\\zork\\data\\" + soundName);
+                                stream = new FileInputStream(soundFile);
+                                audioStream = new AudioStream(stream);
+                                AudioPlayer.player.start(audioStream);
+                                i = 0;
+                            }
+                            i++;
+                            Thread.sleep(1000);
+                        }
+                    } else {
+                        while(i < seconds && Constants.SoundConstants.playSounds.get(soundName)) {
+                            i++;
+                            Thread.sleep(1000);
+                        }
                     }
                     AudioPlayer.player.stop(audioStream);
                 } catch(Exception e) {
