@@ -29,6 +29,11 @@ public class Constants {
         public static final HashMap<String,Boolean> playSounds = new HashMap<>();
     }
 
+    public static final class RenderConstants {
+        public static final int BORDER_LENGTH = 20;
+        public static final int BORDER_HEIGHT = 20;
+    }
+
     public static final class CommandConstants {
         public static final HashMap<String,Command> commands = new HashMap<>();
     }
@@ -46,7 +51,7 @@ public class Constants {
     }
 
     public static synchronized void playTitleSound() {
-        playSound("mainmenu.wav",25,true);
+        playSound("mainmenu.wav",43,true);
     }
 
 

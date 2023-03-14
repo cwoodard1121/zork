@@ -1,19 +1,29 @@
 package zork;
 import java.io.*;
 
-import javax.xml.transform.stream.StreamSource;
+import zork.Constants.RenderConstants;
+
 
 public class Graphics {
     private Game game;
 
+
+    public static void main(String[] args) {
+        new Graphics(Game.getGame()).render();
+        // for testing renderer only
+    }
 
     public Graphics(Game game) {
         this.game = game;
     }
 
     public void render() {
-        StringBuilder builder = new StringBuilder();
-        
+        StringBuilder renderer = new StringBuilder();
+        for(int i = 0; i < RenderConstants.BORDER_LENGTH; i++) {
+            renderer.append("-");
+        }
+        renderer.append("\n");
+        System.out.println(renderer.toString());
     }
 
 
