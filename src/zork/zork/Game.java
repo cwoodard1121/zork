@@ -62,8 +62,7 @@ public class Game {
     
 
   private void initRooms(String fileName) throws Exception {
-    File f = new File(new File("").getAbsolutePath().concat("\\bin\\zork\\data\\" + fileName));
-    BufferedReader reader = new BufferedReader(new FileReader(f));
+    BufferedReader reader = Utils.getReaderFromBin(fileName);
     String line = null;
     StringBuilder b = new StringBuilder();
     while((line = reader.readLine()) != null) {
@@ -133,7 +132,7 @@ public class Game {
     if(isTesting) return;
     Scanner in = new Scanner(System.in);
     titleCard c = new titleCard();
-    Constants.playTitleSound();
+    Utils.playTitleSound();
     c.printTitle();
     boolean hasStart = false;
     while(!hasStart) {
