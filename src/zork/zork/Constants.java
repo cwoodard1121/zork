@@ -27,13 +27,12 @@ public class Constants {
     public static final class CommandConstants {
         public static final HashMap<String,Command> commands = new HashMap<>();
     }
-        /**
-         * This static block registers every command, do this after you make one.
-         */
+
+
     public static void initCommands() {
-        CommandConstants.commands.put("go", new Go("go"));
-        CommandConstants.commands.put("stop", new Stop("stop"));
-        CommandConstants.commands.put("entersubway", new EnterSubway("entersubway"));
+        Utils.registerCommand(Go.class);
+        Utils.registerCommand(Stop.class);
+        Utils.registerCommand(EnterSubway.class);
     }
 
 

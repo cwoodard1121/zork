@@ -6,8 +6,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 import sun.audio.*;
+import zork.Constants.CommandConstants;
 
 public class Utils {
 
@@ -39,6 +42,21 @@ public class Utils {
         return null;
     }
 
+    /**
+     * Registers command to the command list.
+     * @param command
+     */
+    public static void registerCommand(Class<? extends Command> command) {
+        String name = command.getSimpleName().toLowerCase();
+        System.out.println(name);
+        try {
+            Constructor<? extends Command> constructor = command.getConstructor(String.class);
+            Command c = constructor.newInstance(name);
+            CommandConstants.commands.put(name,c);
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static synchronized void subwaySound() {
         playSound("subway.wav",3,false);

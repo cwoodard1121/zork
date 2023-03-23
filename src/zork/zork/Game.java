@@ -25,7 +25,7 @@ public class Game {
   private final Graphics renderer = new Graphics(this);
   public static Game game = new Game();
   public static boolean finished = false;
-  public static boolean isTesting = false;
+  public static boolean isTesting = true;
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
 
   private final Player player;
