@@ -29,10 +29,17 @@ public class Constants {
     }
 
 
+    /**
+     * Registers all commands in the zork.commands package using reflection
+     */
     public static void initCommands() {
-        Utils.registerCommand(Go.class);
-        Utils.registerCommand(Stop.class);
-        Utils.registerCommand(EnterSubway.class);
+        try {
+            for(Class<?> command : Utils.getClasses("zork.commands")) {
+                Utils.registerCommand((Class<? extends Command>) command);
+            }
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
