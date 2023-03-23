@@ -11,7 +11,7 @@ public class Stop extends Command{
     @Override
     public String runCommand(String... args) {
       Game.getGame().finished = true;
-      return "Exitting game...";  
+      return "Exiting game...";  
     }
 
     

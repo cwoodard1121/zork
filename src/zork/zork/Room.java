@@ -16,7 +16,7 @@ public class Room {
     return exits;
   }
 
-  public void setExits(ArrayList<Exit> exits) {
+  public void setExits(final ArrayList<Exit> exits) {
     this.exits = exits;
   }
 
@@ -24,7 +24,7 @@ public class Room {
    * Create a room described "description". Initially, it has no exits.
    * "description" is something like "a kitchen" or "an open court yard".
    */
-  public Room(String description) {
+  public Room(final String description) {
     this.description = description;
     exits = new ArrayList<Exit>();
   }
@@ -35,7 +35,7 @@ public class Room {
     exits = new ArrayList<Exit>();
   }
 
-  public void addExit(Exit exit) throws Exception {
+  public void addExit(final Exit exit) throws Exception {
     exits.add(exit);
   }
 
@@ -62,7 +62,7 @@ public class Room {
    */
   private String exitString() {
     String returnString = "Exits: ";
-    for (Exit exit : exits) {
+    for (final Exit exit : exits) {
       returnString += exit.getDirection() + " ";
     }
 
@@ -73,18 +73,18 @@ public class Room {
    * Return the room that is reached if we go from this room in direction
    * "direction". If there is no room in that direction, return null.
    */
-  public Room nextRoom(String direction) {
+  public Room nextRoom(final String direction) {
     try {
-      for (Exit exit : exits) {
+      for (final Exit exit : exits) {
 
         if (exit.getDirection().equalsIgnoreCase(direction)) {
-          String adjacentRoom = exit.getAdjacentRoom();
+          final String adjacentRoom = exit.getAdjacentRoom();
 
           return Game.roomMap.get(adjacentRoom);
         }
 
       }
-    } catch (IllegalArgumentException ex) {
+    } catch (final IllegalArgumentException ex) {
       System.out.println(direction + " is not a valid direction.");
       return null;
     }
@@ -104,7 +104,7 @@ public class Room {
     return roomName;
   }
 
-  public void setRoomName(String roomName) {
+  public void setRoomName(final String roomName) {
     this.roomName = roomName;
   }
 
@@ -112,7 +112,7 @@ public class Room {
     return description;
   }
 
-  public void setDescription(String description) {
+  public void setDescription(final String description) {
     this.description = description;
   }
 }
