@@ -12,7 +12,9 @@ public class Command {
   }
 
   /* Blank constructor for unknown commands. */
-  public Command() {}
+  public Command() {
+    this.name = "Unknown";
+  }
 
   
   /**

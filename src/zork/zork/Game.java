@@ -115,6 +115,8 @@ public class Game {
         processCommand(command,params);
       } catch (IOException e) {
         e.printStackTrace();
+      } catch (NullPointerException e) {
+        System.out.println("Unknown command.");
       }
 
     }
@@ -146,7 +148,7 @@ public class Game {
           handleException(e);
         }
       } else {
-        System.out.println("Please ender a valid command");
+        System.out.println("Please enter a valid command");
     }
    }
 

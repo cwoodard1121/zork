@@ -10,7 +10,7 @@ public class Stop extends Command{
 
     @Override
     public String runCommand(String... args) {
-      Game.getGame().finished = true;
+      Game.finished = true;
       return "Exiting game...";  
     }
 
