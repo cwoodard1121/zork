@@ -16,6 +16,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import datatypes.CommandNotFoundException;
 import datatypes.Location;
 import zork.Constants.PlayerConstants;
 import zork.entites.Player;
@@ -110,13 +111,12 @@ public class Game {
       Command command;
       try {
         command = parser.getCommand();
-        System.out.println(command.getName());
         String[] params = parser.getParams();
         processCommand(command,params);
-      } catch (IOException e) {
-        e.printStackTrace();
       } catch (NullPointerException e) {
-        System.out.println("Unknown command.");
+        e.printStackTrace();
+      } catch (CommandNotFoundException e) {
+        e.printStackTrace();
       }
 
     }

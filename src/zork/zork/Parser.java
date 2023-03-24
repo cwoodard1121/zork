@@ -2,6 +2,9 @@ package zork;
 
 import java.util.Scanner;
 
+import datatypes.CommandNotFoundException;
+import zork.Constants.CommandConstants;
+
 public class Parser {
   private Scanner in;
   private String[] args;
@@ -10,7 +13,7 @@ public class Parser {
     in = new Scanner(System.in);
   }
 
-  public Command getCommand() throws java.io.IOException {
+  public Command getCommand() throws CommandNotFoundException {
     String[] words;
     String inputLine = "";
     Command c = new Command();
@@ -25,6 +28,9 @@ public class Parser {
     int i = 1;
     for(String word : words) {
       if(i == 1) {
+        if(!CommandConstants.commands.containsKey(word)) {
+          throw new CommandNotFoundException(inputLine);
+        }
         c = Constants.CommandConstants.commands.get(word);
         i++;
         continue;
@@ -33,6 +39,9 @@ public class Parser {
       i++;
     }
     } else {
+      if(!CommandConstants.commands.containsKey(words[0])) {
+        throw new CommandNotFoundException(inputLine);
+      }
       c = Constants.CommandConstants.commands.get(words[0]);
     }
     return c;
