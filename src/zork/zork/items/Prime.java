@@ -23,6 +23,78 @@ public class Prime extends Item {
     }
 
 
+    public int getWeight() {
+        return weight;
+    }
+
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public boolean isOpenable() {
+        return isOpenable;
+    }
+
+
+    public void setOpenable(boolean isOpenable) {
+        this.isOpenable = isOpenable;
+    }
+
+
+    public String getColor() {
+        return color;
+    }
+
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+
+    public int getPercentFull() {
+        return percentFull;
+    }
+
+
+    public void setPercentFull(int percentFull) {
+        this.percentFull = percentFull;
+    }
+
+
+    public boolean isFromStore() {
+        return fromStore;
+    }
+
+
+    public void setFromStore(boolean fromStore) {
+        this.fromStore = fromStore;
+    }
+
+
+    public String getOrigin() {
+        return origin;
+    }
+
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    
+
+
 
 
     

@@ -7,6 +7,7 @@ import zork.Entity;
 import zork.Item;
 import zork.Moves;
 import zork.Room;
+import zork.items.Prime;
 
 public class Player extends Entity {
     private Location location;
@@ -62,6 +63,12 @@ public class Player extends Entity {
 
     public int getPrimeCounter() {
         return primeCounter;
+    }
+
+    public void calculatePrimeCounter() {
+        inventory.forEach(item -> {
+            if(item instanceof Prime) primeCounter++;
+        });
     }
 
     public void setPrimeCounter(int primeCounter) {

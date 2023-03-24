@@ -1,6 +1,5 @@
 package datatypes;
 
-import zork.Command;
 import zork.Game;
 
 public class CommandNotFoundException extends Exception {

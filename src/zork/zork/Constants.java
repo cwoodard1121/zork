@@ -13,6 +13,7 @@ import zork.commands.Stop;
 public class Constants {
     public static final class PlayerConstants {
         public static final int DEFAULT_HEALTH = 100;
+        public static final int MAX_INVENTORY_WEIGHT = 100;
     }
 
     public static final class SoundConstants {
