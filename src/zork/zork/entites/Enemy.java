@@ -28,10 +28,6 @@ public class Enemy extends Entity {
         return health;
     }
 
-    public void create() {
-        
-    }
-
 
     public ArrayList<Moves> getMoves(){
         return moves;

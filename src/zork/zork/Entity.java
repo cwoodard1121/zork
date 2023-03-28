@@ -17,6 +17,10 @@ public class Entity {
         this.inventory = inventory;
     }
 
+    public void create() {
+        
+    }
+
 
 
 
