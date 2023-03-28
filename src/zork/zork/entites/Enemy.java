@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import datatypes.Location;
 import zork.Entity;
+import zork.Inventory;
 import zork.Item;
 import zork.Moves;
 import zork.Room;
@@ -17,7 +18,7 @@ public class Enemy extends Entity {
     private double moneyDroped;
 
 
-    public Enemy(Location location, Room currentRoom, int health, ArrayList<Item> inventory, ArrayList<Moves> moves, int money){
+    public Enemy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Moves> moves, int money){
         super(location, currentRoom, health, inventory);
         this.moves = moves;
         this.moneyDroped = money;

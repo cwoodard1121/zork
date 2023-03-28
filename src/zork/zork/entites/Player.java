@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import datatypes.Location;
 import zork.Entity;
+import zork.Inventory;
 import zork.Item;
 import zork.Moves;
 import zork.Room;
@@ -13,11 +14,11 @@ public class Player extends Entity {
     private Location location;
     private Room currentRoom;
     private int health;
-    private ArrayList<Item> inventory;
+    private Inventory inventory;
     private ArrayList<Moves> moves;
     private int primeCounter;
 
-    public Player(Location location, Room currentRoom, int health, int damage, ArrayList<Item> inventory, int primeCounter, ArrayList<Moves> move){
+    public Player(Location location, Room currentRoom, int health, int damage, Inventory inventory, int primeCounter, ArrayList<Moves> move){
         super(location, currentRoom, health, inventory);
         this.primeCounter = primeCounter;
         this.moves = move;
@@ -47,26 +48,18 @@ public class Player extends Entity {
         this.health = health;
     }
 
-    public ArrayList<Item> getInventory() {
+    public Inventory getInventory() {
         return inventory;
     }
 
-    public void addItem(Item i) {
-        this.inventory.add(i);
-    }
 
-    public void removeItem(double id) {
-        for(int i = 0; i < inventory.size(); i++) {
-            if(inventory.get(i).getId() == id) inventory.remove(i);
-        }
-    }
 
     public int getPrimeCounter() {
         return primeCounter;
     }
 
     public void calculatePrimeCounter() {
-        inventory.forEach(item -> {
+        inventory.getItems().forEach(item -> {
             if(item instanceof Prime) primeCounter++;
         });
     }
