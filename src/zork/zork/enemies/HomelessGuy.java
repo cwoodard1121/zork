@@ -1,4 +1,4 @@
-package zork.enimes;
+package zork.enemies;
 
 import java.util.ArrayList;
 
@@ -6,13 +6,14 @@ import zork.entites.Enemy;
 import zork.items.Weapon;
 import datatypes.Location;
 import zork.Entity;
+import zork.Inventory;
 import zork.Item;
 import zork.Moves;
 import zork.Room;
 
 public class HomelessGuy extends Enemy {
 
-    public HomelessGuy(Location location, Room currentRoom, int health, ArrayList<Item> inventory, ArrayList<Moves> moves, int money){
+    public HomelessGuy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Moves> moves, int money){
         super(location, currentRoom, health, inventory, moves, money);
     }
 

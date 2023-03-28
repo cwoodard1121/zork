@@ -16,6 +16,10 @@ public class Constants {
         public static final int MAX_INVENTORY_WEIGHT = 100;
     }
 
+    public static final class EntityConstants {
+        public static final int MAX_INVENTORY_WEIGHT = 25;
+    }
+
     public static final class SoundConstants {
         public static final HashMap<String,Boolean> playSounds = new HashMap<>();
     }
