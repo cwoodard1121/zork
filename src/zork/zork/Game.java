@@ -59,13 +59,13 @@ public class Game {
     return player;
   }
 
-    
+  @Deprecated
   /**
    * This method should only be used when testing so that we can export rooms using java
    * instead of having to write them in the god awful json file. run this and it will export
    * all the rooms in the roomsMap.
    */
-  private void exportRooms() {
+  public void exportRooms() {
     final BufferedWriter roomWriter =  Utils.getWriterFromBin("rooms.json");
     try {
       roomWriter.write(gson.toJson(roomMap));
