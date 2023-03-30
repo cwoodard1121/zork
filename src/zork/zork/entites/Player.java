@@ -6,7 +6,7 @@ import datatypes.Location;
 import zork.Entity;
 import zork.Inventory;
 import zork.Item;
-import zork.Moves;
+import zork.Move;
 import zork.Room;
 import zork.items.Prime;
 
@@ -15,10 +15,10 @@ public class Player extends Entity {
     private Room currentRoom;
     private int health;
     private Inventory inventory;
-    private ArrayList<Moves> moves;
+    private ArrayList<Move> moves;
     private int primeCounter;
 
-    public Player(Location location, Room currentRoom, int health, int damage, Inventory inventory, int primeCounter, ArrayList<Moves> move){
+    public Player(Location location, Room currentRoom, int health, int damage, Inventory inventory, int primeCounter, ArrayList<Move> move){
         super(location, currentRoom, health, inventory);
         this.primeCounter = primeCounter;
         this.moves = move;
