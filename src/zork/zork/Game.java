@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
@@ -59,6 +60,14 @@ public class Game {
   }
 
     
+  /**
+   * This method should only be used when testing so that we can export rooms using java
+   * instead of having to write them in the god awful json file. run this and it will export
+   * all the rooms in the roomsMap.
+   */
+  private void exportRooms() {
+
+  }
 
   private void initRooms(String fileName) throws Exception {
     BufferedReader reader = Utils.getReaderFromBin(fileName);
@@ -68,6 +77,8 @@ public class Game {
       b.append(line);
     }
     Gson gson = new Gson();
+    roomMap = (HashMap<String, Room>) gson.fromJson(b.toString(), Map.class);
+    //TODO: FINISH
     String jsonString = b.toString();
     JSONParser parser = new JSONParser();
     JSONObject json = (JSONObject) parser.parse(jsonString);
