@@ -12,9 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.google.gson.Gson;
 
 import datatypes.CommandNotFoundException;
 import datatypes.Location;
@@ -69,6 +67,7 @@ public class Game {
     while((line = reader.readLine()) != null) {
       b.append(line);
     }
+    Gson gson = new Gson();
     String jsonString = b.toString();
     JSONParser parser = new JSONParser();
     JSONObject json = (JSONObject) parser.parse(jsonString);
