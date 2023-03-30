@@ -1,6 +1,7 @@
 package zork;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -23,6 +24,7 @@ import zork.entites.Player;
 public class Game {
 
   private final Graphics renderer = new Graphics(this);
+  private final Gson gson = new Gson();
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean isTesting = true;
@@ -30,8 +32,6 @@ public class Game {
 
   private final Player player;
   private final Parser parser;
-
-  private Room currentRoom;
   
 
   /**
@@ -66,7 +66,13 @@ public class Game {
    * all the rooms in the roomsMap.
    */
   private void exportRooms() {
+    final BufferedWriter roomWriter =  Utils.getWriterFromBin("rooms.json");
+    try {
+      roomWriter.write(gson.toJson(roomMap));
+      roomWriter.close();
+    } catch(IOException e) {
 
+    }
   }
 
   private void initRooms(String fileName) throws Exception {
@@ -76,37 +82,10 @@ public class Game {
     while((line = reader.readLine()) != null) {
       b.append(line);
     }
-    Gson gson = new Gson();
-    roomMap = (HashMap<String, Room>) gson.fromJson(b.toString(), Map.class);
-    //TODO: FINISH
+    // this is so much simpler and it should actually work.
     String jsonString = b.toString();
-    JSONParser parser = new JSONParser();
-    JSONObject json = (JSONObject) parser.parse(jsonString);
+    roomMap = (HashMap<String, Room>) gson.fromJson(jsonString, Map.class);
 
-    JSONArray jsonRooms = (JSONArray) json.get("rooms");
-
-    for (Object roomObj : jsonRooms) {
-      Room room = new Room();
-      String roomName = (String) ((JSONObject) roomObj).get("name");
-      String roomId = (String) ((JSONObject) roomObj).get("id");
-      String roomDescription = (String) ((JSONObject) roomObj).get("description");
-      room.setDescription(roomDescription);
-      room.setRoomName(roomName);
-
-      JSONArray jsonExits = (JSONArray) ((JSONObject) roomObj).get("exits");
-      ArrayList<Exit> exits = new ArrayList<Exit>();
-      for (Object exitObj : jsonExits) {
-        String direction = (String) ((JSONObject) exitObj).get("direction");
-        String adjacentRoom = (String) ((JSONObject) exitObj).get("adjacentRoom");
-        String keyId = (String) ((JSONObject) exitObj).get("keyId");
-        Boolean isLocked = (Boolean) ((JSONObject) exitObj).get("isLocked");
-        Boolean isOpen = (Boolean) ((JSONObject) exitObj).get("isOpen");
-        Exit exit = new Exit(direction, adjacentRoom, isLocked, keyId, isOpen);
-        exits.add(exit);
-      }
-      room.setExits(exits);
-      roomMap.put(roomId, room);
-    }
   }
 
   /**

@@ -1,9 +1,11 @@
 package zork;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -43,6 +45,19 @@ public class Utils {
         try {
             return new BufferedReader(new InputStreamReader(new FileInputStream(soundFile)));
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * @param fileName
+     * @return BufferedWriter of the file that is selected, relative to the bin directory.
+     */
+    public static BufferedWriter getWriterFromBin(String fileName) {
+        File soundFile = new File(new File(".").getPath() + "\\bin\\zork\\data\\" + fileName);
+        try {
+            return new BufferedWriter(new FileWriter(soundFile));
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
