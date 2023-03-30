@@ -85,7 +85,6 @@ public class Game {
     // this is so much simpler and it should actually work.
     String jsonString = b.toString();
     roomMap = (HashMap<String, Room>) gson.fromJson(jsonString, Map.class);
-
   }
 
   /**
@@ -129,12 +128,17 @@ public class Game {
     while(!hasStart) {
       String result = in.nextLine().toLowerCase();
       if(result.equals("start")) {
-        Constants.SoundConstants.playSounds.replace("mainmenu.wav", true, false);
+        Utils.stopSound("mainmenu.wav");
         hasStart = true;
         try {
           renderer.showCutScene(1500);
         } catch (Exception e) {
           handleException(e);
+        }
+        try {
+          initRooms("rooms.json");
+        } catch (Exception e) {
+          e.printStackTrace();
         }
       } else {
         System.out.println("Please enter a valid command");
