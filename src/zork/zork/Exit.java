@@ -5,21 +5,21 @@ package zork;
  */
 public class Exit extends OpenableObject {
   private String direction;
-  private String adjacentRoom;
+  private Room adjacentRoom;
 
-  public Exit(String direction, String adjacentRoom, boolean isLocked, String keyId) {
+  public Exit(String direction, Room adjacentRoom, boolean isLocked, String keyId) {
     super(isLocked, keyId);
     this.direction = direction;
     this.adjacentRoom = adjacentRoom;
   }
 
-  public Exit(String direction, String adjacentRoom, boolean isLocked, String keyId, Boolean isOpen) {
+  public Exit(String direction, Room adjacentRoom, boolean isLocked, String keyId, Boolean isOpen) {
     super(isLocked, keyId, isOpen);
     this.direction = direction;
     this.adjacentRoom = adjacentRoom;
   }
 
-  public Exit(String direction, String adjacentRoom) {
+  public Exit(String direction, Room adjacentRoom) {
     this.direction = direction;
     this.adjacentRoom = adjacentRoom;
   }
@@ -32,12 +32,13 @@ public class Exit extends OpenableObject {
     this.direction = direction;
   }
 
-  public String getAdjacentRoom() {
+  public Room getAdjacentRoom() {
     return adjacentRoom;
   }
 
-  public void setAdjacentRoom(String adjacentRoom) {
+  public void setAdjacentRoom(Room adjacentRoom) {
     this.adjacentRoom = adjacentRoom;
   }
 
+ 
 }
