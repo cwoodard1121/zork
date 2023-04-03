@@ -15,13 +15,15 @@ public class Player extends Entity {
     private Room currentRoom;
     private int health;
     private Inventory inventory;
-    private ArrayList<Move> moves;
+    private ArrayList<Move> move;
     private int primeCounter;
+    private int speed;
 
     public Player(Location location, Room currentRoom, int health, int damage, Inventory inventory, int primeCounter, ArrayList<Move> move){
         super(location, currentRoom, health, inventory);
         this.primeCounter = primeCounter;
-        this.moves = move;
+        this.move = move;
+        this.speed = speed;
     }
 
     public Location getLocation() {
@@ -36,6 +38,22 @@ public class Player extends Entity {
         return this.currentRoom;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
+    public ArrayList<Move> getMove() {
+        return move;
+    }
+
+    public void setMove(ArrayList<Move> move) {
+        this.move = move;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
     public void changeRoom(Room r) {
         this.currentRoom = r;
     } 
@@ -48,11 +66,10 @@ public class Player extends Entity {
         this.health = health;
     }
 
+
     public Inventory getInventory() {
-        return inventory;
+       return inventory;
     }
-
-
 
     public int getPrimeCounter() {
         return primeCounter;

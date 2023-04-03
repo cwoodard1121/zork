@@ -12,8 +12,10 @@ import zork.Constants.EntityConstants;
 
 public class HomelessGuy extends Enemy {
 
-    public HomelessGuy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Move> moves, int money){
+
+    public HomelessGuy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Move> moves, int money, int speed){
         super(location, currentRoom, health, inventory, moves, money);
+        
     }
 
     public void create() {
@@ -28,6 +30,7 @@ public class HomelessGuy extends Enemy {
         ArrayList<Move> attacks = new ArrayList<>(); attacks.add(punch);
         setMoves(attacks);
         setMoney(2.50);
+        setSpeed(8);
 
     }
     
