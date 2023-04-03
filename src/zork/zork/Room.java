@@ -21,6 +21,27 @@ public class Room {
   }
 
 
+  
+
+  /**
+   * gets the items on the ground in the room
+   * @return
+   */
+  public ArrayList<Item> getGroundItems() {
+    return groundItems;
+  }
+
+
+  /**
+   * removes it from the ground
+   * @param i
+   * @return the item that got removed
+   */
+  public Room removeFromGround(Item i) {
+    groundItems.remove(i);
+    return this;
+  }
+
   /**
    * Create a room described "description". Initially, it has no exits.
    * "description" is something like "a kitchen" or "an open court yard".
