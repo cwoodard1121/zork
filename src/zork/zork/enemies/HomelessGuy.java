@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import zork.entites.Enemy;
 import zork.items.Weapon;
 import datatypes.Location;
-import zork.Entity;
 import zork.Inventory;
-import zork.Item;
 import zork.Move;
 import zork.Room;
+import zork.Constants.EntityConstants;
 
 public class HomelessGuy extends Enemy {
 
@@ -21,9 +20,10 @@ public class HomelessGuy extends Enemy {
        //needs location
        //needs current room
         setHealth(15);
-        Weapon glove = new Weapon(10, "dirty gloves", false, 2);
-        ArrayList<Item> stuff = new ArrayList<>(); stuff.add(glove);
-        setInventory(stuff);
+        Weapon glove = new Weapon( 10, "dirty gloves", false, 2);
+        Inventory i = new Inventory(EntityConstants.MAX_INVENTORY_WEIGHT);
+        i.addItem(glove);
+        setInventory(i);
         Move punch = new Move("punch", 0, null);
         ArrayList<Move> attacks = new ArrayList<>(); attacks.add(punch);
         setMoves(attacks);

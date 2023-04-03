@@ -10,7 +10,7 @@ public class Room {
   private String description;
   private ArrayList<Item> groundItems;
   private ArrayList<Enemy> enemies;
-  private ArrayList<Exit> exits;
+  private ArrayList<Exit> exits = new ArrayList<>();
 
   public ArrayList<Exit> getExits() {
     return exits;
@@ -19,6 +19,7 @@ public class Room {
   public void setExits(final ArrayList<Exit> exits) {
     this.exits = exits;
   }
+
 
   /**
    * Create a room described "description". Initially, it has no exits.
@@ -35,7 +36,7 @@ public class Room {
     exits = new ArrayList<Exit>();
   }
 
-  public void addExit(final Exit exit) throws Exception {
+  public void addExit(final Exit exit) {
     exits.add(exit);
   }
 
@@ -78,9 +79,8 @@ public class Room {
       for (final Exit exit : exits) {
 
         if (exit.getDirection().equalsIgnoreCase(direction)) {
-          final String adjacentRoom = exit.getAdjacentRoom();
 
-          return Game.roomMap.get(adjacentRoom);
+          return exit.getAdjacentRoom();
         }
 
       }

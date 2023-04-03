@@ -1,0 +1,1 @@
+{"York Mills Go Bus Terminal":{"roomName":"York Mills Go Bus Terminal","description":"There are buses and homeless people around.","exits":[{"direction":"N","adjacentRoom":{"description":"Sidewalk","exits":[]},"isLocked":false,"isOpen":false}]}}

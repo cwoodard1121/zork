@@ -10,10 +10,6 @@ import zork.Move;
 import zork.Room;
 
 public class Enemy extends Entity {
-    private Location location;
-    private Room currentRoom;
-    private int health;
-    private ArrayList<Item> inventory;
     private ArrayList<Move> moves;
     private double moneyDroped;
 
@@ -23,51 +19,6 @@ public class Enemy extends Entity {
         this.moves = moves;
         this.moneyDroped = money;
     }
-
-
-    public int getHealth(){
-        return health;
-    }
-
-
-    public ArrayList<Move> getMoves(){
-        return moves;
-    }
-
-    public ArrayList<Item> getInventory(){
-        return inventory;
-    }
-
-
-    public Location getLocation() {
-        return location;
-    }
-
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
-
-
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-
-    public void setInventory(ArrayList<Item> inventory) {
-        this.inventory = inventory;
-    }
-
 
     public void setMoves(ArrayList<Move> moves) {
         this.moves = moves;

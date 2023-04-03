@@ -144,7 +144,7 @@ public class Utils {
      * plays title music
      */
     public static synchronized void playTitleSound() {
-        playSound("mainmenu.wav",43,true);
+        playSound("mainmenu.wav",44,true);
     }
 
 

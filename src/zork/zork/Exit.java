@@ -40,5 +40,6 @@ public class Exit extends OpenableObject {
     this.adjacentRoom = adjacentRoom;
   }
 
+
  
 }

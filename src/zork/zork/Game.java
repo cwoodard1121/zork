@@ -2,13 +2,7 @@ package zork;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +21,7 @@ public class Game {
   private final Gson gson = new Gson();
   public static Game game = new Game();
   public static boolean finished = false;
+  public static boolean shouldCreateRooms = false;
   public static boolean isTesting = true;
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
 
@@ -66,6 +61,7 @@ public class Game {
    * all the rooms in the roomsMap.
    */
   public void exportRooms() {
+    if(!isTesting) return;
     final BufferedWriter roomWriter =  Utils.getWriterFromBin("rooms.json");
     try {
       roomWriter.write(gson.toJson(roomMap));
@@ -74,6 +70,22 @@ public class Game {
 
     }
   }
+
+  /**
+   * This method will not be here at the final product its just to create the initital rooms
+   */
+  public void createRooms() {
+    if(isTesting && shouldCreateRooms) {
+      Room sidewalk = new Room("Sidewalk");
+    
+      Exit e = new Exit("N",sidewalk);
+      Room r = new Room("There are buses and homeless people around.");
+      r.setRoomName("York Mills Go Bus Terminal");
+      r.addExit(e);
+      roomMap.put(r.getRoomName(), r);
+    }
+  }
+
 
   private void initRooms(String fileName) throws Exception {
     BufferedReader reader = Utils.getReaderFromBin(fileName);
@@ -94,7 +106,8 @@ public class Game {
   public void play() throws InterruptedException {
     
     printWelcome();
-
+    createRooms();
+    this.player.setCurrentRoom(roomMap.get("York Mills Go Bus Terminal"));
     while (!finished) {
       Command command;
       try {
@@ -107,7 +120,7 @@ public class Game {
         e.printStackTrace();
       }
 
-    }
+    } 
   }
 
   /**
