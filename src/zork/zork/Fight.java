@@ -11,18 +11,26 @@ public class Fight {
         this.enemy = bad;
     }
 
+    private int playerHealth = Game.getGame().getPlayer().getHealth();
+    private int enemyHealth = enemy.getHealth();
+
+    private int playerSpeed = Game.getGame().getPlayer().getSpeed();
+    private int enemySpeed = enemy.getSpeed();
+    
+    private ArrayList<Item> playerStuff = Game.getGame().getPlayer().getInventory().getItems();
+    private ArrayList<Item> enemyStuff = enemy.getInventory().getItems();
+
+    private ArrayList<Move> playerMoves = Game.getGame().getPlayer().getMove();
+    private ArrayList<Move> enemyMoves = enemy.getMoves();
+
     public void fight(){
-        int playerHealth = Game.getGame().getPlayer().getHealth();
-        int enemyHealth = enemy.getHealth();
+        while(playerHealth>0 || enemyHealth>0){
+            if(playerSpeed>enemySpeed){
+                boolean won = fightingResults();
+            }else{
 
-        int playerSpeed = Game.getGame().getPlayer().getSpeed();
-        int enemySpeed = enemy.getSpeed();
-        
-        ArrayList<Item> playerStuff = Game.getGame().getPlayer().getInventory();
-        ArrayList<Item> enemyStuff = enemy.getInventory();
-
-        ArrayList<Moves> playerMoves = Game.getGame().getPlayer().getMoves();
-        ArrayList<Moves> enemyMoves = enemy.getMoves();
+            }
+        }
 
         /*Fighting
          * Whoever has most speed goes first, lets say its player
@@ -36,6 +44,11 @@ public class Fight {
          * 
          * 
          */
+
+    }
+
+    private boolean fightingResults() {
+        return false;
 
     }
 }
