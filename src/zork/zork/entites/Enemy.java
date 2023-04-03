@@ -12,13 +12,28 @@ import zork.Room;
 public class Enemy extends Entity {
     private ArrayList<Move> moves;
     private double moneyDroped;
+    private int speed;
+
 
 
     public Enemy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Move> moves, int money){
+
         super(location, currentRoom, health, inventory);
         this.moves = moves;
         this.moneyDroped = money;
+        this.speed = speed;
     }
+
+
+    public int getSpeed() {
+        return speed;
+    }
+
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
 
     public void setMoves(ArrayList<Move> moves) {
         this.moves = moves;
