@@ -2,6 +2,8 @@ package zork;
 
 import java.util.ArrayList;
 
+import zork.items.Weapon;
+
 public class Inventory {
   private ArrayList<Item> items;
   private int maxWeight;
@@ -54,6 +56,16 @@ public class Inventory {
     else {
       return false;
     }
+  }
+
+  public ArrayList<Weapon> getWeapons(){
+    ArrayList<Weapon> arr = new ArrayList<Weapon>();
+    for(int i = 0; i<items.size(); i++){
+      if(items.get(i) instanceof Weapon){
+        arr.set(i, (Weapon) items.get(i));
+      }
+    }
+    return arr;
   }
 
 }

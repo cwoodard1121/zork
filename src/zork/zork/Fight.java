@@ -3,8 +3,11 @@ package zork;
 import java.util.ArrayList;
 
 import zork.entites.Enemy;
+import zork.items.Weapon;
+import java.util.Scanner;
 
 public class Fight {
+    static Scanner in = new Scanner(System.in);
     private Enemy enemy;
 
     public Fight(Enemy bad){
@@ -24,11 +27,12 @@ public class Fight {
     private ArrayList<Move> enemyMoves = enemy.getMoves();
 
     public void fight(){
+         boolean didWin;
         while(playerHealth>0 || enemyHealth>0){
             if(playerSpeed>enemySpeed){
-                boolean won = fightingResults();
+                didWin = fightingResults(true);
             }else{
-
+                didWin = fightingResults(false);
             }
         }
 
@@ -47,8 +51,28 @@ public class Fight {
 
     }
 
-    private boolean fightingResults() {
-        return false;
+    private boolean fightingResults(boolean isPlayerFirst) {
+        if(isPlayerFirst){
+            Move move = askQuestion1();
+            Weapon weapon = askQuestion2();
+        }
 
     }
+    
+    private Move askQuestion1() {
+        while(true){
+            System.out.println("What move do you want to use?");
+            System.out.println(Game.getGame().getPlayer().getMove());
+            Move arr = in.next();
+        }
+        return null;
+    }
+    
+    private Weapon askQuestion2() {
+        return null;
+    }
+
+    
+
+    
 }
