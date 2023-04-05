@@ -21,12 +21,35 @@ public class Player extends Entity {
     private int primeCounter;
     private int speed;
     private boolean isInMoveMenu;
+    private String currentMove;
+    
+
+    private boolean isCurrentMove;
 
     public Player(Location location, Room currentRoom, int health, int damage, Inventory inventory, int primeCounter, ArrayList<Move> move){
         super(location, currentRoom, health, inventory);
         this.primeCounter = primeCounter;
         this.move = move;
         this.speed = speed;
+    }
+
+    public String getCurrentMove() {
+        return currentMove;
+    }
+
+
+    public void setCurrentMove(String currentMove) {
+        this.currentMove = currentMove;
+    }
+
+
+    public boolean isCurrentMove() {
+        return isCurrentMove;
+    }
+
+
+    public void setIsCurrentMove(boolean isCurrentMove) {
+        this.isCurrentMove = isCurrentMove;
     }
 
     public Location getLocation() {
