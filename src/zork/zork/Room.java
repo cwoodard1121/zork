@@ -11,6 +11,7 @@ public class Room {
   private ArrayList<Item> groundItems;
   private ArrayList<Enemy> enemies;
   private ArrayList<Exit> exits = new ArrayList<>();
+  private boolean isSubway;
 
   public ArrayList<Exit> getExits() {
     return exits;
