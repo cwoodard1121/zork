@@ -2,6 +2,8 @@ package zork.entites;
 
 import java.util.ArrayList;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
+
 import datatypes.Location;
 import zork.Entity;
 import zork.Inventory;
@@ -18,6 +20,7 @@ public class Player extends Entity {
     private ArrayList<Move> move;
     private int primeCounter;
     private int speed;
+    private boolean isInMoveMenu;
 
     public Player(Location location, Room currentRoom, int health, int damage, Inventory inventory, int primeCounter, ArrayList<Move> move){
         super(location, currentRoom, health, inventory);
@@ -56,6 +59,14 @@ public class Player extends Entity {
 
     public void changeRoom(Room r) {
         this.currentRoom = r;
+    } 
+
+    public void setMoveMenu(boolean i) {
+        this.isInMoveMenu = i;
+    } 
+
+    public boolean getIsMoveMenu() {
+        return isInMoveMenu;
     } 
 
     public int getHealth() {
