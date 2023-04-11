@@ -63,6 +63,7 @@ public class Fight {
     
     private Move askQuestion1() {
         // use commands
+        return  null;
     }
     
     private Weapon askQuestion2() {
