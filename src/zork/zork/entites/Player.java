@@ -21,7 +21,7 @@ public class Player extends Entity {
     private int primeCounter;
     private int speed;
     private boolean isInMoveMenu;
-    private String currentMove;
+    private Move currentMove;
     
 
     private boolean isCurrentMove;
@@ -33,12 +33,12 @@ public class Player extends Entity {
         this.speed = speed;
     }
 
-    public String getCurrentMove() {
+    public Move getCurrentMove() {
         return currentMove;
     }
 
 
-    public void setCurrentMove(String currentMove) {
+    public void setCurrentMove(Move currentMove) {
         this.currentMove = currentMove;
     }
 
