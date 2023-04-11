@@ -56,16 +56,13 @@ public class Fight {
             Move move = askQuestion1();
             Weapon weapon = askQuestion2();
         }
+        //TODO: MAKE WORK
+        return false;
 
     }
     
     private Move askQuestion1() {
-        while(true){
-            System.out.println("What move do you want to use?");
-            System.out.println(Game.getGame().getPlayer().getMove());
-            Move arr = in.next();
-        }
-        return null;
+        // use commands
     }
     
     private Weapon askQuestion2() {
