@@ -22,7 +22,7 @@ public class Game {
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = false;
-  public static boolean isTesting = true;
+  public static boolean isTesting = false;
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
 
   private final Player player;
@@ -144,7 +144,7 @@ public class Game {
         Utils.stopSound("mainmenu.wav");
         hasStart = true;
         try {
-          renderer.showCutScene(1500);
+          renderer.showCutScene(1500, "\\bin\\zork\\data\\cutscene.txt");
         } catch (Exception e) {
           handleException(e);
         }
