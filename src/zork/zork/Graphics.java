@@ -42,10 +42,10 @@ public class Graphics {
         System.out.println();
     }
     
-    public void showCutScene(long frameTime) throws InterruptedException, IOException {
+    public void showCutScene(long frameTime, String cutSceneFile) throws InterruptedException, IOException {
         
         
-        File f = new File(new File("").getAbsolutePath().concat("\\bin\\zork\\data\\cutscene.txt"));
+        File f = new File(new File("").getAbsolutePath().concat(cutSceneFile));
         BufferedReader reader = new BufferedReader(new FileReader(f));
         String line = null;
         boolean isText = true;

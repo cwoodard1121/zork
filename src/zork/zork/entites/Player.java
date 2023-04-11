@@ -60,10 +60,6 @@ public class Player extends Entity {
         this.location = location;
     }
 
-    public Room getRoom() {
-        return this.currentRoom;
-    }
-
     public int getSpeed() {
         return speed;
     }
