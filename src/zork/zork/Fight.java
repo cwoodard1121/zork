@@ -56,20 +56,22 @@ public class Fight {
             Move move = askQuestion1();
             Weapon weapon = askQuestion2();
         }
-        //TODO: MAKE WORK
-        return false;
 
         return false;
 
     }
     
     private Move askQuestion1() {
-        while(true){
-            System.out.println("What move do you want to use?");
-            System.out.println(Game.getGame().getPlayer().getMove());
-            Move arr = in.next();
+        Game.getGame().getPlayer().setMoveMenu(true);
+        System.out.println("What move do you want to use?");
+        System.out.println(Game.getGame().getPlayer().getMove());
+        while(Game.getGame().getPlayer().isCurrentMove() == false){
+           
         }
+        Move move = Game.getGame().getPlayer().getCurrentMove();
+
         return null;
+
     }
     
     private Weapon askQuestion2() {
