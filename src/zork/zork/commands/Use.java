@@ -15,12 +15,12 @@ public class Use extends Command {
     @Override
     public String runCommand(String... args) {
         if(Game.getGame().getPlayer().getIsMoveMenu()) {
-            ArrayList<Move> weapons = Game.getGame().getPlayer().getMove();
-            for (int i = 0; i < weapons.size(); i++) {
-                if(args[0].equalsIgnoreCase(weapons.get(i).getMove())) {
+            ArrayList<Move> moves = Game.getGame().getPlayer().getMove();
+            for (int i = 0; i < moves.size(); i++) {
+                if(args[0].equalsIgnoreCase(moves.get(i).getMove())) {
                     Game.getGame().getPlayer().setIsCurrentMove(true);
-                    Game.getGame().getPlayer().setCurrentMove(weapons.get(i).getMove());
-                    return weapons.get(i).getMove();
+                    Game.getGame().getPlayer().setCurrentMove(moves.get(i).getMove());
+                    return moves.get(i).getMove();
                 }
             }
             return "That is not a valid move";

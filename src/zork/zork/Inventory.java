@@ -50,6 +50,10 @@ public class Inventory {
     return currentWeight;
   }
 
+  public void setCurrentWeight(int i) {
+    this.currentWeight = i;
+  }
+
   public boolean addItem(Item item) {
     if (item.getWeight() + currentWeight <= maxWeight)
       return items.add(item);
@@ -67,5 +71,10 @@ public class Inventory {
     }
     return arr;
   }
+
+
+
+
+  
 
 }
