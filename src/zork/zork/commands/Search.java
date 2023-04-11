@@ -12,7 +12,7 @@ public class Search extends Command {
     @Override
     public String runCommand(String... args) {
         String str = "";
-        for (Item e : Game.getGame().getPlayer().getRoom().getGroundItems()) {
+        for (Item e : Game.getGame().getPlayer().getCurrentRoom().getGroundItems()) {
             str = str + e.getName();
         }
         return str;

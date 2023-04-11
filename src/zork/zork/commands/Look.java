@@ -10,7 +10,7 @@ public class Look extends Command {
 
     @Override
     public String runCommand(String... args) {
-        return Game.getGame().getPlayer().getRoom().shortDescription();
+        return Game.getGame().getPlayer().getCurrentRoom().shortDescription();
     }
 
     
