@@ -24,6 +24,11 @@ public class Use extends Command {
                 }
             }
             return "That is not a valid move";
+        }else if(Game.getGame().getPlayer().isInWeaponMenu()){
+            ArrayList<Weapon> arr = Game.getGame().getPlayer().getInventory().getWeapons();
+            for (int i = 0; i < arr.size(); i++) {
+                
+            }
         }
         return "You are not in a fight"; //make it do stuff outside of battle later
     }

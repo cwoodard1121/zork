@@ -68,14 +68,28 @@ public class Fight {
         while(Game.getGame().getPlayer().isCurrentMove() == false){
            
         }
+        Game.getGame().getPlayer().setIsCurrentMove(true);
         Move move = Game.getGame().getPlayer().getCurrentMove();
 
-        return null;
+        return move;
 
     }
     
     private Weapon askQuestion2() {
-        return null;
+        Game.getGame().getPlayer().setIsCurrentMove(true);
+        Game.getGame().getPlayer().setInWeaponMenu(true);
+        ArrayList<Weapon> arr = Game.getGame().getPlayer().getInventory().getWeapons();
+        if(arr.size() > 1){
+        System.out.println("What weapon do you want to use?");
+        System.out.println(arr);
+        while (Game.getGame().getPlayer().isCurrentMove() == false) {
+            
+        }
+        Game.getGame().getPlayer().setIsCurrentMove(true);
+        
+        }else{
+            return arr.get(0);
+        }
     }
 
     
