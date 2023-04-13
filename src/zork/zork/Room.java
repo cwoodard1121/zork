@@ -33,6 +33,11 @@ public class Room {
   }
 
 
+  public Room addItemGround(Item i) {
+    groundItems.add(i);
+    return this;
+  }
+
   /**
    * removes it from the ground
    * @param i
