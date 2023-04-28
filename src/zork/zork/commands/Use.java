@@ -19,7 +19,7 @@ public class Use extends Command {
             for (int i = 0; i < moves.size(); i++) {
                 if(args[0].equalsIgnoreCase(moves.get(i).getMove())) {
                     Game.getGame().getPlayer().setIsCurrentMove(true);
-                    Game.getGame().getPlayer().setCurrentMove(moves.get(i).getMove());
+                    Game.getGame().getPlayer().setCurrentMove(moves.get(i));
                     return moves.get(i).getMove();
                 }
             }
