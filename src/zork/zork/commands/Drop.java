@@ -2,6 +2,8 @@ package zork.commands;
 
 import zork.Command;
 import zork.Game;
+import zork.Item;
+import zork.entites.Player;
 import zork.Exit;
 
 public class Drop extends Command {
@@ -12,13 +14,19 @@ public class Drop extends Command {
 
     @Override
     public String runCommand(String... args) {
-        for(int i = 0; i < Game.getGame().getPlayer().getInventory().getItemCount(); i++) {
-            if (args[0].equalsIgnoreCase(Game.getGame().getPlayer().getInventory().getItem(i).getName())) {
-                int weight = Game.getGame().getPlayer().getInventory().getCurrentWeight();
-                weight = weight - Game.getGame().getPlayer().getInventory().getItem(i).getWeight();
-                Game.getGame().getPlayer().getInventory().setCurrentWeight(weight);
-                String getItemName = Game.getGame().getPlayer().getInventory().getItem(i).getName();
-                Game.getGame().getPlayer().getInventory().removeItem(Game.getGame().getPlayer().getInventory().getItem(i));
+        Game game = Game.getGame();
+        for(int i = 0; i < game.getPlayer().getInventory().getItemCount(); i++) {
+            zork.Inventory inventory = game.getPlayer().getInventory();
+            Player player = game.getPlayer();
+            if (args[0].equalsIgnoreCase(inventory.getItem(i).getName())) {
+                int weight = inventory.getCurrentWeight();
+                weight = weight - inventory.getItem(i).getWeight();
+                player.getInventory().setCurrentWeight(weight);
+                Item item = inventory.getItem(i);
+                String getItemName = inventory.getItem(i).getName();
+                game.getPlayer().getInventory().removeItem(Game.getGame().getPlayer().getInventory().getItem(i));
+                player.getCurrentRoom().addItemGround(item);
+
                 return "You dropped your " + getItemName + " on the ground";
             }
         }
