@@ -3,6 +3,7 @@ package zork;
 import java.util.ArrayList;
 
 import zork.entites.Enemy;
+import zork.entites.Player;
 import zork.items.Weapon;
 import java.util.Scanner;
 
@@ -51,11 +52,15 @@ public class Fight {
 
     }
 
+
+
     private boolean fightingResults(boolean isPlayerFirst) {
         if(isPlayerFirst){
             Move move = askQuestion1();
             Weapon weapon = askQuestion2();
         }
+
+        
 
         return false;
 
@@ -76,7 +81,6 @@ public class Fight {
     }
     
     private Weapon askQuestion2() {
-        Game.getGame().getPlayer().setIsCurrentMove(true);
         Game.getGame().getPlayer().setInWeaponMenu(true);
         ArrayList<Weapon> arr = Game.getGame().getPlayer().getInventory().getWeapons();
         if(arr.size() > 1){
@@ -86,6 +90,9 @@ public class Fight {
             
         }
         Game.getGame().getPlayer().setIsCurrentMove(true);
+        Weapon weapon = Game.getGame().getPlayer().getCurrentWeapon();
+
+        return weapon;
         
         }else{
             return arr.get(0);

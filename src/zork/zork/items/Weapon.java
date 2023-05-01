@@ -7,11 +7,19 @@ public class Weapon extends Item {
     private String name;
     private boolean isOpenable;
     private int damage;
+    
+
+    
 
     public Weapon(int weight, String name, boolean isOpenable, int damage){
         super(weight, name, isOpenable);
         this.isOpenable = false;
         this.damage = damage;
+       
+    }
+
+    public String getWeapon() {
+        return name;
     }
 
     public int getWeight() {
@@ -21,6 +29,7 @@ public class Weapon extends Item {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+    
 
     public String getName() {
         return name;

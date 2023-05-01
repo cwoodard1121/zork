@@ -11,6 +11,7 @@ import zork.Item;
 import zork.Move;
 import zork.Room;
 import zork.items.Prime;
+import zork.items.Weapon;
 
 public class Player extends Entity {
     private Location location;
@@ -22,6 +23,10 @@ public class Player extends Entity {
     private int speed;
     private boolean isInMoveMenu;
     private Move currentMove;
+    private boolean isInWeaponMenu;
+    private Weapon currentWeapon;
+    
+
     
 
     private boolean isCurrentMove;
@@ -33,10 +38,26 @@ public class Player extends Entity {
         this.speed = speed;
     }
 
+    public void setCurrentWeapon(Weapon currentWeapon) {
+        this.currentWeapon = currentWeapon;
+    }
+
     public Move getCurrentMove() {
         return currentMove;
     }
 
+    public Weapon getCurrentWeapon(){
+        return currentWeapon;
+    }
+    
+
+    public boolean isInWeaponMenu() {
+        return isInWeaponMenu;
+    }
+
+    public void setInWeaponMenu(boolean isInWeaponMenu) {
+        this.isInWeaponMenu = isInWeaponMenu;
+    }
 
     public void setCurrentMove(Move currentMove) {
         this.currentMove = currentMove;
