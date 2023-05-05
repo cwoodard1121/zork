@@ -7,19 +7,29 @@ public class Weapon extends Item {
     private String name;
     private boolean isOpenable;
     private int damage;
+    private String effect;
     
 
     
 
-    public Weapon(int weight, String name, boolean isOpenable, int damage){
+    public Weapon(int weight, String name, boolean isOpenable, int damage, String effect){
         super(weight, name, isOpenable);
         this.isOpenable = false;
         this.damage = damage;
+        this.effect = effect;
        
     }
 
     public String getWeapon() {
         return name;
+    }
+
+    public String getEffect() {
+        return effect;
+    }
+
+    public void setEffect(String effect) {
+        this.effect = effect;
     }
 
     public int getWeight() {

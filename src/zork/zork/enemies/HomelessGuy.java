@@ -22,7 +22,7 @@ public class HomelessGuy extends Enemy {
        //needs location
        //needs current room
         setHealth(15);
-        Weapon glove = new Weapon( 10, "dirty gloves", false, 2);
+        Weapon glove = new Weapon( 10, "dirty gloves", false, 2, "none");
         Inventory i = new Inventory(EntityConstants.MAX_INVENTORY_WEIGHT);
         i.addItem(glove);
         setInventory(i);

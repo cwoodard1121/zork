@@ -52,4 +52,14 @@ public class Enemy extends Entity {
         this.moneyDroped = d;
     }
 
+
+    public double getMoneyDroped() {
+        return moneyDroped;
+    }
+
+
+    public void setMoneyDroped(double moneyDroped) {
+        this.moneyDroped = moneyDroped;
+    }
+
 }
