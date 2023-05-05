@@ -28,12 +28,12 @@ public class Fight {
     private ArrayList<Move> enemyMoves = enemy.getMoves();
 
     public void fight(){
-         boolean didWin;
+         boolean didPlayerWin;
         while(playerHealth>0 || enemyHealth>0){
             if(playerSpeed>enemySpeed){
-                didWin = fightingResults(true);
+                didPlayerWin = fightingResults(true);
             }else{
-                didWin = fightingResults(false);
+                didPlayerWin = fightingResults(false);
             }
         }
 
@@ -56,8 +56,15 @@ public class Fight {
 
     private boolean fightingResults(boolean isPlayerFirst) {
         if(isPlayerFirst){
-            Move move = askQuestion1();
-            Weapon weapon = askQuestion2();
+            Move pMove = askMove();
+            Weapon pWeapon = askWeapon();
+
+            int ran = (int)(Math.random()*enemyMoves.size());
+            Move eMove = enemyMoves.get(ran);
+            int ran2 = (int)(Math.random()*enemy.getInventory().getWeapons().size());
+            Weapon eWeapon = enemy.getInventory().getWeapons().get(ran2); 
+
+
         }
 
         
@@ -66,7 +73,7 @@ public class Fight {
 
     }
     
-    private Move askQuestion1() {
+    private Move askMove() {
         Game.getGame().getPlayer().setMoveMenu(true);
         System.out.println("What move do you want to use?");
         System.out.println(Game.getGame().getPlayer().getMove());
@@ -80,7 +87,7 @@ public class Fight {
 
     }
     
-    private Weapon askQuestion2() {
+    private Weapon askWeapon() {
         Game.getGame().getPlayer().setInWeaponMenu(true);
         ArrayList<Weapon> arr = Game.getGame().getPlayer().getInventory().getWeapons();
         if(arr.size() > 1){
