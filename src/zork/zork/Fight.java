@@ -29,13 +29,13 @@ public class Fight {
 
     public void fight(){
          boolean didPlayerWin;
-        while(playerHealth>0 || enemyHealth>0){
-            if(playerSpeed>enemySpeed){
-                didPlayerWin = fightingResults(true);
-            }else{
-                didPlayerWin = fightingResults(false);
-            }
+        
+        if(playerSpeed>enemySpeed){
+            didPlayerWin = fightingResults(true);
+        }else{
+            didPlayerWin = fightingResults(false);
         }
+        
 
         /*Fighting
          * Whoever has most speed goes first, lets say its player
@@ -55,22 +55,65 @@ public class Fight {
 
 
     private boolean fightingResults(boolean isPlayerFirst) {
-        if(isPlayerFirst){
-            Move pMove = askMove();
-            Weapon pWeapon = askWeapon();
+        while(true){
 
-            int ran = (int)(Math.random()*enemyMoves.size());
-            Move eMove = enemyMoves.get(ran);
-            int ran2 = (int)(Math.random()*enemy.getInventory().getWeapons().size());
-            Weapon eWeapon = enemy.getInventory().getWeapons().get(ran2); 
+            if(playerSpeed>enemySpeed){
+                    Move pMove = askMove();
+                    Weapon pWeapon = askWeapon();
+
+                    int ran = (int)(Math.random()*enemyMoves.size());
+                    Move eMove = enemyMoves.get(ran);
+                    int ran2 = (int)(Math.random()*enemy.getInventory().getWeapons().size());
+                    Weapon eWeapon = enemy.getInventory().getWeapons().get(ran2); 
 
 
+                    int pDamge = pMove.getDamage() + pWeapon.getDamage();
+                    int eDamage = eMove.getDamage() + eWeapon.getDamage();
+
+                    //effects are here depending on teh effects we going to have to change stuff
+                    //have each effect under a type like recourring damage or extra damage smth like that
+                    enemyHealth -= pDamge;
+                    if(enemyHealth<=0){
+                        return true;
+                    }
+                    playerHealth -= eDamage;
+                    if(playerHealth<= 0){
+                        return false;
+                    }
+
+
+
+            }else{
+            
+                    Move pMove = askMove();
+                    Weapon pWeapon = askWeapon();
+
+                    int ran = (int)(Math.random()*enemyMoves.size());
+                    Move eMove = enemyMoves.get(ran);
+                    int ran2 = (int)(Math.random()*enemy.getInventory().getWeapons().size());
+                    Weapon eWeapon = enemy.getInventory().getWeapons().get(ran2); 
+
+
+                    int pDamge = pMove.getDamage() + pWeapon.getDamage();
+                    int eDamage = eMove.getDamage() + eWeapon.getDamage();
+
+                    //effects are here depending on teh effects we going to have to change stuff
+                    //have each effect under a type like recourring damage or extra damage smth like that
+                    playerHealth -= eDamage;
+                    if(playerHealth<= 0){
+                        return false;
+                    }
+                    
+                    enemyHealth -= pDamge;
+                    if(enemyHealth<=0){
+                        return true;
+                    }
+                    
+                
+
+            }
         }
-
         
-
-        return false;
-
     }
     
     private Move askMove() {
