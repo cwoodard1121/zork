@@ -31,9 +31,9 @@ public class Fight {
          boolean didPlayerWin;
         
         if(playerSpeed>enemySpeed){
-            didPlayerWin = fightingResults(true);
+            didPlayerWin = fightingResults();
         }else{
-            didPlayerWin = fightingResults(false);
+            didPlayerWin = fightingResults();
         }
         
 
@@ -54,7 +54,7 @@ public class Fight {
 
 
 
-    private boolean fightingResults(boolean isPlayerFirst) {
+    private boolean fightingResults() {
         while(true){
 
             if(playerSpeed>enemySpeed){
