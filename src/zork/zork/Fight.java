@@ -43,7 +43,7 @@ public class Fight {
          * if they dont it will give them the only weapon they have
          * they choose which move and it does it 
          *damage from the weapon is added to the damage of the move
-         * 
+         * effects are put overtime
          * 
          * 
          * 
