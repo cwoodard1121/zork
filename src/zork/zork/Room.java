@@ -52,7 +52,8 @@ public class Room {
    * Create a room described "description". Initially, it has no exits.
    * "description" is something like "a kitchen" or "an open court yard".
    */
-  public Room(final String description) {
+  public Room(final String description, String name) {
+    this.roomName = name;
     this.description = description;
     exits = new ArrayList<Exit>();
   }

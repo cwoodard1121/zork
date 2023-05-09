@@ -62,7 +62,6 @@ public class Game {
    */
   public void exportRooms() {
     System.out.println(roomMap.size());
-    if(!isTesting) return;
     final BufferedWriter roomWriter =  Utils.getWriterFromBin("rooms.json");
     try {
       roomWriter.write(gson.toJson(roomMap));
@@ -77,7 +76,7 @@ public class Game {
    */
   public void createRooms() { // VARIABLE NAME STANDARDS !!IMPORTANT!!, for rooms, Make a name using java naming convention
     // for Exits use the room name + exit + Direction of exit example Room yorkMillsTerminal has as exit that goes to it in the north so we call it "yorkMillsBusTerminalExitNorth"
-    if(isTesting && shouldCreateRooms) {
+    if(shouldCreateRooms) {
       // Create a room object and use the description as the constructor parameter.
       final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal");
       // Subway area in york mills
@@ -139,7 +138,6 @@ public class Game {
   }
 
   private void printWelcome() throws InterruptedException {
-    if(isTesting) return;
     Scanner in = new Scanner(System.in);
     titleCard c = new titleCard();
     Utils.playTitleSound();
@@ -150,11 +148,28 @@ public class Game {
       if(result.equals("start")) {
         Utils.stopSound("mainmenu.wav");
         hasStart = true;
+        if(!isTesting) {
         try {
           renderer.showCutScene(1500, "\\bin\\zork\\data\\cutscene.txt");
         } catch (Exception e) {
           handleException(e);
         }
+      }
+        boolean hasChosenName = false;
+        System.out.print("Please enter your name: ");
+        while(!hasChosenName) {
+          result = in.nextLine().toLowerCase();
+          if(result.length() > 16) {
+            System.out.print("Please enter a name between 1-16 Characters");
+          } else if (result.equalsIgnoreCase("cameron")) { 
+            System.out.print("Sorry that name is already taken, Please enter another name:");
+          } else {
+            hasChosenName = true;
+            Game.getGame().getPlayer().setName(result);
+          }
+        }
+        
+
         try {
           initRooms("rooms.json");
         } catch (Exception e) {
@@ -164,12 +179,6 @@ public class Game {
         System.out.println("Please enter a valid command");
     }
    }
-
-    System.out.println("Zork is a new, incredibly boring adventure game.");
-    System.out.println("Type 'help' if you need help.");
-    System.out.println();
-
-
   }
 
   /**

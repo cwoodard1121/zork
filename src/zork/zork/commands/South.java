@@ -13,7 +13,7 @@ public class South extends Command {
     @Override
     public String runCommand(String... args) {
         for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
-            if(e.getDirection().equalsIgnoreCase("south")) {
+            if(e.getDirection().equalsIgnoreCase("s")) {
                 Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
                 return e.getAdjacentRoom().getDescription();
             }
