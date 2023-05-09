@@ -68,6 +68,8 @@ public class Fight {
 
 
                     int pDamge = pMove.getDamage() + pWeapon.getDamage();
+
+                    System.out.println(Game.getGame().getPlayer().getName() + "used" + " " + pWeapon.getName());
                     int eDamage = eMove.getDamage() + eWeapon.getDamage();
 
                     //effects are here depending on teh effects we going to have to change stuff

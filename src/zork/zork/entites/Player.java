@@ -25,17 +25,18 @@ public class Player extends Entity {
     private Move currentMove;
     private boolean isInWeaponMenu;
     private Weapon currentWeapon;
+    private String name;
     
 
     
 
     private boolean isCurrentMove;
 
-    public Player(Location location, Room currentRoom, int health, int damage, Inventory inventory, int primeCounter, ArrayList<Move> move){
+    public Player(Location location, Room currentRoom, int health, int damage, Inventory inventory, int primeCounter, ArrayList<Move> move, String name){
         super(location, currentRoom, health, inventory);
         this.primeCounter = primeCounter;
         this.move = move;
-        this.speed = speed;
+        this.name = name;
     }
 
     public void setCurrentWeapon(Weapon currentWeapon) {
@@ -50,6 +51,10 @@ public class Player extends Entity {
         return currentWeapon;
     }
     
+
+    public String getName() {
+        return name;
+    }
 
     public boolean isInWeaponMenu() {
         return isInWeaponMenu;
