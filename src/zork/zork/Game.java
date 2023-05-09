@@ -23,7 +23,7 @@ public class Game {
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
   public static boolean isTesting = true;
-  public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
+  public static HashMap<String, Room> roomMap; 
 
   private final Player player;
   private final Parser parser;
@@ -32,7 +32,7 @@ public class Game {
   /**
    * Create the game and initialise its internal map.
    */
-  public Game() {
+  public Game() { 
     Constants.initCommands();
     try {
       // initRooms("src\\zork\\data\\rooms.json");
@@ -74,26 +74,31 @@ public class Game {
   /**
    * This method will not be here at the final product its just to create the initital rooms
    */
-  public void createRooms() { // VARIABLE NAME STANDARDS !!IMPORTANT!!, for rooms, Make a name using java naming convention
+  public void createRooms() { 
+    roomMap = new HashMap<String,Room>();
+    // VARIABLE NAME STANDARDS !!IMPORTANT!!, for rooms, Make a name using java naming convention
     // for Exits use the room name + exit + Direction of exit example Room yorkMillsTerminal has as exit that goes to it in the north so we call it "yorkMillsBusTerminalExitNorth"
     if(shouldCreateRooms) {
       // Create a room object and use the description as the constructor parameter.
-      final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal");
+      final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal"); roomMap.put(yorkMillsBusTerminal.getRoomName(),yorkMillsBusTerminal);
       // Subway area in york mills
-      final Room yorkMillsSubway = new Room("Subway station trains are going by","yorkmillssubway");
-      // Exit which goes down into the subway
-      final Exit yorkMillsSubwayExitSouth = new Exit("S",yorkMillsSubway);
+      final Room yorkMillsSubwayHallway = new Room("A Hallway is ahead leading to the Subway","yorkmillssubwayhallway"); roomMap.put(yorkMillsSubwayHallway.getRoomName(), yorkMillsSubwayHallway);
+      // Exit which goes down into the subwaynigni
+      final Room yorkMillsSubway = new Room("Subways are going by, North to Finch, South to Vaughn", "yorkmillssubway"); roomMap.put(yorkMillsSubway.getRoomName(), yorkMillsSubway);
+      final Exit yorkMillsSubwayHallwayExitDown = new Exit("D",yorkMillsSubwayHallway); yorkMillsBusTerminal.addExit(yorkMillsSubwayHallwayExitDown);
       // exit which goes back to the bus terminal
-      final Exit yorkMillsBusTerminalExitNorth = new Exit("N", yorkMillsBusTerminal);
-      yorkMillsSubway.addExit(yorkMillsBusTerminalExitNorth);
-      yorkMillsBusTerminal.addExit(yorkMillsSubwayExitSouth);
-      roomMap.put(yorkMillsBusTerminal.getRoomName(),yorkMillsBusTerminal);
-      roomMap.put(yorkMillsSubway.getRoomName(), yorkMillsSubway);
+      final Exit yorkMillsBusTerminalExitUp = new Exit("U", yorkMillsBusTerminal); yorkMillsSubwayHallway.addExit(yorkMillsBusTerminalExitUp);
+      final Exit yorkMillsBusSubwayHallwayExitNorth = new Exit("N", yorkMillsSubwayHallway); yorkMillsSubway.addExit(yorkMillsBusSubwayHallwayExitNorth);
+      final Exit yorkMillsSubwayExitSouth = new Exit("S", yorkMillsSubway); yorkMillsSubwayHallway.addExit(yorkMillsSubwayExitSouth);
+     // Attempt at understanding this _______________________  Direction from TO here        From here                             Exit Name Where its going TO +
+      System.out.println(roomMap == null);
+      
     }
   }
 
 
   private void initRooms(String fileName) throws Exception {
+    roomMap = new HashMap<String, Room>();
     BufferedReader reader = Utils.getReaderFromBin(fileName);
     String line = null;
     StringBuilder b = new StringBuilder();
@@ -112,7 +117,14 @@ public class Game {
   public void play() throws InterruptedException {
     
     printWelcome();
-    createRooms();
+    try {
+      createRooms();
+      if(roomMap.size() == 0) {
+        initRooms("rooms.json");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
     while (!finished) {
       Command command;
@@ -163,6 +175,8 @@ public class Game {
             System.out.print("Please enter a name between 1-16 Characters");
           } else if (result.equalsIgnoreCase("cameron")) { 
             System.out.print("Sorry that name is already taken, Please enter another name:");
+          } else if (result.equalsIgnoreCase("cagasuge")) { 
+            System.out.println("Im not mad... Im just dissapointed     ");
           } else {
             hasChosenName = true;
             Game.getGame().getPlayer().setName(result);
@@ -170,11 +184,7 @@ public class Game {
         }
         
 
-        try {
-          initRooms("rooms.json");
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+
       } else {
         System.out.println("Please enter a valid command");
     }
