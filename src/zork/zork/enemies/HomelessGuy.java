@@ -13,15 +13,17 @@ import zork.Constants.EntityConstants;
 public class HomelessGuy extends Enemy {
 
 
-    public HomelessGuy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Move> moves, int money, int speed){
-        super(location, currentRoom, health, inventory, moves, money);
+    public HomelessGuy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Move> moves, int money, int speed, String name){
+        super(location, currentRoom, health, inventory, moves, money, name);
         
     }
 
     public void create() {
        //needs location
        //needs current room
-        setHealth(15);
+    
+        
+        /*setHealth(15);
         Weapon glove = new Weapon( 10, "dirty gloves", false, 2, "none");
         Inventory i = new Inventory(EntityConstants.MAX_INVENTORY_WEIGHT);
         i.addItem(glove);
@@ -30,7 +32,7 @@ public class HomelessGuy extends Enemy {
         ArrayList<Move> attacks = new ArrayList<>(); attacks.add(punch);
         setMoves(attacks);
         setMoney(2.50);
-        setSpeed(8);
+        setSpeed(8);*/
 
     }
     

@@ -27,6 +27,9 @@ public class Fight {
     private ArrayList<Move> playerMoves = Game.getGame().getPlayer().getMove();
     private ArrayList<Move> enemyMoves = enemy.getMoves();
 
+    private ArrayList<Effects> playerEffects;
+    private ArrayList<Effects> enemyEffects;
+
     public void fight(){
          boolean didPlayerWin;
         
@@ -56,7 +59,7 @@ public class Fight {
 
     private boolean fightingResults() {
         while(true){
-
+            int turnCount = 0;
             if(playerSpeed>enemySpeed){
                     Move pMove = askMove();
                     Weapon pWeapon = askWeapon();
@@ -68,18 +71,31 @@ public class Fight {
 
 
                     int pDamge = pMove.getDamage() + pWeapon.getDamage();
-
                     System.out.println(Game.getGame().getPlayer().getName() + "used" + " " + pWeapon.getName());
                     int eDamage = eMove.getDamage() + eWeapon.getDamage();
+                    System.out.println(enemy.getName() + "used" + " " + eWeapon.getName());
+
+                    playerEffects.add(eWeapon.getEffect());
+                    enemyEffects.add(pWeapon.getEffect());
+
+                    for (int i = 0; i < playerEffects.size(); i++) {
+                        
+                    }
+                    
 
                     //effects are here depending on teh effects we going to have to change stuff
                     //have each effect under a type like recourring damage or extra damage smth like that
+                    System.out.println("You did " + pDamge + " Damage");
                     enemyHealth -= pDamge;
                     if(enemyHealth<=0){
+                        System.out.println(enemy.getName() + " Died! YOU WIN!!!");
                         return true;
                     }
+                    System.out.println(enemy.getName() + " did " + pDamge + " Damage");
                     playerHealth -= eDamage;
                     if(playerHealth<= 0){
+                        System.out.println(enemy.getName() + " Won! YOU DIED!!!");
+                        Game.getGame().getPlayer().gameOver();
                         return false;
                     }
 
@@ -97,17 +113,24 @@ public class Fight {
 
 
                     int pDamge = pMove.getDamage() + pWeapon.getDamage();
+                    System.out.println(Game.getGame().getPlayer().getName() + "used" + " " + pWeapon.getName());
                     int eDamage = eMove.getDamage() + eWeapon.getDamage();
+                    System.out.println(enemy.getName() + "used" + " " + eWeapon.getName());
 
                     //effects are here depending on teh effects we going to have to change stuff
                     //have each effect under a type like recourring damage or extra damage smth like that
+                    
+                    System.out.println(enemy.getName() + " did " + pDamge + " Damage");
                     playerHealth -= eDamage;
                     if(playerHealth<= 0){
+                        System.out.println(enemy.getName() + " Won! YOU DIED!!!");
+                        Game.getGame().getPlayer().gameOver();
                         return false;
                     }
-                    
+                    System.out.println("You did " + pDamge + " Damage");
                     enemyHealth -= pDamge;
                     if(enemyHealth<=0){
+                        System.out.println(enemy.getName() + " Died! YOU WIN!!!");
                         return true;
                     }
                     
@@ -118,6 +141,10 @@ public class Fight {
         
     }
     
+    
+
+
+
     private Move askMove() {
         Game.getGame().getPlayer().setMoveMenu(true);
         System.out.println("What move do you want to use?");

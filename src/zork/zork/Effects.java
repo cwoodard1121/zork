@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class Effects {
     private String name;
     private String type;
-    static ArrayList<Effects> affectingSpeed;
-    static ArrayList<Effects> affectingDamage;
-    //you can add more types
+    private int turn;
+   
 
-    public Effects(String name, String type){
+    public Effects(String name, String type, int turn){
         this.name = name;
         this.type = type;
+        this.turn = turn;
     }
 
     public String getName() {
@@ -20,6 +20,14 @@ public class Effects {
 
     public String getType() {
         return type;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 
 
