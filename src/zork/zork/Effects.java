@@ -7,6 +7,7 @@ public class Effects {
     private int damageChange;
     private int speedChange;
     private int turn;
+    private int turnCount;
    
 
     public Effects(String name, int turn, int damageChange, int speedChange){
@@ -26,6 +27,14 @@ public class Effects {
 
     public void setDamageChange(int damageChange) {
         this.damageChange = damageChange;
+    }
+
+    public int getTurnCount() {
+        return turnCount;
+    }
+
+    public void setTurnCount(int turnCount) {
+        this.turnCount = turnCount;
     }
 
     public int getSpeedChange() {

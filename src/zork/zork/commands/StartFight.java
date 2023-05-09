@@ -15,6 +15,7 @@ public class StartFight extends Command{
     @Override
     public String runCommand(String... args) {
         Enemy tester = new HomelessGuy(null, null, 0, null, null, 0, 10, "homless");
+        tester.create();
         Fight test = new Fight(tester);
         test.fight();
         // TODO Auto-generated method stub

@@ -2,6 +2,7 @@ package zork;
 
 import java.util.ArrayList;
 
+import zork.enemies.HomelessGuy;
 import zork.entites.Enemy;
 import zork.entites.Player;
 import zork.items.Weapon;
@@ -57,10 +58,11 @@ public class Fight {
 
 
 
+
+
     private boolean fightingResults() {
         while(true){
-            int turnCount = 0;
-            turnCount++;
+            
             if(playerSpeed>enemySpeed){
                     Move pMove = askMove();
                     Weapon pWeapon = askWeapon();
@@ -82,9 +84,12 @@ public class Fight {
                     for (int i = 0; i < playerEffects.size(); i++) {
                        int dam = playerEffects.get(i).getDamageChange();
                        int sped = playerEffects.get(i).getSpeedChange();
-                       if(playerEffects.get(i).getTurn() != turnCount){
+                       if(playerEffects.get(i).getTurn() != playerEffects.get(i).getTurnCount()){
                             playerHealth-=dam;
                             playerSpeed-=sped;
+                            playerEffects.get(i).setTurnCount(playerEffects.get(i).getTurnCount()+1);
+                        }else{
+                            playerEffects.get(i).setTurnCount(0);
                         }
                     }
 
@@ -92,9 +97,12 @@ public class Fight {
                         int dam = enemyEffects.get(i).getDamageChange();
                         int sped = enemyEffects.get(i).getSpeedChange();
                         
-                        if(enemyEffects.get(i).getTurn() != turnCount){
+                        if(enemyEffects.get(i).getTurn() != enemyEffects.get(i).getTurnCount()){
                             enemyHealth-=dam;
                             enemySpeed-=sped;
+                            enemyEffects.get(i).setTurnCount(enemyEffects.get(i).getTurnCount()+1);
+                        }else{
+                            enemyEffects.get(i).setTurnCount(0);
                         }
                      }
                     
