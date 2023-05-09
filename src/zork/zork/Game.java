@@ -61,6 +61,7 @@ public class Game {
    * all the rooms in the roomsMap.
    */
   public void exportRooms() {
+    System.out.println(roomMap.size());
     if(!isTesting) return;
     final BufferedWriter roomWriter =  Utils.getWriterFromBin("rooms.json");
     try {
@@ -74,15 +75,21 @@ public class Game {
   /**
    * This method will not be here at the final product its just to create the initital rooms
    */
-  public void createRooms() {
+  public void createRooms() { // VARIABLE NAME STANDARDS !!IMPORTANT!!, for rooms, Make a name using java naming convention
+    // for Exits use the room name + exit + Direction of exit example Room yorkMillsTerminal has as exit that goes to it in the north so we call it "yorkMillsBusTerminalExitNorth"
     if(isTesting && shouldCreateRooms) {
-      Room sidewalk = new Room("Sidewalk");
-    
-      Exit e = new Exit("N",sidewalk);
-      Room r = new Room("There are buses and homeless people around.");
-      r.setRoomName("York Mills Go Bus Terminal");
-      r.addExit(e);
-      roomMap.put(r.getRoomName(), r);
+      // Create a room object and use the description as the constructor parameter.
+      final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal");
+      // Subway area in york mills
+      final Room yorkMillsSubway = new Room("Subway station trains are going by","yorkmillssubway");
+      // Exit which goes down into the subway
+      final Exit yorkMillsSubwayExitSouth = new Exit("S",yorkMillsSubway);
+      // exit which goes back to the bus terminal
+      final Exit yorkMillsBusTerminalExitNorth = new Exit("N", yorkMillsBusTerminal);
+      yorkMillsSubway.addExit(yorkMillsBusTerminalExitNorth);
+      yorkMillsBusTerminal.addExit(yorkMillsSubwayExitSouth);
+      roomMap.put(yorkMillsBusTerminal.getRoomName(),yorkMillsBusTerminal);
+      roomMap.put(yorkMillsSubway.getRoomName(), yorkMillsSubway);
     }
   }
 
@@ -107,7 +114,7 @@ public class Game {
     
     printWelcome();
     createRooms();
-    this.player.setCurrentRoom(roomMap.get("York Mills Go Bus Terminal"));
+    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
     while (!finished) {
       Command command;
       try {
