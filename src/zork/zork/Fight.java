@@ -60,6 +60,7 @@ public class Fight {
     private boolean fightingResults() {
         while(true){
             int turnCount = 0;
+            turnCount++;
             if(playerSpeed>enemySpeed){
                     Move pMove = askMove();
                     Weapon pWeapon = askWeapon();
@@ -79,8 +80,23 @@ public class Fight {
                     enemyEffects.add(pWeapon.getEffect());
 
                     for (int i = 0; i < playerEffects.size(); i++) {
-                        
+                       int dam = playerEffects.get(i).getDamageChange();
+                       int sped = playerEffects.get(i).getSpeedChange();
+                       if(playerEffects.get(i).getTurn() != turnCount){
+                            playerHealth-=dam;
+                            playerSpeed-=sped;
+                        }
                     }
+
+                    for (int i = 0; i < enemyEffects.size(); i++) {
+                        int dam = enemyEffects.get(i).getDamageChange();
+                        int sped = enemyEffects.get(i).getSpeedChange();
+                        
+                        if(enemyEffects.get(i).getTurn() != turnCount){
+                            enemyHealth-=dam;
+                            enemySpeed-=sped;
+                        }
+                     }
                     
 
                     //effects are here depending on teh effects we going to have to change stuff

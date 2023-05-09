@@ -141,5 +141,9 @@ public class Player extends Entity {
         this.primeCounter = primeCounter;
     }
 
+    public void gameOver(){
+      
+        //tell them they died and give them their health back and set their room to a spawnpoint
+    }
     
 }
