@@ -1,7 +1,11 @@
 package zork.commands;
 
+import datatypes.Location;
 import zork.Command;
 import zork.Fight;
+import zork.Room;
+import zork.Constants.EntityConstants;
+import zork.Constants.PlayerConstants;
 import zork.enemies.HomelessGuy;
 import zork.entites.Enemy;
 
@@ -14,8 +18,8 @@ public class StartFight extends Command{
 
     @Override
     public String runCommand(String... args) {
-        Enemy tester = new HomelessGuy(null, null, 0, null, null, 0, 10, "homless");
-        tester.create();
+        
+        Enemy tester = new HomelessGuy(new Location(0, 0), new Room(), 20, null, null, 0, 10, "homless");
         Fight test = new Fight(tester);
         test.fight();
         // TODO Auto-generated method stub
