@@ -11,10 +11,10 @@ import zork.Move;
 import zork.Room;
 import zork.Constants.EntityConstants;
 
-public class HomelessGuy extends Enemy {
+public class ExampleEnemy extends Enemy {
 
 
-    public HomelessGuy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Move> moves, int money, int speed, String name){
+    public ExampleEnemy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Move> moves, int money, int speed, String name){
         super(location, currentRoom, health, inventory, moves, money, name);
         
         Location notRealLocation = new Location(2, 3);
