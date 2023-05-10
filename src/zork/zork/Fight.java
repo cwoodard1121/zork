@@ -2,7 +2,7 @@ package zork;
 
 import java.util.ArrayList;
 
-import zork.enemies.HomelessGuy;
+import zork.enemies.ExampleEnemy;
 import zork.entites.Enemy;
 import zork.entites.Player;
 import zork.items.Weapon;
