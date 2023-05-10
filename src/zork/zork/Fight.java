@@ -191,7 +191,7 @@ public class Fight {
     private Weapon askWeapon() {
         Game.getGame().getPlayer().setInWeaponMenu(true);
         ArrayList<Weapon> arr = Game.getGame().getPlayer().getInventory().getWeapons();
-        if(arr.size() > 1){
+        if(arr.size() >= 1){
         System.out.println("What weapon do you want to use?");
         System.out.println(arr);
         while (Game.getGame().getPlayer().isCurrentMove() == false) {
@@ -203,7 +203,7 @@ public class Fight {
         return weapon;
         
         }else{
-            return arr.get(0);
+            return new Weapon(0, "no weapon", false, 0, new Effects("no effect", 0, 0, 0));
         }
     }
 
