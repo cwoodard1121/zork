@@ -19,7 +19,7 @@ public class StartFight extends Command{
     @Override
     public String runCommand(String... args) {
         
-        Enemy tester = new ExampleEnemy(new Location(0, 0), new Room(), 20, null, null, 0, 10, "homless");
+        Enemy tester = new ExampleEnemy(new Location(0, 0), new Room(), 20, null, 0, 10, "homless");
         Fight test = new Fight(tester);
         test.fight();
         // TODO Auto-generated method stub

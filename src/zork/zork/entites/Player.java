@@ -8,7 +8,7 @@ import datatypes.Location;
 import zork.Entity;
 import zork.Inventory;
 import zork.Item;
-import zork.Move;
+
 import zork.Room;
 import zork.items.Prime;
 import zork.items.Weapon;
@@ -18,11 +18,11 @@ public class Player extends Entity {
     private Room currentRoom;
     private int health;
     private Inventory inventory;
-    private ArrayList<Move> move;
+
     private int primeCounter;
     private int speed;
     private boolean isInMoveMenu;
-    private Move currentMove;
+ 
     private boolean isInWeaponMenu;
     private Weapon currentWeapon;
     private String name;
@@ -32,10 +32,10 @@ public class Player extends Entity {
 
     private boolean isCurrentMove;
 
-    public Player(Location location, Room currentRoom, int health, Inventory inventory, int primeCounter, ArrayList<Move> move, String name){
+    public Player(Location location, Room currentRoom, int health, Inventory inventory, int primeCounter, String name){
         super(location, currentRoom, health, inventory);
         this.primeCounter = primeCounter;
-        this.move = move;
+        
         this.name = name;
     }
 
@@ -43,9 +43,7 @@ public class Player extends Entity {
         this.currentWeapon = currentWeapon;
     }
 
-    public Move getCurrentMove() {
-        return currentMove;
-    }
+   
 
     public Weapon getCurrentWeapon(){
         return currentWeapon;
@@ -64,9 +62,7 @@ public class Player extends Entity {
         this.isInWeaponMenu = isInWeaponMenu;
     }
 
-    public void setCurrentMove(Move currentMove) {
-        this.currentMove = currentMove;
-    }
+   
 
 
     public boolean isCurrentMove() {
@@ -90,13 +86,6 @@ public class Player extends Entity {
         return speed;
     }
 
-    public ArrayList<Move> getMove() {
-        return move;
-    }
-
-    public void setMove(ArrayList<Move> move) {
-        this.move = move;
-    }
 
     public void setSpeed(int speed) {
         this.speed = speed;

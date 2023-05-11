@@ -6,21 +6,18 @@ import datatypes.Location;
 import zork.Entity;
 import zork.Inventory;
 import zork.Item;
-import zork.Move;
 import zork.Room;
 
 public class Enemy extends Entity {
-    private ArrayList<Move> moves;
     private double moneyDroped;
     private int speed;
     private String name;
 
 
 
-    public Enemy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Move> moves, int money, String name){
+    public Enemy(Location location, Room currentRoom, int health, Inventory inventory, int money, String name){
 
         super(location, currentRoom, health, inventory);
-        this.moves = moves;
         this.moneyDroped = money;
         this.speed = speed;
         this.name = name;
@@ -34,16 +31,6 @@ public class Enemy extends Entity {
 
     public void setSpeed(int speed) {
         this.speed = speed;
-    }
-
-
-    public ArrayList<Move> getMoves() {
-        return moves;
-    }
-
-
-    public void setMoves(ArrayList<Move> moves) {
-        this.moves = moves;
     }
 
     public double getMoney(){

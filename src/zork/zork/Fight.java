@@ -60,27 +60,23 @@ public class Fight {
       ArrayList<Item> playerStuff = Game.getGame().getPlayer().getInventory().getItems();
       ArrayList<Item> enemyStuff = enemy.getInventory().getItems();
 
-      ArrayList<Move> playerMoves = Game.getGame().getPlayer().getMove();
-      ArrayList<Move> enemyMoves = enemy.getMoves();
-
       ArrayList<Effects> playerEffects = new ArrayList<>();
       ArrayList<Effects> enemyEffects  = new ArrayList<>();
 
         while(true){
             
             if(playerSpeed>enemySpeed){
-                    Move pMove = askMove();
+                    
                     Weapon pWeapon = askWeapon();
 
-                    int ran = (int)(Math.random()*enemyMoves.size());
-                    Move eMove = enemyMoves.get(ran);
+                   
                     int ran2 = (int)(Math.random()*enemy.getInventory().getWeapons().size());
                     Weapon eWeapon = enemy.getInventory().getWeapons().get(ran2); 
 
 
-                    int pDamge = pMove.getDamage() + pWeapon.getDamage();
+                    int pDamge = pWeapon.getDamage();
                     System.out.println(Game.getGame().getPlayer().getName() + "used" + " " + pWeapon.getName());
-                    int eDamage = eMove.getDamage() + eWeapon.getDamage();
+                    int eDamage = eWeapon.getDamage();
                     System.out.println(enemy.getName() + "used" + " " + eWeapon.getName());
 
                     playerEffects.add(eWeapon.getEffect());
@@ -132,36 +128,7 @@ public class Fight {
 
             }else{
             
-                    Move pMove = askMove();
-                    Weapon pWeapon = askWeapon();
 
-                    int ran = (int)(Math.random()*enemyMoves.size());
-                    Move eMove = enemyMoves.get(ran);
-                    int ran2 = (int)(Math.random()*enemy.getInventory().getWeapons().size());
-                    Weapon eWeapon = enemy.getInventory().getWeapons().get(ran2); 
-
-
-                    int pDamge = pMove.getDamage() + pWeapon.getDamage();
-                    System.out.println(Game.getGame().getPlayer().getName() + "used" + " " + pWeapon.getName());
-                    int eDamage = eMove.getDamage() + eWeapon.getDamage();
-                    System.out.println(enemy.getName() + "used" + " " + eWeapon.getName());
-
-                    //effects are here depending on teh effects we going to have to change stuff
-                    //have each effect under a type like recourring damage or extra damage smth like that
-                    
-                    System.out.println(enemy.getName() + " did " + pDamge + " Damage");
-                    playerHealth -= eDamage;
-                    if(playerHealth<= 0){
-                        System.out.println(enemy.getName() + " Won! YOU DIED!!!");
-                        Game.getGame().getPlayer().gameOver();
-                        return false;
-                    }
-                    System.out.println("You did " + pDamge + " Damage");
-                    enemyHealth -= pDamge;
-                    if(enemyHealth<=0){
-                        System.out.println(enemy.getName() + " Died! YOU WIN!!!");
-                        return true;
-                    }
                     
                 
 
@@ -174,19 +141,7 @@ public class Fight {
 
 
 
-    private Move askMove() {
-        Game.getGame().getPlayer().setMoveMenu(true);
-        System.out.println("What move do you want to use?");
-        System.out.println(Game.getGame().getPlayer().getMove());
-        while(Game.getGame().getPlayer().isCurrentMove() == false){
-           
-        }
-        Game.getGame().getPlayer().setIsCurrentMove(true);
-        Move move = Game.getGame().getPlayer().getCurrentMove();
-
-        return move;
-
-    }
+ 
     
     private Weapon askWeapon() {
         Game.getGame().getPlayer().setInWeaponMenu(true);
