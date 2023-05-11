@@ -4,22 +4,53 @@ import java.util.ArrayList;
 
 public class Effects {
     private String name;
-    private String type;
-    static ArrayList<Effects> affectingSpeed;
-    static ArrayList<Effects> affectingDamage;
-    //you can add more types
+    private int damageChange;
+    private int speedChange;
+    private int turn;
+    private int turnCount;
+   
 
-    public Effects(String name, String type){
+    public Effects(String name, int turn, int damageChange, int speedChange){
         this.name = name;
-        this.type = type;
+        this.turn = turn;
+        this.damageChange = damageChange;
+        this.speedChange = speedChange;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getType() {
-        return type;
+    public int getDamageChange() {
+        return damageChange;
+    }
+
+    public void setDamageChange(int damageChange) {
+        this.damageChange = damageChange;
+    }
+
+    public int getTurnCount() {
+        return turnCount;
+    }
+
+    public void setTurnCount(int turnCount) {
+        this.turnCount = turnCount;
+    }
+
+    public int getSpeedChange() {
+        return speedChange;
+    }
+
+    public void setSpeedChange(int speedChange) {
+        this.speedChange = speedChange;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 
 

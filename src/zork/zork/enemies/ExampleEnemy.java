@@ -5,24 +5,25 @@ import java.util.ArrayList;
 import zork.entites.Enemy;
 import zork.items.Weapon;
 import datatypes.Location;
+import zork.Effects;
 import zork.Inventory;
 import zork.Move;
 import zork.Room;
 import zork.Constants.EntityConstants;
 
-public class HomelessGuy extends Enemy {
+public class ExampleEnemy extends Enemy {
 
 
-    public HomelessGuy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Move> moves, int money, int speed){
-        super(location, currentRoom, health, inventory, moves, money);
+    public ExampleEnemy(Location location, Room currentRoom, int health, Inventory inventory, ArrayList<Move> moves, int money, int speed, String name){
+        super(location, currentRoom, health, inventory, moves, money, name);
         
-    }
-
-    public void create() {
-       //needs location
-       //needs current room
+        Location notRealLocation = new Location(2, 3);
+        setLocation(notRealLocation);
+        Room notRealRoom = new Room();
+        setCurrentRoom(notRealRoom);
+        Effects poison = new Effects("poison", 2, 5, 0);
         setHealth(15);
-        Weapon glove = new Weapon( 10, "dirty gloves", false, 2, "none");
+        Weapon glove = new Weapon( 10, "dirty gloves", false, 2, poison);
         Inventory i = new Inventory(EntityConstants.MAX_INVENTORY_WEIGHT);
         i.addItem(glove);
         setInventory(i);
@@ -33,5 +34,4 @@ public class HomelessGuy extends Enemy {
         setSpeed(8);
 
     }
-    
 }

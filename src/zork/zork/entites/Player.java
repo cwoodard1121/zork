@@ -30,7 +30,7 @@ public class Player extends Entity {
 
     private boolean isCurrentMove;
 
-    public Player(Location location, Room currentRoom, int health, int damage, Inventory inventory, int primeCounter, ArrayList<Move> move, String name){
+    public Player(Location location, Room currentRoom, int health, Inventory inventory, int primeCounter, ArrayList<Move> move, String name){
         super(location, currentRoom, health, inventory);
         this.primeCounter = primeCounter;
         this.move = move;
@@ -142,5 +142,9 @@ public class Player extends Entity {
         this.primeCounter = primeCounter;
     }
 
+    public void gameOver(){
+      
+        //tell them they died and give them their health back and set their room to a spawnpoint
+    }
     
 }
