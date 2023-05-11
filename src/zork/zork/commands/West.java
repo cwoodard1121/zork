@@ -14,7 +14,7 @@ public class West extends Command {
     @Override
     public String runCommand(String... args) {
         for (Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
-            if (e.getDirection().equalsIgnoreCase("west")) {
+            if (e.getDirection().equalsIgnoreCase("w")) {
                 Game.getGame().getPlayer().setCurrentRoom(e.getAdjacentRoom());
                 return e.getAdjacentRoom().getDescription();
             }

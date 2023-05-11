@@ -2,7 +2,6 @@ package zork.entites;
 
 import java.util.ArrayList;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 import datatypes.Location;
 import zork.Entity;
@@ -15,7 +14,6 @@ import zork.items.Weapon;
 
 public class Player extends Entity {
     private Location location;
-    private Room currentRoom;
     private int health;
     private Inventory inventory;
 
@@ -48,7 +46,10 @@ public class Player extends Entity {
     public Weapon getCurrentWeapon(){
         return currentWeapon;
     }
-    
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -92,7 +93,7 @@ public class Player extends Entity {
     }
 
     public void changeRoom(Room r) {
-        this.currentRoom = r;
+        super.setCurrentRoom(r);
     } 
 
     public void setMoveMenu(boolean i) {
