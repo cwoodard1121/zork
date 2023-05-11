@@ -5,12 +5,16 @@ public class Item extends OpenableObject {
   private String name;
   private boolean isOpenable;
   private double id;
+  private boolean hasEffect;
 
 
-  public Item(int weight, String name, boolean isOpenable) {
+  
+
+  public Item(int weight, String name, boolean isOpenable, boolean hasEffect) {
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
+    this.hasEffect = hasEffect;
     this.id = (Math.random() * (Integer.MAX_VALUE - 1));
   }
 
@@ -19,7 +23,13 @@ public class Item extends OpenableObject {
       System.out.println("The " + name + " cannot be opened.");
 
   }
+  public boolean hasEffect() {
+      return hasEffect;
+    }
 
+    public void setUsedInAFight(boolean hasEffect) {
+      this.hasEffect = hasEffect;
+    }
   public double getId() {
     return id;
   }

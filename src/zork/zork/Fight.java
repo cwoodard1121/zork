@@ -65,74 +65,85 @@ public class Fight {
 
         while(true){
             
-            if(playerSpeed>enemySpeed){
-                    
-                    Weapon pWeapon = askWeapon();
-
-                   
-                    int ran2 = (int)(Math.random()*enemy.getInventory().getWeapons().size());
-                    Weapon eWeapon = enemy.getInventory().getWeapons().get(ran2); 
-
-
-                    int pDamge = pWeapon.getDamage();
-                    System.out.println(Game.getGame().getPlayer().getName() + "used" + " " + pWeapon.getName());
-                    int eDamage = eWeapon.getDamage();
-                    System.out.println(enemy.getName() + "used" + " " + eWeapon.getName());
-
-                    playerEffects.add(eWeapon.getEffect());
-                    enemyEffects.add(pWeapon.getEffect());
-
-                    for (int i = 0; i < playerEffects.size(); i++) {
-                       int dam = playerEffects.get(i).getDamageChange();
-                       int sped = playerEffects.get(i).getSpeedChange();
-                       if(playerEffects.get(i).getTurn() != playerEffects.get(i).getTurnCount()){
-                            playerHealth-=dam;
-                            playerSpeed-=sped;
-                            playerEffects.get(i).setTurnCount(playerEffects.get(i).getTurnCount()+1);
-                        }else{
-                            playerEffects.get(i).setTurnCount(0);
-                        }
-                    }
-
-                    for (int i = 0; i < enemyEffects.size(); i++) {
-                        int dam = enemyEffects.get(i).getDamageChange();
-                        int sped = enemyEffects.get(i).getSpeedChange();
-                        
-                        if(enemyEffects.get(i).getTurn() != enemyEffects.get(i).getTurnCount()){
-                            enemyHealth-=dam;
-                            enemySpeed-=sped;
-                            enemyEffects.get(i).setTurnCount(enemyEffects.get(i).getTurnCount()+1);
-                        }else{
-                            enemyEffects.get(i).setTurnCount(0);
-                        }
-                     }
-                    
-
-                    //effects are here depending on teh effects we going to have to change stuff
-                    //have each effect under a type like recourring damage or extra damage smth like that
-                    System.out.println("You did " + pDamge + " Damage");
-                    enemyHealth -= pDamge;
-                    if(enemyHealth<=0){
-                        System.out.println(enemy.getName() + " Died! YOU WIN!!!");
-                        return true;
-                    }
-                    System.out.println(enemy.getName() + " did " + pDamge + " Damage");
-                    playerHealth -= eDamage;
-                    if(playerHealth<= 0){
-                        System.out.println(enemy.getName() + " Won! YOU DIED!!!");
-                        Game.getGame().getPlayer().gameOver();
-                        return false;
-                    }
-
-
-
-            }else{
             
 
+                    if(Game.getGame().getPlayer().isInWeaponMenu() == true){
                     
-                
+                        Weapon pWeapon = askWeapon();
+                        int ran2 = (int)(Math.random()*enemy.getInventory().getWeapons().size());
+                        Weapon eWeapon = enemy.getInventory().getWeapons().get(ran2); 
 
-            }
+
+                        int pDamge = pWeapon.getDamage();
+                        System.out.println(Game.getGame().getPlayer().getName() + "used" + " " + pWeapon.getName());
+                        int eDamage = eWeapon.getDamage();
+                        System.out.println(enemy.getName() + "used" + " " + eWeapon.getName());
+
+                        playerEffects.add(eWeapon.getEffect());
+                        enemyEffects.add(pWeapon.getEffect());
+
+                        for (int i = 0; i < playerEffects.size(); i++) {
+                        int dam = playerEffects.get(i).getDamageChange();
+                        int sped = playerEffects.get(i).getSpeedChange();
+                        if(playerEffects.get(i).getTurn() != playerEffects.get(i).getTurnCount()){
+                                playerHealth-=dam;
+                                playerSpeed-=sped;
+                                playerEffects.get(i).setTurnCount(playerEffects.get(i).getTurnCount()+1);
+                            }else{
+                                playerEffects.get(i).setTurnCount(0);
+                            }
+                        }
+
+                        for (int i = 0; i < enemyEffects.size(); i++) {
+                            int dam = enemyEffects.get(i).getDamageChange();
+                            int sped = enemyEffects.get(i).getSpeedChange();
+                            
+                            if(enemyEffects.get(i).getTurn() != enemyEffects.get(i).getTurnCount()){
+                                enemyHealth-=dam;
+                                enemySpeed-=sped;
+                                enemyEffects.get(i).setTurnCount(enemyEffects.get(i).getTurnCount()+1);
+                            }else{
+                                enemyEffects.get(i).setTurnCount(0);
+                            }
+                        }
+                        
+
+                        if(playerSpeed>enemySpeed){
+                            System.out.println("You did " + pDamge + " Damage");
+                            enemyHealth -= pDamge;
+                            if(enemyHealth<=0){
+                                System.out.println(enemy.getName() + " Died! YOU WIN!!!");
+                                return true;
+                            }
+                            System.out.println(enemy.getName() + " did " + pDamge + " Damage");
+                            playerHealth -= eDamage;
+                            if(playerHealth<= 0){
+                                System.out.println(enemy.getName() + " Won! YOU DIED!!!");
+                                Game.getGame().getPlayer().gameOver();
+                                return false;
+                            }
+                        }else{
+                            System.out.println(enemy.getName() + " did " + pDamge + " Damage");
+                            playerHealth -= eDamage;
+                            if(playerHealth<= 0){
+                                System.out.println(enemy.getName() + " Won! YOU DIED!!!");
+                                Game.getGame().getPlayer().gameOver();
+                                return false;
+                            }
+                            System.out.println("You did " + pDamge + " Damage");
+                            enemyHealth -= pDamge;
+                            if(enemyHealth<=0){
+                                System.out.println(enemy.getName() + " Died! YOU WIN!!!");
+                                return true;
+                            }
+                            
+                        }
+                    }else if(Game.getGame().getPlayer().getIsItemMenu() == true){
+                        Item item = askItem();
+                    }
+
+
+            
         }
         
     }
@@ -143,6 +154,24 @@ public class Fight {
 
  
     
+    private Item askItem() {
+        Game.getGame().getPlayer().setInItemMenu(true);
+        ArrayList<Item> arr = Game.getGame().getPlayer().getInventory().getItemsWithEffects();
+        
+        System.out.println("What item do you want to use?");
+        System.out.println(arr);
+        while (Game.getGame().getPlayer().isCurrentMove() == false) {
+            
+        }
+        Game.getGame().getPlayer().setIsCurrentMove(true);
+        Item item = Game.getGame().getPlayer().getCurrentItem();
+
+        return item;
+    }
+
+
+
+
     private Weapon askWeapon() {
         Game.getGame().getPlayer().setInWeaponMenu(true);
         ArrayList<Weapon> arr = Game.getGame().getPlayer().getInventory().getWeapons();

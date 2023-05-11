@@ -72,6 +72,17 @@ public class Inventory {
     return arr;
   }
 
+  public ArrayList<Item> getItemsWithEffects(){
+    ArrayList<Item> arr = new ArrayList<Item>();
+    for (int i = 0; i < arr.size(); i++) {
+        if(items.get(i).hasEffect() == true){
+          arr.set(i, items.get(i));
+        }
+    }
+
+    return arr;
+  }
+
 
 
 

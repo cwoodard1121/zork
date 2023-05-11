@@ -19,10 +19,14 @@ public class Player extends Entity {
 
     private int primeCounter;
     private int speed;
-    private boolean isInMoveMenu;
- 
+    private boolean isInItemMenu;
+    
+
     private boolean isInWeaponMenu;
     private Weapon currentWeapon;
+    private Item currentItem;
+
+
     private String name;
     
 
@@ -33,15 +37,24 @@ public class Player extends Entity {
     public Player(Location location, Room currentRoom, int health, Inventory inventory, int primeCounter, String name){
         super(location, currentRoom, health, inventory);
         this.primeCounter = primeCounter;
-        
         this.name = name;
     }
 
     public void setCurrentWeapon(Weapon currentWeapon) {
         this.currentWeapon = currentWeapon;
     }
+    
+    public Item getCurrentItem() {
+        return currentItem;
+    }
 
-   
+    public void setCurrentItem(Item currentItem) {
+        this.currentItem = currentItem;
+    }
+    
+    public void setInItemMenu(boolean isInItemMenu) {
+        this.isInItemMenu = isInItemMenu;
+    }
 
     public Weapon getCurrentWeapon(){
         return currentWeapon;
@@ -96,12 +109,12 @@ public class Player extends Entity {
         super.setCurrentRoom(r);
     } 
 
-    public void setMoveMenu(boolean i) {
-        this.isInMoveMenu = i;
+    public void setItemMenu(boolean i) {
+        this.isInItemMenu = i;
     } 
 
-    public boolean getIsMoveMenu() {
-        return isInMoveMenu;
+    public boolean getIsItemMenu() {
+        return isInItemMenu;
     } 
 
     public int getHealth() {
