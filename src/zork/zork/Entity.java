@@ -9,7 +9,7 @@ public class Entity {
     private Location location;
     private Room currentRoom;
     private int health;
-    private Inventory inventory = new Inventory(EntityConstants.MAX_INVENTORY_WEIGHT);
+    private Inventory inventory;
 
     public Entity(Location location, Room currentRoom, int health, Inventory inventory){
         this.currentRoom = currentRoom;
@@ -50,7 +50,7 @@ public class Entity {
     }
 
     public Inventory getInventory() {
-        return inventory;
+        return this.inventory;
     }
 
     public void setInventory(Inventory inventory) {

@@ -127,7 +127,7 @@ public class Player extends Entity {
 
 
     public Inventory getInventory() {
-       return inventory;
+       return this.inventory;
     }
 
     public int getPrimeCounter() {
