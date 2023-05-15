@@ -12,6 +12,8 @@ public class Room {
   private ArrayList<Enemy> enemies;
   private ArrayList<Exit> exits = new ArrayList<>();
   private boolean isSubway;
+  private String displayName;
+
 
   public ArrayList<Exit> getExits() {
     return exits;
@@ -52,9 +54,10 @@ public class Room {
    * Create a room described "description". Initially, it has no exits.
    * "description" is something like "a kitchen" or "an open court yard".
    */
-  public Room(final String description, String name) {
+  public Room(final String description, String name, String displayName) {
     this.roomName = name;
     this.description = description;
+    this.displayName = displayName;
     exits = new ArrayList<Exit>();
   }
 
@@ -143,4 +146,13 @@ public class Room {
   public void setDescription(final String description) {
     this.description = description;
   }
+
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  public void setDisplayName(String displayName) {
+    this.displayName = displayName;
+  }
+
 }
