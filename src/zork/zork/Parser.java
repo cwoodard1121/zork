@@ -28,10 +28,10 @@ public class Parser {
     int i = 0;
     for(String word : words) {
       if(i == 0) {
-        if(!CommandConstants.commands.containsKey(word)) {
+        if(!CommandConstants.commands.containsKey(word.toLowerCase())) {
           throw new CommandNotFoundException(inputLine);
         }
-        c = Constants.CommandConstants.commands.get(word);
+        c = Constants.CommandConstants.commands.get(word.toLowerCase());
         i++;
         continue;
       }
@@ -39,10 +39,10 @@ public class Parser {
       i++;
     }
     } else {
-      if(!CommandConstants.commands.containsKey(words[0])) {
+      if(!CommandConstants.commands.containsKey(words[0].toLowerCase())) {
         throw new CommandNotFoundException(inputLine);
       }
-      c = Constants.CommandConstants.commands.get(words[0]);
+      c = Constants.CommandConstants.commands.get(words[0].toLowerCase());
     }
     return c;
   }
