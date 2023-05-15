@@ -23,11 +23,11 @@ public class Parser {
     inputLine = in.nextLine();
 
     words = inputLine.split(" ");
-
+    args = new String[words.length - 1];
     if(words.length > 1) {
-    int i = 1;
+    int i = 0;
     for(String word : words) {
-      if(i == 1) {
+      if(i == 0) {
         if(!CommandConstants.commands.containsKey(word)) {
           throw new CommandNotFoundException(inputLine);
         }
@@ -35,7 +35,7 @@ public class Parser {
         i++;
         continue;
       }
-      args[i] = word;
+      args[i - 1] = word;
       i++;
     }
     } else {
