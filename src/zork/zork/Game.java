@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.naming.InitialContext;
+
 import com.google.gson.Gson;
 
 import datatypes.CommandNotFoundException;
@@ -79,12 +81,13 @@ public class Game {
     // VARIABLE NAME STANDARDS !!IMPORTANT!!, for rooms, Make a name using java naming convention
     // for Exits use the room name + exit + Direction of exit example Room yorkMillsTerminal has as exit that goes to it in the north so we call it "yorkMillsBusTerminalExitNorth"
     if(shouldCreateRooms) {
+
       // Create a room object and use the description as the constructor parameter.
-      final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal"); roomMap.put(yorkMillsBusTerminal.getRoomName(),yorkMillsBusTerminal);
+      final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal", "York Mills Bus Terminal"); roomMap.put(yorkMillsBusTerminal.getRoomName(),yorkMillsBusTerminal);
       // Subway area in york mills
-      final Room yorkMillsSubwayHallway = new Room("A Hallway is ahead leading to the Subway","yorkmillssubwayhallway"); roomMap.put(yorkMillsSubwayHallway.getRoomName(), yorkMillsSubwayHallway);
+      final Room yorkMillsSubwayHallway = new Room("A Hallway is ahead leading to the Subway","yorkmillssubwayhallway", "York Mills Subway Hallway"); roomMap.put(yorkMillsSubwayHallway.getRoomName(), yorkMillsSubwayHallway);
       // Exit which goes down into the subwaynigni
-      final Room yorkMillsSubway = new Room("Subways are going by, North to Finch, South to Vaughn", "yorkmillssubway"); roomMap.put(yorkMillsSubway.getRoomName(), yorkMillsSubway);
+      final Room yorkMillsSubway = new Room("Subways are going by, North to Finch, South to Vaughn", "yorkmillssubway", "York Mills Subway"); roomMap.put(yorkMillsSubway.getRoomName(), yorkMillsSubway);
       final Exit yorkMillsSubwayHallwayExitDown = new Exit("D",yorkMillsSubwayHallway); yorkMillsBusTerminal.addExit(yorkMillsSubwayHallwayExitDown);
       // exit which goes back to the bus terminal
       final Exit yorkMillsBusTerminalExitUp = new Exit("U", yorkMillsBusTerminal); yorkMillsSubwayHallway.addExit(yorkMillsBusTerminalExitUp);
