@@ -83,9 +83,9 @@ public class Fight {
 
 
                             int pDamge = pWeapon.getDamage();
-                            System.out.println(Game.getGame().getPlayer().getName() + "used" + " " + pWeapon.getName());
+                            System.out.println(Game.getGame().getPlayer().getName() + " used" + " " + pWeapon.getName());
                             int eDamage = eWeapon.getDamage();
-                            System.out.println(enemy.getName() + "used" + " " + eWeapon.getName());
+                            System.out.println(enemy.getName() + " used" + " " + eWeapon.getName());
 
                             playerEffects.add(eWeapon.getEffect());
                             enemyEffects.add(pWeapon.getEffect());
@@ -162,6 +162,8 @@ public class Fight {
                 }
                 
             }).start();
+            
+
             return returnValue[0];
     }
     
@@ -194,7 +196,9 @@ public class Fight {
         ArrayList<Weapon> arr = Game.getGame().getPlayer().getInventory().getWeapons();
         if(arr.size() >= 1){
         System.out.println("What weapon do you want to use?");
-        System.out.println(arr);
+        for (int i = 0; i < arr.size(); i++) {
+            System.out.println("> " + arr.get(i).getName());
+        }
         while (Game.getGame().getPlayer().isCurrentMove() == false) {
             
         }
