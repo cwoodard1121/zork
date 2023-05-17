@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.naming.InitialContext;
+
 import com.google.gson.Gson;
 
 import datatypes.CommandNotFoundException;
@@ -79,6 +81,7 @@ public class Game {
     // VARIABLE NAME STANDARDS !!IMPORTANT!!, for rooms, Make a name using java naming convention
     // for Exits use the room name + exit + Direction of exit example Room yorkMillsTerminal has as exit that goes to it in the north so we call it "yorkMillsBusTerminalExitNorth"
     if(shouldCreateRooms) {
+
       // Create a room object and use the description as the constructor parameter.
       final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal", "York Mills Bus Terminal"); roomMap.put(yorkMillsBusTerminal.getRoomName(),yorkMillsBusTerminal);
       // Subway area in york mills
