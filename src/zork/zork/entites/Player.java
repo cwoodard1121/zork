@@ -15,16 +15,16 @@ import zork.items.Weapon;
 public class Player extends Entity {
     private Location location;
     private int health;
-    private Inventory inventory;
 
     private int primeCounter;
     private int speed;
-    private boolean isInItemMenu;
     
-
+    private boolean isInItemMenu;
     private boolean isInWeaponMenu;
     private Weapon currentWeapon;
     private Item currentItem;
+    private boolean isChoosingMenu = true;
+    private boolean isInFight;
 
 
     private String name;
@@ -52,8 +52,24 @@ public class Player extends Entity {
         this.currentItem = currentItem;
     }
     
+    public boolean isInFight() {
+        return isInFight;
+    }
+
+    public void setInFight(boolean isInFight) {
+        this.isInFight = isInFight;
+    }
+
     public void setInItemMenu(boolean isInItemMenu) {
         this.isInItemMenu = isInItemMenu;
+    }
+
+    public boolean isChoosingMenu() {
+        return isChoosingMenu;
+    }
+
+    public void setChoosingMenu(boolean isChoosingMenu) {
+        this.isChoosingMenu = isChoosingMenu;
     }
 
     public Weapon getCurrentWeapon(){
@@ -127,7 +143,7 @@ public class Player extends Entity {
 
 
     public Inventory getInventory() {
-       return this.inventory;
+       return super.getInventory();
     }
 
     public int getPrimeCounter() {
@@ -135,7 +151,7 @@ public class Player extends Entity {
     }
 
     public void calculatePrimeCounter() {
-        inventory.getItems().forEach(item -> {
+        super.getInventory().getItems().forEach(item -> {
             if(item instanceof Prime) primeCounter++;
         });
     }
