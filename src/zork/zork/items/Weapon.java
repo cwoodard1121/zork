@@ -5,7 +5,6 @@ import zork.Item;
 
 public class Weapon extends Item {
     private int weight;
-    private String name;
     private boolean isOpenable;
     private int damage;
     private Effects effect;
@@ -23,7 +22,7 @@ public class Weapon extends Item {
     }
 
     public String getWeapon() {
-        return name;
+        return super.getName();
     }
 
 
@@ -50,11 +49,11 @@ public class Weapon extends Item {
     
 
     public String getName() {
-        return name;
+        return super.getName();
     }
     
     public void setName(String name) {
-        this.name = name;
+        super.setName(name);
     }
 
     public int getDamage(){

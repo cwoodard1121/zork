@@ -66,7 +66,7 @@ public class Inventory {
     ArrayList<Weapon> arr = new ArrayList<Weapon>();
     for(int i = 0; i<items.size(); i++){
       if(items.get(i) instanceof Weapon){
-        arr.set(i, (Weapon) items.get(i));
+        arr.add((Weapon) items.get(i));
       }
     }
     return arr;
