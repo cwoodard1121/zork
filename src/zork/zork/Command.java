@@ -1,5 +1,8 @@
 package zork;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Command {
   private String name;
 
@@ -21,8 +24,10 @@ public class Command {
    * 
    * @param args
    * @return Console otuput
+ * @throws IOException
+ * @throws FileNotFoundException
    */
-  public String runCommand(String... args) {
+  public String runCommand(String... args) throws FileNotFoundException, IOException {
     return "Invalid command: " + name;
   }
 

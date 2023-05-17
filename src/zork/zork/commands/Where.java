@@ -13,7 +13,7 @@ public class Where extends Command {
 
     @Override
     public String runCommand(String... args) {
-        return Game.getGame().getPlayer().getCurrentRoom().getRoomName();
+        return Game.getGame().getPlayer().getCurrentRoom().getDisplayName();
     }
 
     

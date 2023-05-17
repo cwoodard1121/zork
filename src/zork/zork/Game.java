@@ -2,6 +2,7 @@ package zork;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,8 +76,9 @@ public class Game {
 
   /**
    * This method will not be here at the final product its just to create the initital rooms
+   * @throws FileNotFoundException
    */
-  public void createRooms() { 
+  public void createRooms() throws FileNotFoundException, IOException { 
     roomMap = new HashMap<String,Room>();
     // VARIABLE NAME STANDARDS !!IMPORTANT!!, for rooms, Make a name using java naming convention
     // for Exits use the room name + exit + Direction of exit example Room yorkMillsTerminal has as exit that goes to it in the north so we call it "yorkMillsBusTerminalExitNorth"
@@ -94,8 +96,9 @@ public class Game {
       final Exit yorkMillsBusSubwayHallwayExitNorth = new Exit("N", yorkMillsSubwayHallway); yorkMillsSubway.addExit(yorkMillsBusSubwayHallwayExitNorth);
       final Exit yorkMillsSubwayExitSouth = new Exit("S", yorkMillsSubway); yorkMillsSubwayHallway.addExit(yorkMillsSubwayExitSouth);
      // Attempt at understanding this _______________________  Direction from TO here        From here                             Exit Name Where its going TO +
-      System.out.println(roomMap == null);
-      
+      // was for testing : System.out.println(roomMap == null);
+      yorkMillsBusTerminal.printAscii();
+      //
     }
   }
 
@@ -116,8 +119,10 @@ public class Game {
   /**
    * Main play routine. Loops until end of play.
    * @throws InterruptedException
+   * @throws IOException
+   * @throws FileNotFoundException
    */
-  public void play() throws InterruptedException {
+  public void play() throws InterruptedException, FileNotFoundException, IOException {
     
     printWelcome();
     try {
@@ -196,8 +201,10 @@ public class Game {
 
   /**
    * Given a command, process (that is: execute) the command.
+   * @throws IOException
+   * @throws FileNotFoundException
    */
-  private void processCommand(Command command, String[] args) {
+  private void processCommand(Command command, String[] args) throws FileNotFoundException, IOException {
     System.out.println(command.runCommand(args));
   }
 

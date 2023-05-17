@@ -1,5 +1,7 @@
 package zork;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import zork.entites.Enemy;
@@ -76,7 +78,7 @@ public class Room {
    * constructor).
    */
   public String shortDescription() {
-    return "Room: " + roomName + "\n\n" + description;
+    return "Room: " + displayName + "\n" + description;
   }
 
   /**
@@ -85,7 +87,7 @@ public class Room {
    */
   public String longDescription() {
 
-    return "Room: " + roomName + "\n\n" + description + "\n" + exitString();
+    return "Room: " + displayName + "\n" + description + "\n" + exitString();
   }
 
   /**
@@ -131,6 +133,10 @@ public class Room {
    * 
    * throw new IllegalArgumentException("Invalid Direction"); }
    */
+
+  public void printAscii () throws FileNotFoundException, IOException {
+    InitAscii.fillAsciiArt(this.roomName);
+  }
   public String getRoomName() {
     return roomName;
   }

@@ -1,5 +1,8 @@
 package zork.commands;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import zork.Command;
 import zork.Constants;
 import zork.Exit;
@@ -12,10 +15,11 @@ public class West extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args) throws FileNotFoundException, IOException {
         for (Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
             if (e.getDirection().equalsIgnoreCase("w")) {
                 Game.getGame().getPlayer().setCurrentRoom(e.getAdjacentRoom());
+                e.getAdjacentRoom().printAscii();
                 return e.getAdjacentRoom().getDescription();
             }
             
