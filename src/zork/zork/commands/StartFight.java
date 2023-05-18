@@ -30,7 +30,7 @@ public class StartFight extends Command{
         Game.getGame().getPlayer().getInventory().addItem(testWeapon);
         test.fight();
         // TODO Auto-generated method stub
-        return super.runCommand(args);
+        return "done";
     }
 
 }
