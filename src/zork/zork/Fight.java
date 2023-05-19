@@ -44,7 +44,8 @@ public class Fight {
 
 
     private boolean fightingResults() {
-                    int playerHealth = Game.getGame().getPlayer().getHealth();
+                    
+                int playerHealth = Game.getGame().getPlayer().getHealth();
                     int enemyHealth = enemy.getHealth();
 
                     int playerSpeed = Game.getGame().getPlayer().getSpeed();
@@ -57,7 +58,7 @@ public class Fight {
                     System.out.println("Do you choose the weapon menu or the item menu (for now u cant go back)");
                 
                     Game.getGame().getPlayer().setChoosingMenu(true);
-
+            
                     if(Game.getGame().getPlayer().isInWeaponMenu() == true){
                     
                         Weapon pWeapon = askWeapon();
