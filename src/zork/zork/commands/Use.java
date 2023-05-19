@@ -29,9 +29,20 @@ public class Use extends Command {
                     return arr.get(i).getWeapon();
                 }
             }
-        }else if(Game.getGame().getPlayer().getIsItemMenu()){
+        }else{
             ArrayList<Item> pInventory = Game.getGame().getPlayer().getInventory().getItems();
             for (int i = 0; i < pInventory.size(); i++) {
+
+                if(Game.getGame().getPlayer().getIsItemMenu()){
+                    ArrayList<Item> arr = Game.getGame().getPlayer().getInventory().getItemsWithEffects();
+                    if(command.equalsIgnoreCase(pInventory.get(i).getName())){
+                        Game.getGame().getPlayer().setIsCurrentMove(true);
+                        Game.getGame().getPlayer().setCurrentItem(pInventory.get(i));
+                        return pInventory.get(i).getName();
+                    }
+
+                }
+
                 if(command.equalsIgnoreCase(pInventory.get(i).getName())){
                     Game.getGame().getPlayer().setIsCurrentMove(true);
                     Game.getGame().getPlayer().setCurrentItem(pInventory.get(i));
@@ -39,7 +50,7 @@ public class Use extends Command {
                 }
             }
         }
-        return "You are not in a fight or that is not a weapon you have"; //make it do stuff outside of battle later
+        return "You are not in a fight or that is not a weapon/item you have"; //make it do stuff outside of battle later
     }
 
     
