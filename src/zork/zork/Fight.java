@@ -2,9 +2,7 @@ package zork;
 
 import java.util.ArrayList;
 
-import zork.enemies.ExampleEnemy;
 import zork.entites.Enemy;
-import zork.entites.Player;
 import zork.items.Weapon;
 import java.lang.Runnable;
 
@@ -13,8 +11,11 @@ public class Fight {
 
     public Fight(Enemy bad){
         this.enemy = bad;
+        
     }
     
+   
+            
    /*Fighting
          * Whoever has most speed goes first, lets say its player
          * player is given their moves and asked which weapon they want to use if they have more than one
@@ -31,9 +32,10 @@ public class Fight {
    
     public void fight(){
         Game.getGame().getPlayer().setInFight(true);
-        int playerSpeed = Game.getGame().getPlayer().getSpeed();
-        int enemySpeed = enemy.getSpeed();
         boolean didPlayerWin = fightingResults();
+        //game over thing will have all the menu things set to default and your location back to a spawnpoint
+        //win expect player serperatly gets stuff from enemys dead body
+        //example, you beat them in a fight so you search their dead body so you can pick up the sutff that wont overload your inventory
         
     }
 
@@ -43,7 +45,7 @@ public class Fight {
 
     private boolean fightingResults() {
         boolean[] returnValue = new boolean[]{false};
-        new Thread(new Runnable() {
+         new Thread(new Runnable() {
 
             @Override
             public void run() {
@@ -54,9 +56,7 @@ public class Fight {
                     int playerSpeed = Game.getGame().getPlayer().getSpeed();
                     int enemySpeed = enemy.getSpeed();
                         
-                    ArrayList<Item> playerStuff = Game.getGame().getPlayer().getInventory().getItems();
-                    ArrayList<Item> enemyStuff = enemy.getInventory().getItems();
-
+                    
                     ArrayList<Effects> playerEffects = new ArrayList<>();
                     ArrayList<Effects> enemyEffects  = new ArrayList<>();
                    
