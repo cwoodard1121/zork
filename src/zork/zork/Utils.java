@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+// import javafx.scene.media.Media;
+// import javafx.scene.media.MediaPlayer;
 import sun.audio.*;
 import zork.Constants.CommandConstants;
 import zork.Constants.SoundConstants;
@@ -175,9 +175,9 @@ public class Utils {
      */
     public static void playSound(String sound, int secs, boolean loop) {
         final int seconds = secs;
-        Media hit = new Media(getFileFromBin(sound).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.play();
+        // Media hit = new Media(getFileFromBin(sound).toURI().toString());
+        // MediaPlayer mediaPlayer = new MediaPlayer(hit);
+        //mediaPlayer.play();
     }
 
 
