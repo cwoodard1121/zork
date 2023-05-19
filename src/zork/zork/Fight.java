@@ -3,6 +3,7 @@ package zork;
 import java.util.ArrayList;
 
 import zork.entites.Enemy;
+import zork.entites.Player;
 import zork.items.Weapon;
 import java.lang.Runnable;
 
@@ -31,12 +32,20 @@ public class Fight {
 
    
     public void fight(){
+        Game.getGame().getPlayer().setChoosingMenu(false);
         Game.getGame().getPlayer().setInFight(true);
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 while(Game.getGame().getPlayer().isInFight()) {
-                    boolean didPlayerWin = fightingResults();
+                    Player p = Game.getGame().getPlayer();
+                    if(!p.getIsItemMenu() && !p.isInWeaponMenu()) {
+                        boolean didPlayerWin = fightingResults();
+                        if(didPlayerWin) {
+                            System.out.println("you won");
+                            Game.getGame().getPlayer().setInFight(false);
+                        }
+                    }
                     //game over thing will have all the menu things set to default and your location back to a spawnpoint
                     //win expect player serperatly gets stuff from enemys dead body
                     //example, you beat them in a fight so you search their dead body so you can pick up the sutff that wont overload your inventory
@@ -54,6 +63,7 @@ public class Fight {
 
 
     private boolean fightingResults() {
+        if(Game.getGame().getPlayer().isChoosingMenu()) return false;
                     
                 int playerHealth = Game.getGame().getPlayer().getHealth();
                     int enemyHealth = enemy.getHealth();
@@ -69,7 +79,7 @@ public class Fight {
                 
                     Game.getGame().getPlayer().setChoosingMenu(true);
             
-                    if(Game.getGame().getPlayer().isInWeaponMenu() == true){
+                    if(Game.getGame().getPlayer().isInWeaponMenu()){
                     
                         Weapon pWeapon = askWeapon();
                         int ran2 = (int)(Math.random()*enemy.getInventory().getWeapons().size());
