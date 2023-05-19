@@ -44,12 +44,6 @@ public class Fight {
 
 
     private boolean fightingResults() {
-        boolean[] returnValue = new boolean[]{false};
-         new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                while(true){
                     int playerHealth = Game.getGame().getPlayer().getHealth();
                     int enemyHealth = enemy.getHealth();
 
@@ -61,11 +55,7 @@ public class Fight {
                     ArrayList<Effects> enemyEffects  = new ArrayList<>();
                    
                     System.out.println("Do you choose the weapon menu or the item menu (for now u cant go back)");
-                    
-                    while(Game.getGame().getPlayer().isChoosingMenu() == true){
-                       
-
-                    }
+                
                     Game.getGame().getPlayer().setChoosingMenu(true);
 
                     if(Game.getGame().getPlayer().isInWeaponMenu() == true){
@@ -117,16 +107,14 @@ public class Fight {
                             if(enemyHealth<=0){
                                 System.out.println(enemy.getName() + " Died! YOU WIN!!!");
                                 Game.getGame().getPlayer().setInFight(false);
-                                returnValue[0] = true;
-                                break;
+                                return true;
                                 
                                 
                             }else if(playerHealth<= 0){
                                 System.out.println(enemy.getName() + " Won! YOU DIED!!!");
                                 Game.getGame().getPlayer().gameOver();
                                 Game.getGame().getPlayer().setInFight(false);
-                                returnValue[0] = false;
-                                break;
+                                return false;
 
                             }
                         }else{
@@ -138,14 +126,12 @@ public class Fight {
                                 System.out.println(enemy.getName() + " Won! YOU DIED!!!");
                                 Game.getGame().getPlayer().gameOver();
                                 Game.getGame().getPlayer().setInFight(false);
-                                returnValue[0] = false;
-                                break;
+                                return false;
                                 
                             }else if(enemyHealth<=0){
                                 System.out.println(enemy.getName() + " Died! YOU WIN!!!");
                                 Game.getGame().getPlayer().setInFight(false);
-                                returnValue[0] = true;
-                                break;
+                                return true;
                                 
                             }
                             
@@ -155,22 +141,8 @@ public class Fight {
                     }
 
 
-            
-        }
-            }
-            
-        }).start();
-            
-        
-           return returnValue[0];
-        
-        
-                
-            
-        
-        
-    }
-    
+            return false;
+        }    
     
    
 
