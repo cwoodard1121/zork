@@ -6,13 +6,12 @@ import zork.Fight;
 import zork.Game;
 import zork.Item;
 import zork.Room;
-import zork.Constants.EntityConstants;
-import zork.Constants.PlayerConstants;
 import zork.enemies.ExampleEnemy;
 import zork.entites.Enemy;
 import zork.items.Weapon;
 
-public class StartFight extends Command{
+
+public class StartFight extends Command {
     
 
     public StartFight(String name) {
@@ -29,7 +28,6 @@ public class StartFight extends Command{
         Weapon testWeapon = new Weapon(0, "Diamond Pick", false, 20, null);
         Game.getGame().getPlayer().getInventory().addItem(testWeapon);
         test.fight();
-        // TODO Auto-generated method stub
         return Game.isTesting ? "done" : "";
     }
 
