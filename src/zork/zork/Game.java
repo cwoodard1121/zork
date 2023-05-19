@@ -15,7 +15,6 @@ import com.google.gson.Gson;
 
 import datatypes.CommandNotFoundException;
 import datatypes.Location;
-import javafx.embed.swing.JFXPanel;
 import zork.Constants.PlayerConstants;
 import zork.entites.Player;
 
@@ -124,7 +123,7 @@ public class Game {
    * @throws FileNotFoundException
    */
   public void play() throws InterruptedException, FileNotFoundException, IOException {
-    new JFXPanel();
+
     printWelcome();
     try {
       createRooms();
