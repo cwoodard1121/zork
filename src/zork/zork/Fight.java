@@ -32,10 +32,20 @@ public class Fight {
    
     public void fight(){
         Game.getGame().getPlayer().setInFight(true);
-        boolean didPlayerWin = fightingResults();
-        //game over thing will have all the menu things set to default and your location back to a spawnpoint
-        //win expect player serperatly gets stuff from enemys dead body
-        //example, you beat them in a fight so you search their dead body so you can pick up the sutff that wont overload your inventory
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(Game.getGame().getPlayer().isInFight()) {
+                    boolean didPlayerWin = fightingResults();
+                    //game over thing will have all the menu things set to default and your location back to a spawnpoint
+                    //win expect player serperatly gets stuff from enemys dead body
+                    //example, you beat them in a fight so you search their dead body so you can pick up the sutff that wont overload your inventory
+                }
+            }
+            
+        });
+        t.start();
+
         
     }
 
