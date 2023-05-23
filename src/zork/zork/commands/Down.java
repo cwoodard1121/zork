@@ -18,9 +18,12 @@ public class Down extends Command {
         for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
             try{
             if(e.getDirection().equalsIgnoreCase("d")) {
+                if (!e.getAdjacentRoom().isLocked()) {
                 Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
                 e.getAdjacentRoom().printAscii();
                 return e.getAdjacentRoom().getDescription();
+                }
+                return e.getAdjacentRoom().getDisplayName() + " is Locked or Unavalible at this time";
             }
         } catch (Exception exception) {
             return "ya done goofed";

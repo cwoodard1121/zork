@@ -27,7 +27,7 @@ public class West extends Command {
             return "ya done goofed";
         } 
             }
-            return "There is no room to the South";
+            return "There is no room to the West";
         }
     }
 
