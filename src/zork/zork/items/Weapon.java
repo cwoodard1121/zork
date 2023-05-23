@@ -27,11 +27,13 @@ public class Weapon extends Item {
 
 
     public Effects getEffect() {
-        try {
+        if (effect != null) {
             return effect;
-        } catch (Exception e) {
+        }else{
             return new Effects("placeholder", 0, 0, 0);
         }
+            
+       
         
     }
 

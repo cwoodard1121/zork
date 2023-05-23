@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+// import javafx.scene.media.Media;
+// import javafx.scene.media.MediaPlayer;
 import sun.audio.*;
 import zork.Constants.CommandConstants;
 import zork.Constants.SoundConstants;
@@ -26,7 +28,7 @@ public class Utils {
      * @param fileName
      * @return InputStream of the file selected, relative to the bin directory.
      */
-    public static InputStream getFileFromBin(String fileName) {
+    public static InputStream getFileStreamFromBin(String fileName) {
         File soundFile = new File(new File(".").getPath() + "\\bin\\zork\\data\\" + fileName);
         try {
             return (InputStream) new FileInputStream(soundFile);
@@ -34,6 +36,14 @@ public class Utils {
             e.printStackTrace();
         }
         return null;
+    }
+    /**
+     * 
+     * @param fileName
+     * @return File supplied
+     */
+    public static File getFileFromBin(String fileName) {
+        return new File(new File(".").getPath() + "\\bin\\zork\\data\\" + fileName);
     }
 
     /**
@@ -163,42 +173,51 @@ public class Utils {
      * @param secs The length of the file
      * @param loop Whether or not the sound should loop until cancelled
      */
-    public static synchronized void playSound(String sound, int secs, boolean loop) {
-        final String soundName = sound.replace(".wav", "").concat(".wav");
+    public static void playSound(String sound, int secs, boolean loop) {
         final int seconds = secs;
-        Constants.SoundConstants.playSounds.put(soundName, true);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    AudioStream audioStream = new AudioStream(getFileFromBin(soundName));
-                    AudioPlayer.player.start(audioStream);
-                    int i = 0;
-                    if(loop) {
-                        while(Constants.SoundConstants.playSounds.get(soundName)) {
-                            if(i >= seconds) {
-                                AudioPlayer.player.stop(audioStream);
-                                audioStream = new AudioStream(getFileFromBin(soundName));
-                                AudioPlayer.player.start(audioStream);
-                                i = 0;
-                            }
-                            i++;
-                            Thread.sleep(1000);
-                        }
-                    } else {
-                        while(i < seconds && Constants.SoundConstants.playSounds.get(soundName)) {
-                            i++;
-                            Thread.sleep(1000);
-                        }
-                    }
-                    AudioPlayer.player.stop(audioStream);
-                } catch(Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        // Media hit = new Media(getFileFromBin(sound).toURI().toString());
+        // MediaPlayer mediaPlayer = new MediaPlayer(hit);
+        //mediaPlayer.play();
+    }
+
+
+
+    // public static synchronized void playSound(String sound, int secs, boolean loop) {
+    //     final String soundName = sound.replace(".wav", "").concat(".wav");
+    //     final int seconds = secs;
+    //     Constants.SoundConstants.playSounds.put(soundName, true);
+    //     new Thread(new Runnable() {
+    //         @Override
+    //         public void run() {
+    //             try {
+    //                 AudioStream audioStream = new AudioStream(getFileFromBin(soundName));
+    //                 AudioPlayer.player.start(audioStream);
+    //                 int i = 0;
+    //                 if(loop) {
+    //                     while(Constants.SoundConstants.playSounds.get(soundName)) {
+    //                         if(i >= seconds) {
+    //                             AudioPlayer.player.stop(audioStream);
+    //                             audioStream = new AudioStream(getFileFromBin(soundName));
+    //                             AudioPlayer.player.start(audioStream);
+    //                             i = 0;
+    //                         }
+    //                         i++;
+    //                         Thread.sleep(1000);
+    //                     }
+    //                 } else {
+    //                     while(i < seconds && Constants.SoundConstants.playSounds.get(soundName)) {
+    //                         i++;
+    //                         Thread.sleep(1000);
+    //                     }
+    //                 }
+    //                 AudioPlayer.player.stop(audioStream);
+    //             } catch(Exception e) {
+    //                 e.printStackTrace();
+    //             }
+    //         }
+    //     }).start();
 
         
 
-    }
+    // }
 }
