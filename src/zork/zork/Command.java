@@ -27,7 +27,7 @@ public class Command {
  * @throws IOException
  * @throws FileNotFoundException
    */
-  public String runCommand(String... args) throws FileNotFoundException, IOException {
+  public String runCommand(String... args)  {
     return "Invalid command: " + name;
   }
 
