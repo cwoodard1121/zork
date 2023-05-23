@@ -14,19 +14,21 @@ public class South extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args){
         for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
+            System.out.println(e.getDirection() + " " + e.getAdjacentRoom().getRoomName());
             try{
             if(e.getDirection().equalsIgnoreCase("s")) {
                 Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
                 e.getAdjacentRoom().printAscii();
                 return e.getAdjacentRoom().getDescription();
             }
-        
-        return "There is no room to the South";
-    } catch (Exception exception) {} 
+            
+        } catch (Exception exception) {
+            return "ya done goofed";
+        } 
+            }
+            return "There is no room to the South";
         }
-        return "ya done goofed";
     }
-}
 

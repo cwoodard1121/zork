@@ -22,12 +22,10 @@ public class Up extends Command {
                 e.getAdjacentRoom().printAscii();
                 return e.getAdjacentRoom().getDescription();
             }
-        
-        return "There is no room above you";
-    } catch (Exception exception) {} 
-
-    
+        } catch (Exception exception) {
+            return "ya done goofed";
+        } 
+            }
+            return "There is no room above you";
+        }
     }
-        return "ya done goofed";
-    }
-}

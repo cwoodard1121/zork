@@ -22,10 +22,12 @@ public class North extends Command {
                 e.getAdjacentRoom().printAscii();
                 return e.getAdjacentRoom().getDescription();
             }
-        return "There is no room to the North";
-    } catch (Exception exception) {} 
+        } catch (Exception exception) {
+            return "ya done goofed";
+        } 
+            }
+            return "There is no room to the North";
         }
-        return "ya done goofed";
     }
-}
+
 

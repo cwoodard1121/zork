@@ -100,6 +100,10 @@ public class Game {
       final Room yongeEglintonMall = new Room("You stand in the lobby of the Yonge and Eglinton Mall.", "yongeeglintonmall"); roomMap.put(yongeEglintonMall.getRoomName(), yongeEglintonMall);
 
       //BAYVIEW GLEN INDEPENDENT SCHOOL ROOMS
+      final Room bayviewGlenLobby = new Room("Placeholder Description for bayviewGlenLobby", "bayviewglenlobby"); // north exit outside for later looking south when walking in
+      final Room bayviewGlenHallwayCafeteria = new Room("Placeholder Description for bayviewGlenHallwayCageteria", "bayviewGlenHallwayCafeteria"); // to the east from lobby
+      final Room bayviewGlenHallwayPrepGym = new Room("Placeholder Description for bayviewGlenHallwayPrepGym", "BayviewGlenHallwayPrepGym");
+      final Room bayviewGlenHallwayTheatreFront = new Room("Placeholder Description for bayviewGlenHallwayTheatreFront", "bayviewGlenHallwayTheatreFront");
       
 
       //YORK MILLS AREA EXITS

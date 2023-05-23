@@ -22,9 +22,11 @@ public class Down extends Command {
                 e.getAdjacentRoom().printAscii();
                 return e.getAdjacentRoom().getDescription();
             }
-            return "There is no room to the South";
-        } catch (Exception exception) {} 
-            }
+        } catch (Exception exception) {
             return "ya done goofed";
+        } 
+            }
+            return "There is no room below you";
         }
     }
+
