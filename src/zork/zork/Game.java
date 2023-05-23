@@ -97,6 +97,9 @@ public class Game {
       final Room eglintonBusStop = new Room("You face the completely halted traffic of Yonge street, just below Eglinton street", "eglintonbusstop"); roomMap.put(eglintonBusStop.getRoomName(), eglintonBusStop);
       final Room eglintonStation = new Room("you have entered Eglinton Station. It smells of cinnabons.", "elgintonstation"); roomMap.put(eglintonStation.getRoomName(), eglintonStation);
 
+      //BAYVIEW GLEN INDEPENDENT SCHOOL ROOMS
+      
+
       //YORK MILLS AREA EXITS
       final Exit yorkMillsSubwayHallwayExitDown = new Exit("D",yorkMillsSubwayHallway); yorkMillsBusTerminal.addExit(yorkMillsSubwayHallwayExitDown);
       final Exit yorkMillsBusSubwayHallwayExitNorth = new Exit("N", yorkMillsSubwayHallway); yorkMillsSubway.addExit(yorkMillsBusSubwayHallwayExitNorth);
@@ -223,7 +226,6 @@ public class Game {
           }
         }
         
-
 
       } else {
         System.out.println("Please enter a valid command");
