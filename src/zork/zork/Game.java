@@ -2,6 +2,7 @@ package zork;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,6 +82,8 @@ public class Game {
     if(shouldCreateRooms) {
       // Create a room object and use the description as the constructor parameter.
 
+      
+
       //YORK MILLS AREA ROOMS
       final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal"); roomMap.put(yorkMillsBusTerminal.getRoomName(),yorkMillsBusTerminal);
       final Room facultyRoom = new Room("A staff room with a few tables", "facultyroom"); roomMap.put(facultyRoom.getRoomName(), facultyRoom);
@@ -110,7 +113,11 @@ public class Game {
       //EGLINTON AREA EXITS
       final Exit yorkMillsShuttleBusExitNorth = new Exit("N", yorkMillsShuttleBus); eglintonBusStop.addExit(yorkMillsShuttleBusExitNorth);
       final Exit eglintonBusStopExitSouthFromYorkMillsBus = new Exit("S", eglintonBusStop); yorkMillsShuttleBus.addExit(eglintonBusStopExitSouthFromYorkMillsBus);
-
+      try {
+        yorkMillsBusTerminal.printAscii();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
 
       
      //ROOM LEGEND
@@ -144,8 +151,10 @@ public class Game {
   /**
    * Main play routine. Loops until end of play.
    * @throws InterruptedException
+   * @throws IOException
+   * @throws FileNotFoundException
    */
-  public void play() throws InterruptedException {
+  public void play() throws InterruptedException, FileNotFoundException, IOException {
     
     printWelcome();
     try {
@@ -224,8 +233,10 @@ public class Game {
 
   /**
    * Given a command, process (that is: execute) the command.
+   * @throws IOException
+   * @throws FileNotFoundException
    */
-  private void processCommand(Command command, String[] args) {
+  private void processCommand(Command command, String[] args) throws FileNotFoundException, IOException {
     System.out.println(command.runCommand(args));
   }
 
