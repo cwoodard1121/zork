@@ -82,7 +82,8 @@ public class Game {
     if(shouldCreateRooms) {
       // Create a room object and use the description as the constructor parameter.
 
-      
+      // SHEPPARD YONGE
+      final Room sheppardYongeLine1 = new Room("Going south will lead you to York Mills, North to Finch is under maintainence.","sheppardYongeLine1");
 
       //YORK MILLS AREA ROOMS
       final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal"); roomMap.put(yorkMillsBusTerminal.getRoomName(),yorkMillsBusTerminal);
@@ -100,10 +101,6 @@ public class Game {
       final Room yongeEglintonMall = new Room("You stand in the lobby of the Yonge and Eglinton Mall.", "yongeeglintonmall"); roomMap.put(yongeEglintonMall.getRoomName(), yongeEglintonMall);
 
       //BAYVIEW GLEN INDEPENDENT SCHOOL ROOMS
-      final Room bayviewGlenLobby = new Room("Placeholder Description for bayviewGlenLobby", "bayviewglenlobby"); // north exit outside for later looking south when walking in
-      final Room bayviewGlenHallwayCafeteria = new Room("Placeholder Description for bayviewGlenHallwayCageteria", "bayviewGlenHallwayCafeteria"); // to the east from lobby
-      final Room bayviewGlenHallwayPrepGym = new Room("Placeholder Description for bayviewGlenHallwayPrepGym", "BayviewGlenHallwayPrepGym");
-      final Room bayviewGlenHallwayTheatreFront = new Room("Placeholder Description for bayviewGlenHallwayTheatreFront", "bayviewGlenHallwayTheatreFront");
       
 
       //YORK MILLS AREA EXITS
@@ -163,7 +160,7 @@ public class Game {
    * @throws IOException
    * @throws FileNotFoundException
    */
-  public void play() throws InterruptedException, FileNotFoundException, IOException {
+  public void play() throws InterruptedException {
     
     printWelcome();
     try {
@@ -244,7 +241,7 @@ public class Game {
    * @throws IOException
    * @throws FileNotFoundException
    */
-  private void processCommand(Command command, String[] args) throws FileNotFoundException, IOException {
+  private void processCommand(Command command, String[] args) {
     System.out.println(command.runCommand(args));
   }
 
