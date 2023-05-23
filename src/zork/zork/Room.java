@@ -10,8 +10,8 @@ public class Room {
 
   private String roomName;
   private String description;
-  private ArrayList<Item> groundItems;
-  private ArrayList<Enemy> enemies;
+  private ArrayList<Item> groundItems = new ArrayList<>();
+  private ArrayList<Enemy> enemies = new ArrayList<>();
   private ArrayList<Exit> exits = new ArrayList<>();
   private boolean isSubway;
   private String displayName;
@@ -60,6 +60,12 @@ public class Room {
     this.roomName = name;
     this.description = description;
     this.displayName = displayName;
+    exits = new ArrayList<Exit>();
+  }
+  public Room(final String description, String name) {
+    this.roomName = name;
+    this.description = description;
+    this.displayName = name;
     exits = new ArrayList<Exit>();
   }
 
