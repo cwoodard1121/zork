@@ -82,7 +82,10 @@ public class Game {
     if(shouldCreateRooms) {
       // Create a room object and use the description as the constructor parameter.
 
-      
+      // SHEPPARD YONGE
+      final Room sheppardYongeLine1 = new Room("Going south will lead you to York Mills, North to Finch is under maintainence.","sheppardyongeline1");
+      final Room sheppardYongeLine4 = new Room("Going east will lead you to Bayview. Going west will lead you into a tunnel.","sheppardyongeline4");
+      final Room sheppardYongeLine4StreetHallway = new Room("The escalator is stopped. The door to the street is nearby.","sheppardyongeline4streethighway");
 
       //YORK MILLS AREA ROOMS
       final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal"); roomMap.put(yorkMillsBusTerminal.getRoomName(),yorkMillsBusTerminal);
@@ -100,6 +103,7 @@ public class Game {
       final Room yongeEglintonMall = new Room("You stand in the lobby of the Yonge and Eglinton Mall.", "yongeeglintonmall"); roomMap.put(yongeEglintonMall.getRoomName(), yongeEglintonMall);
 
       //BAYVIEW GLEN INDEPENDENT SCHOOL ROOMS
+
       final Room bayviewGlenLobby = new Room("Placeholder Description for bayviewGlenLobby", "bayviewglenlobby"); // north exit outside for later looking south when walking in
       final Room bayviewGlenHallwayCafeteria = new Room("Placeholder Description for bayviewGlenHallwayCafeteria", "bayviewglenhallwaycafeteria"); // to the east from lobby
       final Room bayviewGlenHallwayPrepGym = new Room("Placeholder Description for bayviewGlenHallwayPrepGym", "bayviewglenhallwayprepgym");
@@ -116,6 +120,7 @@ public class Game {
       final Room bayviewGlenHallway2ndFloorToUpperSchool = new Room("Placeholder Description for bayviewGlenHallway2ndFloorToUpperSchool", "bayviewglenhallway2ndfloortoupperschool");
       final Room bayviewGlenG11CommonArea = new Room("Placeholder Description for bayviewGlenG11CommonArea", "bayviewgleng11commonarea");
       final Room bayviewGlenGradHallway = new Room("Placeholder Description for bayviewGlenGradHallway", "bayviewglengradhallway");
+
 
       //YORK MILLS AREA EXITS
       final Exit yorkMillsSubwayHallwayExitDown = new Exit("D",yorkMillsSubwayHallway); yorkMillsBusTerminal.addExit(yorkMillsSubwayHallwayExitDown);
@@ -174,7 +179,7 @@ public class Game {
    * @throws IOException
    * @throws FileNotFoundException
    */
-  public void play() throws InterruptedException, FileNotFoundException, IOException {
+  public void play() throws InterruptedException {
     
     printWelcome();
     try {
@@ -255,7 +260,7 @@ public class Game {
    * @throws IOException
    * @throws FileNotFoundException
    */
-  private void processCommand(Command command, String[] args) throws FileNotFoundException, IOException {
+  private void processCommand(Command command, String[] args) {
     System.out.println(command.runCommand(args));
   }
 

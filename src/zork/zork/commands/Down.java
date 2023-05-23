@@ -15,6 +15,7 @@ public class Down extends Command {
 
     @Override
     public String runCommand(String... args) {
+        
         for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
             try{
             if(e.getDirection().equalsIgnoreCase("d")) {
