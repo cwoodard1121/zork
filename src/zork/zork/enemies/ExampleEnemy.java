@@ -21,7 +21,6 @@ public class ExampleEnemy extends Enemy {
         Room notRealRoom = new Room();
         setCurrentRoom(notRealRoom);
         Effects poison = new Effects("poison", 2, 5, 0);
-        setHealth(15);
         Weapon glove = new Weapon( 10, "dirty gloves", false, 2, poison);
         Inventory i = new Inventory(EntityConstants.MAX_INVENTORY_WEIGHT);
         i.addItem(glove);

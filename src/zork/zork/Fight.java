@@ -18,21 +18,6 @@ public class Fight {
     }
     
    
-            
-   /*Fighting
-         * Whoever has most speed goes first, lets say its player
-         * player is given their moves and asked which weapon they want to use if they have more than one
-         * if they dont it will give them the only weapon they have
-         * they choose which move and it does it 
-         *damage from the weapon is added to the damage of the move
-         * effects are put overtime
-         * 
-         * 
-         * 
-         * 
-         */
-
-   
     public void fight(){
         Game.getGame().getPlayer().setChoosingMenu(false);
         Game.getGame().getPlayer().setInFight(true);     
@@ -100,24 +85,34 @@ public class Fight {
                         enemyEffects.add(pWeapon.getEffect());
 
                         for (int i = 0; i < playerEffects.size(); i++) {
-                        int dam = playerEffects.get(i).getDamageChange();
-                        int sped = playerEffects.get(i).getSpeedChange();
-                        if(playerEffects.get(i).getTurn() != playerEffects.get(i).getTurnCount()){
-                                playerHealth-=dam;
-                                playerSpeed-=sped;
-                                playerEffects.get(i).setTurnCount(playerEffects.get(i).getTurnCount()+1);
-                            }else{
-                                playerEffects.get(i).setTurnCount(0);
-                            }
+                            if(playerEffects.get(i).getName().equalsIgnoreCase("placeholder"))
+                                break;
+                            System.out.println("you got the effect " + playerEffects.get(i).getName());
+                            int dam = playerEffects.get(i).getDamageChange();
+                            int sped = playerEffects.get(i).getSpeedChange();
+                            if(playerEffects.get(i).getTurn() != playerEffects.get(i).getTurnCount()){
+                                    playerHealth-=dam;
+                                    playerSpeed-=sped;
+                                    System.out.println("it did " + dam + " Damage");
+                                    System.out.println("Your speed was lowered by " + sped);
+                                    playerEffects.get(i).setTurnCount(playerEffects.get(i).getTurnCount()+1);
+                                }else{
+                                    playerEffects.get(i).setTurnCount(0);
+                                }
                         }
 
                         for (int i = 0; i < enemyEffects.size(); i++) {
+                            if(enemyEffects.get(i).getName().equalsIgnoreCase("placeholder"))
+                                break;
+                            System.out.println("you dealt the effect " + enemyEffects.get(i).getName());
                             int dam = enemyEffects.get(i).getDamageChange();
                             int sped = enemyEffects.get(i).getSpeedChange();
                             
                             if(enemyEffects.get(i).getTurn() != enemyEffects.get(i).getTurnCount()){
                                 enemyHealth-=dam;
                                 enemySpeed-=sped;
+                                System.out.println("your effect did " + dam + " Damage to " + enemy.getName());
+                                System.out.println("the enimes speed was lowered by" + sped);
                                 enemyEffects.get(i).setTurnCount(enemyEffects.get(i).getTurnCount()+1);
                             }else{
                                 enemyEffects.get(i).setTurnCount(0);
@@ -144,8 +139,7 @@ public class Fight {
                             }
                             Game.getGame().getPlayer().setChoosingMenu(true);
 
-                            System.out.println(Game.getGame().getPlayer().getName() + " has" + playerHealth + "health remaining");
-                            System.out.println(enemy.getName() + " has" + enemyHealth + "health remaining");
+                            
                         }else{
                             System.out.println(enemy.getName() + " did " + eDamage + " Damage");
                             playerHealth -= eDamage;
@@ -165,8 +159,8 @@ public class Fight {
                             }
                             
                             Game.getGame().getPlayer().setChoosingMenu(true);
-                            System.out.println(Game.getGame().getPlayer().getName() + " has" + playerHealth + "health remaining");
-                            System.out.println(enemy.getName() + " has" + enemyHealth + "health remaining");
+                            System.out.println(Game.getGame().getPlayer().getName() + " has " + playerHealth + " health remaining");
+                            System.out.println(enemy.getName() + " has " + enemyHealth + " health remaining");
                         }
                         
                     }else if(Game.getGame().getPlayer().getIsItemMenu() == true){
@@ -174,8 +168,7 @@ public class Fight {
                     }
                 Game.getGame().getPlayer().setInWeaponMenu(false);
                 Game.getGame().getPlayer().setInItemMenu(false);
-
-                 Game.getGame().getPlayer().setChoosingMenu(true);
+                Game.getGame().getPlayer().setChoosingMenu(true);
             }
                 
         }    
