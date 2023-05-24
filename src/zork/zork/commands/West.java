@@ -15,19 +15,19 @@ public class West extends Command {
     }
 
     @Override
-    public String runCommand(String... args) throws FileNotFoundException, IOException {
+    public String runCommand(String... args) {
         for (Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
+            try {
             if (e.getDirection().equalsIgnoreCase("w")) {
                 Game.getGame().getPlayer().setCurrentRoom(e.getAdjacentRoom());
                 e.getAdjacentRoom().printAscii();
                 return e.getAdjacentRoom().getDescription();
+            }  
+        } catch (Exception exception) {
+            return "ya done goofed";
+        } 
             }
-            
+            return "There is no room to the West";
         }
-        return "There is no room to the West";
     }
-
-    
-    
-}
 

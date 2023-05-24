@@ -10,12 +10,21 @@ public class Room {
 
   private String roomName;
   private String description;
-  private ArrayList<Item> groundItems;
-  private ArrayList<Enemy> enemies;
+  private ArrayList<Item> groundItems = new ArrayList<>();
+  private ArrayList<Enemy> enemies = new ArrayList<>();
   private ArrayList<Exit> exits = new ArrayList<>();
   private boolean isSubway;
   private String displayName;
+  private boolean isLocked = false;
 
+
+  public boolean isLocked() {
+    return isLocked;
+  }
+
+  public void setLocked(boolean isLocked) {
+    this.isLocked = isLocked;
+  }
 
   public ArrayList<Exit> getExits() {
     return exits;
@@ -69,6 +78,29 @@ public class Room {
     this.description = description;
     this.displayName = displayName;
     exits = new ArrayList<Exit>();
+  }
+
+  public Room(final String description, String name, String displayName, boolean Locked) {
+    this.roomName = name;
+    this.description = description;
+    this.displayName = displayName;
+    exits = new ArrayList<Exit>();
+    this.isLocked = Locked;
+  }
+
+  public Room(final String description, String name) {
+    this.roomName = name;
+    this.description = description;
+    this.displayName = name;
+    exits = new ArrayList<Exit>();
+  }
+
+  public Room(final String description, String name, Boolean Locked) {
+    this.roomName = name;
+    this.description = description;
+    this.displayName = name;
+    exits = new ArrayList<Exit>();
+    this.isLocked = Locked;
   }
 
   public Room() {

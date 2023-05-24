@@ -13,7 +13,7 @@ public class Weapon extends Command {
         if(Game.getGame().getPlayer().isInFight() == true){
             Game.getGame().getPlayer().setChoosingMenu(false);
             Game.getGame().getPlayer().setInWeaponMenu(true);
-            return Game.getGame().isTesting ? "going into the menu" : "";
+            return Game.isTesting ? "going into the menu" : "";
         }else{
             return "not in a fight";
         }

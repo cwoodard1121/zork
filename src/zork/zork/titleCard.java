@@ -5,7 +5,7 @@ import javax.swing.Renderer;
 public class titleCard {
     public void printTitle() throws InterruptedException {
         Graphics g = new Graphics(null);
-        int delay = 4;
+        int delay = 2;
         System.out.println();
         g.slowTextSpeed(" _ _ _ ___| |___ ___ _____ ___   | |_ ___       ", delay);
         g.slowTextSpeed("| | | | -_| |  _| . |     | -_|  |  _| . |_ _ _ ", delay);
@@ -27,7 +27,7 @@ public class titleCard {
         g.slowTextSpeed(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::", delay);
         g.slowTextSpeed("A text-based adventure video game created by:", delay);
         System.out.println();
-        delay = 50;
+        delay = 25;
         g.slowTextSpeed("C. Woodard", delay);
         System.out.println("\n");
         g.slowTextSpeed("E. McMullen", delay);
@@ -36,7 +36,7 @@ public class titleCard {
         System.out.println("\n");
         g.slowTextSpeed("L. Minato", delay);
         System.out.println("\n");
-        delay = 4;
+        delay = 2;
         g.slowTextSpeed(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::", delay);
         g.slowTextSpeed("___________________________________________________________________________________", delay);
         System.out.print("\nType Start to begin: ");

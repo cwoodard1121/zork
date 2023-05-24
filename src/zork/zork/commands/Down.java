@@ -14,16 +14,23 @@ public class Down extends Command {
     }
 
     @Override
-    public String runCommand(String... args) throws FileNotFoundException, IOException {
+    public String runCommand(String... args) {
+        
         for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
+            try{
             if(e.getDirection().equalsIgnoreCase("d")) {
+                if (!e.getAdjacentRoom().isLocked()) {
                 Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
                 e.getAdjacentRoom().printAscii();
                 return e.getAdjacentRoom().getDescription();
+                }
+                return e.getAdjacentRoom().getDisplayName() + " is Locked or Unavalible at this time";
             }
+        } catch (Exception exception) {
+            return "ya done goofed";
+        } 
+            }
+            return "There is no room below you";
         }
-        return "There is no room below you";
-
-
     }
-}
+
