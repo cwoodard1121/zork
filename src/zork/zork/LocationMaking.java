@@ -12,7 +12,13 @@ public class LocationMaking {
         Scanner in = new Scanner(System.in);
         System.out.println("Whats the name of the Room");
         String ans = in.nextLine();
-        System.out.println("final Room " + ans + " = new Room (\"Placeholder Description for " + ans + "\", \"" + ans.toLowerCase() + "\"); roomMap.put(" + ans + ".getRoomName(), " + ans + ");");
+        System.out.println("Is this Room Locked? y/n");
+        String isLocked = in.nextLine();
+        if (isLocked.equalsIgnoreCase("y"))
+            isLocked = ", true";
+        else 
+            isLocked = "";
+        System.out.println("final Room " + ans + " = new Room (\"Placeholder Description for " + ans + "\", \"" + ans.toLowerCase() + "\"); roomMap.put(" + ans + ".getRoomName(), " + ans + isLocked + ");");
         System.out.println("how many exits does this room have?");
         while(!hasNumber) {
         String numRepeat = in.nextLine();
