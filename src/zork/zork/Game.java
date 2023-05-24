@@ -104,8 +104,8 @@ public class Game {
 
       //BAYVIEW GLEN INDEPENDENT SCHOOL ROOMS
 
-      final Room bayviewGlenLobby = new Room("Placeholder Description for bayviewGlenLobby", "bayviewglenlobby"); // north exit outside for later looking south when walking in
-      final Room bayviewGlenHallwayCafeteria = new Room("Placeholder Description for bayviewGlenHallwayCafeteria", "bayviewglenhallwaycafeteria"); // to the east from lobby
+      final Room bayviewGlenLobby = new Room ("Placeholder Description for bayviewGlenLobby", "bayviewglenlobby"); roomMap.put(bayviewGlenLobby.getRoomName(), bayviewGlenLobby); // north exit outside for later looking south when walking in
+      final Room bayviewGlenHallwayCafeteria = new Room ("Placeholder Description for bayviewGlenHallwayCafeteria", "bayviewglenhallwaycafeteria"); roomMap.put(bayviewGlenHallwayCafeteria.getRoomName(), bayviewGlenHallwayCafeteria); // to the east from lobby
       final Room bayviewGlenHallwayPrepGym = new Room("Placeholder Description for bayviewGlenHallwayPrepGym", "bayviewglenhallwayprepgym");
       final Room bayviewGlenHallwayTheatreFront = new Room("Placeholder Description for bayviewGlenHallwayTheatreFront", "bayviewglenhallwaytheatrefront");
       final Room bayviewGlenCafeteriaFoodArea = new Room("Placeholder Description for bayviewGlenCafeteriaFoodArea", "bayviewglencafeteriafoodarea");
@@ -120,6 +120,7 @@ public class Game {
       final Room bayviewGlenHallway2ndFloorToUpperSchool = new Room("Placeholder Description for bayviewGlenHallway2ndFloorToUpperSchool", "bayviewglenhallway2ndfloortoupperschool");
       final Room bayviewGlenG11CommonArea = new Room("Placeholder Description for bayviewGlenG11CommonArea", "bayviewgleng11commonarea");
       final Room bayviewGlenGradHallway = new Room("Placeholder Description for bayviewGlenGradHallway", "bayviewglengradhallway");
+      
 
 
       //YORK MILLS AREA EXITS
