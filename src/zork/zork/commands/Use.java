@@ -24,9 +24,10 @@ public class Use extends Command {
         
             for (int i = 0; i < arr.size(); i++) {
                 if(command.equalsIgnoreCase(arr.get(i).getWeapon())) {
+                    Game.bool.set(true);
                     Game.getGame().getPlayer().setIsCurrentMove(true);
                     Game.getGame().getPlayer().setCurrentWeapon(arr.get(i));
-                    return arr.get(i).getWeapon();
+                    return "you chose " + arr.get(i).getWeapon();
                 }
             }
         }else{
@@ -36,6 +37,8 @@ public class Use extends Command {
                 if(Game.getGame().getPlayer().getIsItemMenu()){
                     ArrayList<Item> arr = Game.getGame().getPlayer().getInventory().getItemsWithEffects();
                     if(command.equalsIgnoreCase(pInventory.get(i).getName())){
+                        System.out.println("in here");
+                        Game.bool.set(true);
                         Game.getGame().getPlayer().setIsCurrentMove(true);
                         Game.getGame().getPlayer().setCurrentItem(pInventory.get(i));
                         return pInventory.get(i).getName();
@@ -44,6 +47,7 @@ public class Use extends Command {
                 }
 
                 if(command.equalsIgnoreCase(pInventory.get(i).getName())){
+                    Game.bool.set(true);
                     Game.getGame().getPlayer().setIsCurrentMove(true);
                     Game.getGame().getPlayer().setCurrentItem(pInventory.get(i));
                     return pInventory.get(i).getName();

@@ -28,6 +28,14 @@ public class Room {
 
   
 
+  public ArrayList<Enemy> getEnemies() {
+    return enemies;
+  }
+
+  public void addEnemies(Enemy enemie) {
+      enemies.add(enemie);
+  }
+
   /**
    * gets the items on the ground in the room
    * @return

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.google.gson.Gson;
 
@@ -20,6 +20,7 @@ import zork.entites.Player;
 public class Game {
 
   private final Graphics renderer = new Graphics(this);
+  public static AtomicBoolean bool = new AtomicBoolean();
   private final Gson gson = new Gson();
   public static Game game = new Game();
   public static boolean finished = false;

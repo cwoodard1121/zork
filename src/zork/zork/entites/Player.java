@@ -14,7 +14,6 @@ import zork.items.Weapon;
 
 public class Player extends Entity {
     private Location location;
-    private int health;
 
     private int primeCounter;
     private int speed;
@@ -134,11 +133,11 @@ public class Player extends Entity {
     } 
 
     public int getHealth() {
-        return health;
+        return super.getHealth();
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        super.setHealth(health);
     }
 
 
