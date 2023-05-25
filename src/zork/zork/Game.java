@@ -182,7 +182,7 @@ public class Game {
     
       final Exit bayviewGlenCafeteriaFoodAreaExitWest = new Exit("W",bayviewGlenCafeteriaFoodArea); bayviewGlenKitchen.addExit(bayviewGlenCafeteriaFoodAreaExitWest);
 
-      final Exit bayviewGlenHallwayCafeteriaExitSouthTwo = new Exit("S",bayviewGlenHallwayCafeteria); bayviewGlenCafeteriaDiningArea.addExit(bayviewGlenHallwayCafeteriaExitSouthTwo);
+      final Exit bayviewGlenCafeteriaFoodAreaExitSouth = new Exit("S",bayviewGlenCafeteriaFoodArea); bayviewGlenCafeteriaDiningArea.addExit(bayviewGlenCafeteriaFoodAreaExitSouth);
       final Exit bayviewGlenOutsideCafeteriaExitNorth = new Exit("N",bayviewGlenOutsideCafeteria); bayviewGlenCafeteriaDiningArea.addExit(bayviewGlenOutsideCafeteriaExitNorth);
       
       final Exit bayviewGlenOutsideLobbyExitWest = new Exit("W",bayviewGlenOutsideLobby); bayviewGlenOutsideCafeteria.addExit(bayviewGlenOutsideLobbyExitWest);
@@ -318,7 +318,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
+    this.player.setCurrentRoom(roomMap.get("bayviewglenlobby"));
     while (!finished) {
       Command command;
       try {
