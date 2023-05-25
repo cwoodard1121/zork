@@ -37,6 +37,7 @@ public class Utils {
         }
         return null;
     }
+    
     /**
      * 
      * @param fileName
@@ -175,6 +176,7 @@ public class Utils {
      */
     public static void playSound(String sound, int secs, boolean loop) {
         final int seconds = secs;
+        InputStream s =  getFileStreamFromBin(sound);
         // Media hit = new Media(getFileFromBin(sound).toURI().toString());
         // MediaPlayer mediaPlayer = new MediaPlayer(hit);
         //mediaPlayer.play();
