@@ -121,6 +121,11 @@ public class Player extends Entity {
     }
 
     public void changeRoom(Room r) {
+        System.out.println(r.isLocked());
+        if(r.isLocked()) {
+            System.out.println("Unscheduled maintainence has been scheduled. Come back later.");
+            return;
+        }
         super.setCurrentRoom(r);
     } 
 

@@ -2,6 +2,7 @@ package zork.commands;
 
 import datatypes.Location;
 import zork.Command;
+import zork.Effects;
 import zork.Fight;
 import zork.Game;
 import zork.Item;
@@ -19,11 +20,11 @@ public class StartFight extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args) throws InterruptedException {
        
         Enemy tester = new ExampleEnemy(new Location(0, 0), new Room(), 30, null, 0, 10, "homless");
         Fight test = new Fight(tester);
-        Item testItem = new Item(0, "health pot", false, true);
+        Item testItem = new Item(0, "health pot", false, new Effects("health up", 0, 0, 2, 12), false);
         Game.getGame().getPlayer().getInventory().addItem(testItem);
         Weapon testWeapon = new Weapon(0, "Diamond Pick", false, 5, null);
         Game.getGame().getPlayer().getInventory().addItem(testWeapon);

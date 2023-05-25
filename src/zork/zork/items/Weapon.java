@@ -14,10 +14,10 @@ public class Weapon extends Item {
     
 
     public Weapon(int weight, String name, boolean isOpenable, int damage, Effects effect){
-        super(weight, name, isOpenable, true);
+        super(weight, name, isOpenable, effect, true);
         this.isOpenable = false;
         this.damage = damage;
-        this.effect = effect;
+       
 
     }
 
@@ -30,7 +30,7 @@ public class Weapon extends Item {
         if (effect != null) {
             return effect;
         }else{
-            return new Effects("placeholder", 0, 0, 0);
+            return new Effects("placeholder", 0, 0, 0, 0);
         }
             
        

@@ -36,7 +36,7 @@ public class Graphics {
 
     public void slowTextSpeed(String text, int delay) throws InterruptedException {
         for(int i = 0; i < text.length(); i++) {
-            System.out.print(text.charAt(i));
+            System.out.print(text.charAt(i)); 
             Thread.sleep(delay);
         }
         System.out.println();

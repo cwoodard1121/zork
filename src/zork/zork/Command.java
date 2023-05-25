@@ -35,8 +35,9 @@ public class Command {
    * 
    * @param args
    * @return Console otuput
+ * @throws InterruptedException
    */
-  public String runCommand(String... args)  {
+  public String runCommand(String... args) throws InterruptedException  {
     return "Invalid command: " + name;
   }
 

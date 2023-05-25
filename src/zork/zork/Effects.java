@@ -4,17 +4,19 @@ import java.util.ArrayList;
 
 public class Effects {
     private String name;
-    private int damageChange;
-    private int speedChange;
+    private int damage;
+    private int speed;
+    private int health;
     private int turn;
     private int turnCount;
    
 
-    public Effects(String name, int turn, int damageChange, int speedChange){
+    public Effects(String name, int turn, int damage, int speed, int health){
         this.name = name;
         this.turn = turn;
-        this.damageChange = damageChange;
-        this.speedChange = speedChange;
+        this.damage = damage;
+        this.speed = speed;
+        this.health = health;
     }
 
     public String getName() {
@@ -22,11 +24,11 @@ public class Effects {
     }
 
     public int getDamageChange() {
-        return damageChange;
+        return damage;
     }
 
     public void setDamageChange(int damageChange) {
-        this.damageChange = damageChange;
+        this.damage = damageChange;
     }
 
     public int getTurnCount() {
@@ -38,11 +40,11 @@ public class Effects {
     }
 
     public int getSpeedChange() {
-        return speedChange;
+        return speed;
     }
 
     public void setSpeedChange(int speedChange) {
-        this.speedChange = speedChange;
+        this.speed = speedChange;
     }
 
     public int getTurn() {
@@ -51,6 +53,14 @@ public class Effects {
 
     public void setTurn(int turn) {
         this.turn = turn;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
 

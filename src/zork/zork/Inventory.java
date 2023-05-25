@@ -75,10 +75,16 @@ public class Inventory {
   public ArrayList<Item> getItemsWithEffects(){
     //ONLY USE THIS WITH ITEMS THAT CAN BE USED IN A FIGHT
     ArrayList<Item> arr = new ArrayList<Item>();
-    for (int i = 0; i < arr.size(); i++) {
-        if(items.get(i).hasEffect() == true){
-          arr.set(i, items.get(i));
+    for (int i = 0; i < items.size(); i++) {
+        try {
+          if(items.get(i).getEffect() instanceof Effects && !items.get(i).isWeapon()){
+           
+            arr.add(items.get(i));
+          }
+        } catch (Exception e) {
+          continue;
         }
+        
     }
 
     return arr;

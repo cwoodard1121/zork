@@ -5,16 +5,17 @@ public class Item extends OpenableObject {
   private String name;
   private boolean isOpenable;
   private double id;
-  private boolean hasEffect;
-
+  private Effects Effect;
+  private boolean isWeapon;
 
   
 
-  public Item(int weight, String name, boolean isOpenable, boolean hasEffect) {
+  public Item(int weight, String name, boolean isOpenable, Effects Effect, Boolean isWeapon) {
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
-    this.hasEffect = hasEffect;
+    this.Effect = Effect;
+    this.isWeapon = isWeapon;
     this.id = (Math.random() * (Integer.MAX_VALUE - 1));
   }
 
@@ -23,12 +24,12 @@ public class Item extends OpenableObject {
       System.out.println("The " + name + " cannot be opened.");
 
   }
-  public boolean hasEffect() {
-      return hasEffect;
+  public Effects getEffect() {
+      return Effect;
     }
 
-    public void setUsedInAFight(boolean hasEffect) {
-      this.hasEffect = hasEffect;
+    public void setUsedInAFight(Effects Effect) {
+      this.Effect = Effect;
     }
   public double getId() {
     return id;
@@ -56,6 +57,14 @@ public class Item extends OpenableObject {
 
   public void setOpenable(boolean isOpenable) {
     this.isOpenable = isOpenable;
+  }
+
+  public boolean isWeapon() {
+    return isWeapon;
+  }
+
+  public void setWeapon(boolean isWeapon) {
+    this.isWeapon = isWeapon;
   }
 
 
