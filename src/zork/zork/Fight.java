@@ -149,7 +149,7 @@ public class Fight {
                                     enemyHealth-=dam;
                                     enemySpeed-=sped;
                                     text.slowTextSpeed("your effect did " + dam + " Damage to " + enemy.getName(), 7);
-                                    text.slowTextSpeed("the enimes speed was lowered by" + sped, 7);
+                                    text.slowTextSpeed("the enimie's speed was lowered by" + sped, 7);
                                     enemyEffects.get(i).setTurnCount(enemyEffects.get(i).getTurnCount()+1);
                                 }else{
                                     enemyEffects.remove(i);
@@ -211,7 +211,6 @@ public class Fight {
                                 for (int i = 0; i < Game.getGame().getPlayer().getInventory().getItems().size(); i++) {
                                     if(item.getName().equals(Game.getGame().getPlayer().getInventory().getItems().get(i).getName())){
                                         Game.getGame().getPlayer().getInventory().getItems().remove(i);
-                                        text.slowTextSpeed("removed item", 7);
                                     }
                                 }
                             }else{

@@ -1,5 +1,7 @@
 package zork;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,6 +17,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 // import javafx.scene.media.Media;
 // import javafx.scene.media.MediaPlayer;
@@ -37,7 +44,7 @@ public class Utils {
         }
         return null;
     }
-    
+
     /**
      * 
      * @param fileName
@@ -175,11 +182,20 @@ public class Utils {
      * @param loop Whether or not the sound should loop until cancelled
      */
     public static void playSound(String sound, int secs, boolean loop) {
-        final int seconds = secs;
-        InputStream s =  getFileStreamFromBin(sound);
-        // Media hit = new Media(getFileFromBin(sound).toURI().toString());
-        // MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        //mediaPlayer.play();
+        try {
+            //TODO: WIP
+            final int seconds = secs;
+            InputStream stream =  getFileStreamFromBin(sound);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(getFileFromBin(sound.replace(".wav", "") + ".wav"));
+            AudioFormat format = audioStream.getFormat();
+
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
