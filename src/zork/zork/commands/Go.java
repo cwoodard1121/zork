@@ -10,6 +10,7 @@ public class Go extends Command {
     
     public Go(String name) {
         super(name);
+        addAlias("g");
     }
 
     @Override
@@ -19,6 +20,11 @@ public class Go extends Command {
             for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
                 if(e.getDirection().equalsIgnoreCase(direction)) {
                     Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
+                    try {
+                    e.getAdjacentRoom().printAscii();
+                    } catch (Exception ignored) {
+                        System.out.println("ascii not loaded.");
+                    }
                     return e.getAdjacentRoom().getDescription();
                 }
             }

@@ -10,6 +10,7 @@ import zork.Utils;
 public class Inventory extends Command {
     public Inventory(String name) {
         super(name);
+        addAlias("i");
     }
     @Override
     public String runCommand(String... args) {

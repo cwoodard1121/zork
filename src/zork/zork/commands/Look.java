@@ -6,6 +6,7 @@ import zork.Game;
 public class Look extends Command {
     public Look(String name) {
         super(name);
+        addAlias("l");
     }
 
     @Override

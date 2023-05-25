@@ -2,9 +2,11 @@ package zork;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Command {
   private String name;
+  private ArrayList<String> aliases = new ArrayList<>();
 
   /**
    * Create a command object. Only need to supply the name and then use override the
@@ -12,6 +14,15 @@ public class Command {
    */
   public Command(String name) {
     this.name = name;
+  }
+
+  public Command addAlias(String name) {
+    aliases.add(name);
+    return this;
+  }
+
+  public ArrayList<String> getAliases() {
+    return aliases;
   }
 
   /* Blank constructor for unknown commands. */
@@ -24,8 +35,6 @@ public class Command {
    * 
    * @param args
    * @return Console otuput
- * @throws IOException
- * @throws FileNotFoundException
    */
   public String runCommand(String... args)  {
     return "Invalid command: " + name;

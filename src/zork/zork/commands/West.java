@@ -12,6 +12,7 @@ import zork.Utils;
 public class West extends Command {
     public West(String name) {
         super(name);
+        addAlias("w");
     }
 
     @Override
