@@ -11,7 +11,7 @@ import java.util.Map;
 public class InitAscii {
         public static void fillAsciiArt (String roomName) throws FileNotFoundException, IOException {
         // \\bin\\zork\\data\\cutscene.txt
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        // System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         String roomNameFile = roomName + ".txt";
         File f = new File(new File("").getAbsolutePath().concat("\\bin\\locations\\" + roomNameFile));
         BufferedReader reader = new BufferedReader(new FileReader(f));

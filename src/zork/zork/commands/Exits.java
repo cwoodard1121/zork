@@ -7,6 +7,7 @@ import zork.Game;
 public class Exits extends Command {
     public Exits(String name) {
         super(name);
+        addAlias("ex");
     }
 
     @Override

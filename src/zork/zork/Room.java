@@ -177,6 +177,7 @@ public class Room {
   public void printAscii () throws FileNotFoundException, IOException {
     InitAscii.fillAsciiArt(this.roomName);
   }
+  
   public String getRoomName() {
     return roomName;
   }

@@ -11,6 +11,7 @@ public class South extends Command {
 
     public South(String name) {
         super(name);
+        addAlias("s");
     }
 
     @Override

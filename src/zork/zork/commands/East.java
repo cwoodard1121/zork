@@ -11,6 +11,7 @@ public class East extends Command {
 
     public East(String name) {
         super(name);
+        addAlias("e");
     }
 
     @Override

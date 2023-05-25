@@ -11,6 +11,7 @@ public class North extends Command {
 
     public North(String name) {
         super(name);
+        addAlias("n");
     }
 
     @Override
