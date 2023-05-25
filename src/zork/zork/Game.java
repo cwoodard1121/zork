@@ -378,10 +378,11 @@ public class Game {
 
   /**
    * Given a command, process (that is: execute) the command.
+   * @throws InterruptedException
    * @throws IOException
    * @throws FileNotFoundException
    */
-  private void processCommand(Command command, String[] args) {
+  private void processCommand(Command command, String[] args) throws InterruptedException {
     System.out.println(command.runCommand(args));
   }
 
