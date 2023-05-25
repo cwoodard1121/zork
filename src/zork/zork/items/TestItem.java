@@ -9,7 +9,7 @@ public class TestItem extends Item {
     private int damage;
     private Effects effect;
     public TestItem(int weight, String name, boolean isOpenable, Effects effect) {
-        super(weight, name, isOpenable, true);
+        super(weight, name, isOpenable, effect, false);
         this.isOpenable = false;
         this.effect = effect;
     }

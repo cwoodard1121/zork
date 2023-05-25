@@ -20,7 +20,7 @@ public class ExampleEnemy extends Enemy {
         setLocation(notRealLocation);
         Room notRealRoom = new Room();
         setCurrentRoom(notRealRoom);
-        Effects poison = new Effects("poison", 2, 5, 0);
+        Effects poison = new Effects("poison", 2, 5, 0, 0);
         Weapon glove = new Weapon( 10, "dirty gloves", false, 2, poison);
         Inventory i = new Inventory(EntityConstants.MAX_INVENTORY_WEIGHT);
         i.addItem(glove);

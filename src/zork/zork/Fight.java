@@ -54,8 +54,6 @@ public class Fight {
                     ArrayList<Effects> playerEffects = new ArrayList<>();
                     ArrayList<Effects> enemyEffects  = new ArrayList<>();
               while (true){      
-                   
-                   
                     System.out.println("Do you choose the weapon menu or the item menu (for now u cant go back)");
                     while( Game.getGame().getPlayer().getIsItemMenu() == false && Game.getGame().getPlayer().isInWeaponMenu() == false){
                         String answer = in.nextLine().toLowerCase();
@@ -83,39 +81,71 @@ public class Fight {
 
                         playerEffects.add(eWeapon.getEffect());
                         enemyEffects.add(pWeapon.getEffect());
-
+                        
                         for (int i = 0; i < playerEffects.size(); i++) {
-                            if(playerEffects.get(i).getName().equalsIgnoreCase("placeholder"))
-                                break;
-                            System.out.println("you got the effect " + playerEffects.get(i).getName());
+                            if(playerEffects.get(i).getName().equalsIgnoreCase("placeholder")){
+                                playerEffects.remove(i);
+                                continue;
+                            }else{
+                                int doseRepeat = 0;
+                                int location = 0;
+                                for(int y = 0; y<playerEffects.size(); y++){
+                                    if(playerEffects.get(y).getName().equals(playerEffects.get(i).getName())){
+                                        doseRepeat++;
+                                        location = y;
+                                    }
+                                }
+                                if(doseRepeat>=2){
+                                    playerEffects.remove(location);
+                                    
+                                }
+                            }
+                            
                             int dam = playerEffects.get(i).getDamageChange();
                             int sped = playerEffects.get(i).getSpeedChange();
                             if(playerEffects.get(i).getTurn() != playerEffects.get(i).getTurnCount()){
+                                 System.out.println("you got the effect " + playerEffects.get(i).getName());
                                     playerHealth-=dam;
                                     playerSpeed-=sped;
                                     System.out.println("it did " + dam + " Damage");
                                     System.out.println("Your speed was lowered by " + sped);
                                     playerEffects.get(i).setTurnCount(playerEffects.get(i).getTurnCount()+1);
-                                }else{
-                                    playerEffects.get(i).setTurnCount(0);
-                                }
+                            }else{
+                                    playerEffects.remove(i);
+                                    System.out.println("the effect " + enemyEffects.get(i).getName() + " has stoped");
+                            }
                         }
 
                         for (int i = 0; i < enemyEffects.size(); i++) {
-                            if(enemyEffects.get(i).getName().equalsIgnoreCase("placeholder"))
-                                break;
-                            System.out.println("you dealt the effect " + enemyEffects.get(i).getName());
+                            if(enemyEffects.get(i).getName().equalsIgnoreCase("placeholder")){
+                                enemyEffects.remove(i);
+                                continue;
+                            }else{
+                                int doseRepeat = 0;
+                                int location = 0;
+                                for(int y = 0; y<enemyEffects.size(); y++){
+                                    if(enemyEffects.get(y).getName().equals(enemyEffects.get(i).getName())){
+                                        doseRepeat++;
+                                        location = y;
+                                    }
+                                }
+                                if(doseRepeat>=2){
+                                    enemyEffects.remove(location);
+                                }
+                            }
                             int dam = enemyEffects.get(i).getDamageChange();
                             int sped = enemyEffects.get(i).getSpeedChange();
                             
                             if(enemyEffects.get(i).getTurn() != enemyEffects.get(i).getTurnCount()){
+                                System.out.println("you dealt the effect " + enemyEffects.get(i).getName());
                                 enemyHealth-=dam;
                                 enemySpeed-=sped;
                                 System.out.println("your effect did " + dam + " Damage to " + enemy.getName());
                                 System.out.println("the enimes speed was lowered by" + sped);
                                 enemyEffects.get(i).setTurnCount(enemyEffects.get(i).getTurnCount()+1);
                             }else{
-                                enemyEffects.get(i).setTurnCount(0);
+                                enemyEffects.remove(i);
+                                System.out.println("the effect " + enemyEffects.get(i).getName() + " has stoped");
                             }
                         }
                         
@@ -165,7 +195,23 @@ public class Fight {
                         
                     }else if(Game.getGame().getPlayer().getIsItemMenu() == true){
                         Item item = askItem();
+                        if(item != null){
+                            playerHealth += item.getEffect().getHealth();
+                            playerSpeed += item.getEffect().getSpeedChange();
+                            System.out.println("health up by " + item.getEffect().getHealth() + " and speed went up by " + item.getEffect().getSpeedChange());
+                            System.out.println("changes happen");
+                            for (int i = 0; i < Game.getGame().getPlayer().getInventory().getItems().size(); i++) {
+                                if(item.getName().equals(Game.getGame().getPlayer().getInventory().getItems().get(i).getName())){
+                                    Game.getGame().getPlayer().getInventory().getItems().remove(i);
+                                    System.out.println("removed item");
+                                }
+                            }
+                        }else{
+                            System.out.println("you dont have an item");
+                        }
+
                     }
+
                 Game.getGame().getPlayer().setInWeaponMenu(false);
                 Game.getGame().getPlayer().setInItemMenu(false);
                 Game.getGame().getPlayer().setChoosingMenu(true);
@@ -182,44 +228,69 @@ public class Fight {
         Game.getGame().getPlayer().setInItemMenu(true);
         ArrayList<Item> arr = Game.getGame().getPlayer().getInventory().getItemsWithEffects();
         
-        System.out.println("What item do you want to use?");
-        System.out.println(arr);
-        while (Game.getGame().getPlayer().isCurrentMove() == false) {
-            
-        }
-        Game.getGame().getPlayer().setIsCurrentMove(true);
-        Item item = Game.getGame().getPlayer().getCurrentItem();
+    
+        
+        while(true){
+            if(Game.getGame().getPlayer().getInventory().getItemsWithEffects().size()>=1){
+                System.out.println("What item do you want to use?");
+                for (int i = 0; i < arr.size(); i++) {
+                    System.out.println("> " + arr.get(i).getName());
+                }
+                boolean choiceMade = false;
+                String answer = "";
+                while (!choiceMade) {
+                    answer = in.nextLine().toLowerCase();
+                    choiceMade = true;
+                
+                }
+                
+                for (int i = 0; i < arr.size(); i++) {
+                    if(arr.get(i).getName().equalsIgnoreCase(answer)){
+                        return arr.get(i);
+                    }
+                }
 
-        return item;
+                System.out.println("that is not an item you have"); 
+            }else{
+                return null;
+            }
+        }
+
+        
     }
 
 
     private Weapon askWeapon() {
         ArrayList<Weapon> arr = Game.getGame().getPlayer().getInventory().getWeapons();
         if(arr.size() >= 1){
-        System.out.println("What weapon do you want to use?");
-        for (int i = 0; i < arr.size(); i++) {
-            System.out.println("> " + arr.get(i).getName());
-        }
-        boolean choiceMade = false;
-        String answer = "";
-        while (!choiceMade) {
-            answer = in.nextLine().toLowerCase();
-            choiceMade = true;
-           
-        }
-        
-        for (int i = 0; i < arr.size(); i++) {
-            if(arr.get(i).getName().equalsIgnoreCase(answer)){
-                return arr.get(i);
+
+        while(true){
+            System.out.println("What weapon do you want to use?");
+            for (int i = 0; i < arr.size(); i++) {
+                System.out.println("> " + arr.get(i).getName());
             }
+            boolean choiceMade = false;
+            String answer = "";
+            while (!choiceMade) {
+                answer = in.nextLine().toLowerCase();
+                choiceMade = true;
+            
+            }
+            
+            for (int i = 0; i < arr.size(); i++) {
+                if(arr.get(i).getName().equalsIgnoreCase(answer)){
+                    return arr.get(i);
+                }
+            }
+
+            System.out.println("that is not an weapon you have"); 
         }
         
         }else{
-            return new Weapon(0, "no weapon", false, 0, new Effects("no effect", 0, 0, 0));
+            return new Weapon(0, "no weapon", false, 0, new Effects("no effect", 0, 0, 0, 0));
         }
 
-        return null;
+      
     }
 
     
