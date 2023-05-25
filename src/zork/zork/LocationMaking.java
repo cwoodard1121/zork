@@ -29,6 +29,7 @@ public class LocationMaking {
             System.out.println("enter a number");
         }
     }
+        String[] total = new String[numRepeatInt];
         for (int i = 0; i < numRepeatInt; i++) {
             System.out.println("What room does this lead to and which direction do you walk to get there, for example D yorkMillsSubwayHallway");
             String str = in.nextLine();
@@ -47,10 +48,15 @@ public class LocationMaking {
                 direction = "East";
             else if (directionLetter.equals("W"))
                 direction = "West";
-            System.out.println("final Exit " + goTo + "Exit" + direction + " = new Exit(\"" + directionLetter + "\"," + goTo + "); " + ans + ".addExit(" + goTo + "Exit" + direction + ");");
+            total[i] = ("final Exit " + goTo + "Exit" + direction + " = new Exit(\"" + directionLetter + "\"," + goTo + "); " + ans + ".addExit(" + goTo + "Exit" + direction + ");\n");
+        
             
         }
+        for (String string : total) {
+            System.out.print(string);
+        }
         System.out.println("Room Completed");
+        hasNumber = !hasNumber;
     } 
     // final Room yorkMillsBusTerminal = new Room ("Placeholder Description for yorkMillsBusTerminal", "yorkmillsbusterminal"); roomMap.put(yorkMillsBusTerminal.getRoomName(), yorkMillsBusTerminal)
     // final ExityorkMillsSubwayHallwayExit Down new Exit("D",yorkMillsSubwayHallway); yorkMillsBusTerminal.addExit(yorkMillsSubwayHallwayExitDown)

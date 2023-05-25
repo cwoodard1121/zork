@@ -11,6 +11,7 @@ public class Down extends Command {
 
     public Down(String name) {
         super(name);
+        addAlias("d");
     }
 
     @Override

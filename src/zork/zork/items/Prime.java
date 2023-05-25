@@ -14,7 +14,7 @@ public class Prime extends Item {
     
 
     public Prime(int weight, String name, boolean isOpenable, String color, boolean fromStore, String origin) {
-        super(weight, name, isOpenable, false);
+        super(weight, name, isOpenable, null, false);
         this.weight = weight;
         this.name = name;
         this.isOpenable = isOpenable;

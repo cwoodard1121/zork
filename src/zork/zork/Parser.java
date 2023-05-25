@@ -1,6 +1,7 @@
 package zork;
 
 import java.util.Scanner;
+import java.util.Map.Entry;
 
 import datatypes.CommandNotFoundException;
 import zork.Constants.CommandConstants;
@@ -27,11 +28,28 @@ public class Parser {
     if(words.length > 1) {
     int i = 0;
     for(String word : words) {
+      boolean hasAlias = false;
+      String alias = "";
       if(i == 0) {
         if(!CommandConstants.commands.containsKey(word.toLowerCase())) {
-          throw new CommandNotFoundException(inputLine);
+          for(Entry<String,Command> entry : CommandConstants.commands.entrySet()) {
+            Command g = entry.getValue();
+            for(String a : g.getAliases()) {
+              if(a.toLowerCase().equals(word.toLowerCase())) {
+                alias = g.getName().toLowerCase();
+                hasAlias = true;
+              }
+            }
+          }
+          if(!hasAlias) {
+            throw new CommandNotFoundException(inputLine);
+          }
         }
-        c = Constants.CommandConstants.commands.get(word.toLowerCase());
+        if(!hasAlias) {
+          c = Constants.CommandConstants.commands.get(word.toLowerCase());
+        } else {
+          c = CommandConstants.commands.get(alias);
+        }
         i++;
         continue;
       }
@@ -39,10 +57,27 @@ public class Parser {
       i++;
     }
     } else {
+      boolean hasAlias = false;
+      String alias = "";
       if(!CommandConstants.commands.containsKey(words[0].toLowerCase())) {
-        throw new CommandNotFoundException(inputLine);
+        for(Entry<String,Command> entry : CommandConstants.commands.entrySet()) {
+          Command g = entry.getValue();
+          for(String a : g.getAliases()) {
+            if(a.toLowerCase().equals(words[0].toLowerCase())) {
+              alias = g.getName().toLowerCase();
+              hasAlias = true;
+            }
+          }
+        }
+        if(!hasAlias) {
+          throw new CommandNotFoundException(inputLine);
+        }
       }
-      c = Constants.CommandConstants.commands.get(words[0].toLowerCase());
+        if(!hasAlias) {
+          c = Constants.CommandConstants.commands.get(words[0].toLowerCase());
+        } else {
+          c = CommandConstants.commands.get(alias);
+        }
     }
     return c;
   }
