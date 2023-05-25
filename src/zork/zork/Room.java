@@ -8,6 +8,7 @@ import zork.entites.Enemy;
 
 public class Room {
 
+  private String lockedMessage = "";
   private String roomName;
   private String description;
   private ArrayList<Item> groundItems = new ArrayList<>();
@@ -19,10 +20,11 @@ public class Room {
 
 
   public boolean isLocked() {
-    return isLocked;
+    return this.isLocked;
   }
 
   public void setLocked(boolean isLocked) {
+    System.out.println(isLocked + " setting locked to this");
     this.isLocked = isLocked;
   }
 
@@ -57,6 +59,16 @@ public class Room {
   public Room addItemGround(Item i) {
     groundItems.add(i);
     return this;
+  }
+
+  
+
+  public String getLockedMessage() {
+    return lockedMessage;
+  }
+
+  public void setLockedMessage(String lockedMessage) {
+    this.lockedMessage = lockedMessage;
   }
 
   /**

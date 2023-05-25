@@ -97,13 +97,16 @@ public class Game {
       final Room yorkMillsSubwayHallway = new Room("A Hallway is ahead leading to the Subway, Chuck Page plays some guitar for passersby.","yorkmillssubwayhallway"); roomMap.put(yorkMillsSubwayHallway.getRoomName(), yorkMillsSubwayHallway);
       final Room yorkMillsSubway = new Room("Please come back later, unscheduled maintenance has just been scheduled, shuttlebuses are available.", "yorkmillssubway"); 
       yorkMillsSubway.addItemGround(new Item(1,  "transfer", false, false));
-      final Room eglintonShuttleBus = new Room("Going south will lead you to Elginton Station via the shuttle bus", "eglintonshuttlebus"); roomMap.put(eglintonShuttleBus.getRoomName(), eglintonShuttleBus); roomMap.put(yorkMillsSubway.getRoomName(), yorkMillsSubway);
+      final Room eglintonShuttleBus = new Room("Going south will lead you to Eglinton Station via the shuttle bus", "eglintonshuttlebus"); roomMap.put(eglintonShuttleBus.getRoomName(), eglintonShuttleBus); roomMap.put(yorkMillsSubway.getRoomName(), yorkMillsSubway);
       //EGLINTON AREA ROOMS
       final Room yorkMillsShuttleBus = new Room("Going north will lead you to York Mills Station", "yorkmillsshuttlebus"); roomMap.put(yorkMillsShuttleBus.getRoomName(), yorkMillsShuttleBus);
       final Room eglintonBusStop = new Room("You face the completely halted traffic of Yonge and Eglinton", "eglintonbusstop"); roomMap.put(eglintonBusStop.getRoomName(), eglintonBusStop);
-      final Room eglintonStation = new Room("you have entered Eglinton Station. It smells of cinnabons.", "elgintonstation"); roomMap.put(eglintonStation.getRoomName(), eglintonStation);
+      final Room eglintonStation = new Room("you have entered Eglinton Station. It smells of cinnabons.", "eglintonstation"); roomMap.put(eglintonStation.getRoomName(), eglintonStation);
       final Room eglintonStreet = new Room("You are on the sidewalk on Eglinton Street, you can feel the subway rumble below you.", "eglintonstreet"); roomMap.put(eglintonStreet.getRoomName(), eglintonStreet);
       final Room yongeEglintonMall = new Room("You stand in the lobby of the Yonge and Eglinton Mall.", "yongeeglintonmall"); roomMap.put(yongeEglintonMall.getRoomName(), yongeEglintonMall);
+      final Room circleK = new Room ("*Dialogue about prime to be implemented, homeless fight and u get a prime* a dingy convenience store with a sleeping cashier", "circlek"); roomMap.put(circleK.getRoomName(), circleK);
+      final Room foodCourt = new Room ("*Dialogue with OP shopkeeper, the prime here is super expensive, and shopkeeper is super strong* You can hear the subway rumbling in the background", "foodcourt"); roomMap.put(foodCourt.getRoomName(), foodCourt);
+      final Room eglintonSubway = new Room ("South leads to St. Clair station, North leads to York Mills Station", "eglintonsubway",true); eglintonSubway.setLocked(true); roomMap.put(eglintonSubway.getRoomName(), eglintonSubway);
 
       //BAYVIEW GLEN INDEPENDENT SCHOOL ROOMS
 
@@ -142,6 +145,19 @@ public class Game {
       //EGLINTON AREA EXITS
       final Exit yorkMillsShuttleBusExitNorth = new Exit("N", yorkMillsShuttleBus); eglintonBusStop.addExit(yorkMillsShuttleBusExitNorth);
       final Exit eglintonBusStopExitSouthFromYorkMillsBus = new Exit("S", eglintonBusStop); yorkMillsShuttleBus.addExit(eglintonBusStopExitSouthFromYorkMillsBus);
+      final Exit eglintonStreetExitEast = new Exit("E", eglintonStreet); eglintonBusStop.addExit(eglintonStreetExitEast);
+      final Exit eglintonBusStopExitWest = new Exit("W", eglintonBusStop); eglintonStreet.addExit(eglintonBusStopExitWest);
+      final Exit eglintonStationExitSouth = new Exit("S", eglintonStation); eglintonBusStop.addExit(eglintonStationExitSouth);
+      final Exit yongeEglintonMallExitNorth = new Exit("N", yongeEglintonMall); eglintonStreet.addExit(yongeEglintonMallExitNorth);
+      final Exit eglintonBusStopExitNorth = new Exit("N", eglintonBusStop); eglintonStation.addExit(eglintonBusStopExitNorth);
+      final Exit eglintonStreetExitSouth = new Exit("S", eglintonStreet); yongeEglintonMall.addExit(eglintonStreetExitSouth);
+      final Exit yongeEglintonMallExitWest = new Exit("W",yongeEglintonMall); circleK.addExit(yongeEglintonMallExitWest);
+      final Exit circleKExitEast = new Exit("E", circleK); yongeEglintonMall.addExit(circleKExitEast);
+      final Exit eglintonBusStopExitEast = new Exit("E",eglintonBusStop); foodCourt.addExit(eglintonBusStopExitEast);
+      final Exit foodCourtExitWest = new Exit("W", foodCourt); eglintonBusStop.addExit(foodCourtExitWest);
+      final Exit eglintonSubwayExitWest = new Exit("W", eglintonSubway); eglintonStation.addExit(eglintonSubwayExitWest);
+      final Exit eglintonStationExitEast = new Exit("E", eglintonStation); eglintonSubway.addExit(eglintonStationExitEast);
+      // final Exit  = new Exit("", ); .addExit();
       try {
         yorkMillsBusTerminal.printAscii();
       } catch (IOException e) {
