@@ -113,8 +113,8 @@ public class Game {
       final Room eglintonSubway = new Room ("South leads to St. Clair station, North leads to York Mills Station", "eglintonsubway",true); eglintonSubway.setLocked(true); roomMap.put(eglintonSubway.getRoomName(), eglintonSubway);
 
       //ST. CLAIR AREA ROOMS
-
       final Room stClairSubway = new Room("North leads to Eglinton, South leads to Summerhill", "stclairsubway"); roomMap.put(stClairSubway.getRoomName(), stClairSubway);
+      final Room ___it_keeps = new Room("Please leave it alone. It does not like to be disturbed.", "itkeeps"); 
 
       //SUMMER HILL DEAD END ROOM
 
@@ -293,6 +293,18 @@ public class Game {
       final Exit foodCourtExitWest = new Exit("W", foodCourt); eglintonBusStop.addExit(foodCourtExitWest);
       final Exit eglintonSubwayExitWest = new Exit("W", eglintonSubway); eglintonStation.addExit(eglintonSubwayExitWest);
       final Exit eglintonStationExitEast = new Exit("E", eglintonStation); eglintonSubway.addExit(eglintonStationExitEast);
+      final Exit stClairSubwayExitSouth = new Exit("S", stClairSubway); eglintonSubway.addExit(stClairSubwayExitSouth);
+
+      //ST. CLAIR AREA EXITS
+      final Exit eglintonSubwayExitNorth = new Exit("N", eglintonSubway); stClairSubway.addExit(eglintonSubwayExitNorth);
+      final Exit itKeepsExitDown = new Exit("D", ___it_keeps); stClairSubway.addExit(itKeepsExitDown);
+      final Exit stClairSubwayExitUp = new Exit("U", stClairSubway); ___it_keeps.addExit(stClairSubwayExitUp);
+
+      //SUMMERHILL DEAD END EXIT
+      final Exit summerhillSubwayExitSouth = new Exit("S", summerhillSubway); stClairSubway.addExit(summerhillSubwayExitSouth);
+      final Exit stClairSubwayExitNorth = new Exit("N", stClairSubway); summerhillSubway.addExit(stClairSubwayExitNorth);
+      
+
       // final Exit  = new Exit("", ); .addExit();
       try {
         yorkMillsBusTerminal.printAscii();
@@ -346,7 +358,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("bayviewglenlobby"));
+    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
     while (!finished) {
       Command command;
       try {
