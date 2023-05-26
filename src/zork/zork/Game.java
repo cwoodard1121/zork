@@ -388,9 +388,15 @@ public class Game {
 
   private void printWelcome() throws InterruptedException {
     Scanner in = new Scanner(System.in);
+    if(!isTesting){
     titleCard c = new titleCard();
     Utils.playTitleSound();
     c.printTitle();
+    }else{
+      System.out.print("\nType Start to begin: ");
+    }
+    
+     
     boolean hasStart = false;
     while(!hasStart) {
       String result = in.nextLine().toLowerCase();
