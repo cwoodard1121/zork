@@ -235,7 +235,7 @@ public class Fight {
                                 text.slowTextSpeed(Game.getGame().getPlayer().getName() + " has " + playerHealth + " health remaining", 7);
                                 text.slowTextSpeed(enemy.getName() + " has " + enemyHealth + " health remaining", 7);
                             }else{
-                                text.slowTextSpeed("you dont have an item", 7);
+                                text.slowTextSpeed("you dont have an item avaliable (should have visited a tims...)", 7);
                             }
 
                         }
