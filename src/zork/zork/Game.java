@@ -420,6 +420,10 @@ public class Game {
             System.out.print("Sorry that name is already taken, Please enter another name:");
           } else if (result.equalsIgnoreCase("cagasuge")) { 
             System.out.println("Im not mad... Im just dissapointed     ");
+          } else if (result.equalsIgnoreCase("jch")){
+            System.out.println("your funniest person alive award is being sent to your location");
+            hasChosenName = true;
+            Game.getGame().getPlayer().setName(result);
           } else {
             hasChosenName = true;
             Game.getGame().getPlayer().setName(result);
