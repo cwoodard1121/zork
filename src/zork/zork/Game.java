@@ -393,11 +393,7 @@ public class Game {
       
 
       // final Exit  = new Exit("", ); .addExit();
-      try {
-        yorkMillsBusTerminal.printAscii();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+
 
       
      //ROOM LEGEND
@@ -445,7 +441,12 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("bayviewglenlobby"));
+    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
+    try {
+      player.getCurrentRoom().printAscii();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     while (!finished) {
       Command command;
       try {

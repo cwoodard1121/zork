@@ -8,6 +8,7 @@ import zork.items.Weapon;
 import java.lang.Runnable;
 import java.util.Scanner;
 import zork.Graphics;
+import zork.Utils.SoundHandler;
 
 public class Fight {
     private Enemy enemy;
@@ -22,12 +23,17 @@ public class Fight {
     public void fight(){
         Game.getGame().getPlayer().setChoosingMenu(false);
         Game.getGame().getPlayer().setInFight(true);     
-        boolean didPlayerWin = false;        
+        boolean didPlayerWin = false;
+        SoundHandler.stop();
+        SoundHandler.playSound("would_boss.wav",true);
         didPlayerWin = fightingResults();
         if(didPlayerWin)
             System.out.println("won");
         else
             System.out.println("lost");
+
+        SoundHandler.stopSound("would_boss.wav");
+        SoundHandler.startAfterInterruption();
                         
                     
                     //game over thing will have all the menu things set to default and your location back to a spawnpoint
