@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -21,7 +20,7 @@ import zork.entites.Player;
 
 public class Game {
 
-  private final Graphics renderer = new Graphics(this);
+  private final Graphics renderer = new Graphics();
   public static AtomicBoolean bool = new AtomicBoolean();
   private final Gson gson = new Gson();
   public static Game game = new Game();
@@ -55,11 +54,15 @@ public class Game {
     return game;
   }
 
+  public Graphics getRenderer() {
+    return renderer;
+  }
+
+
   public Player getPlayer() {
     return player;
   }
 
-  @Deprecated
   /**
    * This method should only be used when testing so that we can export rooms using java
    * instead of having to write them in the god awful json file. run this and it will export
@@ -132,6 +135,12 @@ public class Game {
 
 
 
+
+      //ELLESMERE AREA ROOMS
+
+      final Room ellesmereStationUnderground = new Room("Tap presto to enter subway.", "ellesmerestationunderground", "Ellesmere Station Entrance");
+      final Room ellesmereSubwayNorthbound = new Room("Northbound to McCowan","ellesmeresubwaynorthbound","Ellesmere Station Track Northbound");
+      
 
 
 
@@ -383,6 +392,8 @@ public class Game {
       final Exit eglintonShuttleBusExitEast = new Exit("E", eglintonShuttleBus); yorkMillsBusTerminal.addExit(eglintonShuttleBusExitEast);
       final Exit yorkMillsBusTerminalExitWest = new Exit("W", yorkMillsBusTerminal); eglintonShuttleBus.addExit(yorkMillsBusTerminalExitWest);
       final Exit eglintonBusStopExitSouth = new Exit("S", eglintonBusStop); eglintonShuttleBus.addExit(eglintonBusStopExitSouth);
+
+      //ELLESMERE AREA EXITS
       
       
       
@@ -491,6 +502,7 @@ public class Game {
 
   private void handleException(Exception e) {
     // TODO: FINISH
+    // broken
   }
 
   private void printWelcome() throws InterruptedException {
@@ -537,7 +549,6 @@ public class Game {
           }
         }
         
-
       } else {
         System.out.println("Please enter a valid command");
     }
@@ -555,17 +566,6 @@ public class Game {
   }
 
   // implementations of user commands:
-
-  /**
-   * Print out some help information. Here we print some stupid, cryptic message
-   * and a list of the command words.
-   */
-  private void printHelp() {
-    System.out.println("You are lost. You are alone. You wander");
-    System.out.println("around at Monash Uni, Peninsula Campus.");
-    System.out.println();
-    System.out.println("Your command words are:");
-  }
 
   /**
    * Try to go to one direction. If there is an exit, enter the new room,

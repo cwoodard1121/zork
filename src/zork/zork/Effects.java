@@ -1,6 +1,5 @@
 package zork;
 
-import java.util.ArrayList;
 
 public class Effects {
     private String name;

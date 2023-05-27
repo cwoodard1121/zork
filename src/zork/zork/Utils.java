@@ -1,7 +1,5 @@
 package zork;
 
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,17 +16,13 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Queue;
-import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
 
-import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-// import javafx.scene.media.Media;
-// import javafx.scene.media.MediaPlayer;
 import zork.Constants.CommandConstants;
 import zork.Constants.SoundConstants;
 
@@ -92,7 +86,7 @@ public class Utils {
     * @throws ClassNotFoundException
     * @throws IOException
     */
-    public static Class[] getClasses(String packageName) throws ClassNotFoundException, IOException {
+    public static Class<?>[] getClasses(String packageName) throws ClassNotFoundException, IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         assert classLoader != null;
         String path = packageName.replace('.', '/');
@@ -102,7 +96,7 @@ public class Utils {
             URL resource = resources.nextElement();
             dirs.add(new File(resource.getFile()));
         }
-        ArrayList<Class> classes = new ArrayList<Class>();
+        ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
         for (File directory : dirs) {
             classes.addAll(findClasses(directory, packageName));
         }
@@ -118,8 +112,8 @@ public class Utils {
     * @return The classes
     * @throws ClassNotFoundException
     */
-    private static List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
-        List<Class> classes = new ArrayList<Class>();
+    private static List<Class<?>> findClasses(File directory, String packageName) throws ClassNotFoundException {
+        List<Class<?>> classes = new ArrayList<Class<?>>();
         if (!directory.exists()) {
             return classes;
         }
@@ -140,14 +134,11 @@ public class Utils {
      * Registers command to the command list.
      * @param command
      */
-    public static void registerCommand(Class<? extends Command> command) {
+    public static void registerCommand(Class<?> command) {
         String name = command.getSimpleName().toLowerCase();
-        if(Game.isTesting) {
-            System.out.println("REGISTERED COMMAND:" +  name + " FULL CLASSPATH:" + command.getName());
-        }
         try {
-            Constructor<? extends Command> constructor = command.getConstructor(String.class);
-            Command c = constructor.newInstance(name);
+            Constructor<?> constructor = command.getConstructor(String.class);
+            Command c = (Command) constructor.newInstance(name);
             CommandConstants.commands.put(name,c);
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
             e.printStackTrace();
@@ -163,7 +154,6 @@ public static class SoundHandler {
 
     private static final Thread radioPlayerThread = getRadioPlayerThread();
 
-    private static boolean somethingsPlaying = false;
     private static volatile boolean stopped = false;
     private static volatile boolean interrupted = false;
 
@@ -175,9 +165,7 @@ public static class SoundHandler {
         final String soundName = song;
                 try {
             
-                    InputStream stream =  getFileStreamFromBin(song);
                     AudioInputStream audioStream = AudioSystem.getAudioInputStream(getFileFromBin(soundName));
-                    AudioFormat format = audioStream.getFormat();
         
                     Clip clip = AudioSystem.getClip();
                     clip.open(audioStream);
@@ -282,7 +270,6 @@ public static class SoundHandler {
      * @param loop Whether or not the sound should loop until cancelled
      */
     public static synchronized void playSound(String sound, boolean loop) {
-        somethingsPlaying = true;
         stop();
         final String soundName = sound.replace(".wav", "").concat(".wav");
         Constants.SoundConstants.playSounds.put(soundName, true);
@@ -292,9 +279,7 @@ public static class SoundHandler {
             public void run() {
                 try {
             
-                    InputStream stream =  getFileStreamFromBin(sound);
                     AudioInputStream audioStream = AudioSystem.getAudioInputStream(getFileFromBin(soundName));
-                    AudioFormat format = audioStream.getFormat();
         
                     Clip clip = AudioSystem.getClip();
                     clip.open(audioStream);
@@ -307,7 +292,6 @@ public static class SoundHandler {
                         }
 
                     clip.stop();
-                    somethingsPlaying = false;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

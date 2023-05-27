@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class LocationMaking {
   public static void main(String[] args) throws InterruptedException {
     boolean name = true;
-    boolean exits = true;
     boolean hasNumber = false;
     Integer numRepeatInt = 1;
     while(name) {
@@ -57,7 +56,10 @@ public class LocationMaking {
         }
         System.out.println("Room Completed");
         hasNumber = !hasNumber;
-    } 
+        in.close();
+    }
+    
+ 
     // final Room yorkMillsBusTerminal = new Room ("Placeholder Description for yorkMillsBusTerminal", "yorkmillsbusterminal"); roomMap.put(yorkMillsBusTerminal.getRoomName(), yorkMillsBusTerminal)
     // final ExityorkMillsSubwayHallwayExit Down new Exit("D",yorkMillsSubwayHallway); yorkMillsBusTerminal.addExit(yorkMillsSubwayHallwayExitDown)
     // final Exit yorkMillsSubwayHallwayExit Down new Exit("D",yorkMillsSubwayHallway); yorkMillsBusTerminal.addExit(yorkMillsSubwayHallwayExitDown);

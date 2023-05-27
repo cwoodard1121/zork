@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class InitAscii {
         public static void fillAsciiArt (String roomName) throws FileNotFoundException, IOException {
@@ -24,5 +22,6 @@ public class InitAscii {
             continue;
 
         }
+        reader.close();
     }
 }

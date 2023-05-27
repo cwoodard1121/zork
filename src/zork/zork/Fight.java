@@ -3,11 +3,8 @@ package zork;
 import java.util.ArrayList;
 
 import zork.entites.Enemy;
-import zork.entites.Player;
 import zork.items.Weapon;
-import java.lang.Runnable;
 import java.util.Scanner;
-import zork.Graphics;
 import zork.Utils.SoundHandler;
 
 public class Fight {
@@ -55,7 +52,7 @@ public class Fight {
         try {
             
        
-                        Graphics text = new Graphics(Game.getGame());
+                        Graphics text = new Graphics();
                         int playerHealth = Game.getGame().getPlayer().getHealth();
                         int enemyHealth = enemy.getHealth();
 
@@ -264,7 +261,7 @@ public class Fight {
     
     private Item askItem() {
         try{
-        Graphics text = new Graphics(Game.getGame());
+        Graphics text = new Graphics();
         Game.getGame().getPlayer().setInItemMenu(true);
         ArrayList<Item> arr = Game.getGame().getPlayer().getInventory().getItemsWithEffects();
 
@@ -305,7 +302,7 @@ public class Fight {
     private Weapon askWeapon() {
         try {
             
-        Graphics text = new Graphics(Game.getGame());
+        Graphics text = Game.getGame().getRenderer();
         ArrayList<Weapon> arr = Game.getGame().getPlayer().getInventory().getWeapons();
         if(arr.size() >= 1){
 

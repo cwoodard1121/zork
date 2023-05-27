@@ -1,9 +1,7 @@
 package zork;
 
-import java.util.ArrayList;
 
 import datatypes.Location;
-import zork.Constants.EntityConstants;
 
 public class Entity {
     private Location location;

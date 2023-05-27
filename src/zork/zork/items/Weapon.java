@@ -5,7 +5,6 @@ import zork.Item;
 
 public class Weapon extends Item {
     private int weight;
-    private boolean isOpenable;
     private int damage;
 
   
@@ -15,7 +14,6 @@ public class Weapon extends Item {
 
     public Weapon(int weight, String name, boolean isOpenable, int damage, Effects effect){
         super(weight, name, isOpenable, effect, true);
-        this.isOpenable = false;
         this.damage = damage;
        
 
