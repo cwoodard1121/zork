@@ -156,9 +156,10 @@ public static class SoundHandler {
 
     private static volatile boolean stopped = false;
     private static volatile boolean interrupted = false;
+    private static volatile int currentSong = 0;
 
-    private static final Queue<String> songQueueTemplate = new ConcurrentLinkedQueue<>();
-    private static Queue<String> songQueue = new ConcurrentLinkedQueue<>();
+    private static final ArrayList<String> songQueueTemplate = new ArrayList<>();
+    private static volatile ArrayList<String> songQueue = new ArrayList<>();
 
 
     public static synchronized void playSong(String song) {
@@ -192,11 +193,12 @@ public static class SoundHandler {
     public static void loopQueuedSongs() {
         while(true) {
             if(!stopped) {
-                if(songQueue.size() > 0) {
-                    String song = songQueue.poll();
+                if(songQueue.size() > currentSong) {
+                    String song = songQueue.get(currentSong);
                     playSong(song);
+                    currentSong++;
                 } else {
-                    songQueue = songQueueTemplate;
+                    currentSong = 0;
                 }
             }
         }
@@ -234,6 +236,7 @@ public static class SoundHandler {
         songQueueTemplate.add("house_of_the_rising_sun.wav");
         songQueueTemplate.add("american_pie.wav");
         songQueueTemplate.add("stairway_to_heaven.wav");
+        songQueue = songQueueTemplate;
         radioPlayerThread.start();
 
     }
