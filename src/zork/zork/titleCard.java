@@ -1,10 +1,9 @@
 package zork;
 
-import javax.swing.Renderer;
 
 public class titleCard {
     public void printTitle() throws InterruptedException {
-        Graphics g = new Graphics(null);
+        Graphics g = Game.getGame().getRenderer();
         int delay = 2;
         System.out.println();
         g.slowTextSpeed(" _ _ _ ___| |___ ___ _____ ___   | |_ ___       ", delay);

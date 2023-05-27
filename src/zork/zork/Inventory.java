@@ -15,12 +15,7 @@ public class Inventory {
     this.currentWeight = 0;
   }
 
-
-  @Deprecated
-  /**
-   * Should not be used because of multithreading
-   * @return
-   */
+  
   public ArrayList<Item> getItems() {
     return this.items;
   }

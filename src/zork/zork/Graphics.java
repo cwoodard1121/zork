@@ -5,16 +5,9 @@ import zork.Constants.RenderConstants;
 
 
 public class Graphics {
-    private Game game;
 
 
-    public static void main(String[] args) {
-        new Graphics(Game.getGame()).render();
-        // for testing renderer only
-    }
-
-    public Graphics(Game game) {
-        this.game = game;
+    public Graphics() {
     }
 
     public void render() {
@@ -26,13 +19,6 @@ public class Graphics {
         System.out.println(renderer.toString());
     }
 
-
-    public String createBorder(int length, int height) {
-        StringBuilder borderBuilder = new StringBuilder();
-        // borderBuilder.append()
-        //TODO: FINISH
-        return null;
-    }
 
     public void slowTextSpeed(String text, int delay) throws InterruptedException {
         for(int i = 0; i < text.length(); i++) {
@@ -75,6 +61,7 @@ public class Graphics {
                 continue;
             }
         }
+        reader.close();
         Thread.sleep(frameTime);
 
     }
