@@ -1,12 +1,9 @@
 package zork;
 
-import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.util.HashMap;
 
-import zork.commands.Go;
-import zork.commands.Stop;
 
 public class Constants {
     public static final class PlayerConstants {
@@ -38,7 +35,7 @@ public class Constants {
     public static void initCommands() {
         try {
             for(Class<?> command : Utils.getClasses("zork.commands")) {
-                Utils.registerCommand((Class<? extends Command>) command);
+                Utils.registerCommand(command);
             }
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();

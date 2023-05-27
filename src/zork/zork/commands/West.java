@@ -1,13 +1,9 @@
 package zork.commands;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import zork.Command;
-import zork.Constants;
 import zork.Exit;
 import zork.Game;
-import zork.Utils;
 
 public class West extends Command {
     public West(String name) {

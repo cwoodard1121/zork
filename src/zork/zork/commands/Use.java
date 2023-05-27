@@ -3,7 +3,6 @@ package zork.commands;
 import java.util.ArrayList;
 import zork.Command;
 import zork.Game;
-import zork.Inventory;
 import zork.Item;
 import zork.items.Weapon;
 public class Use extends Command {
@@ -35,7 +34,6 @@ public class Use extends Command {
             for (int i = 0; i < pInventory.size(); i++) {
 
                 if(Game.getGame().getPlayer().getIsItemMenu()){
-                    ArrayList<Item> arr = Game.getGame().getPlayer().getInventory().getItemsWithEffects();
                     if(command.equalsIgnoreCase(pInventory.get(i).getName())){
                         System.out.println("in here");
                         Game.bool.set(true);

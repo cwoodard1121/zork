@@ -1,7 +1,6 @@
 package zork.commands;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 
 import zork.Command;
 import zork.Game;

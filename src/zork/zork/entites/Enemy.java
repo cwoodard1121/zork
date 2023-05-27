@@ -1,11 +1,9 @@
 package zork.entites;
 
-import java.util.ArrayList;
 
 import datatypes.Location;
 import zork.Entity;
 import zork.Inventory;
-import zork.Item;
 import zork.Room;
 
 public class Enemy extends Entity {
@@ -19,7 +17,6 @@ public class Enemy extends Entity {
 
         super(location, currentRoom, health, inventory);
         this.moneyDroped = money;
-        this.speed = speed;
         this.name = name;
     }
 

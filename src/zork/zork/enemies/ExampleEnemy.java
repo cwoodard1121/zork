@@ -1,6 +1,5 @@
 package zork.enemies;
 
-import java.util.ArrayList;
 
 import zork.entites.Enemy;
 import zork.items.Weapon;

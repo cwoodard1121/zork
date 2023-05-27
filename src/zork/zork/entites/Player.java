@@ -1,7 +1,5 @@
 package zork.entites;
 
-import java.util.ArrayList;
-
 
 import datatypes.Location;
 import zork.Entity;

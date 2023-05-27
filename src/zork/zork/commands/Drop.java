@@ -4,7 +4,6 @@ import zork.Command;
 import zork.Game;
 import zork.Item;
 import zork.entites.Player;
-import zork.Exit;
 
 public class Drop extends Command {
 
