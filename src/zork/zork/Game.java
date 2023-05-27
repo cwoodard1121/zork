@@ -136,6 +136,8 @@ public class Game {
 
 
 
+      //ELLESMERE AREA ROOMS
+
 
 
 
@@ -390,6 +392,8 @@ public class Game {
       final Exit eglintonShuttleBusExitEast = new Exit("E", eglintonShuttleBus); yorkMillsBusTerminal.addExit(eglintonShuttleBusExitEast);
       final Exit yorkMillsBusTerminalExitWest = new Exit("W", yorkMillsBusTerminal); eglintonShuttleBus.addExit(yorkMillsBusTerminalExitWest);
       final Exit eglintonBusStopExitSouth = new Exit("S", eglintonBusStop); eglintonShuttleBus.addExit(eglintonBusStopExitSouth);
+
+      //ELLESMERE AREA EXITS
       
       
       
@@ -515,7 +519,6 @@ public class Game {
     boolean hasStart = false;
     while(!hasStart) {
       String result = in.nextLine().toLowerCase();
-      in.close();
       if(result.equals("start")) {
         SoundHandler.stopSound("mainmenu.wav");
         hasStart = true;
@@ -546,7 +549,6 @@ public class Game {
           }
         }
         
-
       } else {
         System.out.println("Please enter a valid command");
     }
