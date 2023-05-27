@@ -138,7 +138,6 @@ public class Game {
       final Room bayviewGlenPrepGym = new Room("Placeholder Description for bayviewGlenPrepGym", "bayviewglenprepgym"); roomMap.put(bayviewGlenPrepGym.getRoomName(), bayviewGlenPrepGym);
       final Room bayviewGlenWeightRoom = new Room("Placeholder Description for bayviewGlenWeightRoom", "bayviewglenweightroom"); roomMap.put(bayviewGlenWeightRoom.getRoomName(), bayviewGlenWeightRoom);
       final Room bayviewGlenOutsidePrepGymNorth = new Room("Placeholder Description for bayviewGlenOutsidePrepGymNorth", "bayviewglenoutsideprepgymnorth"); roomMap.put(bayviewGlenOutsidePrepGymNorth.getRoomName(), bayviewGlenOutsidePrepGymNorth);
-      final Room bayviewGlenOutsidePrepGymEast = new Room("Placeholder Description for bayviewGlenOutsidePrepGymEast", "bayviewglenoutsideprepgymeast"); roomMap.put(bayviewGlenOutsidePrepGymEast.getRoomName(), bayviewGlenOutsidePrepGymEast);
       final Room bayviewGlenLearningCommons = new Room("Placeholder Description for bayviewGlenLearningCommons", "bayviewglenlearningcommons"); roomMap.put(bayviewGlenLearningCommons.getRoomName(), bayviewGlenLearningCommons);
       final Room bayviewGlenLearningCommonsSubArea = new Room ("Placeholder Description for bayviewGlenLearningCommonsSubArea", "bayviewglenlearningcommonssubarea"); roomMap.put(bayviewGlenLearningCommonsSubArea.getRoomName(), bayviewGlenLearningCommonsSubArea);
       final Room bayviewGlenTheatre = new Room("Placeholder Description for bayviewGlenTheatre", "bayviewglentheatre"); roomMap.put(bayviewGlenTheatre.getRoomName(), bayviewGlenTheatre);
@@ -147,7 +146,6 @@ public class Game {
       final Room bayviewGlenG11CommonArea = new Room("Placeholder Description for bayviewGlenG11CommonArea", "bayviewgleng11commonarea"); roomMap.put(bayviewGlenG11CommonArea.getRoomName(), bayviewGlenG11CommonArea);
       final Room bayviewGlenGradHallway = new Room("Placeholder Description for bayviewGlenGradHallway", "bayviewglengradhallway"); roomMap.put(bayviewGlenGradHallway.getRoomName(), bayviewGlenGradHallway);
       final Room bayviewGlenUpperMusicHallway = new Room ("Placeholder Description for bayviewGlenUpperMusicHallway", "bayviewglenuppermusichallway"); roomMap.put(bayviewGlenUpperMusicHallway.getRoomName(), bayviewGlenUpperMusicHallway);
-      final Room bayviewGlenOutsideHallwayTheatreBack = new Room ("Placeholder Description for bayviewGlenOutsideHallwayTheatreBack", "bayviewglenoutsidehallwaytheatreback"); roomMap.put(bayviewGlenOutsideHallwayTheatreBack.getRoomName(), bayviewGlenOutsideHallwayTheatreBack);
       final Room bayviewGlenDramaRoom = new Room ("Placeholder Description for bayviewGlenDramaRoom", "bayviewglendramaroom"); roomMap.put(bayviewGlenDramaRoom.getRoomName(), bayviewGlenDramaRoom);
       final Room bayviewGlenDeck = new Room ("Placeholder Description for bayviewGlenDeck", "bayviewglendeck"); roomMap.put(bayviewGlenDeck.getRoomName(), bayviewGlenDeck);
       final Room bayviewGlenYorkMills = new Room ("Placeholder Description for bayviewGlenYorkMills", "bayviewglenyorkmills"); roomMap.put(bayviewGlenYorkMills.getRoomName(), bayviewGlenYorkMills);
@@ -156,10 +154,9 @@ public class Game {
       final Room bayviewGlen3rdFloorEastPrepStairwayHallway = new Room ("Placeholder Description for bayviewGlen3rdFloorEast'PrepStairwayHallway", "bayviewglen3rdflooreastprepstairwayhallway"); roomMap.put(bayviewGlen3rdFloorEastPrepStairwayHallway.getRoomName(), bayviewGlen3rdFloorEastPrepStairwayHallway);
       final Room bayviewGlenG9CommonArea = new Room ("Placeholder Description for bayviewGlenG9CommonArea", "bayviewgleng9commonarea"); roomMap.put(bayviewGlenG9CommonArea.getRoomName(), bayviewGlenG9CommonArea);
       final Room bayviewGlenOutsideStaircase = new Room ("Placeholder Description for bayviewGlenOutsideStaircase", "bayviewglenoutsidestaircase"); roomMap.put(bayviewGlenOutsideStaircase.getRoomName(), bayviewGlenOutsideStaircase);
-
+      final Room bayviewGlenOutsideWest = new Room ("Placeholder Description for bayviewGlenOutsideWest", "bayviewglenoutsidewest"); roomMap.put(bayviewGlenOutsideWest.getRoomName(), bayviewGlenOutsideWest);
       final Room bayviewGlenMusicRoom = new Room ("Placeholder Description for bayviewGlenMusicRoom", "bayviewglenmusicroom"); roomMap.put(bayviewGlenMusicRoom.getRoomName(), bayviewGlenMusicRoom);
       final Room bayviewGlen2ndFloorUpperHallway = new Room ("Placeholder Description for bayviewGlen2ndFloorUpperHallway", "bayviewglen2ndfloorupperhallway"); roomMap.put(bayviewGlen2ndFloorUpperHallway.getRoomName(), bayviewGlen2ndFloorUpperHallway);
-
       final Room bayviewGlenHallway3rdFloorByElevator = new Room ("Placeholder Description for bayviewGlenHallway3rdFloorByElevator", "bayviewglenhallway3rdfloorbyelevator"); roomMap.put(bayviewGlenHallway3rdFloorByElevator.getRoomName(), bayviewGlenHallway3rdFloorByElevator);
 
       //BVG EXITS
@@ -170,8 +167,8 @@ public class Game {
       final Exit bayviewGlen3rdFloorLobbyExitUp = new Exit("U",bayviewGlen3rdFloorLobby); bayviewGlenLobby.addExit(bayviewGlen3rdFloorLobbyExitUp);
 
       final Exit bayviewGlenLobbyExitSouth = new Exit("S",bayviewGlenLobby); bayviewGlenOutsideLobby.addExit(bayviewGlenLobbyExitSouth);
-      final Exit bayviewGlenOutsideCafeteriaExitEast = new Exit("E",bayviewGlenOutsideCafeteria); bayviewGlenLobby.addExit(bayviewGlenOutsideCafeteriaExitEast);
-      final Exit bayviewGlenOutsideHallwayTheatreFrontExitWest = new Exit("W",bayviewGlenOutsideHallwayTheatreFront); bayviewGlenLobby.addExit(bayviewGlenOutsideHallwayTheatreFrontExitWest);
+      final Exit bayviewGlenOutsideCafeteriaExitEast = new Exit("E",bayviewGlenOutsideCafeteria); bayviewGlenOutsideLobby.addExit(bayviewGlenOutsideCafeteriaExitEast);
+      final Exit bayviewGlenOutsideHallwayTheatreFrontExitWest = new Exit("W",bayviewGlenOutsideHallwayTheatreFront); bayviewGlenOutsideLobby.addExit(bayviewGlenOutsideHallwayTheatreFrontExitWest);
 
       final Exit bayviewGlenLearningCommonsExitSouth = new Exit("S",bayviewGlenLearningCommons); bayviewGlenHallwayCafeteria.addExit(bayviewGlenLearningCommonsExitSouth);
       final Exit bayviewGlenCafeteriaFoodAreaExitNorth = new Exit("N",bayviewGlenCafeteriaFoodArea); bayviewGlenHallwayCafeteria.addExit(bayviewGlenCafeteriaFoodAreaExitNorth);
@@ -179,7 +176,7 @@ public class Game {
       final Exit bayviewGlenLobbyExitWest = new Exit("W",bayviewGlenLobby); bayviewGlenHallwayCafeteria.addExit(bayviewGlenLobbyExitWest);
 
       final Exit bayviewGlenPrepGymExitNorth = new Exit("N",bayviewGlenPrepGym); bayviewGlenHallwayPrepGym.addExit(bayviewGlenPrepGymExitNorth);
-      final Exit bayviewGlenOutsideHallwayPrepGymExitEast = new Exit("E",bayviewGlenOutsidePrepGymEast); bayviewGlenHallwayPrepGym.addExit(bayviewGlenOutsideHallwayPrepGymExitEast);
+      final Exit bayviewGlenOutsideStaircaseExitEast = new Exit("E",bayviewGlenOutsideStaircase); bayviewGlenHallwayPrepGym.addExit(bayviewGlenOutsideStaircaseExitEast);
       final Exit bayviewGlenWeightRoomExitSouth = new Exit("S",bayviewGlenWeightRoom); bayviewGlenHallwayPrepGym.addExit(bayviewGlenWeightRoomExitSouth);
       final Exit bayviewGlenHallwayCafeteriaExitWest = new Exit("W",bayviewGlenHallwayCafeteria); bayviewGlenHallwayPrepGym.addExit(bayviewGlenHallwayCafeteriaExitWest);
       final Exit bayviewGlen3rdFloorEastPrepStairwayHallwayExitUp = new Exit("U",bayviewGlen3rdFloorEastPrepStairwayHallway); bayviewGlenHallwayPrepGym.addExit(bayviewGlen3rdFloorEastPrepStairwayHallwayExitUp);
@@ -187,12 +184,12 @@ public class Game {
       final Exit bayviewGlenOutsideHallwayTheatreFrontExitNorth = new Exit("N",bayviewGlenOutsideHallwayTheatreFront); bayviewGlenHallwayTheatreFront.addExit(bayviewGlenOutsideHallwayTheatreFrontExitNorth);
       final Exit bayviewGlenTheatreExitSouth = new Exit("S",bayviewGlenTheatre); bayviewGlenHallwayTheatreFront.addExit(bayviewGlenTheatreExitSouth);
       final Exit bayviewGlenLobbyExitEast = new Exit("E",bayviewGlenLobby); bayviewGlenHallwayTheatreFront.addExit(bayviewGlenLobbyExitEast);
-      final Exit bayviewGlenOutsideHallwayTheatreFrontWestExitWest = new Exit("W",bayviewGlenOutsideHallwayTheatreFront); bayviewGlenHallwayTheatreFront.addExit(bayviewGlenOutsideHallwayTheatreFrontWestExitWest);
+      final Exit bayviewGlenOutsideWestExitWest = new Exit("W",bayviewGlenOutsideWest); bayviewGlenHallwayTheatreFront.addExit(bayviewGlenOutsideWestExitWest);
       final Exit bayviewGlen3rdFloorWestPrepStairwayHallwayExitUp = new Exit("U",bayviewGlen3rdFloorWestPrepStairwayHallway); bayviewGlenHallwayTheatreFront.addExit(bayviewGlen3rdFloorWestPrepStairwayHallwayExitUp);
       
       final Exit bayviewGlenHallwayTheatreFrontExitSouth = new Exit("S",bayviewGlenHallwayTheatreFront); bayviewGlenOutsideHallwayTheatreFront.addExit(bayviewGlenHallwayTheatreFrontExitSouth);
-      
-      final Exit bayviewGlenHallwayTheatreFrontExitEast = new Exit("E",bayviewGlenHallwayTheatreFront); bayviewGlenOutsideHallwayTheatreFront.addExit(bayviewGlenHallwayTheatreFrontExitEast);
+      final Exit bayviewGlenOutsideLobbyExitEast = new Exit("E",bayviewGlenOutsideLobby); bayviewGlenOutsideHallwayTheatreFront.addExit(bayviewGlenOutsideLobbyExitEast);
+      final Exit bayviewGlenOutsideWestExitWestTwo = new Exit("W",bayviewGlenOutsideWest); bayviewGlenOutsideHallwayTheatreFront.addExit(bayviewGlenOutsideWestExitWestTwo);
 
       final Exit bayviewGlenCafeteriaDiningAreaExitNorth = new Exit("N",bayviewGlenCafeteriaDiningArea); bayviewGlenCafeteriaFoodArea.addExit(bayviewGlenCafeteriaDiningAreaExitNorth);
       final Exit bayviewGlenHallwayCafeteriaExitSouth = new Exit("S",bayviewGlenHallwayCafeteria); bayviewGlenCafeteriaFoodArea.addExit(bayviewGlenHallwayCafeteriaExitSouth);
@@ -213,11 +210,12 @@ public class Game {
       final Exit bayviewGlenHallwayPrepGymExitNorth = new Exit("N",bayviewGlenHallwayPrepGym); bayviewGlenWeightRoom.addExit(bayviewGlenHallwayPrepGymExitNorth);
 
       final Exit bayviewGlenOutsideCafeteriaExitWest = new Exit("W",bayviewGlenOutsideCafeteria); bayviewGlenOutsidePrepGymNorth.addExit(bayviewGlenOutsideCafeteriaExitWest);
-      final Exit bayviewGlenOutsidePrepGymEastExitEast = new Exit("E",bayviewGlenOutsidePrepGymEast); bayviewGlenOutsidePrepGymNorth.addExit(bayviewGlenOutsidePrepGymEastExitEast);
+      final Exit bayviewGlenOutsideStaircaseExitEastTwo = new Exit("E",bayviewGlenOutsideStaircase); bayviewGlenOutsidePrepGymNorth.addExit(bayviewGlenOutsideStaircaseExitEastTwo);
       final Exit bayviewGlenPrepGymExitSouth = new Exit("S",bayviewGlenPrepGym); bayviewGlenOutsidePrepGymNorth.addExit(bayviewGlenPrepGymExitSouth);
 
-      final Exit bayviewGlenOutsidePrepGymNorthExitNorth = new Exit("N",bayviewGlenOutsidePrepGymNorth); bayviewGlenOutsidePrepGymEast.addExit(bayviewGlenOutsidePrepGymNorthExitNorth);
-      final Exit bayviewGlenHallwayPrepGymExitWest = new Exit("W",bayviewGlenHallwayPrepGym); bayviewGlenOutsidePrepGymEast.addExit(bayviewGlenHallwayPrepGymExitWest); 
+      final Exit bayviewGlenOutsidePrepGymNorthExitNorth = new Exit("N",bayviewGlenOutsidePrepGymNorth); bayviewGlenOutsideStaircase.addExit(bayviewGlenOutsidePrepGymNorthExitNorth);
+      final Exit bayviewGlenHallwayPrepGymExitWest = new Exit("W",bayviewGlenHallwayPrepGym); bayviewGlenOutsideStaircase.addExit(bayviewGlenHallwayPrepGymExitWest); 
+      final Exit bayviewGlenDeckExitWest = new Exit("S",bayviewGlenDeck); bayviewGlenOutsideStaircase.addExit(bayviewGlenDeckExitWest); 
 
       final Exit bayviewGlenHallwayCafeteriaExitNorth = new Exit("N",bayviewGlenHallwayCafeteria); bayviewGlenLearningCommons.addExit(bayviewGlenHallwayCafeteriaExitNorth);
       final Exit bayviewGlenLearningCommonsSubAreaExitWest = new Exit("W",bayviewGlenLearningCommonsSubArea); bayviewGlenLearningCommons.addExit(bayviewGlenLearningCommonsSubAreaExitWest);
@@ -230,26 +228,24 @@ public class Game {
       final Exit bayviewGlenTheatreExitNorth = new Exit("N",bayviewGlenTheatre); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenTheatreExitNorth);
       final Exit bayviewGlenDramaRoomExitSouth = new Exit("S",bayviewGlenDramaRoom); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenDramaRoomExitSouth);
       final Exit bayviewGlenG11CommonAreaExitEast = new Exit("E",bayviewGlenG11CommonArea); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenG11CommonAreaExitEast);
-      final Exit bayviewGlenOutsideHallwayTheatreBackExitWest = new Exit("W",bayviewGlenOutsideHallwayTheatreBack); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenOutsideHallwayTheatreBackExitWest);
+      final Exit bayviewGlenOutsideWestkExitWest = new Exit("W",bayviewGlenOutsideWest); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenOutsideWestkExitWest);
 
       final Exit bayviewGlenTheatreHallwayBackExitNorth = new Exit("N",bayviewGlenHallwayTheatreBack); bayviewGlenDramaRoom.addExit(bayviewGlenTheatreHallwayBackExitNorth);
 
-      final Exit bayviewGlenOustideHallwayTheatreFrontExitNorth = new Exit("N",bayviewGlenOutsideHallwayTheatreBack); bayviewGlenOutsideHallwayTheatreBack.addExit(bayviewGlenOustideHallwayTheatreFrontExitNorth);
-      final Exit bayviewGlenDeckExitSouth = new Exit("S",bayviewGlenDeck); bayviewGlenOutsideHallwayTheatreBack.addExit(bayviewGlenDeckExitSouth);
-      final Exit bayviewGlenHallwayTheatreBackExitEast = new Exit("E",bayviewGlenHallwayTheatreBack); bayviewGlenOutsideHallwayTheatreBack.addExit(bayviewGlenHallwayTheatreBackExitEast);
+      final Exit bayviewGlenUpperMusicHallwayExitSouth = new Exit("S",bayviewGlenUpperMusicHallway); bayviewGlenMusicRoom.addExit(bayviewGlenUpperMusicHallwayExitSouth);
       
       final Exit bayviewGlenLobbyExitNorth = new Exit("N",bayviewGlenLobby); bayviewGlenHallway2ndFloorToUpperSchool.addExit(bayviewGlenLobbyExitNorth);
       final Exit bayviewGlenG11CommonAreaExitSouth = new Exit("S",bayviewGlenG11CommonArea); bayviewGlenHallway2ndFloorToUpperSchool.addExit(bayviewGlenG11CommonAreaExitSouth);
       final Exit bayviewGlenGradHallwayExitEast = new Exit("E",bayviewGlenGradHallway); bayviewGlenHallway2ndFloorToUpperSchool.addExit(bayviewGlenGradHallwayExitEast);
 
-      final Exit bayviewGlenOutsideHallwayTheatreBackExitNorth = new Exit("N",bayviewGlenOutsideHallwayTheatreBack); bayviewGlenDeck.addExit(bayviewGlenOutsideHallwayTheatreBackExitNorth);
       final Exit bayviewGlenYorkMillsExitSouth = new Exit("S",bayviewGlenYorkMills); bayviewGlenDeck.addExit(bayviewGlenYorkMillsExitSouth);
       final Exit bayviewGlenG11CommonAreaExitUp = new Exit("U",bayviewGlenG11CommonArea); bayviewGlenDeck.addExit(bayviewGlenG11CommonAreaExitUp);
-      final Exit bayviewGlenOutsideStaircaseExitEast = new Exit("E",bayviewGlenOutsideStaircase); bayviewGlenDeck.addExit(bayviewGlenOutsideStaircaseExitEast); 
+      final Exit bayviewGlenOutsideStaircaseExitEastThree = new Exit("E",bayviewGlenOutsideStaircase); bayviewGlenDeck.addExit(bayviewGlenOutsideStaircaseExitEastThree); 
+      final Exit bayviewGlenOutsideWestExitWestThree = new Exit("W",bayviewGlenOutsideWest); bayviewGlenDeck.addExit(bayviewGlenOutsideWestExitWestThree);
 
       final Exit bayviewGlenG9CommonAreaExitUp = new Exit("U",bayviewGlenG9CommonArea); bayviewGlenG11CommonArea.addExit(bayviewGlenG9CommonAreaExitUp);
       final Exit bayviewGlenHallway2ndFloorToUpperSchoolExitNorth = new Exit("N",bayviewGlenHallway2ndFloorToUpperSchool); bayviewGlenG11CommonArea.addExit(bayviewGlenHallway2ndFloorToUpperSchoolExitNorth);
-      final Exit bayviewGlenDeckExitDown = new Exit("D",bayviewGlenDeck); bayviewGlenG11CommonArea.addExit(bayviewGlenDeckExitDown);
+      final Exit bayviewGlenDeckExitSouth = new Exit("S",bayviewGlenDeck); bayviewGlenG11CommonArea.addExit(bayviewGlenDeckExitSouth);
       final Exit bayviewGlenHallwayTheatreBackExitWest = new Exit("W",bayviewGlenHallwayTheatreBack); bayviewGlenG11CommonArea.addExit(bayviewGlenHallwayTheatreBackExitWest);
       final Exit bayviewGlen2ndFloorUpperHallwayExitEast = new Exit("E",bayviewGlen2ndFloorUpperHallway); bayviewGlenG11CommonArea.addExit(bayviewGlen2ndFloorUpperHallwayExitEast);
 
@@ -260,11 +256,16 @@ public class Game {
       final Exit bayviewGlenGradHallwayExitWest = new Exit("W",bayviewGlenGradHallway); bayviewGlenUpperMusicHallway.addExit(bayviewGlenGradHallwayExitWest);
       final Exit bayviewGlen2ndFloorUpperHallwayExitSouth = new Exit("S",bayviewGlen2ndFloorUpperHallway); bayviewGlenUpperMusicHallway.addExit(bayviewGlen2ndFloorUpperHallwayExitSouth);
 
+
       final Exit bayviewGlenUpperMusicHallwayExitEastTwo = new Exit("E",bayviewGlenUpperMusicHallway); bayviewGlenMusicRoom.addExit(bayviewGlenUpperMusicHallwayExitEastTwo);
 
       final Exit bayviewGlenUpperMusicHallwayExitNorth = new Exit("N",bayviewGlenUpperMusicHallway); bayviewGlen2ndFloorUpperHallway.addExit(bayviewGlenUpperMusicHallwayExitNorth);
       final Exit bayviewGlenHallway3rdFloorByElevatorExitUp = new Exit("U", bayviewGlenHallway3rdFloorByElevator); bayviewGlen2ndFloorUpperHallway.addExit(bayviewGlenHallway3rdFloorByElevatorExitUp);
       final Exit bayviewGlenG11CommonAreaExitWest = new Exit("W",bayviewGlenG11CommonArea); bayviewGlen2ndFloorUpperHallway.addExit(bayviewGlenG11CommonAreaExitWest);
+      
+      final Exit bayviewGlenDeckExitSouthTwo = new Exit("S",bayviewGlenDeck); bayviewGlenOutsideWest.addExit(bayviewGlenDeckExitSouthTwo);
+      final Exit bayviewGlenOutsideHallwayTheatreFrontExitNorthTwo = new Exit("N",bayviewGlenOutsideHallwayTheatreFront); bayviewGlenOutsideWest.addExit(bayviewGlenOutsideHallwayTheatreFrontExitNorthTwo);
+      final Exit bayviewGlenHallwayTheatreFrontExitEast = new Exit("E",bayviewGlenHallwayTheatreFront); bayviewGlenOutsideWest.addExit(bayviewGlenHallwayTheatreFrontExitEast);
       //YORK MILLS AREA EXITS
 
       final Exit yorkMillsSubwayHallwayExitDown = new Exit("D",yorkMillsSubwayHallway); yorkMillsBusTerminal.addExit(yorkMillsSubwayHallwayExitDown);
