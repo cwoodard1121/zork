@@ -164,24 +164,11 @@ public static class SoundHandler {
     private static final Thread radioPlayerThread = getRadioPlayerThread();
 
     private static boolean somethingsPlaying = false;
-    private static boolean interrupted = false;
+    private static volatile boolean stopped = false;
+    private static volatile boolean interrupted = false;
 
     private static final Queue<String> songQueueTemplate = new ConcurrentLinkedQueue<>();
     private static Queue<String> songQueue = new ConcurrentLinkedQueue<>();
-    private static final Thread spamChecker = new Thread(new Runnable() {
-
-        @Override
-        public void run() {
-            while(true) {
-                if(!somethingsPlaying) {
-                    radioPlayerThread.start();
-                    break;
-                }
-            }
-        }
-        
-    });
-
 
 
     public static synchronized void playSong(String song) {
@@ -210,17 +197,19 @@ public static class SoundHandler {
     }
 
     public static void stop() {
-        radioPlayerThread.stop();
-        spamChecker.start();
+        stopped = true;
+        interrupted = true;
     }
 
     public static void loopQueuedSongs() {
         while(true) {
-            if(songQueue.size() > 0) {
-                String song = songQueue.poll();
-                playSong(song);
-            } else {
-                songQueue = songQueueTemplate;
+            if(!stopped) {
+                if(songQueue.size() > 0) {
+                    String song = songQueue.poll();
+                    playSong(song);
+                } else {
+                    songQueue = songQueueTemplate;
+                }
             }
         }
     }
@@ -234,6 +223,11 @@ public static class SoundHandler {
             }
             
         });
+    }
+
+    public static void startAfterInterruption() {
+        interrupted = false;
+        stopped = false;
     }
 
     public static void skip() {
@@ -307,7 +301,7 @@ public static class SoundHandler {
                     if(loop) clip.loop(1000000);
                     clip.start();
                     int i = 0;
-                        while((!loop && i < (TimeUnit.MICROSECONDS.toSeconds(clip.getMicrosecondLength())) && SoundConstants.playSounds.get(soundName)) || (loop && SoundConstants.playSounds.get(soundName)) || clip.isActive()) {
+                        while((!loop && i < (TimeUnit.MICROSECONDS.toSeconds(clip.getMicrosecondLength())) && SoundConstants.playSounds.get(soundName)) || (loop && SoundConstants.playSounds.get(soundName)) || clip.isActive() && SoundConstants.playSounds.get(soundName)) {
                             i++;
                             Thread.sleep(1000);
                         }
