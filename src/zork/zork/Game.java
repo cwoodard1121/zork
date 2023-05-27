@@ -138,6 +138,10 @@ public class Game {
 
       //ELLESMERE AREA ROOMS
 
+      final Room ellesmereStationUnderground = new Room("Tap presto to enter subway.", "ellesmerestationunderground", "Ellesmere Station Entrance");
+      final Room ellesmereSubwayNorthbound = new Room("Northbound to McCowan","ellesmeresubwaynorthbound","Ellesmere Station Track Northbound");
+      
+
 
 
 
