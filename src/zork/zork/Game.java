@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import datatypes.CommandNotFoundException;
 import datatypes.Location;
 import zork.Constants.PlayerConstants;
+import zork.Utils.SoundHandler;
 import zork.entites.Player;
 
 public class Game {
@@ -390,7 +391,7 @@ public class Game {
     Scanner in = new Scanner(System.in);
     if(!isTesting){
     titleCard c = new titleCard();
-    Utils.playTitleSound();
+    SoundHandler.playTitleSound();
     c.printTitle();
     }else{
       System.out.print("\nType Start to begin: ");
@@ -401,7 +402,7 @@ public class Game {
     while(!hasStart) {
       String result = in.nextLine().toLowerCase();
       if(result.equals("start")) {
-        Utils.stopSound("mainmenu.wav");
+        SoundHandler.stopSound("mainmenu.wav");
         hasStart = true;
         if(!isTesting) {
         try {

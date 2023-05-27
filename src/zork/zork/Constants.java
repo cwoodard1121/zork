@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
-import sun.audio.*;
-import zork.commands.EnterSubway;
 import zork.commands.Go;
 import zork.commands.Stop;
 

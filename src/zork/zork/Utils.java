@@ -17,6 +17,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Queue;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -25,7 +29,6 @@ import javax.sound.sampled.Clip;
 
 // import javafx.scene.media.Media;
 // import javafx.scene.media.MediaPlayer;
-import sun.audio.*;
 import zork.Constants.CommandConstants;
 import zork.Constants.SoundConstants;
 
@@ -151,18 +154,121 @@ public class Utils {
         }
     }
 
+
+
+
+
+
+public static class SoundHandler {
+
+    private static final Thread radioPlayerThread = getRadioPlayerThread();
+
+    private static boolean somethingsPlaying = false;
+    private static boolean interrupted = false;
+
+    private static final Queue<String> songQueueTemplate = new ConcurrentLinkedQueue<>();
+    private static Queue<String> songQueue = new ConcurrentLinkedQueue<>();
+    private static final Thread spamChecker = new Thread(new Runnable() {
+
+        @Override
+        public void run() {
+            while(true) {
+                if(!somethingsPlaying) {
+                    radioPlayerThread.start();
+                    break;
+                }
+            }
+        }
+        
+    });
+
+
+
+    public static synchronized void playSong(String song) {
+        final String soundName = song;
+                try {
+            
+                    InputStream stream =  getFileStreamFromBin(song);
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(getFileFromBin(soundName));
+                    AudioFormat format = audioStream.getFormat();
+        
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(audioStream);
+                    clip.start();
+                    int i = 0;
+                        while(i < (TimeUnit.MICROSECONDS.toSeconds(clip.getMicrosecondLength()))) {
+                            if(interrupted) break;
+                            i++;
+                            Thread.sleep(1000);
+                        }
+                        interrupted = false;
+
+                    clip.stop();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+    }
+
+    public static void stop() {
+        radioPlayerThread.stop();
+        spamChecker.start();
+    }
+
+    public static void loopQueuedSongs() {
+        while(true) {
+            if(songQueue.size() > 0) {
+                String song = songQueue.poll();
+                playSong(song);
+            } else {
+                songQueue = songQueueTemplate;
+            }
+        }
+    }
+
+    private static Thread getRadioPlayerThread() {
+        return new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                loopQueuedSongs();
+            }
+            
+        });
+    }
+
+    public static void skip() {
+        interrupted = true;
+    }
+
+    public static void shuffle() {
+
+    }
+
+    static {
+        /**
+         * add file names here
+         */
+        songQueueTemplate.add("house_of_the_rising_sun.wav");
+        songQueueTemplate.add("omission.wav");
+        songQueueTemplate.add("american_pie.wav");
+        songQueueTemplate.add("stairway_to_heaven.wav");
+        radioPlayerThread.start();
+
+    }
+
     /**
      * plays ttc subway sound
      */
     public static synchronized void subwaySound() {
-        playSound("subway.wav",3,false);
+        playSound("subway.wav",false);
     }
+
 
     /**
      * plays title music
      */
     public static synchronized void playTitleSound() {
-        playSound("mainmenu.wav",44,true);
+        playSound("mainmenu.wav",true);
     }
 
 
@@ -181,61 +287,40 @@ public class Utils {
      * @param secs The length of the file
      * @param loop Whether or not the sound should loop until cancelled
      */
-    public static void playSound(String sound, int secs, boolean loop) {
-        try {
-            //TODO: WIP
-            final int seconds = secs;
-            InputStream stream =  getFileStreamFromBin(sound);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(getFileFromBin(sound.replace(".wav", "") + ".wav"));
-            AudioFormat format = audioStream.getFormat();
+    public static synchronized void playSound(String sound, boolean loop) {
+        somethingsPlaying = true;
+        stop();
+        final String soundName = sound.replace(".wav", "").concat(".wav");
+        Constants.SoundConstants.playSounds.put(soundName, true);
+        new Thread(new Runnable() {
 
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
-
-            clip.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    // public static synchronized void playSound(String sound, int secs, boolean loop) {
-    //     final String soundName = sound.replace(".wav", "").concat(".wav");
-    //     final int seconds = secs;
-    //     Constants.SoundConstants.playSounds.put(soundName, true);
-    //     new Thread(new Runnable() {
-    //         @Override
-    //         public void run() {
-    //             try {
-    //                 AudioStream audioStream = new AudioStream(getFileFromBin(soundName));
-    //                 AudioPlayer.player.start(audioStream);
-    //                 int i = 0;
-    //                 if(loop) {
-    //                     while(Constants.SoundConstants.playSounds.get(soundName)) {
-    //                         if(i >= seconds) {
-    //                             AudioPlayer.player.stop(audioStream);
-    //                             audioStream = new AudioStream(getFileFromBin(soundName));
-    //                             AudioPlayer.player.start(audioStream);
-    //                             i = 0;
-    //                         }
-    //                         i++;
-    //                         Thread.sleep(1000);
-    //                     }
-    //                 } else {
-    //                     while(i < seconds && Constants.SoundConstants.playSounds.get(soundName)) {
-    //                         i++;
-    //                         Thread.sleep(1000);
-    //                     }
-    //                 }
-    //                 AudioPlayer.player.stop(audioStream);
-    //             } catch(Exception e) {
-    //                 e.printStackTrace();
-    //             }
-    //         }
-    //     }).start();
-
+            @Override
+            public void run() {
+                try {
+            
+                    InputStream stream =  getFileStreamFromBin(sound);
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(getFileFromBin(soundName));
+                    AudioFormat format = audioStream.getFormat();
         
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(audioStream);
+                    if(loop) clip.loop(1000000);
+                    clip.start();
+                    int i = 0;
+                        while((!loop && i < (TimeUnit.MICROSECONDS.toSeconds(clip.getMicrosecondLength())) && SoundConstants.playSounds.get(soundName)) || (loop && SoundConstants.playSounds.get(soundName)) || clip.isActive()) {
+                            i++;
+                            Thread.sleep(1000);
+                        }
 
-    // }
+                    clip.stop();
+                    somethingsPlaying = false;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            
+        }).start();
+
+    }
+    }
 }
