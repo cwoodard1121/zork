@@ -9,6 +9,7 @@ public class Up extends Command {
 
     public Up(String name) {
         super(name);
+        addAlias("u");
     }
 
     @Override
