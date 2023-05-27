@@ -70,7 +70,7 @@ public class Fight {
                                 Game.getGame().getPlayer().setInItemMenu(true);
                             else
                             
-                                text.slowTextSpeed("say WEAPON or ITEM for the menu you want", 7);
+                            text.slowTextSpeed("say WEAPON or ITEM for the menu you want", 7);
                         }
                     
                         Game.getGame().getPlayer().setChoosingMenu(true);
@@ -105,24 +105,28 @@ public class Fight {
                                     }
                                     if(doseRepeat>=2){
                                         playerEffects.remove(location);
-                                        
+                                       
                                     }
                                 }
                                 
                                 int dam = playerEffects.get(i).getDamageChange();
                                 int sped = playerEffects.get(i).getSpeedChange();
                                 if(playerEffects.get(i).getTurn() != playerEffects.get(i).getTurnCount()){
-                                    text.slowTextSpeed("you got the effect " + playerEffects.get(i).getName(), 7);
+                                        text.slowTextSpeed("you got the effect " + playerEffects.get(i).getName(), 7);
                                         playerHealth-=dam;
                                         playerSpeed-=sped;
                                         text.slowTextSpeed("it did " + dam + " Damage", 7);
                                         text.slowTextSpeed("Your speed was lowered by " + sped, 7);
                                         playerEffects.get(i).setTurnCount(playerEffects.get(i).getTurnCount()+1);
                                 }else{
-                                        playerEffects.remove(i);
-                                        text.slowTextSpeed("the effect " + enemyEffects.get(i).getName() + " has stoped", 7);
+                                    text.slowTextSpeed("the effect " + playerEffects.get(i).getName() + " has stoped", 7);
+                                    playerEffects.get(i).setTurn(0);
+                                    playerEffects.remove(i);
+                                       
                                 }
                             }
+
+                            //effect thing above works when it is complette copy it everywhere else
 
                             for (int i = 0; i < enemyEffects.size(); i++) {
                                 if(enemyEffects.get(i).getName().equalsIgnoreCase("placeholder")){
@@ -139,29 +143,30 @@ public class Fight {
                                     }
                                     if(doseRepeat>=2){
                                         enemyEffects.remove(location);
+                                       
                                     }
                                 }
+                                
                                 int dam = enemyEffects.get(i).getDamageChange();
                                 int sped = enemyEffects.get(i).getSpeedChange();
-                                
                                 if(enemyEffects.get(i).getTurn() != enemyEffects.get(i).getTurnCount()){
-                                    text.slowTextSpeed("you dealt the effect " + enemyEffects.get(i).getName(), 7);
-                                    enemyHealth-=dam;
-                                    enemySpeed-=sped;
-                                    text.slowTextSpeed("your effect did " + dam + " Damage to " + enemy.getName(), 7);
-                                    text.slowTextSpeed("the enimes speed was lowered by" + sped, 7);
-                                    enemyEffects.get(i).setTurnCount(enemyEffects.get(i).getTurnCount()+1);
+                                        text.slowTextSpeed("you dealt the effect " + enemyEffects.get(i).getName(), 7);
+                                        enemyHealth-=dam;
+                                        enemySpeed-=sped;
+                                        text.slowTextSpeed("it did " + dam + " Damage", 7);
+                                        text.slowTextSpeed("Their speed was lowered by " + sped, 7);
+                                        enemyEffects.get(i).setTurnCount(enemyEffects.get(i).getTurnCount()+1);
                                 }else{
-                                    enemyEffects.remove(i);
                                     text.slowTextSpeed("the effect " + enemyEffects.get(i).getName() + " has stoped", 7);
+                                    enemyEffects.get(i).setTurn(0);
+                                    enemyEffects.remove(i);
+                                       
                                 }
                             }
-                            
-
                             if(playerSpeed>enemySpeed){
                                 text.slowTextSpeed("You did " + pDamge + " Damage", 7);
                                 enemyHealth -= pDamge;
-                                text.slowTextSpeed(enemy.getName() + " did " + pDamge + " Damage", 7);
+                                text.slowTextSpeed(enemy.getName() + " did " + eDamage + " Damage", 7);
                                 playerHealth -= eDamage;
                                 if(enemyHealth<=0){
                                     text.slowTextSpeed(enemy.getName() + " Died! YOU WIN!!!", 7);
@@ -207,15 +212,30 @@ public class Fight {
                                 playerHealth += item.getEffect().getHealth();
                                 playerSpeed += item.getEffect().getSpeedChange();
                                 text.slowTextSpeed("health up by " + item.getEffect().getHealth() + " and speed went up by " + item.getEffect().getSpeedChange(), 7);
-                                text.slowTextSpeed("changes happen", 7);
                                 for (int i = 0; i < Game.getGame().getPlayer().getInventory().getItems().size(); i++) {
                                     if(item.getName().equals(Game.getGame().getPlayer().getInventory().getItems().get(i).getName())){
                                         Game.getGame().getPlayer().getInventory().getItems().remove(i);
-                                        text.slowTextSpeed("removed item", 7);
                                     }
                                 }
+
+                                int ran2 = (int)(Math.random()*enemy.getInventory().getWeapons().size());
+                                Weapon eWeapon = enemy.getInventory().getWeapons().get(ran2); 
+                                int eDamage = eWeapon.getDamage();
+                                text.slowTextSpeed(enemy.getName() + " used" + " " + eWeapon.getName(), 7);
+
+                                text.slowTextSpeed(enemy.getName() + " did " + eDamage + " Damage", 7);
+                                playerHealth -= eDamage;
+                                if(playerHealth<= 0){
+                                    text.slowTextSpeed(enemy.getName() + " Won! YOU DIED!!!", 7);
+                                    Game.getGame().getPlayer().gameOver();
+                                    Game.getGame().getPlayer().setInFight(false);
+                                    return false;
+                                }
+                                
+                                text.slowTextSpeed(Game.getGame().getPlayer().getName() + " has " + playerHealth + " health remaining", 7);
+                                text.slowTextSpeed(enemy.getName() + " has " + enemyHealth + " health remaining", 7);
                             }else{
-                                text.slowTextSpeed("you dont have an item", 7);
+                                text.slowTextSpeed("you dont have an item avaliable (should have visited a tims...)", 7);
                             }
 
                         }
@@ -225,7 +245,7 @@ public class Fight {
                     Game.getGame().getPlayer().setChoosingMenu(true);
                 }
             } catch (Exception e) {
-              System.out.println("this happens because of try and catch");
+              System.out.println("error occured ");
                 return false;
             }
                 
@@ -241,9 +261,7 @@ public class Fight {
         Graphics text = new Graphics(Game.getGame());
         Game.getGame().getPlayer().setInItemMenu(true);
         ArrayList<Item> arr = Game.getGame().getPlayer().getInventory().getItemsWithEffects();
-        
-    
-        
+
         while(true){
             if(Game.getGame().getPlayer().getInventory().getItemsWithEffects().size()>=1){
                 text.slowTextSpeed("What item do you want to use?", 7);

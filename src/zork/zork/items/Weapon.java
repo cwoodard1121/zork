@@ -7,7 +7,7 @@ public class Weapon extends Item {
     private int weight;
     private boolean isOpenable;
     private int damage;
-    private Effects effect;
+
   
     
 
@@ -27,8 +27,8 @@ public class Weapon extends Item {
 
 
     public Effects getEffect() {
-        if (effect != null) {
-            return effect;
+        if (super.getEffect() != null) {
+            return super.getEffect();
         }else{
             return new Effects("placeholder", 0, 0, 0, 0);
         }
@@ -38,7 +38,7 @@ public class Weapon extends Item {
     }
 
     public void setEffect(Effects effect) {
-        this.effect = effect;
+        super.setEffect(effect);
     }
 
     public int getWeight() {

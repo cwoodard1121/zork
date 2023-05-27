@@ -9,6 +9,7 @@ public class Effects {
     private int health;
     private int turn;
     private int turnCount;
+
    
 
     public Effects(String name, int turn, int damage, int speed, int health){
@@ -17,6 +18,7 @@ public class Effects {
         this.damage = damage;
         this.speed = speed;
         this.health = health;
+
     }
 
     public String getName() {
@@ -62,6 +64,8 @@ public class Effects {
     public void setHealth(int health) {
         this.health = health;
     }
+
+
 
 
     

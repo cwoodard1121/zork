@@ -67,5 +67,9 @@ public class Item extends OpenableObject {
     this.isWeapon = isWeapon;
   }
 
+  public void setEffect(Effects effect) {
+    Effect = effect;
+  }
+
 
 }
