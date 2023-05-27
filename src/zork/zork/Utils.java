@@ -248,8 +248,8 @@ public static class SoundHandler {
         /**
          * add file names here
          */
-        songQueueTemplate.add("house_of_the_rising_sun.wav");
         songQueueTemplate.add("omission.wav");
+        songQueueTemplate.add("house_of_the_rising_sun.wav");
         songQueueTemplate.add("american_pie.wav");
         songQueueTemplate.add("stairway_to_heaven.wav");
         radioPlayerThread.start();
