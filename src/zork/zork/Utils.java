@@ -15,8 +15,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioInputStream;
@@ -286,7 +284,7 @@ public static class SoundHandler {
         
                     Clip clip = AudioSystem.getClip();
                     clip.open(audioStream);
-                    if(loop) clip.loop(1000000);
+                    if(loop) clip.loop(Clip.LOOP_CONTINUOUSLY);
                     clip.start();
                     int i = 0;
                         while((!loop && i < (TimeUnit.MICROSECONDS.toSeconds(clip.getMicrosecondLength())) && SoundConstants.playSounds.get(soundName)) || (loop && SoundConstants.playSounds.get(soundName)) || clip.isActive() && SoundConstants.playSounds.get(soundName)) {
