@@ -125,6 +125,7 @@ public class Fight {
                                     text.slowTextSpeed("the effect " + playerEffects.get(i).getName() + " has stoped", 7);
                                     playerEffects.get(i).setTurn(0);
                                     playerEffects.remove(i);
+                                    i = 0;
                                        
                                 }
                             }
@@ -163,7 +164,7 @@ public class Fight {
                                     text.slowTextSpeed("the effect " + enemyEffects.get(i).getName() + " has stoped", 7);
                                     enemyEffects.get(i).setTurn(0);
                                     enemyEffects.remove(i);
-                                       
+                                    i = 0;   
                                 }
                             }
                             if(playerSpeed>enemySpeed){
@@ -224,7 +225,46 @@ public class Fight {
                                 int ran2 = (int)(Math.random()*enemy.getInventory().getWeapons().size());
                                 Weapon eWeapon = enemy.getInventory().getWeapons().get(ran2); 
                                 int eDamage = eWeapon.getDamage();
+
+
                                 text.slowTextSpeed(enemy.getName() + " used" + " " + eWeapon.getName(), 7);
+                                playerEffects.add(eWeapon.getEffect());
+                                for (int i = 0; i < playerEffects.size(); i++) {
+                                    if(playerEffects.get(i).getName().equalsIgnoreCase("placeholder")){
+                                        playerEffects.remove(i);
+                                        continue;
+                                    }else{
+                                        int doseRepeat = 0;
+                                        int location = 0;
+                                        for(int y = 0; y<playerEffects.size(); y++){
+                                            if(playerEffects.get(y).getName().equals(playerEffects.get(i).getName())){
+                                                doseRepeat++;
+                                                location = y;
+                                            }
+                                        }
+                                        if(doseRepeat>=2){
+                                            playerEffects.remove(location);
+                                        
+                                        }
+                                    }
+                                    
+                                    int dam = playerEffects.get(i).getDamageChange();
+                                    int sped = playerEffects.get(i).getSpeedChange();
+                                    if(playerEffects.get(i).getTurn() != playerEffects.get(i).getTurnCount()){
+                                            text.slowTextSpeed("you got the effect " + playerEffects.get(i).getName(), 7);
+                                            playerHealth-=dam;
+                                            playerSpeed-=sped;
+                                            text.slowTextSpeed("it did " + dam + " Damage", 7);
+                                            text.slowTextSpeed("Your speed was lowered by " + sped, 7);
+                                            playerEffects.get(i).setTurnCount(playerEffects.get(i).getTurnCount()+1);
+                                    }else{
+                                        text.slowTextSpeed("the effect " + playerEffects.get(i).getName() + " has stoped", 7);
+                                        playerEffects.get(i).setTurn(0);
+                                        playerEffects.remove(i);
+                                        
+                                    }
+                                }
+
 
                                 text.slowTextSpeed(enemy.getName() + " did " + eDamage + " Damage", 7);
                                 playerHealth -= eDamage;
