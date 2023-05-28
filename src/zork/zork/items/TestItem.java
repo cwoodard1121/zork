@@ -1,14 +1,14 @@
 package zork.items;
 
-import zork.Effects;
+import zork.Effect;
 import zork.Item;
 public class TestItem extends Item {
     private int weight;
     private String name;
     private boolean isOpenable;
     private int damage;
-    private Effects effect;
-    public TestItem(int weight, String name, boolean isOpenable, Effects effect) {
+    private Effect effect;
+    public TestItem(int weight, String name, boolean isOpenable, Effect effect) {
         super(weight, name, isOpenable, effect, false);
         this.isOpenable = false;
         this.effect = effect;
@@ -38,10 +38,10 @@ public class TestItem extends Item {
     public void setDamage(int damage) {
         this.damage = damage;
     }
-    public Effects getEffect() {
+    public Effect getEffect() {
         return effect;
     }
-    public void setEffect(Effects effect) {
+    public void setEffect(Effect effect) {
         this.effect = effect;
     }
 }

@@ -15,7 +15,7 @@ public class Inventory {
     this.currentWeight = 0;
   }
 
-  
+
   public ArrayList<Item> getItems() {
     return this.items;
   }
@@ -68,11 +68,11 @@ public class Inventory {
   }
 
   public ArrayList<Item> getItemsWithEffects(){
-    //ONLY USE THIS WITH ITEMS THAT CAN BE USED IN A FIGHT
+    // ONLY USE THIS WITH ITEMS THAT CAN BE USED IN A FIGHT
     ArrayList<Item> arr = new ArrayList<Item>();
     for (int i = 0; i < items.size(); i++) {
         try {
-          if(items.get(i).getEffect() instanceof Effects && !items.get(i).isWeapon()){
+          if(items.get(i).getEffect() instanceof Effect && !items.get(i).isWeapon()){
            
             arr.add(items.get(i));
           }
