@@ -226,14 +226,18 @@ public static class SoundHandler {
 
     }
 
+    public static void addToPlaylist(String song) {
+        songQueueTemplate.add(song);
+    }
+
     static {
         /**
          * add file names here
          */
-        songQueueTemplate.add("omission.wav");
-        songQueueTemplate.add("house_of_the_rising_sun.wav");
-        songQueueTemplate.add("american_pie.wav");
-        songQueueTemplate.add("stairway_to_heaven.wav");
+        addToPlaylist("omission.wav");
+        addToPlaylist("house_of_the_rising_sun.wav");
+        addToPlaylist("american_pie.wav");
+        addToPlaylist("stairway_to_heaven.wav");
         songQueue = songQueueTemplate;
         radioPlayerThread.start();
 
@@ -301,5 +305,5 @@ public static class SoundHandler {
         }).start();
 
     }
-    }
+}
 }

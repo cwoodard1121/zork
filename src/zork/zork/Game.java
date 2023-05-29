@@ -16,7 +16,10 @@ import datatypes.CommandNotFoundException;
 import datatypes.Location;
 import zork.Constants.PlayerConstants;
 import zork.Utils.SoundHandler;
+import zork.entites.Enemy;
 import zork.entites.Player;
+import zork.items.Weapon;
+import java.lang.Runnable;
 
 public class Game {
 
@@ -178,6 +181,20 @@ public class Game {
       final Room bayviewGlen3rdFloorWestPrepStairwayHallway = new Room ("Placeholder Description for bayviewGlen3rdFloorWestPrepStairwayHallway", "bayviewglen3rdfloorwestprepstairwayhallway"); roomMap.put(bayviewGlen3rdFloorWestPrepStairwayHallway.getRoomName(), bayviewGlen3rdFloorWestPrepStairwayHallway);
       final Room bayviewGlen3rdFloorEastPrepStairwayHallway = new Room ("Placeholder Description for bayviewGlen3rdFloorEast'PrepStairwayHallway", "bayviewglen3rdflooreastprepstairwayhallway"); roomMap.put(bayviewGlen3rdFloorEastPrepStairwayHallway.getRoomName(), bayviewGlen3rdFloorEastPrepStairwayHallway);
       final Room bayviewGlenG9CommonArea = new Room ("Placeholder Description for bayviewGlenG9CommonArea", "bayviewgleng9commonarea"); roomMap.put(bayviewGlenG9CommonArea.getRoomName(), bayviewGlenG9CommonArea);
+      Inventory meatBall = new Inventory(5);
+      meatBall.addItem(new Weapon(3, "Fork", false, 10, null));
+      final Enemy cyrus_meatball = new Enemy(null, bayviewGlenG9CommonArea, Constants.PlayerConstants.DEFAULT_HEALTH * 2,meatBall , 0, "Meatball");
+      bayviewGlenG9CommonArea.addEnemies(cyrus_meatball);
+      bayviewGlenG9CommonArea.setRunnable(new Runnable() {
+
+        @Override
+        public void run() {
+          System.out.println("Meatball is in the way of cyrus's locker. ");
+          Fight f = new Fight(cyrus_meatball);
+          f.fight();
+        }
+        
+      });
       final Room bayviewGlenOutsideStaircase = new Room ("Placeholder Description for bayviewGlenOutsideStaircase", "bayviewglenoutsidestaircase"); roomMap.put(bayviewGlenOutsideStaircase.getRoomName(), bayviewGlenOutsideStaircase);
       final Room bayviewGlenOutsideWest = new Room ("Placeholder Description for bayviewGlenOutsideWest", "bayviewglenoutsidewest"); roomMap.put(bayviewGlenOutsideWest.getRoomName(), bayviewGlenOutsideWest);
       final Room bayviewGlenMusicRoom = new Room ("Placeholder Description for bayviewGlenMusicRoom", "bayviewglenmusicroom"); roomMap.put(bayviewGlenMusicRoom.getRoomName(), bayviewGlenMusicRoom);
@@ -476,6 +493,8 @@ public class Game {
       e.printStackTrace();
     }
     this.player.setCurrentRoom(roomMap.get("bayviewglenlobby"));
+    this.player.getInventory().addItem(new Weapon(5, "Big Rock", false, 5, 
+      new Effect("Bleeding", 2, 2, 5, 0)));
     try {
       player.getCurrentRoom().printAscii();
     } catch (IOException e) {
