@@ -493,6 +493,8 @@ public class Game {
       e.printStackTrace();
     }
     this.player.setCurrentRoom(roomMap.get("bayviewglenlobby"));
+    this.player.getInventory().addItem(new Weapon(5, "Big Rock", false, 5, 
+      new Effect("Bleeding", 2, 2, 5, 0)));
     try {
       player.getCurrentRoom().printAscii();
     } catch (IOException e) {
