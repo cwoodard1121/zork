@@ -18,8 +18,8 @@ public class Fight {
     private int enemySpeed;
                             
                         
-    private ArrayList<Effects> playerEffects;
-    private ArrayList<Effects> enemyEffects;
+    private ArrayList<Effect> playerEffect;
+    private ArrayList<Effect> enemyEffect;
 
     public Fight(Enemy bad){
         this.enemy = bad;
@@ -66,8 +66,8 @@ public class Fight {
                         enemySpeed = enemy.getSpeed();
                             
                         
-                         playerEffects = new ArrayList<>();
-                         enemyEffects  = new ArrayList<>();
+                         playerEffect = new ArrayList<>();
+                         enemyEffect  = new ArrayList<>();
                 while (true){      
                         
                     
@@ -121,8 +121,8 @@ public class Fight {
         text.slowTextSpeed(enemy.getName() + " used" + " " + eWeapon.getName(), 7);
         playerHealth-= eDamage;
         text.slowTextSpeed("they did " + eDamage + " Damage", 7);
-        playerEffects.add(eWeapon.getEffect());
-        computeEffects(false);
+        playerEffect.add(eWeapon.getEffect());
+        computeEffect(false);
 
         }catch (Exception e){
             System.out.println("error happened");
@@ -151,8 +151,8 @@ public class Fight {
                 text.slowTextSpeed(Game.getGame().getPlayer().getName() + " used" + " " + pWeapon.getName(), 7);
                 enemyHealth -= pDamge;
                 text.slowTextSpeed("You did " + pDamge + " Damage", 7);
-                enemyEffects.add(pWeapon.getEffect());
-                computeEffects(true);
+                enemyEffect.add(pWeapon.getEffect());
+                computeEffect(true);
             }else{
                 Item item = askItem();
                 if(item != null){
@@ -176,54 +176,54 @@ public class Fight {
     }
 
 
-    private void computeEffects(boolean isForEnemy) {
+    private void computeEffect(boolean isForEnemy) {
         try {
         if(isForEnemy){
-            for (int i = 0; i < enemyEffects.size(); i++) {
-                if(enemyEffects.get(i) == null){
-                    enemyEffects.remove(i);
+            for (int i = 0; i < enemyEffect.size(); i++) {
+                if(enemyEffect.get(i) == null){
+                    enemyEffect.remove(i);
                     i = 0;
                     continue;
                 }else{
-                    enemyEffects = removeRepeats(enemyEffects);
-                    int dam = enemyEffects.get(i).getDamageChange();
-                    int sped = enemyEffects.get(i).getSpeedChange();
-                    if(enemyEffects.get(i).getTurn() != enemyEffects.get(i).getTurnCount()){
-                        text.slowTextSpeed("you dealt the effect " + enemyEffects.get(i).getName(), 7);
+                    enemyEffect = removeRepeats(enemyEffect);
+                    int dam = enemyEffect.get(i).getDamageChange();
+                    int sped = enemyEffect.get(i).getSpeedChange();
+                    if(enemyEffect.get(i).getTurn() != enemyEffect.get(i).getTurnCount()){
+                        text.slowTextSpeed("you dealt the effect " + enemyEffect.get(i).getName(), 7);
                         enemyHealth-=dam;
                         enemySpeed-=sped;
                         text.slowTextSpeed("it did " + dam + " Damage", 7);
                         text.slowTextSpeed("Their speed was lowered by " + sped, 7);
-                        enemyEffects.get(i).setTurnCount(enemyEffects.get(i).getTurnCount()+1);
+                        enemyEffect.get(i).setTurnCount(enemyEffect.get(i).getTurnCount()+1);
                     }else{
-                        text.slowTextSpeed("the effect " + enemyEffects.get(i).getName() + " has stoped", 7);
-                        enemyEffects.get(i).setTurn(0);
-                        enemyEffects.remove(i);
+                        text.slowTextSpeed("the effect " + enemyEffect.get(i).getName() + " has stoped", 7);
+                        enemyEffect.get(i).setTurn(0);
+                        enemyEffect.remove(i);
                     }
 
                 }
             }
         }else{
-            for (int i = 0; i < playerEffects.size(); i++) {
-                if(playerEffects.get(i) == null){
-                    playerEffects.remove(i);
+            for (int i = 0; i < playerEffect.size(); i++) {
+                if(playerEffect.get(i) == null){
+                    playerEffect.remove(i);
                     i = 0;
                     continue;
                 }else{
-                    playerEffects = removeRepeats(playerEffects);
-                    int dam = playerEffects.get(i).getDamageChange();
-                    int sped = playerEffects.get(i).getSpeedChange();
-                    if(playerEffects.get(i).getTurn() != playerEffects.get(i).getTurnCount()){
-                        text.slowTextSpeed("you have the effect " + playerEffects.get(i).getName(), 7);
+                    playerEffect = removeRepeats(playerEffect);
+                    int dam = playerEffect.get(i).getDamageChange();
+                    int sped = playerEffect.get(i).getSpeedChange();
+                    if(playerEffect.get(i).getTurn() != playerEffect.get(i).getTurnCount()){
+                        text.slowTextSpeed("you have the effect " + playerEffect.get(i).getName(), 7);
                         playerHealth-=dam;
                         playerSpeed-=sped;
                         text.slowTextSpeed("it did " + dam + " Damage", 7);
                         text.slowTextSpeed("your speed was lowered by " + sped, 7);
-                        playerEffects.get(i).setTurnCount(playerEffects.get(i).getTurnCount()+1);
+                        playerEffect.get(i).setTurnCount(playerEffect.get(i).getTurnCount()+1);
                     }else{
-                        text.slowTextSpeed("the effect " + playerEffects.get(i).getName() + " has stoped", 7);
-                        playerEffects.get(i).setTurn(0);
-                        playerEffects.remove(i);
+                        text.slowTextSpeed("the effect " + playerEffect.get(i).getName() + " has stoped", 7);
+                        playerEffect.get(i).setTurn(0);
+                        playerEffect.remove(i);
                     }
 
                 }
@@ -239,25 +239,25 @@ public class Fight {
     }
 
 
-    private ArrayList<Effects> removeRepeats(ArrayList<Effects> Effects) {
-        for (int i = 0; i < Effects.size(); i++) {
+    private ArrayList<Effect> removeRepeats(ArrayList<Effect> Effect) {
+        for (int i = 0; i < Effect.size(); i++) {
             
                 int doseRepeat = 0;
                 int location = 0;
-                for(int y = 0; y<Effects.size(); y++){
-                    if(Effects.get(y).getName().equals(Effects.get(i).getName())){
+                for(int y = 0; y<Effect.size(); y++){
+                    if(Effect.get(y).getName().equals(Effect.get(i).getName())){
                         doseRepeat++;
                         location = y;
                     }
                 }
                 if(doseRepeat>=2){
-                    Effects.remove(location);
+                    Effect.remove(location);
                    
                 }
         
         }
 
-        return Effects;
+        return Effect;
 
     }
 
@@ -295,7 +295,7 @@ public class Fight {
         }
         } catch (Exception e) {
             // TODO: handle exception
-            return new Item(0, null, false, null, null);
+            return new Item(0, null, false, null, false);
         }
 
         

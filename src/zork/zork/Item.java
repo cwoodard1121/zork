@@ -5,17 +5,25 @@ public class Item extends OpenableObject {
   private String name;
   private boolean isOpenable;
   private double id;
-  private Effects Effect;
-  private boolean isWeapon;
+  private Effect Effect;
+  private boolean isWeapon = false;
 
   
 
+<<<<<<< HEAD
   public Item(int weight, String name, boolean isOpenable, zork.Effect effect2, Boolean isWeapon) {
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
     this.Effect = effect2;
+=======
+  public Item(int weight, String name, boolean isOpenable, Effect Effect, boolean isWeapon) {
+    this.weight = weight;
+    this.name = name;
+    this.isOpenable = isOpenable;
+>>>>>>> f6abf53c41ea614e94b5d19d83fcf529087df96e
     this.isWeapon = isWeapon;
+    this.Effect = Effect;
     this.id = (Math.random() * (Integer.MAX_VALUE - 1));
   }
 
@@ -24,11 +32,11 @@ public class Item extends OpenableObject {
       System.out.println("The " + name + " cannot be opened.");
 
   }
-  public Effects getEffect() {
+  public Effect getEffect() {
       return Effect;
     }
 
-    public void setUsedInAFight(Effects Effect) {
+    public void setUsedInAFight(Effect Effect) {
       this.Effect = Effect;
     }
   public double getId() {
@@ -67,7 +75,7 @@ public class Item extends OpenableObject {
     this.isWeapon = isWeapon;
   }
 
-  public void setEffect(Effects effect) {
+  public void setEffect(Effect effect) {
     Effect = effect;
   }
 

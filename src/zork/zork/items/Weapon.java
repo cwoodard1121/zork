@@ -28,11 +28,7 @@ public class Weapon extends Item {
         if (super.getEffect() != null) {
             return super.getEffect();
         }else{
-<<<<<<< HEAD
-            return null;
-=======
             return new Effect("placeholder", 0, 0, 0, 0);
->>>>>>> edb7d07845f70cab0f6e6bf080957e91763b5b20
         }
             
        
