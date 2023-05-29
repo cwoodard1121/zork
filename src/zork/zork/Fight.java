@@ -101,7 +101,7 @@ public class Fight {
                 }
                 
             } catch (Exception e) {
-              System.out.println("error occured ");
+                e.printStackTrace();
                 return false;
             }
                 
@@ -125,7 +125,7 @@ public class Fight {
         computeEffect(false);
 
         }catch (Exception e){
-            System.out.println("error happened");
+            e.printStackTrace();
         }
     }
 
@@ -171,7 +171,7 @@ public class Fight {
 
             }
         } catch (Exception e) {
-        System.out.println("error happened");
+            e.printStackTrace();
         }
     }
 
