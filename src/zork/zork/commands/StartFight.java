@@ -27,7 +27,7 @@ public class StartFight extends Command {
         Fight test = new Fight(tester);
         Game.getGame().getPlayer().getInventory().addItem(new Item(0, "health pot", false, new Effect("health up", 0, 0, 2, 12), false));
         Game.getGame().getPlayer().getInventory().addItem(new Weapon(0, "Diamond Pick", false, 5, null));
-        Game.getGame().getPlayer().getInventory().addItem(new Weapon(0, "Big Stone", false, 5, new Effects("Bleeding", 1, 3, 0, 0)));
+        Game.getGame().getPlayer().getInventory().addItem(new Weapon(0, "Big Stone", false, 5, new Effect("Bleeding", 1, 3, 0, 0)));
         test.fight();
         return Game.isTesting ? "done" : "";
     }
