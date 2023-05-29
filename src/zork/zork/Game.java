@@ -152,8 +152,23 @@ public class Game {
 
       //BAYVIEW GLEN INDEPENDENT SCHOOL ROOMS
  
-      
+      final boolean[] hasEnteredLobby = new boolean[]{false};
       final Room bayviewGlenLobby = new Room ("Placeholder Description for bayviewGlenLobby", "bayviewglenlobby"); roomMap.put(bayviewGlenLobby.getRoomName(), bayviewGlenLobby); // north exit outside for later looking south when walking in
+      bayviewGlenLobby.setRunnable(new Runnable(){
+
+        @Override
+        public void run() {
+          if (!hasEnteredLobby[0]) {
+            hasEnteredLobby[0] = true;
+            try {
+              renderer.showCutScene(1500, "\\bin\\zork\\data\\bayviewglencyruscall.txt");
+            } catch (Exception e) {
+              handleException(e);
+            }
+          }
+        }
+        
+      });
       final Room bayviewGlenOutsideLobby = new Room ("Placeholder Description for bayviewGlenOutsideLobby", "bayviewglenoutsidelobby"); roomMap.put(bayviewGlenOutsideLobby.getRoomName(), bayviewGlenOutsideLobby);
       final Room bayviewGlenHallwayCafeteria = new Room ("Placeholder Description for bayviewGlenHallwayCafeteria", "bayviewglenhallwaycafeteria"); roomMap.put(bayviewGlenHallwayCafeteria.getRoomName(), bayviewGlenHallwayCafeteria); // to the east from lobby
       final Room bayviewGlenHallwayPrepGym = new Room("Placeholder Description for bayviewGlenHallwayPrepGym", "bayviewglenhallwayprepgym"); roomMap.put(bayviewGlenHallwayPrepGym.getRoomName(), bayviewGlenHallwayPrepGym);
