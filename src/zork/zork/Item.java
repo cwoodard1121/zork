@@ -10,11 +10,11 @@ public class Item extends OpenableObject {
 
   
 
-  public Item(int weight, String name, boolean isOpenable, Effects Effect, Boolean isWeapon) {
+  public Item(int weight, String name, boolean isOpenable, zork.Effect effect2, Boolean isWeapon) {
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
-    this.Effect = Effect;
+    this.Effect = effect2;
     this.isWeapon = isWeapon;
     this.id = (Math.random() * (Integer.MAX_VALUE - 1));
   }
