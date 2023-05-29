@@ -27,6 +27,9 @@ public class Fight {
     }
     
    
+    /**
+     * Main fight method.
+     */
     public void fight(){
         Game.getGame().getPlayer().setChoosingMenu(false);
         Game.getGame().getPlayer().setInFight(true);     
@@ -49,6 +52,9 @@ public class Fight {
 
 
 
+    /**
+     * @return Whether the player wins the fight
+     */
     private boolean fightingResults() {
 
         try {
@@ -326,7 +332,7 @@ public class Fight {
         }
         
         }else{
-            return new Weapon(0, "no weapon", false, 0, new Effects("no effect", 0, 0, 0, 0));
+            return new Weapon(0, "no weapon", false, 0, new Effect("no effect", 0, 0, 0, 0));
         }
 
         } catch (Exception e) {

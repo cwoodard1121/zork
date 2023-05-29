@@ -1,6 +1,6 @@
 package zork.items;
 
-import zork.Effects;
+import zork.Effect;
 import zork.Item;
 
 public class Weapon extends Item {
@@ -12,7 +12,7 @@ public class Weapon extends Item {
 
     
 
-    public Weapon(int weight, String name, boolean isOpenable, int damage, Effects effect){
+    public Weapon(int weight, String name, boolean isOpenable, int damage, Effect effect){
         super(weight, name, isOpenable, effect, true);
         this.damage = damage;
        
@@ -24,18 +24,22 @@ public class Weapon extends Item {
     }
 
 
-    public Effects getEffect() {
+    public Effect getEffect() {
         if (super.getEffect() != null) {
             return super.getEffect();
         }else{
+<<<<<<< HEAD
             return null;
+=======
+            return new Effect("placeholder", 0, 0, 0, 0);
+>>>>>>> edb7d07845f70cab0f6e6bf080957e91763b5b20
         }
             
        
         
     }
 
-    public void setEffect(Effects effect) {
+    public void setEffect(Effect effect) {
         super.setEffect(effect);
     }
 

@@ -22,7 +22,7 @@ public class Up extends Command {
                 return e.getAdjacentRoom().getDescription();
             }
         } catch (Exception exception) {
-            return "ya done goofed";
+            return "Graphics Could not load \n" + e.getAdjacentRoom().getDescription();
         } 
             }
             return "There is no room above you";

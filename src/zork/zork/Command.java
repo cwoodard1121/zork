@@ -14,11 +14,19 @@ public class Command {
     this.name = name;
   }
 
+  /**
+   * Adds an alias to this command.
+   * @param The name to be added as an alias.
+   */
   public Command addAlias(String name) {
     aliases.add(name);
     return this;
   }
 
+  /**
+   * Gets all aliases for this command.
+   * @return The aliases.
+   */
   public ArrayList<String> getAliases() {
     return aliases;
   }
@@ -33,12 +41,15 @@ public class Command {
    * 
    * @param args
    * @return Console otuput
- * @throws InterruptedException
+   * @throws InterruptedException
    */
   public String runCommand(String... args) throws InterruptedException  {
     return "Invalid command: " + name;
   }
 
+  /**
+   * @return name of Command
+   */
   public String getName() {
     return name;
   }
