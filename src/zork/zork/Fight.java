@@ -298,7 +298,7 @@ public class Fight {
         }
         } catch (Exception e) {
             // TODO: handle exception
-            return new Item(0, null, false, null, null);
+            return new Item(0, null, false, null, false);
         }
 
         
