@@ -17,6 +17,9 @@ public class Fight {
     }
     
    
+    /**
+     * Main fight method.
+     */
     public void fight(){
         Game.getGame().getPlayer().setChoosingMenu(false);
         Game.getGame().getPlayer().setInFight(true);     
@@ -47,6 +50,9 @@ public class Fight {
 
 
 
+    /**
+     * @return Whether the player wins the fight
+     */
     private boolean fightingResults() {
 
         try {
@@ -60,8 +66,8 @@ public class Fight {
                         int enemySpeed = enemy.getSpeed();
                             
                         
-                        ArrayList<Effects> playerEffects = new ArrayList<>();
-                        ArrayList<Effects> enemyEffects  = new ArrayList<>();
+                        ArrayList<Effect> playerEffects = new ArrayList<>();
+                        ArrayList<Effect> enemyEffects  = new ArrayList<>();
                 while (true){      
                         text.slowTextSpeed("Do you want to use a WEAPON or a ITEM (for now u cant go back)", 7);
                         
@@ -329,7 +335,7 @@ public class Fight {
         }
         
         }else{
-            return new Weapon(0, "no weapon", false, 0, new Effects("no effect", 0, 0, 0, 0));
+            return new Weapon(0, "no weapon", false, 0, new Effect("no effect", 0, 0, 0, 0));
         }
 
         } catch (Exception e) {

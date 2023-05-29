@@ -4,7 +4,7 @@ package zork.enemies;
 import zork.entites.Enemy;
 import zork.items.Weapon;
 import datatypes.Location;
-import zork.Effects;
+import zork.Effect;
 import zork.Inventory;
 import zork.Room;
 import zork.Constants.EntityConstants;
@@ -20,7 +20,7 @@ public class ExampleEnemy extends Enemy {
         // Room notRealRoom = new Room();
         // setCurrentRoom(notRealRoom);
      
-        Weapon glove = new Weapon( 10, "dirty gloves", false, 2, new Effects("Poison", 2, 4, 1, 0));
+        Weapon glove = new Weapon( 10, "dirty gloves", false, 2, new Effect("Poison", 2, 4, 1, 0));
         Inventory i = new Inventory(EntityConstants.MAX_INVENTORY_WEIGHT);
         i.addItem(glove);
         setInventory(i);

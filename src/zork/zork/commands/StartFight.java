@@ -2,7 +2,7 @@ package zork.commands;
 
 import datatypes.Location;
 import zork.Command;
-import zork.Effects;
+import zork.Effect;
 import zork.Fight;
 import zork.Game;
 import zork.Item;
@@ -24,7 +24,7 @@ public class StartFight extends Command {
        
         Enemy tester = new ExampleEnemy(new Location(0, 0), new Room(), 30, null, 0, 10, "homless");
         Fight test = new Fight(tester);
-        Game.getGame().getPlayer().getInventory().addItem(new Item(0, "health pot", false, new Effects("health up", 0, 0, 2, 12), false));
+        Game.getGame().getPlayer().getInventory().addItem(new Item(0, "health pot", false, new Effect("health up", 0, 0, 2, 12), false));
         Game.getGame().getPlayer().getInventory().addItem(new Weapon(0, "Diamond Pick", false, 5, null));
         test.fight();
         return Game.isTesting ? "done" : "";
