@@ -124,6 +124,9 @@ public class Player extends Entity {
             System.out.println("Unscheduled maintainence has been scheduled. Come back later.");
             return;
         }
+        if(r.hasRunnable()) {
+            r.getRunnable().run();
+        }
         super.setCurrentRoom(r);
     } 
 
