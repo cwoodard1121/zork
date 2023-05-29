@@ -191,7 +191,11 @@ public class Game {
         public void run() {
           System.out.println("Meatball is in the way of cyrus's locker. ");
           Fight f = new Fight(cyrus_meatball);
-          f.fight();
+          boolean won = f.fight();
+          if(won) {
+            Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(cyrus_meatball);
+          }
+
         }
         
       });
