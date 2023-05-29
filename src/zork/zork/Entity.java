@@ -3,7 +3,7 @@ package zork;
 
 import datatypes.Location;
 
-public class Entity {
+public abstract class Entity {
     private Location location;
     private Room currentRoom;
     private int health;

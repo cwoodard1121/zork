@@ -16,11 +16,16 @@ public class Room {
   private ArrayList<Exit> exits = new ArrayList<>();
   private boolean isSubway;
   private String displayName;
+  private Runnable onEnter;
   private boolean isLocked = false;
 
 
   public boolean isLocked() {
     return this.isLocked;
+  }
+
+  public void onEnter() {
+    onEnter.run();
   }
 
   public void setLocked(boolean isLocked) {
@@ -45,6 +50,18 @@ public class Room {
 
   public void addEnemies(Enemy enemie) {
       enemies.add(enemie);
+  }
+
+  public void setRunnable(Runnable r) {
+    this.onEnter = r;
+  }
+
+  public Runnable getRunnable() {
+    return this.onEnter;
+  }
+
+  public boolean hasRunnable() {
+    return !(this.onEnter == null);
   }
 
   /**
