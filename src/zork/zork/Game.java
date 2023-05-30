@@ -124,6 +124,12 @@ public class Game {
       final Room ___it_keeps = new Room("Please leave it alone. It does not like to be disturbed.", "itkeeps"); roomMap.put(___it_keeps.getRoomName(), ___it_keeps);
       final Room pleaseLEAVE = new Room("LEAVE THIS PLaCE**. nOW!!","leave"); roomMap.put(pleaseLEAVE.getRoomName(), pleaseLEAVE);
       final Room theEnd = new Room("...Stay for a while", "theend"); roomMap.put(theEnd.getRoomName(), theEnd);
+      final Room stClairStation = new Room("you stand in the main lobby of St. Clair Station.", "stclairstation"); roomMap.put(stClairStation.getRoomName(), stClairStation);
+      final Room mcDonalds = new Room("You walk into the cramped subway station McDonald's", "mcdonalds"); roomMap.put(mcDonalds.getRoomName(), mcDonalds);
+      final Room stClairAvenue = new Room("You are outside of the station and are facing the slighlty less halted traffic.", "stclairavenue"); roomMap.put(stClairAvenue.getRoomName(), stClairAvenue);
+      final Room stClairAndYonge = new Room("You are on the southeast corner of the St. Clair and Yonge intersection.", "stclairandyonge"); roomMap.put(stClairAndYonge.getRoomName(), stClairAndYonge);
+      final Room bucaRestaurant = new Room("You are on the north side of St. CLair Avenue West, just outside the restaurant 'Buca'.", "bucarestaurant"); roomMap.put(bucaRestaurant.getRoomName(), bucaRestaurant);
+      final Room genericCorporateBuilding = new Room("You stand outside of a towering corporate building, fancy looking people with briefcases walk by.", "genericCorporateBuilding"); 
 
       //SUMMER HILL DEAD END ROOM
 
@@ -437,6 +443,16 @@ public class Game {
       final Exit stClairSubwayExitUp = new Exit("U", stClairSubway); ___it_keeps.addExit(stClairSubwayExitUp);
       final Exit pleaseLEAVEExitDown = new Exit("D", pleaseLEAVE); ___it_keeps.addExit(pleaseLEAVEExitDown);
       final Exit theEndExitDown = new Exit("D", theEnd); pleaseLEAVE.addExit(theEndExitDown);
+      final Exit stClairStationExitUp = new Exit("U", stClairStation); stClairSubway.addExit(stClairStationExitUp);
+      final Exit stClairSubwayExitDown = new Exit("D", stClairSubway);stClairStation.addExit(stClairSubwayExitDown);
+      final Exit mcDonaldsExitWest = new Exit("W", mcDonalds); stClairStation.addExit(mcDonaldsExitWest);
+      final Exit stClairStationExitEast = new Exit("E", stClairStation); mcDonalds.addExit(stClairStationExitEast);
+      final Exit stClairAvenueExitNorth = new Exit("N", stClairAvenue); stClairStation.addExit(stClairAvenueExitNorth);
+      final Exit stClairStationExitSouth = new Exit("S", stClairStation); stClairAvenue.addExit(stClairStationExitSouth);
+      final Exit stClairAndYongeExitWest = new Exit("W", stClairAndYonge); stClairAvenue.addExit(stClairAndYongeExitWest);
+      final Exit stClairAvenueExitEast = new Exit("E", stClairAvenue); stClairAndYonge.addExit(stClairAvenueExitEast);
+      final Exit bucaExitWest = new Exit("W", bucaRestaurant); stClairAndYonge.addExit(bucaExitWest);
+      final Exit stClairAndYongeExitEast = new Exit("E", stClairAndYonge); bucaRestaurant.addExit(stClairAndYongeExitEast);
 
       //SUMMERHILL DEAD END EXIT
       final Exit summerhillSubwayExitSouth = new Exit("S", summerhillSubway); stClairSubway.addExit(summerhillSubwayExitSouth);
@@ -492,7 +508,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("bayviewglenlobby"));
+    this.player.setCurrentRoom(roomMap.get("stclairsubway"));
     this.player.getInventory().addItem(new Weapon(5, "Big Rock", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     try {
