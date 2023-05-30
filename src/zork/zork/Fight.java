@@ -30,7 +30,7 @@ public class Fight {
     /**
      * Main fight method.
      */
-    public void fight(){
+    public boolean fight(){
         Game.getGame().getPlayer().setChoosingMenu(false);
         Game.getGame().getPlayer().setInFight(true);     
         boolean didPlayerWin = false;
@@ -44,6 +44,7 @@ public class Fight {
 
         SoundHandler.stopSound("would_boss.wav");
         SoundHandler.startAfterInterruption();
+        return didPlayerWin;
        
         
     }

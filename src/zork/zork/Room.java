@@ -18,6 +18,7 @@ public class Room {
   private String displayName;
   private Runnable onEnter;
   private boolean isLocked = false;
+  private ArrayList<Entity> entities = new ArrayList<>();
 
 
   public boolean isLocked() {
@@ -229,6 +230,18 @@ public class Room {
 
   public void setDisplayName(String displayName) {
     this.displayName = displayName;
+  }
+
+  public ArrayList<Entity> getEntities() {
+    return entities;
+  }
+
+  public void setEntities(ArrayList<Entity> entities) {
+    this.entities = entities;
+  }
+
+  public void addEntities(Entity b) {
+    entities.add(b);
   }
 
 }
