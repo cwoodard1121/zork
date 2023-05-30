@@ -132,6 +132,9 @@ public class Game {
       final Room genericCorporateBuilding = new Room("You stand outside of a towering corporate building, fancy looking people with briefcases walk by.", "genericCorporateBuilding"); 
       final Room wetCement = new Room("You just stepped into wet cement! You'd better get out of there before you get stuck.", "wetcement!"); roomMap.put(wetCement.getRoomName(), wetCement);
       final Room corporateLobby = new Room("You feel very out of place among the other Patrick-Bateman like businessmen in the corporate lobby.", "corporatelobby"); roomMap.put(corporateLobby.getRoomName(), corporateLobby);
+      final Room corporateCafe = new Room("You step into a bleak cafe", "corporatecafe"); roomMap.put(corporateCafe.getRoomName(), corporateCafe);
+      final Room corporateElevator = new Room("You are on the first floor of the elevator, it is severely cramped and smells like leather briefcases. Would you like to go up?", "corporateelevator"); roomMap.put(corporateElevator.getRoomName(), corporateElevator);
+      final Room elevatorSecondFloor = new Room("You arrive on the second floor of the office.", "elevatorsecondfloor"); roomMap.put(elevatorSecondFloor.getRoomName(), elevatorSecondFloor);
 
 
       //SUMMER HILL DEAD END ROOM
@@ -481,7 +484,14 @@ public class Game {
       final Exit genericCorporateBuildingExitEast = new Exit("E", genericCorporateBuilding); wetCement.addExit(genericCorporateBuildingExitEast);
       final Exit corporateLobbyExitNorth = new Exit("N", corporateLobby); genericCorporateBuilding.addExit(corporateLobbyExitNorth);
       final Exit genericCoporateBuildingExitSouth = new Exit("S", genericCorporateBuilding); corporateLobby.addExit(genericCoporateBuildingExitSouth);
-      
+      final Exit coporateCafeExitEast = new Exit("E", corporateCafe); corporateLobby.addExit(coporateCafeExitEast);
+      final Exit corporateLobbyExitWest = new Exit("W", corporateLobby); corporateCafe.addExit(corporateLobbyExitWest);
+      final Exit elevatorExitWest = new Exit("W", corporateElevator); corporateLobby.addExit(elevatorExitWest);
+      final Exit corporateLobbyExitEast = new Exit("E", corporateLobby); corporateElevator.addExit(corporateLobbyExitEast);
+      final Exit elevatorSecondFloorExitUp = new Exit("U", elevatorSecondFloor); corporateElevator.addExit(elevatorSecondFloorExitUp);
+      final Exit corporateElevatorExitDown = new Exit("D", corporateElevator); elevatorSecondFloor.addExit(corporateElevatorExitDown);
+
+
 
       //SUMMERHILL DEAD END EXIT
       final Exit summerhillSubwayExitSouth = new Exit("S", summerhillSubway); stClairSubway.addExit(summerhillSubwayExitSouth);
@@ -601,14 +611,19 @@ public class Game {
           if(result.length() > 16) {
             System.out.print("Please enter a name between 1-16 Characters");
           } else if (result.equalsIgnoreCase("cameron")) { 
-            System.out.print("Sorry that name is already taken, Please enter another name:");
+            System.out.print("Sorry that name is already taken, Please enter another name: ");
           } else if (result.equalsIgnoreCase("cagasuge")) { 
             System.out.println("Im not mad... Im just dissapointed     ");
           } else if (result.equalsIgnoreCase("kevin")){
             System.out.println("Hi Mr. Deslauriers, we hope you enjoy 'PRIMEQUEST'!");
-            
           } else if (result.equalsIgnoreCase("snake")){
             System.out.println("Snake, this is major Zero. You have been tasked with infiltrating the enemy territory, and must collect every single flavour of what these people call 'PRIME'. Zero out.");
+          } else if (result.equalsIgnoreCase("lucca")){
+            System.out.println("Sorry that name is already taken, Please enter another name: ");
+          } else if (result.equalsIgnoreCase("ethan")){
+            System.out.println("Sorry that name is already taken, Please enter another name: ");
+          } else if (result.equalsIgnoreCase("marco")){
+            System.out.println("Sorry that name is already taken, Please enter another name: ");
           } else if (result.equalsIgnoreCase("jch")){
             System.out.println("your funniest person alive award is being sent to your location");
             hasChosenName = true;
