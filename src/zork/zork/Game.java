@@ -18,6 +18,7 @@ import zork.Constants.PlayerConstants;
 import zork.Utils.SoundHandler;
 import zork.entites.Enemy;
 import zork.entites.Player;
+import zork.items.TestItem;
 import zork.items.Weapon;
 import java.lang.Runnable;
 
@@ -117,7 +118,7 @@ public class Game {
       final Room yongeEglintonMall = new Room("You stand in the lobby of the Yonge and Eglinton Mall.", "yongeeglintonmall"); roomMap.put(yongeEglintonMall.getRoomName(), yongeEglintonMall);
       final Room circleK = new Room ("*Dialogue about prime to be implemented, homeless fight and u get a prime* a dingy convenience store with a sleeping cashier", "circlek"); roomMap.put(circleK.getRoomName(), circleK);
       final Room foodCourt = new Room ("*Dialogue with OP shopkeeper, the prime here is super expensive, and shopkeeper is super strong* You can hear the subway rumbling in the background", "foodcourt"); roomMap.put(foodCourt.getRoomName(), foodCourt);
-      final Room eglintonSubway = new Room ("South leads to St. Clair station, North leads to York Mills Station", "eglintonsubway",true); eglintonSubway.setLocked(true); roomMap.put(eglintonSubway.getRoomName(), eglintonSubway);
+      final Room eglintonSubway = new Room ("South leads to St. Clair station, North leads to York Mills Station", "eglintonsubway",true, "Placeholder Locked Message"); eglintonSubway.setLocked(true); roomMap.put(eglintonSubway.getRoomName(), eglintonSubway);
 
       //ST. CLAIR AREA ROOMS
       final Room stClairSubway = new Room("North leads to Eglinton, South leads to Summerhill", "stclairsubway"); roomMap.put(stClairSubway.getRoomName(), stClairSubway);
@@ -153,32 +154,19 @@ public class Game {
       //BAYVIEW GLEN INDEPENDENT SCHOOL ROOMS
  
       final boolean[] hasEnteredLobby = new boolean[]{false};
-      final Room bayviewGlenLobby = new Room ("Placeholder Description for bayviewGlenLobby", "bayviewglenlobby"); roomMap.put(bayviewGlenLobby.getRoomName(), bayviewGlenLobby); // north exit outside for later looking south when walking in
-      bayviewGlenLobby.setRunnable(new Runnable(){
-
-        @Override
-        public void run() {
-          if (!hasEnteredLobby[0]) {
-            hasEnteredLobby[0] = true;
-            try {
-              renderer.showCutScene(1500, "\\bin\\zork\\data\\bayviewglencyruscall.txt");
-            } catch (Exception e) {
-              handleException(e);
-            }
-          }
-        }
-        
-      });
+      final Room bayviewGlenLobby = new Room ("Placeholder Description for bayviewGlenLobby", "bayviewglenlobby"); roomMap.put(bayviewGlenLobby.getRoomName(), bayviewGlenLobby);  // north exit outside for later looking south when walking in
+      bayviewGlenLobby.addItemGround(new Item(0, null, isTesting, null, finished));
+      
       final Room bayviewGlenOutsideLobby = new Room ("Placeholder Description for bayviewGlenOutsideLobby", "bayviewglenoutsidelobby"); roomMap.put(bayviewGlenOutsideLobby.getRoomName(), bayviewGlenOutsideLobby);
       final Room bayviewGlenHallwayCafeteria = new Room ("Placeholder Description for bayviewGlenHallwayCafeteria", "bayviewglenhallwaycafeteria"); roomMap.put(bayviewGlenHallwayCafeteria.getRoomName(), bayviewGlenHallwayCafeteria); // to the east from lobby
-      final Room bayviewGlenHallwayPrepGym = new Room("Placeholder Description for bayviewGlenHallwayPrepGym", "bayviewglenhallwayprepgym"); roomMap.put(bayviewGlenHallwayPrepGym.getRoomName(), bayviewGlenHallwayPrepGym);
-      final Room bayviewGlenHallwayTheatreFront = new Room("Placeholder Description for bayviewGlenHallwayTheatreFront", "bayviewglenhallwaytheatrefront"); roomMap.put(bayviewGlenHallwayTheatreFront.getRoomName(), bayviewGlenHallwayTheatreFront);
+      final Room bayviewGlenHallwayPrepGym = new Room("Placeholder Description for bayviewGlenHallwayPrepGym", "bayviewglenhallwayprepgym", true, "Since you know the gym is probably locked maybe the hallway by the gym isn't. you were dead wrong"); roomMap.put(bayviewGlenHallwayPrepGym.getRoomName(), bayviewGlenHallwayPrepGym);
+      final Room bayviewGlenHallwayTheatreFront = new Room("Placeholder Description for bayviewGlenHallwayTheatreFront", "bayviewglenhallwaytheatrefront", true, "the door is locked, you try to barge in but its locked so that doesnt make any sense."); roomMap.put(bayviewGlenHallwayTheatreFront.getRoomName(), bayviewGlenHallwayTheatreFront);
       final Room bayviewGlenOutsideHallwayTheatreFront = new Room ("Placeholder Description for bayviewGlenOutsideHallwayTheatreFront", "bayviewglenoutsidehallwaytheatrefront"); roomMap.put(bayviewGlenOutsideHallwayTheatreFront.getRoomName(), bayviewGlenOutsideHallwayTheatreFront);
       final Room bayviewGlenCafeteriaFoodArea = new Room("Placeholder Description for bayviewGlenCafeteriaFoodArea", "bayviewglencafeteriafoodarea"); roomMap.put(bayviewGlenCafeteriaFoodArea.getRoomName(), bayviewGlenCafeteriaFoodArea);
       final Room bayviewGlenOutsideCafeteria = new Room ("Placeholder Description for bayviewGlenOutsideCafeteria", "bayviewglenoutsidecafeteria"); roomMap.put(bayviewGlenOutsideCafeteria.getRoomName(), bayviewGlenOutsideCafeteria);
       final Room bayviewGlenKitchen = new Room("Placeholder Description for BayviewGlenKitchen", "bayviewglenkitchen"); roomMap.put(bayviewGlenKitchen.getRoomName(), bayviewGlenKitchen);
-      final Room bayviewGlenCafeteriaDiningArea = new Room("Placeholder Description for bayviewGlenCAfeteriaDiningArea", "bayviewglencafeteriadiningarea"); roomMap.put(bayviewGlenCafeteriaDiningArea.getRoomName(), bayviewGlenCafeteriaDiningArea);
-      final Room bayviewGlenPrepGym = new Room("Placeholder Description for bayviewGlenPrepGym", "bayviewglenprepgym"); roomMap.put(bayviewGlenPrepGym.getRoomName(), bayviewGlenPrepGym);
+      final Room bayviewGlenCafeteriaDiningArea = new Room("Placeholder Description for bayviewGlenCafeteriaDiningArea", "bayviewglencafeteriadiningarea", true, "The cafeteria is closed, you hear your stomach grumbling but then you realize its cafeteria food and your urges subside"); roomMap.put(bayviewGlenCafeteriaDiningArea.getRoomName(), bayviewGlenCafeteriaDiningArea);
+      final Room bayviewGlenPrepGym = new Room("Placeholder Description for bayviewGlenPrepGym", "bayviewglenprepgym", true, "The gym is closed and you are unable to get in"); roomMap.put(bayviewGlenPrepGym.getRoomName(), bayviewGlenPrepGym);
       final Room bayviewGlenWeightRoom = new Room("Placeholder Description for bayviewGlenWeightRoom", "bayviewglenweightroom"); roomMap.put(bayviewGlenWeightRoom.getRoomName(), bayviewGlenWeightRoom);
       final Room bayviewGlenOutsidePrepGymNorth = new Room("Placeholder Description for bayviewGlenOutsidePrepGymNorth", "bayviewglenoutsideprepgymnorth"); roomMap.put(bayviewGlenOutsidePrepGymNorth.getRoomName(), bayviewGlenOutsidePrepGymNorth);
       final Room bayviewGlenLearningCommons = new Room("Placeholder Description for bayviewGlenLearningCommons", "bayviewglenlearningcommons"); roomMap.put(bayviewGlenLearningCommons.getRoomName(), bayviewGlenLearningCommons);
@@ -186,7 +174,7 @@ public class Game {
       final Room bayviewGlenTheatre = new Room("Placeholder Description for bayviewGlenTheatre", "bayviewglentheatre"); roomMap.put(bayviewGlenTheatre.getRoomName(), bayviewGlenTheatre);
       final Room bayviewGlenHallwayTheatreBack = new Room ("Placeholder Description for bayviewGlenHallwayTheatreBack", "bayviewglenhallwaytheatreback"); roomMap.put(bayviewGlenHallwayTheatreBack.getRoomName(), bayviewGlenHallwayTheatreBack);
       final Room bayviewGlenHallway2ndFloorToUpperSchool = new Room("Placeholder Description for bayviewGlenHallway2ndFloorToUpperSchool", "bayviewglenhallway2ndfloortoupperschool"); roomMap.put(bayviewGlenHallway2ndFloorToUpperSchool.getRoomName(), bayviewGlenHallway2ndFloorToUpperSchool);
-      final Room bayviewGlenG11CommonArea = new Room("Placeholder Description for bayviewGlenG11CommonArea", "bayviewgleng11commonarea"); roomMap.put(bayviewGlenG11CommonArea.getRoomName(), bayviewGlenG11CommonArea);
+      final Room bayviewGlenG11CommonArea = new Room("Placeholder Description for bayviewGlenG11CommonArea", "bayviewgleng11commonarea", true, "You go up the stairs and try to open the door, but as usual its locked an nobody is there to let you in."); roomMap.put(bayviewGlenG11CommonArea.getRoomName(), bayviewGlenG11CommonArea);
       final Room bayviewGlenGradHallway = new Room("Placeholder Description for bayviewGlenGradHallway", "bayviewglengradhallway"); roomMap.put(bayviewGlenGradHallway.getRoomName(), bayviewGlenGradHallway);
       final Room bayviewGlenUpperMusicHallway = new Room ("Placeholder Description for bayviewGlenUpperMusicHallway", "bayviewglenuppermusichallway"); roomMap.put(bayviewGlenUpperMusicHallway.getRoomName(), bayviewGlenUpperMusicHallway);
       final Room bayviewGlenDramaRoom = new Room ("Placeholder Description for bayviewGlenDramaRoom", "bayviewglendramaroom"); roomMap.put(bayviewGlenDramaRoom.getRoomName(), bayviewGlenDramaRoom);
@@ -208,7 +196,7 @@ public class Game {
           Fight f = new Fight(cyrus_meatball);
           f.fight();
         }
-        
+
       });
       final Room bayviewGlenOutsideStaircase = new Room ("Placeholder Description for bayviewGlenOutsideStaircase", "bayviewglenoutsidestaircase"); roomMap.put(bayviewGlenOutsideStaircase.getRoomName(), bayviewGlenOutsideStaircase);
       final Room bayviewGlenOutsideWest = new Room ("Placeholder Description for bayviewGlenOutsideWest", "bayviewglenoutsidewest"); roomMap.put(bayviewGlenOutsideWest.getRoomName(), bayviewGlenOutsideWest);
@@ -227,8 +215,29 @@ public class Game {
       final Room bayviewGlenG12CommonArea = new Room ("Placeholder Description for bayviewGlenG12CommonArea", "bayviewgleng12commonarea"); roomMap.put(bayviewGlenG12CommonArea.getRoomName(), bayviewGlenG12CommonArea);
       final Room bayviewGlenArtRoom = new Room ("Placeholder Description for bayviewGlenArtRoom", "bayviewglenartroom"); roomMap.put(bayviewGlenArtRoom.getRoomName(), bayviewGlenArtRoom);
       final Room bayviewGlenHallwayOutsideUpperGym = new Room ("Placeholder Description for bayviewGlenHallwayOutsideUpperGym", "bayviewglenhallwayoutsideuppergym"); roomMap.put(bayviewGlenHallwayOutsideUpperGym.getRoomName(), bayviewGlenHallwayOutsideUpperGym);
-      final Room bayviewGlenUpperGym = new Room ("Placeholder Description for bayviewGlenUpperGym", "bayviewglenuppergym"); roomMap.put(bayviewGlenUpperGym.getRoomName(), bayviewGlenUpperGym);
+      final Room bayviewGlenUpperGym = new Room ("Placeholder Description for bayviewGlenUpperGym", "bayviewglenuppergym", true, "The gym is closed, and you can't get in."); roomMap.put(bayviewGlenUpperGym.getRoomName(), bayviewGlenUpperGym);
 
+      bayviewGlenLobby.setRunnable(new Runnable(){
+
+        @Override
+        public void run() {
+          if (!hasEnteredLobby[0]) {
+            hasEnteredLobby[0] = true;
+            try {
+              renderer.showCutScene(1500, "\\bin\\zork\\data\\bayviewglencyruscall.txt", 35);
+            } catch (Exception e) {
+              handleException(e);
+              bayviewGlenHallwayTheatreFront.setLocked(false);
+              bayviewGlenUpperGym.setLocked(false);
+              bayviewGlenG11CommonArea.setLocked(false);
+              bayviewGlenHallwayPrepGym.setLocked(false);
+              bayviewGlenPrepGym.setLocked(false);
+              bayviewGlenCafeteriaDiningArea.setLocked(false);
+
+            }
+          }
+        }
+      });
 
 
       //BVG EXITS
@@ -558,7 +567,7 @@ public class Game {
         hasStart = true;
         if(!isTesting) {
         try {
-          renderer.showCutScene(1500, "\\bin\\zork\\data\\cutscene.txt");
+          renderer.showCutScene(1500, "\\bin\\zork\\data\\cutscene.txt", 75);
         } catch (Exception e) {
           handleException(e);
         }

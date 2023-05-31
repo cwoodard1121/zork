@@ -109,12 +109,13 @@ public class Room {
     exits = new ArrayList<Exit>();
   }
 
-  public Room(final String description, String name, String displayName, boolean Locked) {
+  public Room(final String description, String name, String displayName, boolean Locked, String lockedMessage) {
     this.roomName = name;
     this.description = description;
     this.displayName = displayName;
     exits = new ArrayList<Exit>();
     this.isLocked = Locked;
+    this.lockedMessage = lockedMessage;
   }
 
   public Room(final String description, String name) {
@@ -124,12 +125,13 @@ public class Room {
     exits = new ArrayList<Exit>();
   }
 
-  public Room(final String description, String name, Boolean Locked) {
+  public Room(final String description, String name, Boolean Locked, String lockedMessage) {
     this.roomName = name;
     this.description = description;
     this.displayName = name;
     exits = new ArrayList<Exit>();
     this.isLocked = Locked;
+    this.lockedMessage = lockedMessage;
   }
 
   public Room() {
