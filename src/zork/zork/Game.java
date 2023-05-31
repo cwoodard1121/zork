@@ -29,7 +29,7 @@ public class Game {
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
-  public static boolean isTesting = true;
+  public static boolean isTesting = false;
   public static HashMap<String, Room> roomMap; 
 
   private final Player player;
@@ -566,7 +566,7 @@ public class Game {
     titleCard c = new titleCard();
     SoundHandler.playTitleSound();
     c.printTitle();
-    }else{
+    } else{
       System.out.print("\nType Start to begin: ");
     }
     
@@ -575,11 +575,13 @@ public class Game {
     while(!hasStart) {
       String result = in.nextLine().toLowerCase();
       if(result.equals("start")) {
-        SoundHandler.stopSound("mainmenu.wav");
         hasStart = true;
         if(!isTesting) {
+          SoundHandler.stopSound("mainmenu.wav");
+          SoundHandler.playSound("cutscene.wav", true);
         try {
           renderer.showCutScene(1500, "\\bin\\zork\\data\\cutscene.txt");
+          SoundHandler.stopSound("cutscene.wav");
         } catch (Exception e) {
           handleException(e);
         }
