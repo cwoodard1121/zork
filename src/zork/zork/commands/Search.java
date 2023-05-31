@@ -12,6 +12,7 @@ public class Search extends Command {
     @Override
     public String runCommand(String... args) {
         String str = "";
+        if(Game.getGame().getPlayer().getCurrentRoom().getGroundItems().size() == 0) return "You searched and found... nothing.";
         for (Item e : Game.getGame().getPlayer().getCurrentRoom().getGroundItems()) {
             str = str + e.getName();
         }
