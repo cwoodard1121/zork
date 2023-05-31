@@ -16,21 +16,21 @@ public class Fight {
 
     private int playerSpeed;
     private int enemySpeed;
-                            
+                        
                         
     private ArrayList<Effect> playerEffect;
     private ArrayList<Effect> enemyEffect;
 
     public Fight(Enemy bad){
         this.enemy = bad;
-        
+       
     }
     
    
     /**
      * Main fight method.
      */
-    public void fight(){
+    public boolean fight(){
         Game.getGame().getPlayer().setChoosingMenu(false);
         Game.getGame().getPlayer().setInFight(true);     
         boolean didPlayerWin = false;
@@ -44,6 +44,7 @@ public class Fight {
 
         SoundHandler.stopSound("would_boss.wav");
         SoundHandler.startAfterInterruption();
+        return didPlayerWin;
        
         
     }

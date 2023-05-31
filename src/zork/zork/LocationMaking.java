@@ -1,5 +1,6 @@
 package zork;
 
+
 import java.util.Scanner;
 
 public class LocationMaking {
@@ -28,6 +29,8 @@ public class LocationMaking {
             System.out.println("enter a number");
         }
     }
+
+    
         String[] total = new String[numRepeatInt];
         for (int i = 0; i < numRepeatInt; i++) {
             System.out.println("What room does this lead to and which direction do you walk to get there, for example D yorkMillsSubwayHallway");
@@ -54,6 +57,8 @@ public class LocationMaking {
         for (String string : total) {
             System.out.print(string);
         }
+
+
         System.out.println("Room Completed");
         hasNumber = !hasNumber;
         in.close();

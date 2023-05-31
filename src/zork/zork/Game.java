@@ -54,15 +54,18 @@ public class Game {
     
   }
 
+  /** the game */
   public static Game getGame() {
     return game;
   }
 
+  /** the renderer */
   public Graphics getRenderer() {
     return renderer;
   }
 
 
+  /** the player */
   public Player getPlayer() {
     return player;
   }
@@ -96,14 +99,18 @@ public class Game {
       // SHEPPARD YONGE
       final Room sheppardYongeLine1 = new Room("Going south will lead you to York Mills, North to Finch is under maintainence.","sheppardyongeline1");
       final Room sheppardYongeLine4 = new Room("Going east will lead you to Bayview. Going west will lead you into a tunnel.","sheppardyongeline4");
-      final Room sheppardYongeLine4StreetHallway = new Room("The escalator is stopped. The door to the street is nearby.","sheppardyongeline4streethighway");
+      final Room sheppardYongeLine4StreetHallway = new Room("The escalator is stopped. The door to the street is nearby.","sheppardyongeline4streethallway");
+      final Room sheppardYongeLine1HallwayBeforeStreet = new Room("stuff","sheppardyongeline1hallwaybeforestreet");
+
 
       //YORK MILLS AREA ROOMS
       final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal"); roomMap.put(yorkMillsBusTerminal.getRoomName(),yorkMillsBusTerminal);
       final Room facultyRoom = new Room("A staff room with a few tables", "facultyroom"); roomMap.put(facultyRoom.getRoomName(), facultyRoom);
       final Room gatewayNewsstands = new Room("*Implement shopkeeper* Hello, would you like to purchase anything?", "gatewaynewsstands"); roomMap.put(gatewayNewsstands.getRoomName(), gatewayNewsstands);
       final Room yorkMillsSubwayHallway = new Room("A Hallway is ahead leading to the Subway, Chuck Page plays some guitar for passersby.","yorkmillssubwayhallway"); roomMap.put(yorkMillsSubwayHallway.getRoomName(), yorkMillsSubwayHallway);
-      final Room yorkMillsSubway = new Room("Please come back later, unscheduled maintenance has just been scheduled, shuttlebuses are available.", "yorkmillssubway"); 
+      final Room yorkMillsSubway = new Room("Please come back later, unscheduled maintenance has just been scheduled, shuttlebuses are available.", "yorkmillssubway","york mills subway",true,"Placeholder Locked Message");
+      
+
 
       yorkMillsSubway.addItemGround(new Item(1,  "transfer",false, null, false));
       final Room eglintonShuttleBus = new Room("Going south will lead you to Eglinton Station via the shuttle bus", "eglintonshuttlebus"); roomMap.put(eglintonShuttleBus.getRoomName(), eglintonShuttleBus); roomMap.put(yorkMillsSubway.getRoomName(), yorkMillsSubway);
@@ -114,6 +121,7 @@ public class Game {
       final Room yorkMillsShuttleBus = new Room("Going north will lead you to York Mills Station", "yorkmillsshuttlebus"); roomMap.put(yorkMillsShuttleBus.getRoomName(), yorkMillsShuttleBus);
       final Room eglintonBusStop = new Room("You face the completely halted traffic of Yonge and Eglinton", "eglintonbusstop"); roomMap.put(eglintonBusStop.getRoomName(), eglintonBusStop);
       final Room eglintonStation = new Room("you have entered Eglinton Station. It smells of cinnabons.", "eglintonstation"); roomMap.put(eglintonStation.getRoomName(), eglintonStation);
+
       final Room eglintonStreet = new Room("You are on the sidewalk on Eglinton Street, you can feel the subway rumble below you.", "eglintonstreet"); roomMap.put(eglintonStreet.getRoomName(), eglintonStreet);
       final Room yongeEglintonMall = new Room("You stand in the lobby of the Yonge and Eglinton Mall.", "yongeeglintonmall"); roomMap.put(yongeEglintonMall.getRoomName(), yongeEglintonMall);
       final Room circleK = new Room ("*Dialogue about prime to be implemented, homeless fight and u get a prime* a dingy convenience store with a sleeping cashier", "circlek"); roomMap.put(circleK.getRoomName(), circleK);
@@ -125,6 +133,18 @@ public class Game {
       final Room ___it_keeps = new Room("Please leave it alone. It does not like to be disturbed.", "itkeeps"); roomMap.put(___it_keeps.getRoomName(), ___it_keeps);
       final Room pleaseLEAVE = new Room("LEAVE THIS PLaCE**. nOW!!","leave"); roomMap.put(pleaseLEAVE.getRoomName(), pleaseLEAVE);
       final Room theEnd = new Room("...Stay for a while", "theend"); roomMap.put(theEnd.getRoomName(), theEnd);
+      final Room stClairStation = new Room("you stand in the main lobby of St. Clair Station.", "stclairstation"); roomMap.put(stClairStation.getRoomName(), stClairStation);
+      final Room mcDonalds = new Room("You walk into the cramped subway station McDonald's", "mcdonalds"); roomMap.put(mcDonalds.getRoomName(), mcDonalds);
+      final Room stClairAvenue = new Room("You are outside of the station and are facing the slighlty less halted traffic.", "stclairavenue"); roomMap.put(stClairAvenue.getRoomName(), stClairAvenue);
+      final Room stClairAndYonge = new Room("You are on the southeast corner of the St. Clair and Yonge intersection.", "stclairandyonge"); roomMap.put(stClairAndYonge.getRoomName(), stClairAndYonge);
+      final Room bucaRestaurant = new Room("You are on the north side of St. CLair Avenue West, just outside the restaurant 'Buca'.", "bucarestaurant"); roomMap.put(bucaRestaurant.getRoomName(), bucaRestaurant);
+      final Room genericCorporateBuilding = new Room("You stand outside of a towering corporate building, fancy looking people with briefcases walk by.", "genericCorporateBuilding"); 
+      final Room wetCement = new Room("You just stepped into wet cement! You'd better get out of there before you get stuck.", "wetcement!"); roomMap.put(wetCement.getRoomName(), wetCement);
+      final Room corporateLobby = new Room("You feel very out of place among the other Patrick-Bateman like businessmen in the corporate lobby.", "corporatelobby"); roomMap.put(corporateLobby.getRoomName(), corporateLobby);
+      final Room corporateCafe = new Room("You step into a bleak cafe", "corporatecafe"); roomMap.put(corporateCafe.getRoomName(), corporateCafe);
+      final Room corporateElevator = new Room("You are on the first floor of the elevator, it is severely cramped and smells like leather briefcases. Would you like to go up?", "corporateelevator"); roomMap.put(corporateElevator.getRoomName(), corporateElevator);
+      final Room elevatorSecondFloor = new Room("You arrive on the second floor of the office.", "elevatorsecondfloor"); roomMap.put(elevatorSecondFloor.getRoomName(), elevatorSecondFloor);
+
 
       //SUMMER HILL DEAD END ROOM
 
@@ -144,6 +164,7 @@ public class Game {
 
       final Room ellesmereStationUnderground = new Room("Tap presto to enter subway.", "ellesmerestationunderground", "Ellesmere Station Entrance");
       final Room ellesmereSubwayNorthbound = new Room("Northbound to McCowan","ellesmeresubwaynorthbound","Ellesmere Station Track Northbound");
+      final Room ellesmereSubwaySouthbound = new Room("Southbound to Kennedy","ellesmeresubwaysouthbound","Ellesmere Station Track Southbound");
       
 
 
@@ -194,7 +215,11 @@ public class Game {
         public void run() {
           System.out.println("Meatball is in the way of cyrus's locker. ");
           Fight f = new Fight(cyrus_meatball);
-          f.fight();
+          boolean won = f.fight();
+          if(won) {
+            Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(cyrus_meatball);
+          }
+
         }
 
       });
@@ -434,6 +459,15 @@ public class Game {
       final Exit yorkMillsBusTerminalExitWest = new Exit("W", yorkMillsBusTerminal); eglintonShuttleBus.addExit(yorkMillsBusTerminalExitWest);
       final Exit eglintonBusStopExitSouth = new Exit("S", eglintonBusStop); eglintonShuttleBus.addExit(eglintonBusStopExitSouth);
 
+
+      // SHEPPARD YONGE EXITS
+
+      final Exit sheppardYongeLine1ExitNorth = new Exit("N", sheppardYongeLine4StreetHallway);
+      final Exit sheppardYongeLine1ExitSouth = new Exit("S", sheppardYongeLine1HallwayBeforeStreet);
+      final Exit sheppardYongeLine4ExitExit = new Exit("S", sheppardYongeLine1);
+      
+
+
       //ELLESMERE AREA EXITS
       
       
@@ -461,6 +495,30 @@ public class Game {
       final Exit stClairSubwayExitUp = new Exit("U", stClairSubway); ___it_keeps.addExit(stClairSubwayExitUp);
       final Exit pleaseLEAVEExitDown = new Exit("D", pleaseLEAVE); ___it_keeps.addExit(pleaseLEAVEExitDown);
       final Exit theEndExitDown = new Exit("D", theEnd); pleaseLEAVE.addExit(theEndExitDown);
+      final Exit stClairStationExitUp = new Exit("U", stClairStation); stClairSubway.addExit(stClairStationExitUp);
+      final Exit stClairSubwayExitDown = new Exit("D", stClairSubway);stClairStation.addExit(stClairSubwayExitDown);
+      final Exit mcDonaldsExitWest = new Exit("W", mcDonalds); stClairStation.addExit(mcDonaldsExitWest);
+      final Exit stClairStationExitEast = new Exit("E", stClairStation); mcDonalds.addExit(stClairStationExitEast);
+      final Exit stClairAvenueExitNorth = new Exit("N", stClairAvenue); stClairStation.addExit(stClairAvenueExitNorth);
+      final Exit stClairStationExitSouth = new Exit("S", stClairStation); stClairAvenue.addExit(stClairStationExitSouth);
+      final Exit stClairAndYongeExitWest = new Exit("W", stClairAndYonge); stClairAvenue.addExit(stClairAndYongeExitWest);
+      final Exit stClairAvenueExitEast = new Exit("E", stClairAvenue); stClairAndYonge.addExit(stClairAvenueExitEast);
+      final Exit bucaExitWest = new Exit("W", bucaRestaurant); stClairAndYonge.addExit(bucaExitWest);
+      final Exit stClairAndYongeExitEast = new Exit("E", stClairAndYonge); bucaRestaurant.addExit(stClairAndYongeExitEast);
+      final Exit genericCorporateBuildingExitWest = new Exit("W", genericCorporateBuilding); bucaRestaurant.addExit(genericCorporateBuildingExitWest);
+      final Exit bucaRestaurantExitEast = new Exit("E", bucaRestaurant); genericCorporateBuilding.addExit(bucaRestaurantExitEast);
+      final Exit wetCementExitWest = new Exit("W", wetCement); genericCorporateBuilding.addExit(wetCementExitWest);
+      final Exit genericCorporateBuildingExitEast = new Exit("E", genericCorporateBuilding); wetCement.addExit(genericCorporateBuildingExitEast);
+      final Exit corporateLobbyExitNorth = new Exit("N", corporateLobby); genericCorporateBuilding.addExit(corporateLobbyExitNorth);
+      final Exit genericCoporateBuildingExitSouth = new Exit("S", genericCorporateBuilding); corporateLobby.addExit(genericCoporateBuildingExitSouth);
+      final Exit coporateCafeExitEast = new Exit("E", corporateCafe); corporateLobby.addExit(coporateCafeExitEast);
+      final Exit corporateLobbyExitWest = new Exit("W", corporateLobby); corporateCafe.addExit(corporateLobbyExitWest);
+      final Exit elevatorExitWest = new Exit("W", corporateElevator); corporateLobby.addExit(elevatorExitWest);
+      final Exit corporateLobbyExitEast = new Exit("E", corporateLobby); corporateElevator.addExit(corporateLobbyExitEast);
+      final Exit elevatorSecondFloorExitUp = new Exit("U", elevatorSecondFloor); corporateElevator.addExit(elevatorSecondFloorExitUp);
+      final Exit corporateElevatorExitDown = new Exit("D", corporateElevator); elevatorSecondFloor.addExit(corporateElevatorExitDown);
+
+
 
       //SUMMERHILL DEAD END EXIT
       final Exit summerhillSubwayExitSouth = new Exit("S", summerhillSubway); stClairSubway.addExit(summerhillSubwayExitSouth);
@@ -480,8 +538,58 @@ public class Game {
      // final exit  = new Exit("", );  .addExit( );
 
      
+      //Union
+        //unionPlatform code
+        final Room unionPlatform = new Room ("Placeholder Description for unionPlatform", "unionplatform"); roomMap.put(unionPlatform.getRoomName(), unionPlatform);
+        //unionShopArea
+        final Room unionShopArea = new Room ("Placeholder Description for unionShopArea", "unionshoparea"); roomMap.put(unionShopArea.getRoomName(), unionShopArea);
+        //unionTimHortons
+        final Room unionTimHortons = new Room ("Placeholder Description for unionTimHortons", "uniontimhortons"); roomMap.put(unionTimHortons.getRoomName(), 
+        unionTimHortons);
+        //Main area
+        final Room unionMainArea = new Room ("Placeholder Description for unionMainArea", "unionmainarea"); roomMap.put(unionMainArea.getRoomName(), unionMainArea);
+        //union Corner
+        final Room unionCorner = new Room ("Placeholder Description for unionCorner", "unioncorner"); roomMap.put(unionCorner.getRoomName(), unionCorner);
+        //scams Market
+        final Room unionScamsMarket = new Room ("Placeholder Description for unionScamsMarket", "unionscamsmarket"); roomMap.put(unionScamsMarket.getRoomName(), unionScamsMarket);
+        //hallway
+        final Room unionHallway = new Room ("Placeholder Description for unionHallway", "unionhallway"); roomMap.put(unionHallway.getRoomName(), unionHallway);
+        //Guide room
+        final Room unionGuideRoom = new Room ("Placeholder Description for unionGuideRoom", "unionguideroom"); roomMap.put(unionGuideRoom.getRoomName(), unionGuideRoom);
+        //washroom
+        final Room unionWashroom = new Room ("Placeholder Description for unionWashroom", "unionwashroom"); roomMap.put(unionWashroom.getRoomName(), unionWashroom);
+        //sinkRoom
+        final Room unionSinkRoom = new Room ("Placeholder Description for unionSinkRoom", "unionsinkroom"); roomMap.put(unionSinkRoom.getRoomName(), unionSinkRoom);
+        //Maintenance room
+        final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
+        //faculty closet
+        final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
+        //faculty room
+        final Room unionFacultyRoom = new Room ("Placeholder Description for unionFacultyRoom", "unionfacultyroom"); roomMap.put(unionFacultyRoom.getRoomName(), unionFacultyRoom);
 
-      
+        //exits
+        final Exit  unionShopAreaExitUp = new Exit("U", unionShopArea); unionPlatform.addExit( unionShopAreaExitUp);
+        final Exit unionMainAreaExitNorth = new Exit("N",unionMainArea); unionShopArea.addExit(unionMainAreaExitNorth);    
+        final Exit unionTimHortonsExitEast = new Exit("E",unionTimHortons); unionShopArea.addExit(unionTimHortonsExitEast);
+        final Exit unionShopAreaExitEast = new Exit("W",unionShopArea); unionTimHortons.addExit(unionShopAreaExitEast);
+        final Exit unionHallwayExitNorth = new Exit("N",unionHallway); unionMainArea.addExit(unionHallwayExitNorth);
+        final Exit unionScamsMarketExitWest = new Exit("W",unionScamsMarket); unionMainArea.addExit(unionScamsMarketExitWest);     
+        final Exit unionCornerExitEast = new Exit("E",unionCorner); unionMainArea.addExit(unionCornerExitEast); 
+        final Exit unionMaintenanceRoomExitUp = new Exit("U",unionMaintenanceRoom);unionMainArea.addExit(unionMaintenanceRoomExitUp);   
+        final Exit unionMainAreaExitWest = new Exit("W",unionMainArea); unionCorner.addExit(unionMainAreaExitWest);  
+        final Exit unionMainAreaExitEast = new Exit("E",unionMainArea); unionScamsMarket.addExit(unionMainAreaExitEast);
+        final Exit unionMainAreaExitSouth = new Exit("S",unionMainArea); unionHallway.addExit(unionMainAreaExitSouth); 
+        final Exit unionGuideRoomExitEast = new Exit("E",unionGuideRoom); unionHallway.addExit(unionGuideRoomExitEast);
+        final Exit unionWashroomExitNorth = new Exit("N",unionWashroom); unionHallway.addExit(unionWashroomExitNorth); 
+        final Exit unionHallwayExitWest = new Exit("W",unionHallway); unionGuideRoom.addExit(unionHallwayExitWest);
+        final Exit unionHallwayExitSouth = new Exit("S",unionHallway); unionWashroom.addExit(unionHallwayExitSouth); 
+        final Exit unionSinkRoomExitEast = new Exit("E",unionSinkRoom); unionWashroom.addExit(unionSinkRoomExitEast);
+        final Exit unionWashroomExitWest = new Exit("W",unionWashroom); unionSinkRoom.addExit(unionWashroomExitWest);
+        final Exit unionMainAreaExitDown = new Exit("D",unionMainArea); unionMaintenanceRoom.addExit(unionMainAreaExitDown);
+        final Exit unionFacultyClosetExitNorth = new Exit("N",unionFacultyCloset); unionMaintenanceRoom.addExit(unionFacultyClosetExitNorth);
+        final Exit unionFacultyRoomExitEast = new Exit("E",unionFacultyRoom); unionMaintenanceRoom.addExit(unionFacultyRoomExitEast); 
+        final Exit unionMaintenanceRoomExitSouth = new Exit("S",unionMaintenanceRoom); unionFacultyCloset.addExit(unionMaintenanceRoomExitSouth);
+        final Exit unionMaintenanceRoomExitWest = new Exit("W",unionMaintenanceRoom); unionFacultyRoom.addExit(unionMaintenanceRoomExitWest);
     }
   }
 
@@ -554,7 +662,7 @@ public class Game {
     titleCard c = new titleCard();
     SoundHandler.playTitleSound();
     c.printTitle();
-    }else{
+    } else{
       System.out.print("\nType Start to begin: ");
     }
     
@@ -563,15 +671,18 @@ public class Game {
     while(!hasStart) {
       String result = in.nextLine().toLowerCase();
       if(result.equals("start")) {
-        SoundHandler.stopSound("mainmenu.wav");
         hasStart = true;
         if(!isTesting) {
+          SoundHandler.stopSound("mainmenu.wav");
+          SoundHandler.playSound("cutscene.wav", true);
         try {
           renderer.showCutScene(1500, "\\bin\\zork\\data\\cutscene.txt", 75);
         } catch (Exception e) {
           handleException(e);
         }
       }
+        SoundHandler.startRadio();
+        SoundHandler.startAfterInterruption();
         boolean hasChosenName = false;
         System.out.print("Please enter your name: ");
         while(!hasChosenName) {
@@ -579,9 +690,19 @@ public class Game {
           if(result.length() > 16) {
             System.out.print("Please enter a name between 1-16 Characters");
           } else if (result.equalsIgnoreCase("cameron")) { 
-            System.out.print("Sorry that name is already taken, Please enter another name:");
+            System.out.print("Sorry that name is already taken, Please enter another name: ");
           } else if (result.equalsIgnoreCase("cagasuge")) { 
             System.out.println("Im not mad... Im just dissapointed     ");
+          } else if (result.equalsIgnoreCase("kevin")){
+            System.out.println("Hi Mr. Deslauriers, we hope you enjoy 'PRIMEQUEST'!");
+          } else if (result.equalsIgnoreCase("snake")){
+            System.out.println("Snake, this is major Zero. You have been tasked with infiltrating the enemy territory, and must collect every single flavour of what these people call 'PRIME'. Zero out.");
+          } else if (result.equalsIgnoreCase("lucca")){
+            System.out.println("Sorry that name is already taken, Please enter another name: ");
+          } else if (result.equalsIgnoreCase("ethan")){
+            System.out.println("Sorry that name is already taken, Please enter another name: ");
+          } else if (result.equalsIgnoreCase("marco")){
+            System.out.println("Sorry that name is already taken, Please enter another name: ");
           } else if (result.equalsIgnoreCase("jch")){
             System.out.println("your funniest person alive award is being sent to your location");
             hasChosenName = true;
