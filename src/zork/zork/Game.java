@@ -633,9 +633,9 @@ public class Game {
         String[] params = parser.getParams();
         processCommand(command,params);
       } catch (NullPointerException e) {
-        e.printStackTrace();
+        if(isTesting) e.printStackTrace();
       } catch (CommandNotFoundException e) {
-        e.printStackTrace();
+        if(isTesting) e.printStackTrace();
       }
 
     } 
