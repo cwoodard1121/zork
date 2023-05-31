@@ -28,8 +28,8 @@ public class Graphics {
         System.out.println();
     }
     
-    public void showCutScene(long frameTime, String cutSceneFile) throws InterruptedException, IOException {
-        
+    public void showCutScene(long frameTime, String cutSceneFile, int textSpeed) throws InterruptedException, IOException {
+    
         
         File f = new File(new File("").getAbsolutePath().concat(cutSceneFile));
         BufferedReader reader = new BufferedReader(new FileReader(f));
@@ -52,7 +52,7 @@ public class Graphics {
                 for (int i = 0; i < line.length(); i++) {
                     System.out.print(line.charAt(i));
                     if(((Character.isLetter(line.charAt(i)) && isText) || isTextBypass)) {
-                        Thread.sleep(75);
+                        Thread.sleep(textSpeed);
                     }
                 }
                 System.out.println();

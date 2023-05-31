@@ -18,11 +18,14 @@ public class South extends Command {
         for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
             try{
             if(e.getDirection().equalsIgnoreCase("s")) {
-                Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
-                e.getAdjacentRoom().printAscii();
-                return e.getAdjacentRoom().getDescription();
+                if (!e.getAdjacentRoom().isLocked()) {
+                    Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
+                    e.getAdjacentRoom().printAscii();
+                    return e.getAdjacentRoom().getDescription();
+                } else {
+                    return e.getAdjacentRoom().getLockedMessage();
+                }
             }
-            
         } catch (Exception exception) {
             return "no ascii art";
         } 
@@ -30,4 +33,3 @@ public class South extends Command {
             return "There is no room to the South";
         }
     }
-

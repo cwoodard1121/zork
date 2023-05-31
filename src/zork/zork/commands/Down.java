@@ -12,17 +12,17 @@ public class Down extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
-        
+    public String runCommand(String... args){
         for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
             try{
             if(e.getDirection().equalsIgnoreCase("d")) {
                 if (!e.getAdjacentRoom().isLocked()) {
-                Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
+                    Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
                 e.getAdjacentRoom().printAscii();
                 return e.getAdjacentRoom().getDescription();
+                } else {
+                    return e.getAdjacentRoom().getLockedMessage();
                 }
-                return e.getAdjacentRoom().getDisplayName() + " is Locked or Unavalible at this time";
             }
         } catch (Exception exception) {
             return "no ascii art";
