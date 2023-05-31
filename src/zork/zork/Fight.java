@@ -31,16 +31,18 @@ public class Fight {
      * Main fight method.
      */
     public boolean fight(){
+       
         Game.getGame().getPlayer().setChoosingMenu(false);
         Game.getGame().getPlayer().setInFight(true);     
         boolean didPlayerWin = false;
         SoundHandler.stop();
         SoundHandler.playSound("would_boss.wav",true);
         didPlayerWin = fightingResults();
-        if(didPlayerWin)
+        if(didPlayerWin){
             System.out.println("won");
-        else
+        }else{
             System.out.println("lost");
+        }
 
         SoundHandler.stopSound("would_boss.wav");
         SoundHandler.startAfterInterruption();
