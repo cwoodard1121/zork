@@ -581,7 +581,7 @@ public class Game {
           SoundHandler.playSound("cutscene.wav", true);
         try {
           renderer.showCutScene(1500, "\\bin\\zork\\data\\cutscene.txt");
-          SoundHandler.stopSound("cutscene.wav");
+          SoundHandler.startRadio();
         } catch (Exception e) {
           handleException(e);
         }
