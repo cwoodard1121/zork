@@ -29,7 +29,7 @@ public class Game {
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
-  public static boolean isTesting = false;
+  public static boolean isTesting = true;
   public static HashMap<String, Room> roomMap; 
 
   private final Player player;
@@ -581,11 +581,12 @@ public class Game {
           SoundHandler.playSound("cutscene.wav", true);
         try {
           renderer.showCutScene(1500, "\\bin\\zork\\data\\cutscene.txt");
-          SoundHandler.startRadio();
         } catch (Exception e) {
           handleException(e);
         }
       }
+        SoundHandler.startRadio();
+        SoundHandler.startAfterInterruption();
         boolean hasChosenName = false;
         System.out.print("Please enter your name: ");
         while(!hasChosenName) {
