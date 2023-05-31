@@ -16,14 +16,14 @@ public class Fight {
 
     private int playerSpeed;
     private int enemySpeed;
-                            
+                        
                         
     private ArrayList<Effect> playerEffect;
     private ArrayList<Effect> enemyEffect;
 
     public Fight(Enemy bad){
         this.enemy = bad;
-        
+       
     }
     
    
