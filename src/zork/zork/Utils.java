@@ -230,7 +230,7 @@ public static class SoundHandler {
         songQueueTemplate.add(song);
     }
 
-    static {
+    public static void startRadio() {
         /**
          * add file names here
          */
@@ -297,6 +297,8 @@ public static class SoundHandler {
                         }
 
                     clip.stop();
+                    startAfterInterruption();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
