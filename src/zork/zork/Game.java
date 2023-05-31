@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -18,6 +19,7 @@ import zork.Constants.PlayerConstants;
 import zork.Utils.SoundHandler;
 import zork.entites.Enemy;
 import zork.entites.Player;
+import zork.items.Coupon;
 import zork.items.Weapon;
 import java.lang.Runnable;
 
@@ -542,10 +544,39 @@ public class Game {
         unionTimHortons);
         //Main area
         final Room unionMainArea = new Room ("Placeholder Description for unionMainArea", "unionmainarea"); roomMap.put(unionMainArea.getRoomName(), unionMainArea);
+        // boolean[] hasEnteredMainLobby = {false};
+        // unionMainArea.setRunnable(new Runnable(){
+          
+        //   ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
+        //   @Override
+        //   public void run() {
+        //     if (!hasEnteredMainLobby[0]) {
+        //       hasEnteredMainLobby[0] = true;
+        //       try {
+        //         renderer.showCutScene(1100, "\\bin\\zork\\data\\unioncyruscall.txt");
+        //       } catch (Exception e) {
+        //         handleException(e);
+        //       }
+        //     }
+        //   }
+          
+        // });
         //union Corner
         final Room unionCorner = new Room ("Placeholder Description for unionCorner", "unioncorner"); roomMap.put(unionCorner.getRoomName(), unionCorner);
         //scams Market
         final Room unionScamsMarket = new Room ("Placeholder Description for unionScamsMarket", "unionscamsmarket"); roomMap.put(unionScamsMarket.getRoomName(), unionScamsMarket);
+        Coupon freeprime = new Coupon(2, "One Free Prime", false);
+        unionScamsMarket.setRunnable(new Runnable(){
+         
+          @Override
+          public void run() {
+            ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
+            if(ar.contains(freeprime)){
+              //run the bossfight
+            }
+           
+          }
+        });
         //hallway
         final Room unionHallway = new Room ("Placeholder Description for unionHallway", "unionhallway"); roomMap.put(unionHallway.getRoomName(), unionHallway);
         //Guide room
@@ -558,6 +589,15 @@ public class Game {
         final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         //faculty closet
         final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
+        unionFacultyCloset.setRunnable(new Runnable(){
+         
+          @Override
+          public void run() {
+            Game.getGame().getPlayer().getInventory().addItem(freeprime);
+            System.out.println("you found a coupon for free prime. This can proboably be used somewhere...");
+           
+          }
+        });
         //faculty room
         final Room unionFacultyRoom = new Room ("Placeholder Description for unionFacultyRoom", "unionfacultyroom"); roomMap.put(unionFacultyRoom.getRoomName(), unionFacultyRoom);
 
@@ -570,6 +610,7 @@ public class Game {
         final Exit unionHallwayExitNorth = new Exit("N",unionHallway); unionMainArea.addExit(unionHallwayExitNorth);
         final Exit unionScamsMarketExitWest = new Exit("W",unionScamsMarket); unionMainArea.addExit(unionScamsMarketExitWest);     
         final Exit unionCornerExitEast = new Exit("E",unionCorner); unionMainArea.addExit(unionCornerExitEast); 
+        final Exit unionCornerExitSouth = new Exit("S",unionShopArea); unionMainArea.addExit(unionCornerExitSouth); 
         final Exit unionMaintenanceRoomExitUp = new Exit("U",unionMaintenanceRoom);unionMainArea.addExit(unionMaintenanceRoomExitUp);   
         final Exit unionMainAreaExitWest = new Exit("W",unionMainArea); unionCorner.addExit(unionMainAreaExitWest);  
         final Exit unionMainAreaExitEast = new Exit("E",unionMainArea); unionScamsMarket.addExit(unionMainAreaExitEast);
@@ -619,7 +660,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("bayviewglenlobby"));
+    this.player.setCurrentRoom(roomMap.get("unionplatform"));
     this.player.getInventory().addItem(new Weapon(5, "Big Rock", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     try {
