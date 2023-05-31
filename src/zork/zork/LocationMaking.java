@@ -1,5 +1,6 @@
 package zork;
 
+
 import java.util.Scanner;
 
 public class LocationMaking {
