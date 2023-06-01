@@ -149,18 +149,16 @@ public class Game {
       final Room officeRoom = new Room("You enter an office space with people working away. ", "officeroom"); roomMap.put(officeRoom.getRoomName(), officeRoom);
       final Room storageSpace = new Room("You are now in an old decrepid storage area. Spider webs cover the walls, and there is an open window ", "storagespace"); roomMap.put(storageSpace.getRoomName(), storageSpace);
       final Room catwalk = new Room("You stand on a thin plank of wood connecting the building you were just in, and the building beside it.", "catwalk"); roomMap.put(catwalk.getRoomName(), catwalk);
+      final Room rolexOffice = new Room("You have entered the office of the Rolex Canad building. The boss must be away right now", "rolexoffice"); roomMap.put(rolexOffice.getRoomName(), rolexOffice);
+      final Room rolexHallway = new Room("in the green carpeted rolex halway, you can hear people working away in the offices adjacent. You should get out before you are found here.", "rolexhallway"); roomMap.put(rolexHallway.getRoomName(), rolexHallway);
+      final Room rolexStairwell = new Room("A sign at the top of the stairs says 'to offices', a sign at the bottom says 'emergency exit'.", "rolexstairwell");
+      final Room sketchyAlley = new Room("You stand outside the emergency exit of the Rolex Canada Building. This alley looks like it leads back to St. Clair Avenue West.", "sketchyalley"); roomMap.put(sketchyAlley.getRoomName(), sketchyAlley);
 
 
 
       //SUMMER HILL DEAD END ROOM
 
       final Room summerhillSubway = new Room("Please stay on the train, police investigation underway", "summerhillSubway"); roomMap.put(summerhillSubway.getRoomName(), summerhillSubway);
-
-
-
-
-
-
 
 
 
@@ -529,6 +527,15 @@ public class Game {
       final Exit elevatorSecondFloorExitEast = new Exit("E", elevatorSecondFloor); storageSpace.addExit(elevatorSecondFloorExitEast);
       final Exit catwalkExitWest = new Exit("W", catwalk); storageSpace.addExit(catwalkExitWest);
       final Exit storageSpaceExitEast = new Exit("E", storageSpace); catwalk.addExit(storageSpaceExitEast);
+      final Exit rolexOfficeExitWest = new Exit ("W", rolexOffice); catwalk.addExit(rolexOfficeExitWest);
+      final Exit catwalkExitEast = new Exit("E", catwalk); rolexOffice.addExit(catwalkExitEast);
+      final Exit rolexHallwayExitWest = new Exit("W", rolexHallway); rolexOffice.addExit(rolexHallwayExitWest);
+      final Exit rolexOfficeExitEast = new Exit ("E", rolexOffice); rolexHallway.addExit(rolexOfficeExitEast);
+      final Exit rolexStairwellExitWest = new Exit("W", rolexStairwell); rolexHallway.addExit(rolexStairwellExitWest);
+      final Exit rolexHallwaysExitEast = new Exit ("E", rolexHallway); rolexStairwell.addExit(rolexHallwaysExitEast);
+      final Exit sketchyAlleyExitDown = new Exit ("D", sketchyAlley); rolexStairwell.addExit(sketchyAlleyExitDown); 
+      final Exit rolexStairwellExitUp = new Exit("U", rolexStairwell); sketchyAlley.addExit(rolexStairwellExitUp);
+      
 
 
 
