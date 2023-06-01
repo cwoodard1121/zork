@@ -213,7 +213,7 @@ public class Game {
       final Room bayviewGlenG9CommonArea = new Room ("Placeholder Description for bayviewGlenG9CommonArea", "bayviewgleng9commonarea"); roomMap.put(bayviewGlenG9CommonArea.getRoomName(), bayviewGlenG9CommonArea);
       Inventory meatBall = new Inventory(5);
       meatBall.addItem(new Weapon(3, "Fork", false, 10, null));
-      final Enemy cyrus_meatball = new Enemy(null, bayviewGlenG9CommonArea, Constants.PlayerConstants.DEFAULT_HEALTH * 2,meatBall , 0, "Meatball");
+      final Enemy cyrus_meatball = new Enemy(null, bayviewGlenG9CommonArea, Constants.PlayerConstants.DEFAULT_HEALTH, meatBall , 0, "Meatball");
       bayviewGlenG9CommonArea.addEnemies(cyrus_meatball);
       bayviewGlenG9CommonArea.setRunnable(new Runnable() {
 
@@ -527,7 +527,8 @@ public class Game {
       final Exit elevatorSecondFloorExitWest = new Exit("W", elevatorSecondFloor); officeRoom.addExit(elevatorSecondFloorExitWest);
       final Exit storageSpaceExitWest = new Exit("W", storageSpace); elevatorSecondFloor.addExit(storageSpaceExitWest);
       final Exit elevatorSecondFloorExitEast = new Exit("E", elevatorSecondFloor); storageSpace.addExit(elevatorSecondFloorExitEast);
-      final Exit 
+      final Exit catwalkExitWest = new Exit("W", catwalk); storageSpace.addExit(catwalkExitWest);
+      final Exit storageSpaceExitEast = new Exit("E", storageSpace); catwalk.addExit(storageSpaceExitEast);
 
 
 
