@@ -153,6 +153,7 @@ public class Game {
       final Room rolexHallway = new Room("in the green carpeted rolex halway, you can hear people working away in the offices adjacent. You should get out before you are found here.", "rolexhallway"); roomMap.put(rolexHallway.getRoomName(), rolexHallway);
       final Room rolexStairwell = new Room("A sign at the top of the stairs says 'to offices', a sign at the bottom says 'emergency exit'.", "rolexstairwell");
       final Room sketchyAlley = new Room("You stand outside the emergency exit of the Rolex Canada Building. This alley looks like it leads back to St. Clair Avenue West.", "sketchyalley"); roomMap.put(sketchyAlley.getRoomName(), sketchyAlley);
+      final Room stClairAboveStreetcar = new Room("South of a sketchy alley, you stand on a sidewalk above a streetcar stop.", "stclairabovestreetcar"); roomMap.put(stClairAboveStreetcar.getRoomName(), stClairAboveStreetcar);
 
 
 
@@ -533,8 +534,11 @@ public class Game {
       final Exit rolexOfficeExitEast = new Exit ("E", rolexOffice); rolexHallway.addExit(rolexOfficeExitEast);
       final Exit rolexStairwellExitWest = new Exit("W", rolexStairwell); rolexHallway.addExit(rolexStairwellExitWest);
       final Exit rolexHallwaysExitEast = new Exit ("E", rolexHallway); rolexStairwell.addExit(rolexHallwaysExitEast);
-      final Exit sketchyAlleyExitDown = new Exit ("D", sketchyAlley); rolexStairwell.addExit(sketchyAlleyExitDown); 
-      final Exit rolexStairwellExitUp = new Exit("U", rolexStairwell); sketchyAlley.addExit(rolexStairwellExitUp);
+      final Exit sketchyAlleyExitWest = new Exit ("W", sketchyAlley); rolexStairwell.addExit(sketchyAlleyExitWest); 
+      final Exit rolexStairwellExitEast = new Exit("E", rolexStairwell); sketchyAlley.addExit(rolexStairwellExitEast);
+      final Exit stClairAboveStreetCarExitSouth = new Exit("S", stClairAboveStreetcar); sketchyAlley.addExit(stClairAboveStreetCarExitSouth);
+      final Exit sketchyAlleyExitNorth = new Exit ("N", sketchyAlley); stClairAboveStreetcar.addExit(sketchyAlleyExitNorth);
+
       
 
 
