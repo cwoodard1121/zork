@@ -3,6 +3,7 @@ package zork;
 import java.util.ArrayList;
 
 import zork.entites.Enemy;
+import zork.entites.Player;
 import zork.items.Weapon;
 import java.util.Scanner;
 import zork.Utils.SoundHandler;
@@ -14,7 +15,7 @@ public class Fight {
     private int playerHealth;
     private int enemyHealth;
     private double enemyTotalHealth;
-    private double playerTotalHealth;
+    private double playerTotalHealth = Game.getGame().getPlayer().getMaxHealth();
 
     private int playerSpeed;
     private int enemySpeed;
@@ -33,15 +34,17 @@ public class Fight {
      * Main fight method.
      */
     public boolean fight(){
-        
-        Game.getGame().getPlayer().setChoosingMenu(false);
-        Game.getGame().getPlayer().setInFight(true);     
+        Player player = Game.getGame().getPlayer();
+        player.setChoosingMenu(false);
+        player.setInFight(true);     
         boolean didPlayerWin = false;
         SoundHandler.stop();
         SoundHandler.playSound("would_boss.wav",true);
         didPlayerWin = fightingResults();
         if(didPlayerWin){
             System.out.println("won");
+            expGain();
+            
         }else{
             System.out.println("lost");
         }
@@ -54,7 +57,31 @@ public class Fight {
     }
 
 
-
+    private void expGain() {
+        try {
+        Player player = Game.getGame().getPlayer();
+        boolean leveledUp = false;
+            Game.getGame().getPlayer().addExp(enemy.getExp());
+            while (!leveledUp) {
+                if (player.getExp() > 100) {
+                    player.addExp(-100);
+                    player.addLevel(1);
+                    int previousLevel = player.getLevel()-1;
+                    text.slowTextSpeed(player.getName() + " LEVELED UP " + previousLevel + " -> " + player.getLevel() + "", 2);
+                    Thread.sleep(100);
+                    int[] statIncrease = {player.getStrength() + (int)((Math.random()*4)+2), player.getMaxHealth() + (int)((Math.random()*5) + 6), player.getSpeed() + (int)((Math.random()*4)+2)};
+                    text.slowTextSpeed(" > Strength: " + player.getStrength() + " -> " + statIncrease[0] + "\n > Health: " + player.getMaxHealth() + " -> " + statIncrease[1] + "\n > Speed: " + player.getSpeed() + " -> " + statIncrease[2], 2);
+                    Thread.sleep(100);
+                    player.setStrength(statIncrease[0]); player.setMaxHealth(statIncrease[1]); player.setSpeed(statIncrease[2]);
+                    if(player.getExp() <= 100) {
+                        leveledUp = true;
+                    }
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     /**
@@ -127,6 +154,10 @@ public class Fight {
         text.slowTextSpeed(enemy.getName() + " used" + " " + eWeapon.getName(), 7);
         Thread.sleep(1000);
         eDamage = (int)((Math.random() * 0.5 + 0.8) * (eDamage)); // Create a damage range of 0.8x and 1.2x damage
+        if ((int)(Math.random()*16 + 1) == 16) {
+            eDamage = eDamage * 2;
+            System.out.println("CRITICAL HIT!!!");
+        }
         playerHealth-= eDamage;
         text.slowTextSpeed("It delt " + eDamage + " Damage", 7);
         Thread.sleep(1000);
@@ -220,7 +251,6 @@ public class Fight {
     private void playerTurn() {
         if(!isTotalHealth) {
             enemyTotalHealth = enemyHealth;
-            playerTotalHealth = playerHealth;
             isTotalHealth = true;
         }
         try {
@@ -243,7 +273,12 @@ public class Fight {
                 int pDamge = pWeapon.getDamage();
                 text.slowTextSpeed(Game.getGame().getPlayer().getName() + " used" + " " + pWeapon.getName(), 7);
                 Thread.sleep(1000);
-                pDamge = (int)((Math.random() * 0.5 + 0.8) * (pDamge)); // Create a damage range of 0.8x and 1.2x damage
+                double strengthMod = (Game.getGame().getPlayer().getStrength() / 100.0) + 1;
+                pDamge = (int)((Math.random() * 0.5 + 0.8) * ((pDamge) * strengthMod)); // Create a damage range of 0.8x and 1.2x damage
+                if ((int)(Math.random()*16 + 1) == 16) {
+                    pDamge = pDamge * 2;
+                    System.out.println("CRITICAL HIT!!!");
+                }
                 enemyHealth -= pDamge;
                 text.slowTextSpeed("It delt " + pDamge + " Damage", 7);
                 Thread.sleep(1000);
@@ -389,7 +424,7 @@ public class Fight {
         System.out.println("|                                                     |");
         NameLength = Game.getGame().getPlayer().getName().length();
         spaceBetweenLine = "";
-        HealthPercent = (int)((playerHealth / playerTotalHealth)) * 20;
+        HealthPercent = (int)((playerHealth / playerTotalHealth)*20);
         int playerTotalHealthInt = (int)(playerTotalHealth);
         HealthBar = "";
         for (int i = 1; i < 21 ; i++) {

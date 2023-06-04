@@ -12,8 +12,8 @@ import zork.Constants.EntityConstants;
 public class ExampleEnemy extends Enemy {
 
 
-    public ExampleEnemy(Location location, Room currentRoom, int health, Inventory inventory, int money, int speed, String name){
-        super(location, currentRoom, health, inventory, money, name);
+    public ExampleEnemy(Location location, Room currentRoom, int health, Inventory inventory, int money, int speed, String name, int exp){
+        super(location, currentRoom, health, inventory, money, name, exp);
         
         // Location notRealLocation = new Location(2, 3);
         // setLocation(notRealLocation);
