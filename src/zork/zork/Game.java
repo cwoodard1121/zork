@@ -133,6 +133,7 @@ public class Game {
       final Room gatewayNewsstands = new Room("*Implement shopkeeper* Hello, would you like to purchase anything?", "gatewaynewsstands"); roomMap.put(gatewayNewsstands.getRoomName(), gatewayNewsstands);
       final Room yorkMillsSubwayHallway = new Room("A Hallway is ahead leading to the Subway, Chuck Page plays some guitar for passersby.","yorkmillssubwayhallway"); roomMap.put(yorkMillsSubwayHallway.getRoomName(), yorkMillsSubwayHallway);
       final Room yorkMillsSubway = new Room("Please come back later, unscheduled maintenance has just been scheduled, shuttlebuses are available.", "yorkmillssubway","york mills subway",true,"Placeholder Locked Message");
+      final Room yorkMillsBus = new Room("This 95A bus will lead you east to Bayview Glen, or West to York Mills Station.", "yorkmillsbus");
       
 
 
@@ -592,7 +593,7 @@ public class Game {
        final Room bayviewGlenUpperMusicHallway = new Room ("You walk a narrow hallway past the music room", "bayviewglenuppermusichallway"); roomMap.put(bayviewGlenUpperMusicHallway.getRoomName(), bayviewGlenUpperMusicHallway);
        final Room bayviewGlenDramaRoom = new Room ("You enter the drama room, you see in large bold text #1 27. You don't know what it means but it sounds important so you write it down", "bayviewglendramaroom"); roomMap.put(bayviewGlenDramaRoom.getRoomName(), bayviewGlenDramaRoom);
        final Room bayviewGlenDeck = new Room ("You walk into the deck, you get a compelte view of the entire building from here.", "bayviewglendeck"); roomMap.put(bayviewGlenDeck.getRoomName(), bayviewGlenDeck);
-       final Room bayviewGlenYorkMills = new Room ("You're on york mills street, don mills is to the east.", "bayviewglenyorkmills"); roomMap.put(bayviewGlenYorkMills.getRoomName(), bayviewGlenYorkMills);
+       final Room bayviewGlenYorkMills = new Room ("You're on york mills street, Bayview Glen is to the north.", "bayviewglenyorkmills"); roomMap.put(bayviewGlenYorkMills.getRoomName(), bayviewGlenYorkMills);
        final Room bayviewGlen3rdFloorLobby = new Room ("You go to the third floor above the lobby, wow there's so much to do here!", "bayviewglen3rdfloorlobby"); roomMap.put(bayviewGlen3rdFloorLobby.getRoomName(), bayviewGlen3rdFloorLobby);
        final Room bayviewGlen3rdFloorWestPrepStairwayHallway = new Room ("Hallway, hallway and more hallway.", "bayviewglen3rdfloorwestprepstairwayhallway"); roomMap.put(bayviewGlen3rdFloorWestPrepStairwayHallway.getRoomName(), bayviewGlen3rdFloorWestPrepStairwayHallway);
        final Room bayviewGlen3rdFloorEastPrepStairwayHallway = new Room ("You are in a hallway, you look down at the gym from above.", "bayviewglen3rdflooreastprepstairwayhallway"); roomMap.put(bayviewGlen3rdFloorEastPrepStairwayHallway.getRoomName(), bayviewGlen3rdFloorEastPrepStairwayHallway);
@@ -987,9 +988,14 @@ public class Game {
       final Exit yorkMillsSubwayHallwayExitWest = new Exit("W", yorkMillsSubwayHallway); gatewayNewsstands.addExit(yorkMillsSubwayHallwayExitWest);
       final Exit facultyRoomExitWest = new Exit("W", facultyRoom); yorkMillsSubwayHallway.addExit(facultyRoomExitWest);
       final Exit yorkMillsSubwayHallwayExitEast = new Exit("E", yorkMillsSubwayHallway); facultyRoom.addExit(yorkMillsSubwayHallwayExitEast);
-      final Exit eglintonShuttleBusExitEast = new Exit("E", eglintonShuttleBus); yorkMillsBusTerminal.addExit(eglintonShuttleBusExitEast);
-      final Exit yorkMillsBusTerminalExitWest = new Exit("W", yorkMillsBusTerminal); eglintonShuttleBus.addExit(yorkMillsBusTerminalExitWest);
+      final Exit eglintonShuttleBusExitWest = new Exit("W", eglintonShuttleBus); yorkMillsBusTerminal.addExit(eglintonShuttleBusExitWest);
+      final Exit yorkMillsBusTerminalExitEast = new Exit("E", yorkMillsBusTerminal); eglintonShuttleBus.addExit(yorkMillsBusTerminalExitEast);
       final Exit eglintonBusStopExitSouth = new Exit("S", eglintonBusStop); eglintonShuttleBus.addExit(eglintonBusStopExitSouth);
+      final Exit yorkMillsBusExitEast = new Exit("E", yorkMillsBus); yorkMillsBusTerminal.addExit(yorkMillsBusExitEast);
+      final Exit yorkMillsBusTerminalExitWest = new Exit("W", yorkMillsBusTerminal); yorkMillsBus.addExit(yorkMillsBusTerminalExitWest);
+      final Exit bayviewGlenYorkMillsExitEast = new Exit("E", bayviewGlenYorkMills); yorkMillsBus.addExit(bayviewGlenYorkMillsExitEast);
+      final Exit yorkMillsBusExitWest = new Exit("W", yorkMillsBus); bayviewGlenYorkMills.addExit(yorkMillsBusExitWest);
+      final Exit bayviewGlenDeckExitNorth = new Exit("N", bayviewGlenDeck); bayviewGlenYorkMills.addExit(bayviewGlenDeckExitNorth);
 
 
       // SHEPPARD YONGE EXITS
@@ -1419,7 +1425,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("stclairsubway"));
+    this.player.setCurrentRoom(roomMap.get("yorkmillssubway"));
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {
