@@ -136,7 +136,6 @@ public class Game {
       final Room pleaseLEAVE = new Room("LEAVE THIS PLaCE**. nOW!!","leave"); roomMap.put(pleaseLEAVE.getRoomName(), pleaseLEAVE);
       final Room theEnd = new Room("...Stay for a while", "theend"); roomMap.put(theEnd.getRoomName(), theEnd);
       final Room stClairStation = new Room("you stand in the main lobby of St. Clair Station.", "stclairstation"); roomMap.put(stClairStation.getRoomName(), stClairStation);
-      final Room mcDonalds = new Room("You walk into the cramped subway station McDonald's", "mcdonalds"); roomMap.put(mcDonalds.getRoomName(), mcDonalds);
       final Room stClairAvenue = new Room("You are outside of the station and are facing the slighlty less halted traffic.", "stclairavenue"); roomMap.put(stClairAvenue.getRoomName(), stClairAvenue);
       final Room stClairAndYonge = new Room("You are on the southeast corner of the St. Clair and Yonge intersection.", "stclairandyonge"); roomMap.put(stClairAndYonge.getRoomName(), stClairAndYonge);
       final Room bucaRestaurant = new Room("You are on the north side of St. CLair Avenue West, just outside the restaurant 'Buca'.", "bucarestaurant"); roomMap.put(bucaRestaurant.getRoomName(), bucaRestaurant);
@@ -156,6 +155,91 @@ public class Game {
       final Room stClairAboveStreetcar = new Room("South of a sketchy alley, you stand on a sidewalk above a streetcar stop.", "stclairabovestreetcar"); roomMap.put(stClairAboveStreetcar.getRoomName(), stClairAboveStreetcar);
       final Room wetCement2 = new Room("You just stepped into wet cement! You'd better get out of there before you get stuck.", "wetcement!2"); roomMap.put(wetCement2.getRoomName(), wetCement2);
       final Room streetcar = new Room ("You have entered the streetcar. You look young enough to be under 13.", "streetcar"); roomMap.put(streetcar.getRoomName(), streetcar);
+
+      final Room mcDonalds = new Room("You walk into the cramped subway station McDonald's", "mcdonalds"); roomMap.put(mcDonalds.getRoomName(), mcDonalds);
+            mcDonalds.setRunnable(new Runnable(){
+                public void run(){
+                  try {
+                    Graphics text = new Graphics();
+                    Scanner in = new Scanner(System.in);
+                    text.slowTextSpeed("Hi Welcome to Tim Hortons, Would you like to buy anything? y/n", 7);
+                    String a = in.nextLine();
+                    if(a.equalsIgnoreCase("y")){
+                      boolean finishedOrder = false;
+                        while(!finishedOrder){
+                          if(Game.getGame().getPlayer().getMoney() <=1){
+                            text.slowTextSpeed("What would you like to buy?", 7);
+                            text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
+                            text.slowTextSpeed("> Big Mac - 4$", 7);
+                            text.slowTextSpeed("> McCafe Coffee - 2$", 7);
+                            text.slowTextSpeed("> Happy Meal - 7$", 7);
+                            String b = in.nextLine();
+                            double pMoney = Game.getGame().getPlayer().getMoney();
+                            if(b.equalsIgnoreCase("big mac")){
+                                if((pMoney - 4)>= 0){
+                                  Game.getGame().getPlayer().setMoney(pMoney-=4);
+                                  Game.getGame().getPlayer().getInventory().addItem(
+                                    new Item(2, "Big Mac", false, 
+                                    new Effect("Health up", 0, 0, 4, 20), false)
+                                    );
+                                    finishedOrder = true;
+                                }else{
+                                  text.slowTextSpeed("Im Sorry, Your too broke for Don's LMAO", 7); //CHANGE LATER
+                                }
+                            }else if(b.equalsIgnoreCase("McCafe Coffee")){
+                                if((pMoney - 2)>= 0){
+                                  Game.getGame().getPlayer().setMoney(pMoney-=2);
+                                  Game.getGame().getPlayer().getInventory().addItem(
+                                    new Item(2, "McCafe Coffee", false, 
+                                    new Effect("Health Up", 0, 0, 0, 8), false)
+                                    );
+                                    finishedOrder = true;
+                                }else{
+                                  text.slowTextSpeed("Im Sorry, Your too broke for Don's LMAO", 7); //CHANGE LATER
+                                }
+                            }else if(b.equalsIgnoreCase("Happy Meal")){
+                                if((pMoney - 7)>= 0){
+                                  Game.getGame().getPlayer().setMoney(pMoney-=7);
+                                  Game.getGame().getPlayer().getInventory().addItem(
+                                    new Item(2, "Happy Meal", false, 
+                                    new Effect("Super Delicous", 0, 0, -8, 30), false)
+                                    );
+                                    finishedOrder = true;
+                                }else{
+                                  
+                                  text.slowTextSpeed("Im Sorry, Your too broke for Don's LMAO", 7); //CHANGE LATER
+                                }
+                            }else{
+                              
+                              
+                                text.slowTextSpeed("Sorry, That item is not avaliable right now. Please pick another", 7);
+                              
+                              
+                            }
+                          }
+                          
+                          if(finishedOrder){
+                            while(true){
+                              text.slowTextSpeed("Would you like anything else? y/n", 7);
+                              String c = in.nextLine();
+                              if(c.equalsIgnoreCase("y")){
+                                finishedOrder = false;
+                                break;
+                              }else if(c.equalsIgnoreCase("n")){
+                                finishedOrder = true;
+                                text.slowTextSpeed("Thank you, come again!", 7);
+                                break;
+                              }
+                            }
+                          }
+                        }
+                    }else{
+                      text.slowTextSpeed("ok come back soon", 7);
+                    }
+                    
+                  } catch (Exception e) {
+                    // TODO: handle exception
+                  }
       
 
       //ST. CLAIR WEST AREA ROOMS
@@ -968,6 +1052,8 @@ public class Game {
         final Exit unionMaintenanceRoomExitSouth = new Exit("S",unionMaintenanceRoom); unionFacultyCloset.addExit(unionMaintenanceRoomExitSouth);
         final Exit unionMaintenanceRoomExitWest = new Exit("W",unionMaintenanceRoom); unionFacultyRoom.addExit(unionMaintenanceRoomExitWest);
     }
+    
+    
   }
 
 
