@@ -240,6 +240,8 @@ public class Game {
                   } catch (Exception e) {
                     // TODO: handle exception
                   }
+                }
+            });
       
 
       //ST. CLAIR WEST AREA ROOMS
