@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.google.gson.Gson;
@@ -19,7 +18,6 @@ import zork.Constants.PlayerConstants;
 import zork.Utils.SoundHandler;
 import zork.entites.Enemy;
 import zork.entites.Player;
-import zork.items.TestItem;
 import zork.items.Prime;
 import zork.items.Weapon;
 import java.lang.Runnable;
@@ -99,10 +97,34 @@ public class Game {
       // Create a room object and use the description as the constructor parameter.
 
       // SHEPPARD YONGE
-      final Room sheppardYongeLine1 = new Room("Going south will lead you to York Mills, North to Finch is under maintainence.","sheppardyongeline1");
-      final Room sheppardYongeLine4 = new Room("Going east will lead you to Bayview. Going west will lead you into a tunnel.","sheppardyongeline4");
-      final Room sheppardYongeLine4StreetHallway = new Room("The escalator is stopped. The door to the street is nearby.","sheppardyongeline4streethallway");
+      final Room sheppardYongeLine1 = new Room("Going south will lead you to York Mills, North to Finch is under maintainence.","sheppardyongeline1"); roomMap.put(sheppardYongeLine1.getRoomName(),sheppardYongeLine1);
+      final Room sheppardYongeLine4 = new Room("Going east will lead you to Bayview. Going west will lead you into a tunnel.","sheppardyongeline4"); roomMap.put(sheppardYongeLine4.getRoomName(),sheppardYongeLine4);
+      final Room sheppardYongeLine4StreetHallway = new Room("The escalator is stopped. The door to the street is nearby.","sheppardyongeline4streethallway"); roomMap.put(sheppardYongeLine4StreetHallway.getRoomName(),sheppardYongeLine4StreetHallway);
       final Room sheppardYongeLine1HallwayBeforeStreet = new Room("stuff","sheppardyongeline1hallwaybeforestreet");
+      
+      
+      /*
+       * Example enemy and usage when entering room.
+       */
+      boolean[] hasFoughtCrackhead = new boolean[]{false};
+      Inventory crackHeadInventory = new Inventory(5);
+      Effect crackHeadPoison = new Effect("Poison", 5, 5, -5, 0);
+      crackHeadInventory.addItem(new Weapon(5, "Needle",false, 10,crackHeadPoison));
+      // make crackhead
+      Enemy crackHead = new Enemy(null, sheppardYongeLine4StreetHallway, 25, crackHeadInventory, 0, "Crackhead", 1);
+      sheppardYongeLine4StreetHallway.setRunnable(() -> {
+        if(!hasFoughtCrackhead[0]) {
+        // fight crackhead
+        Fight crackHeadFight = new Fight(crackHead);
+        if(crackHeadFight.fight()) {
+          Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(crackHead);
+          hasFoughtCrackhead[0] = true;
+        } else {
+          System.out.println("didnt win. crackhead steals all ur stuff");
+        }
+      }
+      });
+
 
 
       //YORK MILLS AREA ROOMS
@@ -256,6 +278,7 @@ public class Game {
       //SUMMER HILL DEAD END ROOM
 
       final Room summerhillSubway = new Room("Please stay on the train, police investigation underway", "summerhillSubway"); roomMap.put(summerhillSubway.getRoomName(), summerhillSubway);
+
 
 
 
@@ -720,9 +743,9 @@ public class Game {
 
       // SHEPPARD YONGE EXITS
 
-      final Exit sheppardYongeLine1ExitNorth = new Exit("N", sheppardYongeLine4StreetHallway);
-      final Exit sheppardYongeLine1ExitSouth = new Exit("S", sheppardYongeLine1HallwayBeforeStreet);
-      final Exit sheppardYongeLine4ExitExit = new Exit("S", sheppardYongeLine1);
+      final Exit sheppardYongeLine1ExitNorth = new Exit("U", sheppardYongeLine4StreetHallway); sheppardYongeLine1.addExit(sheppardYongeLine1ExitNorth);
+      final Exit sheppardYongeLine1ExitSouth = new Exit("S", sheppardYongeLine1HallwayBeforeStreet); sheppardYongeLine1.addExit(sheppardYongeLine1ExitSouth);
+      final Exit sheppardYongeLine4ExitDown = new Exit("U", sheppardYongeLine1); sheppardYongeLine4.addExit(sheppardYongeLine4ExitDown);
       
 
 
@@ -1140,7 +1163,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("unionplatform"));
+    this.player.setCurrentRoom(roomMap.get("sheppardyongeline4"));
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {
