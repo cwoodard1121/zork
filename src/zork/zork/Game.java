@@ -972,7 +972,7 @@ public class Game {
         final Room unionCorner = new Room ("Placeholder Description for unionCorner", "unioncorner"); roomMap.put(unionCorner.getRoomName(), unionCorner);
       
           
-          unionMainArea.setRunnable(new Runnable(){
+          unionCorner.setRunnable(new Runnable(){
             
             ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
             @Override
