@@ -677,26 +677,30 @@ public class Game {
         final Room unionPlatform = new Room ("Placeholder Description for unionPlatform", "unionplatform"); roomMap.put(unionPlatform.getRoomName(), unionPlatform);
         //unionShopArea
         final Room unionShopArea = new Room ("Placeholder Description for unionShopArea", "unionshoparea"); roomMap.put(unionShopArea.getRoomName(), unionShopArea);
-          Inventory i = new Inventory(2600);
-          i.addItem(new Weapon(12,"Crow bar", false, 10, null));
-          final Enemy PRIME_THEIF = new Enemy(null, unionShopArea, 20, i, 20, "Prime Theif", 8);
-          unionShopArea.addEnemies(PRIME_THEIF); 
+          
           unionShopArea.setRunnable(new Runnable(){
 
-                ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
+                boolean[] fightDone = {false};
                 @Override
                 public void run() {
-                  try { 
-                    
-                    Fight f = new Fight(PRIME_THEIF);
-                    Graphics text = new Graphics();
-                    text.slowTextSpeed("HEY YOU... I heard that your on a prime quest so i know you have some. NOW GIVE IT TOO ME!!!!", 12);
-                    boolean won = f.fight();
-                    if(won) {
-                        Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(PRIME_THEIF);
+                  if(!fightDone[0]){
+                    Inventory i = new Inventory(2600);
+                    i.addItem(new Weapon(12,"Crow bar", false, 10, null));
+                    final Enemy PRIME_THEIF = new Enemy(null, unionShopArea, 20, i, 20, "Prime Theif", 8);
+                    unionShopArea.addEnemies(PRIME_THEIF); 
+                    try { 
+                      
+                      Fight f = new Fight(PRIME_THEIF);
+                      Graphics text = new Graphics();
+                      text.slowTextSpeed("HEY YOU... I heard that your on a prime quest so i know you have some. NOW GIVE IT TOO ME!!!!", 12);
+                      boolean won = f.fight();
+                      if(won) {
+                          Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(PRIME_THEIF);
+                          fightDone[0] = true;
+                      }
+                    } catch (Exception e) {
+                      // TODO: handle exception
                     }
-                  } catch (Exception e) {
-                    // TODO: handle exception
                   }
                 }
 
@@ -706,6 +710,90 @@ public class Game {
         //unionTimHortons
         final Room unionTimHortons = new Room ("Placeholder Description for unionTimHortons", "uniontimhortons"); roomMap.put(unionTimHortons.getRoomName(), 
         unionTimHortons);
+            unionTimHortons.setRunnable(new Runnable(){
+                public void run(){
+                  try {
+                    Graphics text = new Graphics();
+                    Scanner in = new Scanner(System.in);
+                    text.slowTextSpeed("Hi Welcome to Tim Hortons, Would you like to buy anything? y/n", 7);
+                    String a = in.nextLine();
+                    if(a.equalsIgnoreCase("y")){
+                      boolean finishedOrder = false;
+                        while(!finishedOrder){
+                          text.slowTextSpeed("What would you like to buy?", 7);
+                          text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
+                          text.slowTextSpeed("> Boston Cream Donut - 4$", 7);
+                          text.slowTextSpeed("> French Vanilla - 2$", 7);
+                          text.slowTextSpeed("> Toasted Bagal With Cream Cheese - 7$", 7);
+                          String b = in.nextLine();
+                          double pMoney = Game.getGame().getPlayer().getMoney();
+                          if(b.equalsIgnoreCase("boston cream donut")){
+                              if((pMoney - 4)>= 0){
+                                Game.getGame().getPlayer().setMoney(pMoney-=4);
+                                Game.getGame().getPlayer().getInventory().addItem(
+                                  new Item(2, "Boston Cream Donut", false, 
+                                  new Effect("Health up", 0, 0, 4, 20), false)
+                                  );
+                                  finishedOrder = true;
+                              }else{
+                                text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
+                              }
+                          }else if(b.equalsIgnoreCase("French Vanilla")){
+                              if((pMoney - 2)>= 0){
+                                Game.getGame().getPlayer().setMoney(pMoney-=2);
+                                Game.getGame().getPlayer().getInventory().addItem(
+                                  new Item(2, "French Vanilla", false, 
+                                  new Effect("Health Up", 0, 0, 0, 8), false)
+                                  );
+                                  finishedOrder = true;
+                              }else{
+                                text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
+                              }
+                          }else if(b.equalsIgnoreCase("Toasted Bagal With Cream Cheese")){
+                              if((pMoney - 7)>= 0){
+                                Game.getGame().getPlayer().setMoney(pMoney-=7);
+                                Game.getGame().getPlayer().getInventory().addItem(
+                                  new Item(2, "Toasted Bagal With Cream Cheese", false, 
+                                  new Effect("Super Delicous", 0, 0, -8, 30), false)
+                                  );
+                                  finishedOrder = true;
+                              }else{
+                                
+                                text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
+                              }
+                          }else{
+                            
+                            
+                              text.slowTextSpeed("Sorry, That item is not avaliable right now. Please pick another", 7);
+                            
+                            
+                          }
+                          
+                          if(finishedOrder){
+                            while(true){
+                              text.slowTextSpeed("Would you like anything else? y/n", 7);
+                              String c = in.nextLine();
+                              if(c.equalsIgnoreCase("y")){
+                                finishedOrder = false;
+                                break;
+                              }else if(c.equalsIgnoreCase("n")){
+                                finishedOrder = true;
+                                text.slowTextSpeed("Thank you, come again!", 7);
+                                break;
+                              }
+                            }
+                          }
+                        }
+                    }else{
+                      text.slowTextSpeed("ok come back soon", 7);
+                    }
+                    
+                  } catch (Exception e) {
+                    // TODO: handle exception
+                  }
+
+                }
+            });
         //Main area
         final Room unionMainArea = new Room ("Placeholder Description for unionMainArea", "unionmainarea"); roomMap.put(unionMainArea.getRoomName(), unionMainArea);
             if(!isTesting){
@@ -823,7 +911,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("bayviewglenlobby"));
+    this.player.setCurrentRoom(roomMap.get("unionplatform"));
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {
