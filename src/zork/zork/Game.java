@@ -794,7 +794,6 @@ public class Game {
  
        final Exit bayviewGlenLearningCommonsExitSouth = new Exit("S",bayviewGlenLearningCommons); bayviewGlenHallwayCafeteria.addExit(bayviewGlenLearningCommonsExitSouth);
        final Exit bayviewGlenCafeteriaFoodAreaExitNorth = new Exit("N",bayviewGlenCafeteriaFoodArea); bayviewGlenHallwayCafeteria.addExit(bayviewGlenCafeteriaFoodAreaExitNorth);
-       final Exit bayviewGlenHallwayPrepGymExitEast = new Exit("E",bayviewGlenHallwayPrepGym); bayviewGlenHallwayCafeteria.addExit(bayviewGlenHallwayPrepGymExitEast);
        final Exit bayviewGlenLobbyExitWest = new Exit("W",bayviewGlenLobby); bayviewGlenHallwayCafeteria.addExit(bayviewGlenLobbyExitWest);
  
        final Exit bayviewGlenPrepGymExitNorth = new Exit("N",bayviewGlenPrepGym); bayviewGlenHallwayPrepGym.addExit(bayviewGlenPrepGymExitNorth);
