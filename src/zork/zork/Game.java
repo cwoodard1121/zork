@@ -156,6 +156,12 @@ public class Game {
       final Room stClairAboveStreetcar = new Room("South of a sketchy alley, you stand on a sidewalk above a streetcar stop.", "stclairabovestreetcar"); roomMap.put(stClairAboveStreetcar.getRoomName(), stClairAboveStreetcar);
       final Room wetCement2 = new Room("You just stepped into wet cement! You'd better get out of there before you get stuck.", "wetcement!2"); roomMap.put(wetCement2.getRoomName(), wetCement2);
       final Room streetcar = new Room ("You have entered the streetcar. You look young enough to be under 13.", "streetcar"); roomMap.put(streetcar.getRoomName(), streetcar);
+      
+
+      //ST. CLAIR WEST AREA ROOMS
+      final Room stClairWestStation = new Room ("As you enter the station, a distinct smell of garbage envelops your senses.", "stclairweststation"); roomMap.put(stClairWestStation.getRoomName(), stClairWestStation);
+      final Room onTheRun = new Room("Stepping into the dank and small convenience store, a wall of candy and slim jims greet your eyes. *IMPLEMENT SHOPKEEPER FOR PRIME", "ontherun"); roomMap.put(onTheRun.getRoomName(), onTheRun);
+      final Room stClairWestSubway = new Room ("'Probably one of the nicer subway stations', you think to yourself. ", "stclairwestsubway"); roomMap.put(stClairWestSubway.getRoomName(), stClairWestSubway);
 
 
 
@@ -574,7 +580,13 @@ public class Game {
       final Exit wetCementExitEast = new Exit ("E", wetCement2); stClairAboveStreetcar.addExit(wetCementExitEast);
       final Exit stClairAboveStreetcarExitWest = new Exit ("W", stClairAboveStreetcar); wetCement2.addExit(stClairAboveStreetcarExitWest);
       final Exit streetcarExitSouth = new Exit ("S", streetcar); stClairAboveStreetcar.addExit(streetcarExitSouth);
-      final Exit stClairAboveStreetCarExitNorth= new Exit ("N", stClairAboveStreetcar); streetcar.addExit(stClairAboveStreetCarExitNorth);
+      final Exit stClairAboveStreetCarExitNorth = new Exit ("N", stClairAboveStreetcar); streetcar.addExit(stClairAboveStreetCarExitNorth);
+
+      //St. Clair West Station Exits
+      final Exit stClairWestStationExitWest = new Exit ("W", stClairWestStation); streetcar.addExit(stClairWestStationExitWest);
+      final Exit streetcarExitEast = new Exit("E", streetcar); stClairWestStation.addExit(streetcarExitEast);
+      final Exit onTheRunExitWest = new Exit("W", onTheRun); stClairWestStation.addExit(onTheRunExitWest);
+      final Exit stClairWestStationExitEast = new Exit("E", stClairWestStation); onTheRun.addExit(stClairWestStationExitEast);
 
 
       
