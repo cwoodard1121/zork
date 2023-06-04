@@ -26,10 +26,11 @@ public class South extends Command {
                     return e.getAdjacentRoom().getLockedMessage();
                 }
             }
-        } catch (Exception exception) {
-            return "no ascii art";
-        } 
-            }
-            return "There is no room to the South";
+            } catch (Exception exception) {
+                return "no ascii art";
+            } 
         }
+            return "There is no room to the South";
     }
+
+}

@@ -20,7 +20,6 @@ import zork.Utils.SoundHandler;
 import zork.entites.Enemy;
 import zork.entites.Player;
 import zork.items.TestItem;
-import zork.items.Coupon;
 import zork.items.Weapon;
 import java.lang.Runnable;
 
@@ -550,36 +549,42 @@ public class Game {
         unionTimHortons);
         //Main area
         final Room unionMainArea = new Room ("Placeholder Description for unionMainArea", "unionmainarea"); roomMap.put(unionMainArea.getRoomName(), unionMainArea);
-        // boolean[] hasEnteredMainLobby = {false};
-        // unionMainArea.setRunnable(new Runnable(){
-          
-        //   ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
-        //   @Override
-        //   public void run() {
-        //     if (!hasEnteredMainLobby[0]) {
-        //       hasEnteredMainLobby[0] = true;
-        //       try {
-        //         renderer.showCutScene(1100, "\\bin\\zork\\data\\unioncyruscall.txt");
-        //       } catch (Exception e) {
-        //         handleException(e);
-        //       }
-        //     }
-        //   }
+          //cutscene
+          // boolean[] hasEnteredMainLobby = {false};
+          // unionMainArea.setRunnable(new Runnable(){
+            
+          //   ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
+          //   @Override
+          //   public void run() {
+          //     if (!hasEnteredMainLobby[0]) {
+          //       hasEnteredMainLobby[0] = true;
+          //       try {
+          //         renderer.showCutScene(1100, "\\bin\\zork\\data\\unioncyruscall.txt");
+          //       } catch (Exception e) {
+          //         handleException(e);
+          //       }
+          //     }
+          //   }
           
         // });
         //union Corner
         final Room unionCorner = new Room ("Placeholder Description for unionCorner", "unioncorner"); roomMap.put(unionCorner.getRoomName(), unionCorner);
         //scams Market
         final Room unionScamsMarket = new Room ("Placeholder Description for unionScamsMarket", "unionscamsmarket"); roomMap.put(unionScamsMarket.getRoomName(), unionScamsMarket);
-        Coupon freeprime = new Coupon(2, "One Free Prime", false);
         unionScamsMarket.setRunnable(new Runnable(){
          
           @Override
           public void run() {
             ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
-            if(ar.contains(freeprime)){
-              //run the bossfight
-            }
+            boolean hasCoupon = false;
+              for(int i = 0; i<ar.size(); i++){
+                  if(ar.get(i).getName().equals("Free Prime Coupon"))
+                    hasCoupon = true;
+                  
+              }
+              if(hasCoupon){
+                //run the bossfight
+              }
            
           }
         });
@@ -595,15 +600,7 @@ public class Game {
         final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         //faculty closet
         final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true, "is locked, prob need a key"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
-        unionFacultyCloset.setRunnable(new Runnable(){
-         
-          @Override
-          public void run() {
-            Game.getGame().getPlayer().getInventory().addItem(freeprime);
-            System.out.println("you found a coupon for free prime. This can proboably be used somewhere...");
-           
-          }
-        });
+        unionFacultyCloset.addItemGround(new Item(2, "Free Prime Coupon", false, null, false));
         //faculty room
         final Room unionFacultyRoom = new Room ("Placeholder Description for unionFacultyRoom", "unionfacultyroom"); roomMap.put(unionFacultyRoom.getRoomName(), unionFacultyRoom);
 
