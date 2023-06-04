@@ -1313,7 +1313,7 @@ public class Game {
             text.slowTextSpeed("TTC worker: HEY YOUR NOT SUPPOSE TO BE HERE!", 7);
                 Inventory i = new Inventory(2600);
                 i.addItem(new Weapon(12,"Broom", false, 8, null));
-                final Enemy TTCWORKER = new Enemy(null, unionFacultyRoom, 150, i, 80, "ShopKeeper", 25);
+                final Enemy TTCWORKER = new Enemy(null, unionFacultyRoom, 30, i, 20, "ShopKeeper", 25);
                 Fight f = new Fight(TTCWORKER);
                 boolean won = f.fight();
                 if(won){
