@@ -983,7 +983,10 @@ public class Game {
                 text.slowTextSpeed("Hey kid, wanna try your luck in blackjack? y/n", 0);
                 String d = in.nextLine();
                 if(d.equalsIgnoreCase("y")){
-                  
+                  BlackJack n = new BlackJack();
+                  n.play();
+                }else{
+                  text.slowTextSpeed("alright, your loss...", 0);
                 }
               }catch (Exception e){
                 //ajsdasda
