@@ -189,7 +189,7 @@ public class Game {
                     if(a.equalsIgnoreCase("y")){
                       boolean finishedOrder = false;
                         while(!finishedOrder){
-                          if(Game.getGame().getPlayer().getMoney() >=1){
+                          if(Game.getGame().getPlayer().getMoney() >= 1){
                             text.slowTextSpeed("What would you like to buy?", 7);
                             text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                             text.slowTextSpeed("> Big Mac - 4$", 7);
@@ -239,7 +239,9 @@ public class Game {
                               
                             }
                           }else{
+                            System.out.println("YOU HAVE NO MONEY. YOURE TOO POOR FOR THE DON");
                             finishedOrder = false;
+                            break;
                           }
                           
                           if(finishedOrder){
@@ -1119,7 +1121,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("sheppardyongeline4"));
+    this.player.setCurrentRoom(roomMap.get("stclairsubway"));
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {
