@@ -1572,6 +1572,37 @@ public class Game {
               }
             }
           });
+
+          Inventory rogueEconTest = new Inventory(10);
+       rogueEconTest.addItem(new Weapon(3, "MC=MR < ATC", false, 0, new Effect("Making A Loss in the Short Run", 3, 10, 0, 0)));
+       rogueEconTest.addItem(new Weapon(3, "Supply and Demand Equilibrium", false, 15, null));
+       rogueEconTest.addItem(new Weapon(3, "Unregulated Natural Monopoly", false, 10, new Effect("Extreme Inneficiency", 4, 5, -2, 0)));
+       final Enemy rogueEconTestEnemy = new Enemy(null, bayviewGlen2ndFloorUpperHallway, 75, rogueEconTest , 0, "Rogue Econ Test", 94);
+       bayviewGlen2ndFloorUpperHallway.addEnemies(rogueEconTestEnemy);
+       bayviewGlen2ndFloorUpperHallway.setRunnable(() -> {
+         try {
+           if(bayviewGlen2ndFloorUpperHallway.enemies.contains(rogueEconTestEnemy)) {
+             Fight f = new Fight(rogueEconTestEnemy);
+             boolean won = f.fight();
+             if(won) {
+               bayviewGlen2ndFloorUpperHallway.enemies.remove(rogueEconTestEnemy);
+             }
+           }
+           if (bayviewGlenG12CommonAreaExitDown.getIsExitLocked()) {
+            for (Item i : Game.getGame().getPlayer().getInventory().getItems()) {
+              if (i.getName().equals("Basement Key")) {
+                if (i.getKeyId().equals("BasementBayviewGlenKey")) {
+                  Graphics text = new Graphics();
+                  bayviewGlenG12CommonAreaExitDown.setIsExitLocked(false);
+                  text.slowTextSpeed("You take the time to unlock the door on the way down", 20);
+                }
+              }
+            }
+          }
+         } catch (Exception e) {
+           e.printStackTrace();
+         }
+       });
         //Maintenance room
         final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         //faculty closet
