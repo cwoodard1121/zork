@@ -930,7 +930,8 @@ public class Game {
        
        final Exit bayviewGlenOutsidePrepGymExitNorth = new Exit("N",bayviewGlenOutsidePrepGymNorth); bayviewGlenPrepGym.addExit(bayviewGlenOutsidePrepGymExitNorth);
        final Exit bayviewGlenHallwayPrepGymExitSouth = new Exit("S",bayviewGlenHallwayPrepGym); bayviewGlenPrepGym.addExit(bayviewGlenHallwayPrepGymExitSouth);
- 
+       final Exit bayviewGlenHallwayPrepGymExitEast = new Exit("E",bayviewGlenHallwayPrepGym); bayviewGlenHallwayCafeteria.addExit(bayviewGlenHallwayPrepGymExitEast);
+
        final Exit bayviewGlenHallwayPrepGymExitNorth = new Exit("N",bayviewGlenHallwayPrepGym); bayviewGlenWeightRoom.addExit(bayviewGlenHallwayPrepGymExitNorth);
  
        final Exit bayviewGlenOutsideCafeteriaExitWest = new Exit("W",bayviewGlenOutsideCafeteria); bayviewGlenOutsidePrepGymNorth.addExit(bayviewGlenOutsideCafeteriaExitWest);
