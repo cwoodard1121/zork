@@ -551,7 +551,7 @@ public class Game {
       final Exit storageSpaceExitWest = new Exit("W", storageSpace); elevatorSecondFloor.addExit(storageSpaceExitWest);
       final Exit elevatorSecondFloorExitEast = new Exit("E", elevatorSecondFloor); storageSpace.addExit(elevatorSecondFloorExitEast);
       final Exit catwalkExitWest = new Exit("W", catwalk); storageSpace.addExit(catwalkExitWest);
-      final Exit storageSpaceExitEast = new Exit("E", storageSpace); catwalk.addExit(storageSpaceExitEast);
+      final Exit storageSpaceExitEast = new Exit("E", storageSpace); catwalk.addExit(storageSpaceExitEast);  
       final Exit rolexOfficeExitWest = new Exit ("W", rolexOffice); catwalk.addExit(rolexOfficeExitWest);
       final Exit catwalkExitEast = new Exit("E", catwalk); rolexOffice.addExit(catwalkExitEast);
       final Exit rolexHallwayExitWest = new Exit("W", rolexHallway); rolexOffice.addExit(rolexHallwayExitWest);
@@ -565,7 +565,7 @@ public class Game {
       final Exit wetCementExitEast = new Exit ("E", wetCement2); stClairAboveStreetcar.addExit(wetCementExitEast);
       final Exit stClairAboveStreetcarExitWest = new Exit ("W", stClairAboveStreetcar); wetCement2.addExit(stClairAboveStreetcarExitWest);
       final Exit streetcarExitSouth = new Exit ("S", streetcar); stClairAboveStreetcar.addExit(streetcarExitSouth);
-      final Exit stClairAboveStreetCarExitNorth = new Exit ("N", stClairAboveStreetcar); streetcar.addExit(stClairAboveStreetCarExitNorth);
+      final Exit stClairAboveStreetCarExitNorth= new Exit ("N", stClairAboveStreetcar); streetcar.addExit(stClairAboveStreetCarExitNorth);
 
 
       
