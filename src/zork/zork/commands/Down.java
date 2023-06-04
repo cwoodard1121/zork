@@ -25,7 +25,7 @@ public class Down extends Command {
                 }
             }
         } catch (Exception exception) {
-            return "ya done goofed";
+            return "no ascii art";
         } 
             }
             return "There is no room below you";

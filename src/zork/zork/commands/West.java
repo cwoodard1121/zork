@@ -25,7 +25,7 @@ public class West extends Command {
                 }
             }
         } catch (Exception exception) {
-            return "ya done goofed";
+            return "no ascii art";
         } 
             }
             return "There is no room to the West";

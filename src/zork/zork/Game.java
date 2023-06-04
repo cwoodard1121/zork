@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -19,6 +20,7 @@ import zork.Utils.SoundHandler;
 import zork.entites.Enemy;
 import zork.entites.Player;
 import zork.items.TestItem;
+import zork.items.Coupon;
 import zork.items.Weapon;
 import java.lang.Runnable;
 
@@ -144,17 +146,20 @@ public class Game {
       final Room corporateCafe = new Room("You step into a bleak cafe", "corporatecafe"); roomMap.put(corporateCafe.getRoomName(), corporateCafe);
       final Room corporateElevator = new Room("You are on the first floor of the elevator, it is severely cramped and smells like leather briefcases. Would you like to go up?", "corporateelevator"); roomMap.put(corporateElevator.getRoomName(), corporateElevator);
       final Room elevatorSecondFloor = new Room("You arrive on the second floor of the office.", "elevatorsecondfloor"); roomMap.put(elevatorSecondFloor.getRoomName(), elevatorSecondFloor);
+      final Room officeRoom = new Room("You enter an office space with people working away. ", "officeroom"); roomMap.put(officeRoom.getRoomName(), officeRoom);
+      final Room storageSpace = new Room("You are now in an old decrepid storage area. Spider webs cover the walls, and there is an open window ", "storagespace"); roomMap.put(storageSpace.getRoomName(), storageSpace);
+      final Room catwalk = new Room("You stand on a thin plank of wood connecting the building you were just in, and the building beside it.", "catwalk"); roomMap.put(catwalk.getRoomName(), catwalk);
+      final Room rolexOffice = new Room("You have entered the office of the Rolex Canad building. The boss must be away right now", "rolexoffice"); roomMap.put(rolexOffice.getRoomName(), rolexOffice);
+      final Room rolexHallway = new Room("in the green carpeted rolex halway, you can hear people working away in the offices adjacent. You should get out before you are found here.", "rolexhallway"); roomMap.put(rolexHallway.getRoomName(), rolexHallway);
+      final Room rolexStairwell = new Room("A sign at the top of the stairs says 'to offices', a sign at the bottom says 'emergency exit'.", "rolexstairwell");
+      final Room sketchyAlley = new Room("You stand outside the emergency exit of the Rolex Canada Building. This alley looks like it leads back to St. Clair Avenue West.", "sketchyalley"); roomMap.put(sketchyAlley.getRoomName(), sketchyAlley);
+      final Room stClairAboveStreetcar = new Room("South of a sketchy alley, you stand on a sidewalk above a streetcar stop.", "stclairabovestreetcar"); roomMap.put(stClairAboveStreetcar.getRoomName(), stClairAboveStreetcar);
+
 
 
       //SUMMER HILL DEAD END ROOM
 
       final Room summerhillSubway = new Room("Please stay on the train, police investigation underway", "summerhillSubway"); roomMap.put(summerhillSubway.getRoomName(), summerhillSubway);
-
-
-
-
-
-
 
 
 
@@ -207,7 +212,7 @@ public class Game {
       final Room bayviewGlenG9CommonArea = new Room ("Placeholder Description for bayviewGlenG9CommonArea", "bayviewgleng9commonarea"); roomMap.put(bayviewGlenG9CommonArea.getRoomName(), bayviewGlenG9CommonArea);
       Inventory meatBall = new Inventory(5);
       meatBall.addItem(new Weapon(3, "Fork", false, 10, null));
-      final Enemy cyrus_meatball = new Enemy(null, bayviewGlenG9CommonArea, Constants.PlayerConstants.DEFAULT_HEALTH * 2,meatBall , 0, "Meatball");
+      final Enemy cyrus_meatball = new Enemy(null, bayviewGlenG9CommonArea, Constants.PlayerConstants.DEFAULT_HEALTH, meatBall , 0, "Meatball");
       bayviewGlenG9CommonArea.addEnemies(cyrus_meatball);
       bayviewGlenG9CommonArea.setRunnable(new Runnable() {
 
@@ -253,12 +258,12 @@ public class Game {
             } catch (Exception e) {
               handleException(e);
             }
-              bayviewGlenHallwayTheatreFront.setLocked(false);
-              bayviewGlenUpperGym.setLocked(false);
-              bayviewGlenG11CommonArea.setLocked(false);
-              bayviewGlenHallwayPrepGym.setLocked(false);
-              bayviewGlenPrepGym.setLocked(false);
-              bayviewGlenCafeteriaDiningArea.setLocked(false);
+            bayviewGlenHallwayTheatreFront.setLocked(false);
+            bayviewGlenUpperGym.setLocked(false);
+            bayviewGlenG11CommonArea.setLocked(false);
+            bayviewGlenHallwayPrepGym.setLocked(false);
+            bayviewGlenPrepGym.setLocked(false);
+            bayviewGlenCafeteriaDiningArea.setLocked(false);
           }
         }
       });
@@ -539,6 +544,24 @@ public class Game {
       final Exit corporateLobbyExitEast = new Exit("E", corporateLobby); corporateElevator.addExit(corporateLobbyExitEast);
       final Exit elevatorSecondFloorExitUp = new Exit("U", elevatorSecondFloor); corporateElevator.addExit(elevatorSecondFloorExitUp);
       final Exit corporateElevatorExitDown = new Exit("D", corporateElevator); elevatorSecondFloor.addExit(corporateElevatorExitDown);
+      final Exit officeRoomExitEast = new Exit("E", officeRoom); elevatorSecondFloor.addExit(officeRoomExitEast);
+      final Exit elevatorSecondFloorExitWest = new Exit("W", elevatorSecondFloor); officeRoom.addExit(elevatorSecondFloorExitWest);
+      final Exit storageSpaceExitWest = new Exit("W", storageSpace); elevatorSecondFloor.addExit(storageSpaceExitWest);
+      final Exit elevatorSecondFloorExitEast = new Exit("E", elevatorSecondFloor); storageSpace.addExit(elevatorSecondFloorExitEast);
+      final Exit catwalkExitWest = new Exit("W", catwalk); storageSpace.addExit(catwalkExitWest);
+      final Exit storageSpaceExitEast = new Exit("E", storageSpace); catwalk.addExit(storageSpaceExitEast);
+      final Exit rolexOfficeExitWest = new Exit ("W", rolexOffice); catwalk.addExit(rolexOfficeExitWest);
+      final Exit catwalkExitEast = new Exit("E", catwalk); rolexOffice.addExit(catwalkExitEast);
+      final Exit rolexHallwayExitWest = new Exit("W", rolexHallway); rolexOffice.addExit(rolexHallwayExitWest);
+      final Exit rolexOfficeExitEast = new Exit ("E", rolexOffice); rolexHallway.addExit(rolexOfficeExitEast);
+      final Exit rolexStairwellExitWest = new Exit("W", rolexStairwell); rolexHallway.addExit(rolexStairwellExitWest);
+      final Exit rolexHallwaysExitEast = new Exit ("E", rolexHallway); rolexStairwell.addExit(rolexHallwaysExitEast);
+      final Exit sketchyAlleyExitWest = new Exit ("W", sketchyAlley); rolexStairwell.addExit(sketchyAlleyExitWest); 
+      final Exit rolexStairwellExitEast = new Exit("E", rolexStairwell); sketchyAlley.addExit(rolexStairwellExitEast);
+      final Exit stClairAboveStreetCarExitSouth = new Exit("S", stClairAboveStreetcar); sketchyAlley.addExit(stClairAboveStreetCarExitSouth);
+      final Exit sketchyAlleyExitNorth = new Exit ("N", sketchyAlley); stClairAboveStreetcar.addExit(sketchyAlleyExitNorth);
+
+      
 
 
 
@@ -570,10 +593,39 @@ public class Game {
         unionTimHortons);
         //Main area
         final Room unionMainArea = new Room ("Placeholder Description for unionMainArea", "unionmainarea"); roomMap.put(unionMainArea.getRoomName(), unionMainArea);
+        // boolean[] hasEnteredMainLobby = {false};
+        // unionMainArea.setRunnable(new Runnable(){
+          
+        //   ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
+        //   @Override
+        //   public void run() {
+        //     if (!hasEnteredMainLobby[0]) {
+        //       hasEnteredMainLobby[0] = true;
+        //       try {
+        //         renderer.showCutScene(1100, "\\bin\\zork\\data\\unioncyruscall.txt");
+        //       } catch (Exception e) {
+        //         handleException(e);
+        //       }
+        //     }
+        //   }
+          
+        // });
         //union Corner
         final Room unionCorner = new Room ("Placeholder Description for unionCorner", "unioncorner"); roomMap.put(unionCorner.getRoomName(), unionCorner);
         //scams Market
         final Room unionScamsMarket = new Room ("Placeholder Description for unionScamsMarket", "unionscamsmarket"); roomMap.put(unionScamsMarket.getRoomName(), unionScamsMarket);
+        Coupon freeprime = new Coupon(2, "One Free Prime", false);
+        unionScamsMarket.setRunnable(new Runnable(){
+         
+          @Override
+          public void run() {
+            ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
+            if(ar.contains(freeprime)){
+              //run the bossfight
+            }
+           
+          }
+        });
         //hallway
         final Room unionHallway = new Room ("Placeholder Description for unionHallway", "unionhallway"); roomMap.put(unionHallway.getRoomName(), unionHallway);
         //Guide room
@@ -585,18 +637,29 @@ public class Game {
         //Maintenance room
         final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         //faculty closet
-        final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true, "Placeholder Locked Message for Union Facility Closet"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
+        final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true, "is locked, prob need a key"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
+        unionFacultyCloset.setRunnable(new Runnable(){
+         
+          @Override
+          public void run() {
+            Game.getGame().getPlayer().getInventory().addItem(freeprime);
+            System.out.println("you found a coupon for free prime. This can proboably be used somewhere...");
+           
+          }
+        });
         //faculty room
         final Room unionFacultyRoom = new Room ("Placeholder Description for unionFacultyRoom", "unionfacultyroom"); roomMap.put(unionFacultyRoom.getRoomName(), unionFacultyRoom);
 
         //exits
         final Exit  unionShopAreaExitUp = new Exit("U", unionShopArea); unionPlatform.addExit( unionShopAreaExitUp);
-        final Exit unionMainAreaExitNorth = new Exit("N",unionMainArea); unionShopArea.addExit(unionMainAreaExitNorth);    
+        final Exit unionMainAreaExitNorth = new Exit("N",unionMainArea); unionShopArea.addExit(unionMainAreaExitNorth);  
+        final Exit unionMainAreaExitDown = new Exit("D",unionPlatform); unionShopArea.addExit(unionMainAreaExitDown);  
         final Exit unionTimHortonsExitEast = new Exit("E",unionTimHortons); unionShopArea.addExit(unionTimHortonsExitEast);
         final Exit unionShopAreaExitEast = new Exit("W",unionShopArea); unionTimHortons.addExit(unionShopAreaExitEast);
         final Exit unionHallwayExitNorth = new Exit("N",unionHallway); unionMainArea.addExit(unionHallwayExitNorth);
         final Exit unionScamsMarketExitWest = new Exit("W",unionScamsMarket); unionMainArea.addExit(unionScamsMarketExitWest);     
         final Exit unionCornerExitEast = new Exit("E",unionCorner); unionMainArea.addExit(unionCornerExitEast); 
+        final Exit unionCornerExitSouth = new Exit("S",unionShopArea); unionMainArea.addExit(unionCornerExitSouth); 
         final Exit unionMaintenanceRoomExitUp = new Exit("U",unionMaintenanceRoom);unionMainArea.addExit(unionMaintenanceRoomExitUp);   
         final Exit unionMainAreaExitWest = new Exit("W",unionMainArea); unionCorner.addExit(unionMainAreaExitWest);  
         final Exit unionMainAreaExitEast = new Exit("E",unionMainArea); unionScamsMarket.addExit(unionMainAreaExitEast);
@@ -607,7 +670,7 @@ public class Game {
         final Exit unionHallwayExitSouth = new Exit("S",unionHallway); unionWashroom.addExit(unionHallwayExitSouth); 
         final Exit unionSinkRoomExitEast = new Exit("E",unionSinkRoom); unionWashroom.addExit(unionSinkRoomExitEast);
         final Exit unionWashroomExitWest = new Exit("W",unionWashroom); unionSinkRoom.addExit(unionWashroomExitWest);
-        final Exit unionMainAreaExitDown = new Exit("D",unionMainArea); unionMaintenanceRoom.addExit(unionMainAreaExitDown);
+        final Exit unionMainAreaExitDown2 = new Exit("D",unionMainArea); unionMaintenanceRoom.addExit(unionMainAreaExitDown2);
         final Exit unionFacultyClosetExitNorth = new Exit("N",unionFacultyCloset); unionMaintenanceRoom.addExit(unionFacultyClosetExitNorth);
         final Exit unionFacultyRoomExitEast = new Exit("E",unionFacultyRoom); unionMaintenanceRoom.addExit(unionFacultyRoomExitEast); 
         final Exit unionMaintenanceRoomExitSouth = new Exit("S",unionMaintenanceRoom); unionFacultyCloset.addExit(unionMaintenanceRoomExitSouth);
@@ -661,9 +724,9 @@ public class Game {
         String[] params = parser.getParams();
         processCommand(command,params);
       } catch (NullPointerException e) {
-        e.printStackTrace();
+        if(isTesting) e.printStackTrace();
       } catch (CommandNotFoundException e) {
-        e.printStackTrace();
+        if(isTesting) e.printStackTrace();
       }
 
     } 
@@ -710,7 +773,7 @@ public class Game {
         while(!hasChosenName) {
           result = in.nextLine().toLowerCase();
           if(result.length() > 16) {
-            System.out.print("Please enter a name between 1-16 Characters");
+            System.out.print("Please enter a name between 1-16 Characters: ");
           } else if (result.equalsIgnoreCase("cameron")) { 
             System.out.print("Sorry that name is already taken, Please enter another name: ");
           } else if (result.equalsIgnoreCase("cagasuge")) { 
