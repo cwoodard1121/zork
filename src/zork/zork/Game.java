@@ -785,53 +785,55 @@ public class Game {
                     if(a.equalsIgnoreCase("y")){
                       boolean finishedOrder = false;
                         while(!finishedOrder){
-                          text.slowTextSpeed("What would you like to buy?", 7);
-                          text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
-                          text.slowTextSpeed("> Boston Cream Donut - 4$", 7);
-                          text.slowTextSpeed("> French Vanilla - 2$", 7);
-                          text.slowTextSpeed("> Toasted Bagal With Cream Cheese - 7$", 7);
-                          String b = in.nextLine();
-                          double pMoney = Game.getGame().getPlayer().getMoney();
-                          if(b.equalsIgnoreCase("boston cream donut")){
-                              if((pMoney - 4)>= 0){
-                                Game.getGame().getPlayer().setMoney(pMoney-=4);
-                                Game.getGame().getPlayer().getInventory().addItem(
-                                  new Item(2, "Boston Cream Donut", false, 
-                                  new Effect("Health up", 0, 0, 4, 20), false)
-                                  );
-                                  finishedOrder = true;
-                              }else{
-                                text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
-                              }
-                          }else if(b.equalsIgnoreCase("French Vanilla")){
-                              if((pMoney - 2)>= 0){
-                                Game.getGame().getPlayer().setMoney(pMoney-=2);
-                                Game.getGame().getPlayer().getInventory().addItem(
-                                  new Item(2, "French Vanilla", false, 
-                                  new Effect("Health Up", 0, 0, 0, 8), false)
-                                  );
-                                  finishedOrder = true;
-                              }else{
-                                text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
-                              }
-                          }else if(b.equalsIgnoreCase("Toasted Bagal With Cream Cheese")){
-                              if((pMoney - 7)>= 0){
-                                Game.getGame().getPlayer().setMoney(pMoney-=7);
-                                Game.getGame().getPlayer().getInventory().addItem(
-                                  new Item(2, "Toasted Bagal With Cream Cheese", false, 
-                                  new Effect("Super Delicous", 0, 0, -8, 30), false)
-                                  );
-                                  finishedOrder = true;
-                              }else{
-                                
-                                text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
-                              }
-                          }else{
-                            
-                            
-                              text.slowTextSpeed("Sorry, That item is not avaliable right now. Please pick another", 7);
-                            
-                            
+                          if(Game.getGame().getPlayer().getMoney() <=1){
+                            text.slowTextSpeed("What would you like to buy?", 7);
+                            text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
+                            text.slowTextSpeed("> Boston Cream Donut - 4$", 7);
+                            text.slowTextSpeed("> French Vanilla - 2$", 7);
+                            text.slowTextSpeed("> Toasted Bagal With Cream Cheese - 7$", 7);
+                            String b = in.nextLine();
+                            double pMoney = Game.getGame().getPlayer().getMoney();
+                            if(b.equalsIgnoreCase("boston cream donut")){
+                                if((pMoney - 4)>= 0){
+                                  Game.getGame().getPlayer().setMoney(pMoney-=4);
+                                  Game.getGame().getPlayer().getInventory().addItem(
+                                    new Item(2, "Boston Cream Donut", false, 
+                                    new Effect("Health up", 0, 0, 4, 20), false)
+                                    );
+                                    finishedOrder = true;
+                                }else{
+                                  text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
+                                }
+                            }else if(b.equalsIgnoreCase("French Vanilla")){
+                                if((pMoney - 2)>= 0){
+                                  Game.getGame().getPlayer().setMoney(pMoney-=2);
+                                  Game.getGame().getPlayer().getInventory().addItem(
+                                    new Item(2, "French Vanilla", false, 
+                                    new Effect("Health Up", 0, 0, 0, 8), false)
+                                    );
+                                    finishedOrder = true;
+                                }else{
+                                  text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
+                                }
+                            }else if(b.equalsIgnoreCase("Toasted Bagal With Cream Cheese")){
+                                if((pMoney - 7)>= 0){
+                                  Game.getGame().getPlayer().setMoney(pMoney-=7);
+                                  Game.getGame().getPlayer().getInventory().addItem(
+                                    new Item(2, "Toasted Bagal With Cream Cheese", false, 
+                                    new Effect("Super Delicous", 0, 0, -8, 30), false)
+                                    );
+                                    finishedOrder = true;
+                                }else{
+                                  
+                                  text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
+                                }
+                            }else{
+                              
+                              
+                                text.slowTextSpeed("Sorry, That item is not avaliable right now. Please pick another", 7);
+                              
+                              
+                            }
                           }
                           
                           if(finishedOrder){
