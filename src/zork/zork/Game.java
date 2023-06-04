@@ -1209,6 +1209,7 @@ public class Game {
                 i.addItem(new Weapon(12,"Metal Bat", false, 18, null));
                 final Enemy SHOPKEEPER = new Enemy(null, unionScamsMarket, 150, i, 80, "ShopKeeper", 200);
                 Fight f = new Fight(SHOPKEEPER);
+                text.slowTextSpeed("WHAT IS THAT, A FREE PRIME COUPON??!?!? YOU SCAMMER THATS MY JOB!", 7);
                 boolean won = f.fight();
                 if(won){
                   Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(SHOPKEEPER);
@@ -1232,10 +1233,15 @@ public class Game {
          
           @Override
           public void run() {
+            boolean s = false;
             try{
             Graphics text = new Graphics();
-            text.slowTextSpeed("On the ground you spot a 20$ bill and pick it up... sweet", 0);
-            Game.getGame().getPlayer().setMoney(Game.getGame().getPlayer().getMoney() + 20);
+            if(!s){
+              text.slowTextSpeed("On the ground you spot a 20$ bill and pick it up... sweet", 0);
+               Game.getGame().getPlayer().setMoney(Game.getGame().getPlayer().getMoney() + 20);
+               s = true;
+            }
+            
            
             }catch(Exception e){
               //aklsdjalsd
@@ -1258,11 +1264,44 @@ public class Game {
               }
             }
           });
-        //Maintenance room
-        final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         //faculty closet
         final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true, "is locked, prob need a key"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
         unionFacultyCloset.addItemGround(new Item(2, "Free Prime Coupon", false, null, false));
+        //Maintenance room
+        final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
+          unionMaintenanceRoom.setRunnable(new Runnable(){
+            
+            @Override
+            public void run() {
+              try{
+                boolean hasKey = false;
+                ArrayList<Item> arr = Game.getGame().getPlayer().getInventory().getItems();
+                for(int i = 0; i<arr.size(); i++){
+                  if(arr.get(i).getName().equalsIgnoreCase("Closet Key")){
+                    hasKey = true;
+                  }
+                }
+                Graphics text = new Graphics();
+                if(hasKey){
+                  text.slowTextSpeed("You rush to the closet door in the room, key in hand", 7);
+                  text.slowTextSpeed("Using the key, you unlock the door", 7);
+                  unionFacultyCloset.setLocked(false);
+                  for(int i = 0; i<arr.size(); i++){
+                    if(arr.get(i).getName().equalsIgnoreCase("Closet Key")){
+                      arr.remove(i);
+                    }
+                  }
+                  hasKey = false;
+                }
+                
+
+            
+              }catch(Exception e){
+                //aklsdjalsd
+              }
+            }
+          });
+        
         //faculty room
         final Room unionFacultyRoom = new Room ("Placeholder Description for unionFacultyRoom", "unionfacultyroom"); roomMap.put(unionFacultyRoom.getRoomName(), unionFacultyRoom);
         unionFacultyRoom.setRunnable(new Runnable(){
@@ -1353,7 +1392,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("stclairsubway"));
+    this.player.setCurrentRoom(roomMap.get("unionplatform"));
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {
