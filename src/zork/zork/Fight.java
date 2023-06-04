@@ -42,7 +42,6 @@ public class Fight {
         SoundHandler.playSound("would_boss.wav",true);
         didPlayerWin = fightingResults();
         if(didPlayerWin){
-            System.out.println("won");
             expGain();
             
         }else{
@@ -59,23 +58,23 @@ public class Fight {
 
     private void expGain() {
         try {
-        Player player = Game.getGame().getPlayer();
-        boolean leveledUp = false;
+            Player player = Game.getGame().getPlayer();
+            boolean leveledUp = false;
             Game.getGame().getPlayer().addExp(enemy.getExp());
+            text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Gained " + enemy.getExp() + " EXP", 20); Thread.sleep(1000);
             while (!leveledUp) {
                 if (player.getExp() > 100) {
                     player.addExp(-100);
                     player.addLevel(1);
                     int previousLevel = player.getLevel()-1;
-                    text.slowTextSpeed(player.getName() + " LEVELED UP " + previousLevel + " -> " + player.getLevel() + "", 2);
+                    text.slowTextSpeed(player.getName() + " LEVELED UP " + previousLevel + " -> " + player.getLevel() + "", 20);
                     Thread.sleep(100);
-                    int[] statIncrease = {player.getStrength() + (int)((Math.random()*4)+2), player.getMaxHealth() + (int)((Math.random()*5) + 6), player.getSpeed() + (int)((Math.random()*4)+2)};
-                    text.slowTextSpeed(" > Strength: " + player.getStrength() + " -> " + statIncrease[0] + "\n > Health: " + player.getMaxHealth() + " -> " + statIncrease[1] + "\n > Speed: " + player.getSpeed() + " -> " + statIncrease[2], 2);
+                    int[] statIncrease = {player.getStrength() + (int)((Math.random()*4)+2), player.getMaxHealth() + (int)((Math.random()*5) + 6), player.getSpeed() + (int)((Math.random()*2)+1)};
+                    text.slowTextSpeed(" > Strength: " + player.getStrength() + " -> " + statIncrease[0] + "\n > Health: " + player.getMaxHealth() + " -> " + statIncrease[1] + "\n > Speed: " + player.getSpeed() + " -> " + statIncrease[2], 20);
                     Thread.sleep(100);
                     player.setStrength(statIncrease[0]); player.setMaxHealth(statIncrease[1]); player.setSpeed(statIncrease[2]);
-                    if(player.getExp() <= 100) {
-                        leveledUp = true;
-                    }
+                } if(player.getExp() <= 100) {
+                    leveledUp = true;
                 }
             }
         } catch (InterruptedException e) {

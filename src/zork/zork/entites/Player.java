@@ -128,11 +128,10 @@ public class Player extends Entity {
     }
 
     public void changeRoom(Room r) {
-        System.out.println(r.isLocked());
+        super.setCurrentRoom(r);
         if(r.hasRunnable()) {
             r.getRunnable().run();
         }
-        super.setCurrentRoom(r);
     } 
 
     public void setItemMenu(boolean i) {

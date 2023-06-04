@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.google.gson.Gson;
@@ -183,6 +183,9 @@ public class Game {
        //BAYVIEW GLEN INDEPENDENT SCHOOL ROOMS
  
        final boolean[] hasEnteredLobby = new boolean[]{false};
+       final boolean[] hasChosenInstrument = new boolean[]{false}; //These are all booleans to make sure everything only runs once
+
+
        final Room bayviewGlenLobby = new Room ("Ah the lobby, what a refreshing place, You look around and take a seccond to breathe it all in", "bayviewglenlobby"); roomMap.put(bayviewGlenLobby.getRoomName(), bayviewGlenLobby);  // north exit outside for later looking south when walking in
        bayviewGlenLobby.addItemGround(new Item(0, "", isTesting, null, finished));
        
@@ -216,54 +219,91 @@ public class Game {
        Inventory meatBall = new Inventory(5);
        meatBall.addItem(new Weapon(3, "Fork", false, 10, null));
        final Enemy cyrus_meatball = new Enemy(null, bayviewGlenG9CommonArea, Constants.PlayerConstants.DEFAULT_HEALTH, meatBall , 0, "Meatball", 75);
-       bayviewGlenG9CommonArea.addEnemies(cyrus_meatball);
+       bayviewGlenG9CommonArea.enemies.add(cyrus_meatball);
        bayviewGlenG9CommonArea.setRunnable(new Runnable() {
  
          @Override
-         public void run() {
-           System.out.println("Meatball is in the way of cyrus's locker. ");
-           Fight f = new Fight(cyrus_meatball);
-           boolean won = f.fight();
-           if(won) {
-             Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(cyrus_meatball);
-           }
- 
-         }
- 
-       });
+         public void run() {           
+            if(Game.getGame().getPlayer().getCurrentRoom().enemies.contains(cyrus_meatball)) {
+              System.out.println("Meatball is Blocking the Way");
+              Fight f = new Fight(cyrus_meatball);
+              boolean won = f.fight();
+              if(won) {
+              Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(cyrus_meatball);
+             }
+            }    
+          }
+        });
        final Room bayviewGlenOutsideStaircase = new Room ("You see a long staircase across the east side of the school", "bayviewglenoutsidestaircase"); roomMap.put(bayviewGlenOutsideStaircase.getRoomName(), bayviewGlenOutsideStaircase);
        final Room bayviewGlenOutsideWest = new Room ("You see the entire west side of the school", "bayviewglenoutsidewest"); roomMap.put(bayviewGlenOutsideWest.getRoomName(), bayviewGlenOutsideWest);
-       final Room bayviewGlenMusicRoom = new Room ("you enter the music room you have made your decision, no turning back now", "bayviewglenmusicroom"); roomMap.put(bayviewGlenMusicRoom.getRoomName(), bayviewGlenMusicRoom);
-       
+       final Room bayviewGlenMusicRoom = new Room ("The music room, you remember the fight you once had here.", "bayviewglenmusicroom"); roomMap.put(bayviewGlenMusicRoom.getRoomName(), bayviewGlenMusicRoom);
+      Inventory musicMan = new Inventory(10);
+      musicMan.addItem(new Weapon(3, "Depressing Song", false, 2, new Effect("Depression", 3, 6, 2, 0)));
+      musicMan.addItem(new Weapon(3, "Baton", false, 15, null));
+      final Enemy musicManEnemy = new Enemy(null, bayviewGlenMusicRoom, 75, musicMan , 0, "Music Man", 83);
+      bayviewGlenMusicRoom.addEnemies(musicManEnemy);
        bayviewGlenMusicRoom.setRunnable(() -> {
          Scanner in = new Scanner(System.in);
          Graphics text = new Graphics();
          try {
-          text.slowTextSpeed("Most of the musical instruments were taken but you see 5 in the back corner, you may pick one to take with you on your travels.\n", 15);
-          text.slowTextSpeed(" > Clarinet \n > Trumpet \n > Trombone \n > Oboe \n > Saxophone \n  Which one will you take: ", 120);
-          String ans = in.nextLine();
-          if (ans.equalsIgnoreCase("clarinet")) {
-            Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Clarinet", true, 20, null));
-            text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Clarinet", 15);
-          } else if (ans.equalsIgnoreCase("trumpet")) {
-            Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Trumpet", true, 25, null));
-            text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Trumpet", 15);
-          } else if (ans.equalsIgnoreCase("trombone")) {
-            Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Trombone", true, 25, null));
-            text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Trombone", 15);
-          } else if (ans.equalsIgnoreCase("saxophone")) {
-            Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Saxophone", true, 25, new Effect("Aggitated", 2, 0, -20, 0)));
-            text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Saxophone", 15);
-          } else if (ans.equalsIgnoreCase("oboe")) {
-            Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Oboe", true, 15, new Effect("Ruptured Eardrum", 2, 5, 5, 0)));
-            text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Flute", 15);
-          } else {
+         if (hasChosenInstrument[0]) {
+          return;
+         }
 
+        while(!hasChosenInstrument[0]) {
+          if (Game.getGame().getPlayer().getCurrentRoom().getEnemies().get(0).equals(musicManEnemy)) {
+            Fight f = new Fight(musicManEnemy);
+            boolean won = f.fight();
+            boolean pickedWeapon = false;
+            if(won) {
+              Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(musicManEnemy);
+            }
           }
-          Thread.sleep(1000);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
+            
+            text.slowTextSpeed("As you enter the music room you see 5 instruments in 5 different cases\n Which one will you take:\n", 15);
+            text.slowTextSpeed(" > Clarinet \n > Trumpet \n > Trombone \n > Oboe \n > Saxophone \n > None \n", 120);
+            String ans = in.nextLine();
+            if (ans.equalsIgnoreCase("clarinet")) {
+              Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Clarinet", true, 20, null));
+              text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Clarinet", 15);
+              hasChosenInstrument[0] = true; Thread.sleep(1000);
+
+            } else if (ans.equalsIgnoreCase("trumpet")) {
+              Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Trumpet", true, 25, null));
+              text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Trumpet", 15);
+              hasChosenInstrument[0] = true; Thread.sleep(1000);
+              
+            } else if (ans.equalsIgnoreCase("trombone")) {
+              Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Trombone", true, 25, null));
+              text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Trombone", 15);
+              hasChosenInstrument[0] = true; Thread.sleep(1000);
+              
+            } else if (ans.equalsIgnoreCase("saxophone")) {
+              Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Saxophone", true, 25, new Effect("Aggitated", 2, 0, -20, 0)));
+              text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Saxophone", 15);
+              hasChosenInstrument[0] = true; Thread.sleep(1000);
+              
+            } else if (ans.equalsIgnoreCase("oboe")) {
+              Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Oboe", true, 15, new Effect("Ruptured Eardrum", 2, 5, 5, 0)));
+              text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Flute", 15);
+              hasChosenInstrument[0] = true; Thread.sleep(1000);
+              
+            } if (ans.equalsIgnoreCase("none")){ 
+              hasChosenInstrument[0] = true;
+              text.slowTextSpeed("You decide to leave such a huge choice for another day", 15); Thread.sleep(1000);
+              return;
+            } else if (hasChosenInstrument[0] == true) {
+              text.slowTextSpeed("As you select your instrument, the other instruments dissapear along with musicMan", 15);
+            } else {
+              text.slowTextSpeed("Please Select an instrument or type None to leave: ", 15);
+            }
+            
+           
         }
+        hasChosenInstrument[0] = false;
+        } catch (InterruptedException e) {
+        e.printStackTrace();
+       }
        });
        
        
@@ -757,8 +797,11 @@ public class Game {
       e.printStackTrace();
     }
     this.player.setCurrentRoom(roomMap.get("bayviewglenlobby"));
-    this.player.getInventory().addItem(new Weapon(5, "Big Rock", false, 5, 
+    this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
+    if (isTesting) {
+      this.player.getInventory().addItem(new Weapon(0, "Ban Hammer", false, 1000000, null));
+    }
     try {
       player.getCurrentRoom().printAscii();
     } catch (IOException e) {
