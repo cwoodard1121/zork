@@ -871,7 +871,7 @@ public class Game {
                     if(a.equalsIgnoreCase("y")){
                       boolean finishedOrder = false;
                         while(!finishedOrder){
-                          if(Game.getGame().getPlayer().getMoney() <=1){
+                          if(Game.getGame().getPlayer().getMoney() >= 1){
                             text.slowTextSpeed("What would you like to buy?", 7);
                             text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                             text.slowTextSpeed("> Boston Cream Donut - 4$", 7);
@@ -920,6 +920,8 @@ public class Game {
                               
                               
                             }
+                          } else {
+                            finishedOrder = false;
                           }
                           
                           if(finishedOrder){
