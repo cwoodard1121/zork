@@ -549,6 +549,10 @@ public class Game {
        final boolean[] hasEnteredLobby = new boolean[]{false};
        final boolean[] hasChosenInstrument = new boolean[]{false}; //These are all booleans to make sure everything only runs once
        final boolean[] hasGottenFirstKey = new boolean[]{false};
+       final boolean[] dramaRoomDoorOpened = new boolean[]{false};
+       final int[] learningCommonsSubAreaState = new int[]{0};
+       final boolean[] artRoomLightsOn = new boolean[]{false, false, false};
+       Item owensIphone = new Item(2, "Owen's IPhone", false, null, false);
 
        final Room bayviewGlenLobby = new Room ("Ah the lobby, what a refreshing place, You look around and take a seccond to breathe it all in", "bayviewglenlobby"); roomMap.put(bayviewGlenLobby.getRoomName(), bayviewGlenLobby);  // north exit outside for later looking south when walking in
        
@@ -557,6 +561,9 @@ public class Game {
        final Room bayviewGlenHallwayPrepGym = new Room("you enter a Hallway, gyms to your left and right, oo which one to choose", "bayviewglenhallwayprepgym", false, "Since you know the gym is probably locked maybe the hallway by the gym isn't. you were dead wrong"); roomMap.put(bayviewGlenHallwayPrepGym.getRoomName(), bayviewGlenHallwayPrepGym);
        
        final Room bayviewGlenHallwayTheatreFront = new Room("Hallway next to the theatre, you gase at the theatre through the doorway, the seats, the curtain. Then you realize the door is closed and none of that makes any sense.", "bayviewglenhallwaytheatrefront", false, "the door is locked, you try to barge in but its locked so that doesnt make any sense."); roomMap.put(bayviewGlenHallwayTheatreFront.getRoomName(), bayviewGlenHallwayTheatreFront);
+       
+       
+       
        final Room bayviewGlenOutsideHallwayTheatreFront = new Room ("Parking lot outside of bayview glen, There is a door leading into the school to your south", "bayviewglenoutsidehallwaytheatrefront"); roomMap.put(bayviewGlenOutsideHallwayTheatreFront.getRoomName(), bayviewGlenOutsideHallwayTheatreFront);
        final Room bayviewGlenCafeteriaFoodArea = new Room("You enter the cafeteria, the smell of the food immediatly hits your nose. But nothings been cooked here for a month. huh", "bayviewglencafeteriafoodarea"); roomMap.put(bayviewGlenCafeteriaFoodArea.getRoomName(), bayviewGlenCafeteriaFoodArea);
        bayviewGlenCafeteriaFoodArea.addItemGround(new Item(0, null, true, new Effect("Healing", 0, 0, 0, 30), false));
@@ -584,11 +591,26 @@ public class Game {
        final Room bayviewGlenOutsidePrepGymNorth = new Room("You are outside the prep gym. the gym is directly south of you", "bayviewglenoutsideprepgymnorth"); roomMap.put(bayviewGlenOutsidePrepGymNorth.getRoomName(), bayviewGlenOutsidePrepGymNorth);
        final Room bayviewGlenLearningCommons = new Room("You enter the learning commons. but theres no books! oh no", "bayviewglenlearningcommons"); roomMap.put(bayviewGlenLearningCommons.getRoomName(), bayviewGlenLearningCommons);
        final Room bayviewGlenLearningCommonsSubArea = new Room ("...", "bayviewglenlearningcommonssubarea"); roomMap.put(bayviewGlenLearningCommonsSubArea.getRoomName(), bayviewGlenLearningCommonsSubArea);
-       final Room bayviewGlenTheatre = new Room("You enter the theatre, the seats are retracted you see a door to the south", "bayviewglentheatre"); roomMap.put(bayviewGlenTheatre.getRoomName(), bayviewGlenTheatre);
+       
+       final Room bayviewGlenTheatre = new Room("You enter the theatre, the seats are out you see a door to the south", "bayviewglentheatre"); roomMap.put(bayviewGlenTheatre.getRoomName(), bayviewGlenTheatre);
+       bayviewGlenTheatre.setRunnable(() -> {
+        Graphics text = new Graphics();
+        try {
+          text.slowTextSpeed("You notice ", 20);
+        } catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+       });
+       
        final Room bayviewGlenHallwayTheatreBack = new Room ("You walk into a hallway behind the theatre, you see the grade 11 common area to the east", "bayviewglenhallwaytheatreback"); roomMap.put(bayviewGlenHallwayTheatreBack.getRoomName(), bayviewGlenHallwayTheatreBack);
        final Room bayviewGlenHallway2ndFloorToUpperSchool = new Room("Hallway towards the grade 11 common area. you see closed doors ahead to the south.", "bayviewglenhallway2ndfloortoupperschool"); roomMap.put(bayviewGlenHallway2ndFloorToUpperSchool.getRoomName(), bayviewGlenHallway2ndFloorToUpperSchool);
        
-       final Room bayviewGlenG11CommonArea = new Room("Welcome to objectivly the worst common area", "bayviewgleng11commonarea", false, "You go up the stairs and try to open the door, but as usual its locked an nobody is there to let you in."); roomMap.put(bayviewGlenG11CommonArea.getRoomName(), bayviewGlenG11CommonArea);
+       final Room bayviewGlenG11CommonArea = new Room("Welcome to objectively the worst common area", "bayviewgleng11commonarea", false, "You go up the stairs and try to open the door, but as usual its locked an nobody is there to let you in."); roomMap.put(bayviewGlenG11CommonArea.getRoomName(), bayviewGlenG11CommonArea);
+       
+       
+    
+       
        final Room bayviewGlenGradHallway = new Room("You walk down the hallway filled with names of all the people who did better than you. a single tear runs down your cheek", "bayviewglengradhallway"); roomMap.put(bayviewGlenGradHallway.getRoomName(), bayviewGlenGradHallway);
        final Room bayviewGlenUpperMusicHallway = new Room ("You walk a narrow hallway past the music room", "bayviewglenuppermusichallway"); roomMap.put(bayviewGlenUpperMusicHallway.getRoomName(), bayviewGlenUpperMusicHallway);
        final Room bayviewGlenDramaRoom = new Room ("You enter the drama room, you see in large bold text #1 27. You don't know what it means but it sounds important so you write it down", "bayviewglendramaroom"); roomMap.put(bayviewGlenDramaRoom.getRoomName(), bayviewGlenDramaRoom);
@@ -616,15 +638,15 @@ public class Game {
             }    
           }
         });
-       final Room bayviewGlenOutsideStaircase = new Room ("You see a long staircase across the east side of the school", "bayviewglenoutsidestaircase"); roomMap.put(bayviewGlenOutsideStaircase.getRoomName(), bayviewGlenOutsideStaircase);
-       final Room bayviewGlenOutsideWest = new Room ("You see the entire west side of the school", "bayviewglenoutsidewest"); roomMap.put(bayviewGlenOutsideWest.getRoomName(), bayviewGlenOutsideWest);
-       final Room bayviewGlenMusicRoom = new Room ("The music room, you remember the fight you once had here.", "bayviewglenmusicroom"); roomMap.put(bayviewGlenMusicRoom.getRoomName(), bayviewGlenMusicRoom);
-      Inventory musicMan = new Inventory(10);
-      musicMan.addItem(new Weapon(3, "Depressing Song", false, 2, new Effect("Depression", 3, 6, 2, 0)));
-      musicMan.addItem(new Weapon(3, "Baton", false, 15, null));
-      final Enemy musicManEnemy = new Enemy(null, bayviewGlenMusicRoom, 75, musicMan , 0, "Music Man", 83);
-      bayviewGlenMusicRoom.addEnemies(musicManEnemy);
-       bayviewGlenMusicRoom.setRunnable(() -> {
+    final Room bayviewGlenOutsideStaircase = new Room ("You see a long staircase across the east side of the school", "bayviewglenoutsidestaircase"); roomMap.put(bayviewGlenOutsideStaircase.getRoomName(), bayviewGlenOutsideStaircase);
+    final Room bayviewGlenOutsideWest = new Room ("You see the entire west side of the school", "bayviewglenoutsidewest"); roomMap.put(bayviewGlenOutsideWest.getRoomName(), bayviewGlenOutsideWest);
+    final Room bayviewGlenMusicRoom = new Room ("The music room, you remember the fight you once had here.", "bayviewglenmusicroom"); roomMap.put(bayviewGlenMusicRoom.getRoomName(), bayviewGlenMusicRoom);
+    Inventory musicMan = new Inventory(10);
+    musicMan.addItem(new Weapon(3, "Depressing Song", false, 2, new Effect("Depression", 3, 6, 2, 0)));
+    musicMan.addItem(new Weapon(3, "Baton", false, 15, null));
+    final Enemy musicManEnemy = new Enemy(null, bayviewGlenMusicRoom, 75, musicMan , 0, "Music Man", 83);
+    bayviewGlenMusicRoom.addEnemies(musicManEnemy);
+         bayviewGlenMusicRoom.setRunnable(() -> {
          Scanner in = new Scanner(System.in);
          Graphics text = new Graphics();
          try {
@@ -691,19 +713,100 @@ public class Game {
        
        
        final Room bayviewGlen2ndFloorUpperHallway = new Room ("You enter a Winding hallway filled with locked classrooms", "bayviewglen2ndfloorupperhallway"); roomMap.put(bayviewGlen2ndFloorUpperHallway.getRoomName(), bayviewGlen2ndFloorUpperHallway);
+      
+      
        final Room bayviewGlenHallway3rdFloorByElevator = new Room ("You are in a hallway next to the elevator, you remember you arent supposed to use the elevator... right?", "bayviewglenhallway3rdfloorbyelevator"); roomMap.put(bayviewGlenHallway3rdFloorByElevator.getRoomName(), bayviewGlenHallway3rdFloorByElevator);
        final Room bayviewGlenMathWing = new Room ("The home of cyrusses locker, what a sight to behold", "bayviewglenmathwing"); roomMap.put(bayviewGlenMathWing.getRoomName(), bayviewGlenMathWing);
        final Room bayviewGlen3rdFloorUpperSchoolHallway = new Room ("As you walk passed Ms.Fenili's office a chill runs down your spine", "bayviewglen3rdfloorupperschoolhallway"); roomMap.put(bayviewGlen3rdFloorUpperSchoolHallway.getRoomName(), bayviewGlen3rdFloorUpperSchoolHallway);
        final Room bayviewGlenG10CommonArea = new Room ("You enter a nice common area, filled with couches and chairs", "bayviewgleng10commonarea"); roomMap.put(bayviewGlenG10CommonArea.getRoomName(), bayviewGlenG10CommonArea);
+       bayviewGlenG10CommonArea.setRunnable(() -> {
+          if(!artRoomLightsOn[1]) {
+            Graphics text = new Graphics();
+            Scanner in = new Scanner(System.in);
+            try {
+              text.slowTextSpeed("You see a red button in the corner... \n do you want to press it? Y/N: ", 20);
+              String ans = in.nextLine();
+              if(ans.equalsIgnoreCase("y")) {
+                text.slowTextSpeed("Are you sure?? Y/N:", 20);
+                ans = in.nextLine();
+                if(ans.equalsIgnoreCase("y")) {
+                  text.slowTextSpeed("Positive? Y/N:", 20);
+                  ans = in.nextLine();
+                  if(ans.equalsIgnoreCase("y")) {
+                    text.slowTextSpeed("You are completly sure you want to press the button? Y/N: ", 20);
+                    ans = in.nextLine();
+                    if(ans.equalsIgnoreCase("y")) {
+                      text.slowTextSpeed("100% sure you want to press it? Y/N", 20);
+                      ans = in.nextLine();
+                      if(ans.equalsIgnoreCase("y")) {
+                        text.slowTextSpeed("What if something bad happens? Y/N", 20);
+                        ans = in.nextLine();
+                        if(ans.equalsIgnoreCase("y")) {
+                          text.slowTextSpeed("Ok last time, im just looking out for you? Y/N", 20);
+                          ans = in.nextLine();
+                          if(ans.equalsIgnoreCase("y")) {
+                            text.slowTextSpeed("Cmon seriously, are you COMPLETLY SURE you want to PUSH this BUTTON???? Y/N", 20);
+                            ans = in.nextLine();
+                            if(ans.equalsIgnoreCase("y")) {
+                              text.slowTextSpeed("No joke are you serious, do you want to press this button?? Y/N", 20);
+                              ans = in.nextLine();
+                              if(ans.equalsIgnoreCase("y")) {
+                                text.slowTextSpeed("You press the button", 500);
+                                text.slowTextSpeed("...", 2000);
+                                text.slowTextSpeed("The button makes a clicking sound, fun!", 20);
+                                artRoomLightsOn[1] = true;
+                                } 
+                            } 
+                          } 
+                        } 
+                      } 
+                    } 
+                  } 
+                } 
+              } else {
+                return;
+              }
+            } catch (Exception e) {
+              // TODO: handle exception
+            }
+          }
+       });
+
+       
+       
        final Room bayviewGlen3rdFloorBridge = new Room ("You enter a hallway that connects the upper and prep school", "bayviewglen3rdfloorbridge"); roomMap.put(bayviewGlen3rdFloorBridge.getRoomName(), bayviewGlen3rdFloorBridge);
        final Room bayviewGlen4thFloorEastPrepStairwayHallway = new Room ("What is even up here you may ask, the answer, is in your imagination", "bayviewglen4thflooreastprepstairwayhallway"); roomMap.put(bayviewGlen4thFloorEastPrepStairwayHallway.getRoomName(), bayviewGlen4thFloorEastPrepStairwayHallway);
        final Room bayviewGlen4thFloorWestPrepStairwayHallway = new Room ("And more hallway, when does it end!", "bayviewglen4thfloorwestprepstairwayhallway"); roomMap.put(bayviewGlen4thFloorWestPrepStairwayHallway.getRoomName(), bayviewGlen4thFloorWestPrepStairwayHallway);
+       bayviewGlen4thFloorWestPrepStairwayHallway.setRunnable(() -> {
+          Graphics text = new Graphics();
+          Scanner in = new Scanner(System.in);
+          try {
+            text.slowTextSpeed("You see a rat dressed in a suit, you crouch down to hear him", 20);
+            text.slowTextSpeed(" Tim - Well hello there traveller, welcome to Randy Rats shop, im Tim \n You - Wait if you name is Tim, why is it called Randy Rats shop \n Tim - Because tim doesnt rhyme idiot \n You - Ok well can i buy something \n Tim - Well im fresh out of stock, except for this stupid key I can't sell... they say it goes downstairs but my little rat legs could never get there \n You - How much? \n Tim - I'll give it to ya for 5 coins \n\n Would you like to buy the Key? Y/N: ", 20);
+            String ans = in.nextLine();
+            if(ans.equalsIgnoreCase("y")) {
+              if(Game.getGame().getPlayer().getMoney()>=5) {
+                text.slowTextSpeed(" You - Alright, i'll take it \n Tim - Alright here ya go" , 0);
+                Game.getGame().getPlayer().getInventory().addItem(new Key("BasementBayviewGlenKey", "Basement Key", 2));
+                Game.getGame().getPlayer().setMoney(Game.getGame().getPlayer().getMoney()-5);
+                text.slowTextSpeed("You can now access the 1st Floor!", 20);
+              } else
+              text.slowTextSpeed("You cannot afford the little rat key", 20);
+            } else {
+              text.slowTextSpeed(" You - Maybe next time", 20);
+              return;
+            }
+          } catch (Exception e) {
+            
+          }
+          
+       });
        final Room bayviewGlen4thFloorLobby = new Room ("You enter the top floor, right below you is right above the lobby. neat!", "bayviewglen4thfloorlobby"); roomMap.put(bayviewGlen4thFloorLobby.getRoomName(), bayviewGlen4thFloorLobby);
        final Room bayviewGlenPrepStaffRoom = new Room ("Nice little staff room overlooking the Learning Commons", "bayviewglenprepstaffroom"); roomMap.put(bayviewGlenPrepStaffRoom.getRoomName(), bayviewGlenPrepStaffRoom);
        Inventory questionMark = new Inventory(10);
        questionMark.addItem(new Weapon(3, "White Noise", false, 10, new Effect("Confusion", 20, 2, 0, 0)));
        questionMark.addItem(new Weapon(3, "the FIST", false, 20, null));
-       final Enemy questionMarkEnemy = new Enemy(null, bayviewGlenPrepStaffRoom, 175, questionMark , 0, "?????", 129);
+       final Enemy questionMarkEnemy = new Enemy(null, bayviewGlenPrepStaffRoom, 175, questionMark , 10, "?????", 100);
        bayviewGlenPrepStaffRoom.addEnemies(questionMarkEnemy);
        bayviewGlenPrepStaffRoom.setRunnable(() -> {
           Graphics text = new Graphics();
@@ -743,7 +846,7 @@ public class Game {
        final Room bayviewGlenUpperGym = new Room ("Placeholder Description for bayviewGlenUpperGym", "bayviewglenuppergym", false, "The gym is closed, and you can't get in."); roomMap.put(bayviewGlenUpperGym.getRoomName(), bayviewGlenUpperGym);
  
        bayviewGlenLobby.setRunnable(new Runnable(){
- 
+        
          @Override
          public void run() {
            if (!hasEnteredLobby[0]) {
@@ -828,7 +931,8 @@ public class Game {
        
        final Exit bayviewGlenOutsidePrepGymExitNorth = new Exit("N",bayviewGlenOutsidePrepGymNorth); bayviewGlenPrepGym.addExit(bayviewGlenOutsidePrepGymExitNorth);
        final Exit bayviewGlenHallwayPrepGymExitSouth = new Exit("S",bayviewGlenHallwayPrepGym); bayviewGlenPrepGym.addExit(bayviewGlenHallwayPrepGymExitSouth);
- 
+       final Exit bayviewGlenHallwayPrepGymExitEast = new Exit("E",bayviewGlenHallwayPrepGym); bayviewGlenHallwayCafeteria.addExit(bayviewGlenHallwayPrepGymExitEast);
+
        final Exit bayviewGlenHallwayPrepGymExitNorth = new Exit("N",bayviewGlenHallwayPrepGym); bayviewGlenWeightRoom.addExit(bayviewGlenHallwayPrepGymExitNorth);
  
        final Exit bayviewGlenOutsideCafeteriaExitWest = new Exit("W",bayviewGlenOutsideCafeteria); bayviewGlenOutsidePrepGymNorth.addExit(bayviewGlenOutsideCafeteriaExitWest);
@@ -852,7 +956,7 @@ public class Game {
        final Exit bayviewGlenG11CommonAreaExitEast = new Exit("E",bayviewGlenG11CommonArea); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenG11CommonAreaExitEast);
        final Exit bayviewGlenOutsideWestExitWestFour = new Exit("W",bayviewGlenOutsideWest); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenOutsideWestExitWestFour);
        final Exit bayviewGlenMathWingExitUp = new Exit("U",bayviewGlenMathWing); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenMathWingExitUp);
-       final Exit bayviewGlenHallwayOutsideUpperGymExitDown = new Exit("D",bayviewGlenHallwayOutsideUpperGym); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenHallwayOutsideUpperGymExitDown);
+       final Exit bayviewGlenHallwayOutsideUpperGymExitDown = new Exit("D",bayviewGlenHallwayOutsideUpperGym, "You try to open the door but it doesn't budge", true); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenHallwayOutsideUpperGymExitDown);
  
        final Exit bayviewGlenTheatreHallwayBackExitNorth = new Exit("N",bayviewGlenHallwayTheatreBack); bayviewGlenDramaRoom.addExit(bayviewGlenTheatreHallwayBackExitNorth);
  
@@ -873,9 +977,9 @@ public class Game {
        final Exit bayviewGlenDeckExitSouth = new Exit("S",bayviewGlenDeck); bayviewGlenG11CommonArea.addExit(bayviewGlenDeckExitSouth);
        final Exit bayviewGlenHallwayTheatreBackExitWest = new Exit("W",bayviewGlenHallwayTheatreBack); bayviewGlenG11CommonArea.addExit(bayviewGlenHallwayTheatreBackExitWest);
        final Exit bayviewGlen2ndFloorUpperHallwayExitEast = new Exit("E",bayviewGlen2ndFloorUpperHallway); bayviewGlenG11CommonArea.addExit(bayviewGlen2ndFloorUpperHallwayExitEast);
-       final Exit bayviewGlen1stFloorBelowG11CommonAreaExitDown = new Exit("D",bayviewGlen1stFloorBelowG11CommonArea); bayviewGlenG11CommonArea.addExit(bayviewGlen1stFloorBelowG11CommonAreaExitDown);
+       final Exit bayviewGlen1stFloorBelowG11CommonAreaExitDown = new Exit("D",bayviewGlen1stFloorBelowG11CommonArea, "Doors locked bud", true); bayviewGlenG11CommonArea.addExit(bayviewGlen1stFloorBelowG11CommonAreaExitDown);
  
-       final Exit bayviewGlenG12CommonAreaExitDown = new Exit("D",bayviewGlenG12CommonArea); bayviewGlen2ndFloorUpperHallway.addExit(bayviewGlenG12CommonAreaExitDown);
+       final Exit bayviewGlenG12CommonAreaExitDown = new Exit("D",bayviewGlenG12CommonArea, "You try the handle but it doesnt budge", true); bayviewGlen2ndFloorUpperHallway.addExit(bayviewGlenG12CommonAreaExitDown);
  
        final Exit bayviewGlenUpperMusicHallwayExitEast = new Exit("E",bayviewGlenUpperMusicHallway); bayviewGlenGradHallway.addExit(bayviewGlenUpperMusicHallwayExitEast);
        final Exit bayviewGlenHallway2ndFloorToUpperSchoolExitWest = new Exit("W",bayviewGlenHallway2ndFloorToUpperSchool); bayviewGlenGradHallway.addExit(bayviewGlenHallway2ndFloorToUpperSchoolExitWest);
@@ -963,6 +1067,7 @@ public class Game {
 
        bayviewGlenHallway2ndFloorToUpperSchool.setRunnable(() -> {
         Graphics text = new Graphics();
+        if(bayviewGlenG11CommonAreaExitSouth.getIsExitLocked()) {
         for (Item I : Game.getGame().getPlayer().getInventory().getItems()) {
           if (I.getName().equals("golden key")) {
             if (I.getKeyId().equalsIgnoreCase("G11CommonAreaKey")) {
@@ -976,7 +1081,124 @@ public class Game {
             }
           } 
         }
+      }
        });
+
+       
+       Inventory dramaRoomDoor = new Inventory(0);
+       dramaRoomDoor.addItem(new Weapon(0, "Silence", false, 0, null));
+       final Enemy dramaRoomDoorEnemy = new Enemy(null, bayviewGlenHallwayTheatreBack, 100, dramaRoomDoor , 0, "Door", 1);
+       bayviewGlenHallwayTheatreBack.addEnemies(dramaRoomDoorEnemy);
+       bayviewGlenHallwayTheatreBack.setRunnable(() -> {
+        if(!dramaRoomDoorOpened[0]) {
+          try {
+            Graphics text = new Graphics();
+            bayviewGlenHallwayTheatreBack.printAscii();
+            text.slowTextSpeed("The door to the south is locked :/", 20);  
+            text.slowTextSpeed("...", 2000); 
+            text.slowTextSpeed("Would you.. like to fight the door? Y/N", 20);  
+            Scanner in = new Scanner(System.in);
+            String ans = in.nextLine();
+            if(ans.equalsIgnoreCase("y")) {
+              Fight f = new Fight(dramaRoomDoorEnemy);
+              boolean won = f.fight();
+              if(won) {
+                text.slowTextSpeed("The door bursts open", 20);
+                bayviewGlenDramaRoomExitSouth.setIsExitLocked(false);
+                dramaRoomDoorOpened[0] = true;
+                bayviewGlenHallwayTheatreBack.enemies.remove(dramaRoomDoorEnemy);
+              }
+            } else {
+              return;
+            }
+          } catch (Exception e) {
+              
+          }
+        }
+       });
+
+
+
+       bayviewGlenLearningCommonsSubArea.setRunnable(() -> {
+        Graphics text = new Graphics();
+        
+        try {
+          bayviewGlenLearningCommons.printAscii();
+          if(learningCommonsSubAreaState[0] == 0) {
+            text.slowTextSpeed(" ??? - Hello \n You - Hello? \n Owen - Hello nice to meet you, im owen \n You - Hello Owen \n Owen - I know you're looking for the STRAWBERRY WATERMELON tm. prime, I think I know something that could help with that... \n You - Really, thats great \n Owen - Yes I have the second digit, its on this note I found \n You - What is it? \n Owen - Not so fast, I need something from you first. \n You - Ugh fine what is it \n Owen - I seem to have lost my phone somewhere in this building, if you can find it I can give you this sheet \n You - Alright i'll get right to it.", 20);
+            learningCommonsSubAreaState[0] = 1;
+          } else if (learningCommonsSubAreaState[0] == 1) {
+              if(Game.getGame().getPlayer().getInventory().getItems().contains(owensIphone)) {
+                text.slowTextSpeed(" Owen - Did you get my phone? \n You - Yes here it is \n Owen - Thank you!, now i'll hold up my end of the deal \n You - Thank you ", 20);
+                Game.getGame().getPlayer().getInventory().getItems().remove(owensIphone);
+                Game.getGame().getPlayer().getInventory().addItem(new Item(1, "#2 - 05", false, null, false));
+                learningCommonsSubAreaState[0] = 2;
+              } else {
+                text.slowTextSpeed(" Owen - Did you get my phone? \n You - No... \n Owen - Well then get going then, i dont got all day", 20);
+              }            
+          } else if (learningCommonsSubAreaState[0] == 2) {
+              text.slowTextSpeed(" Owen - Get out of here i'm working on my zork project \n You think to yourself... Wasn't it due ages ago?", 20);
+          }
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+        
+
+       });
+
+       Inventory theif = new Inventory(10);
+       theif.addItem(new Weapon(3, "Knife", false, 12, new Effect("Bleeding", 20, 2, 5, 0)));
+       final Enemy theifEnemy = new Enemy(null, bayviewGlenG12CommonArea, 80, theif , 0, "Theif", 60);
+       bayviewGlenG12CommonArea.addEnemies(theifEnemy);
+       bayviewGlenG12CommonArea.setRunnable(() -> {
+        Graphics text = new Graphics();
+          if(bayviewGlenG12CommonArea.enemies.contains(theifEnemy)) {
+            try {
+              text.slowTextSpeed("You see a theif taking something on the counter \n !! THEY SAW YOU !! \n Theif - NO WITNESSES!!", 20);
+              Fight f = new Fight(theifEnemy);
+              boolean won = f.fight();
+              if (won) {
+                Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(theifEnemy);
+                text.slowTextSpeed("You see a black rectangle on the ground \n its OWENS PHONE! \n its on the ground", 20);
+                bayviewGlenG12CommonArea.addItemGround(owensIphone);
+              }
+              
+            } catch (Exception e) {
+              
+            }
+          }
+          String greenLight; String redLight; String blueLight;
+          if(!artRoomLightsOn[0]) {
+            greenLight = "off";
+          } else {
+            greenLight = "on";
+          }
+
+          if(!artRoomLightsOn[1]) {
+            redLight = "off";
+          } else {
+            redLight = "on";
+          }
+
+          if(!artRoomLightsOn[2]) {
+            blueLight = "off";
+          } else {
+            blueLight = "on";
+          }
+
+          
+
+          try {
+            if(greenLight.equals(redLight) && greenLight.equals(blueLight) && redLight.equals("on")) {
+              bayviewGlenArtRoomExitDown.setIsExitLocked(false);
+              text.slowTextSpeed("You see all lights are on, and the gate in front of the art room has moved " + blueLight, 20);
+            }
+            text.slowTextSpeed("Green Light: " + greenLight + ", Red Light: " + redLight + ", Blue Light: " + blueLight, 20);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          };
+        });
+       
        
       //YORK MILLS AREA EXITS
 
@@ -1356,6 +1578,37 @@ public class Game {
               }
             }
           });
+
+          Inventory rogueEconTest = new Inventory(10);
+       rogueEconTest.addItem(new Weapon(3, "MC=MR < ATC", false, 0, new Effect("Making A Loss in the Short Run", 3, 10, 0, 0)));
+       rogueEconTest.addItem(new Weapon(3, "Supply and Demand Equilibrium", false, 15, null));
+       rogueEconTest.addItem(new Weapon(3, "Unregulated Natural Monopoly", false, 10, new Effect("Extreme Inneficiency", 4, 5, -2, 0)));
+       final Enemy rogueEconTestEnemy = new Enemy(null, bayviewGlen2ndFloorUpperHallway, 75, rogueEconTest , 0, "Rogue Econ Test", 94);
+       bayviewGlen2ndFloorUpperHallway.addEnemies(rogueEconTestEnemy);
+       bayviewGlen2ndFloorUpperHallway.setRunnable(() -> {
+         try {
+           if(bayviewGlen2ndFloorUpperHallway.enemies.contains(rogueEconTestEnemy)) {
+             Fight f = new Fight(rogueEconTestEnemy);
+             boolean won = f.fight();
+             if(won) {
+               bayviewGlen2ndFloorUpperHallway.enemies.remove(rogueEconTestEnemy);
+             }
+           }
+           if (bayviewGlenG12CommonAreaExitDown.getIsExitLocked()) {
+            for (Item i : Game.getGame().getPlayer().getInventory().getItems()) {
+              if (i.getName().equals("Basement Key")) {
+                if (i.getKeyId().equals("BasementBayviewGlenKey")) {
+                  Graphics text = new Graphics();
+                  bayviewGlenG12CommonAreaExitDown.setIsExitLocked(false);
+                  text.slowTextSpeed("You take the time to unlock the door on the way down", 20);
+                }
+              }
+            }
+          }
+         } catch (Exception e) {
+           e.printStackTrace();
+         }
+       });
         //Maintenance room
         final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         //faculty closet
@@ -1363,6 +1616,32 @@ public class Game {
         unionFacultyCloset.addItemGround(new Item(2, "Free Prime Coupon", false, null, false));
         //faculty room
         final Room unionFacultyRoom = new Room ("Placeholder Description for unionFacultyRoom", "unionfacultyroom"); roomMap.put(unionFacultyRoom.getRoomName(), unionFacultyRoom);
+        unionFacultyRoom.setRunnable(new Runnable(){
+          
+          @Override
+          public void run() {
+            try{
+            Graphics text = new Graphics();
+            text.slowTextSpeed("TTC worker: HEY YOUR NOT SUPPOSE TO BE HERE!", 7);
+                Inventory i = new Inventory(2600);
+                i.addItem(new Weapon(12,"Broom", false, 8, null));
+                final Enemy TTCWORKER = new Enemy(null, unionFacultyRoom, 30, i, 20, "ShopKeeper", 25);
+                Fight f = new Fight(TTCWORKER);
+                boolean won = f.fight();
+                if(won){
+                  Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(TTCWORKER);
+                  text.slowTextSpeed("The innocent TTC worker falls to the ground defeated", 7);
+                  text.slowTextSpeed("You notice a key falling from his pocket to the ground", 7);
+                  unionFacultyRoom.addItemGround(new Item(2, "Closet Key", false, null, false));
+                  
+                }
+
+          
+            }catch(Exception e){
+              //aklsdjalsd
+            }
+          }
+        });
 
         //exits
         final Exit  unionShopAreaExitUp = new Exit("U", unionShopArea); unionPlatform.addExit( unionShopAreaExitUp);
@@ -1425,7 +1704,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("yorkmillssubway"));
+    this.player.setCurrentRoom(roomMap.get("stclairsubway"));
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {
