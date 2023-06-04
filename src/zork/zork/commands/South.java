@@ -30,7 +30,7 @@ public class South extends Command {
                 }
             }
             } catch (Exception exception) {
-                return "no ascii art";
+                exception.printStackTrace();
             } 
         }
             return "There is no room to the South";
