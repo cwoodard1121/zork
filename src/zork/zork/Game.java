@@ -240,7 +240,27 @@ public class Game {
          Graphics text = new Graphics();
          try {
           text.slowTextSpeed("Most of the musical instruments were taken but you see 5 in the back corner, you may pick one to take with you on your travels.\n", 15);
-          text.slowTextSpeed(" > Clarinet \n > Trumpet \n > Trombone \n > Flute \n > Saxophone \n                                                         \n Which one will you take: ", 60);
+          text.slowTextSpeed(" > Clarinet \n > Trumpet \n > Trombone \n > Oboe \n > Saxophone \n  Which one will you take: ", 120);
+          String ans = in.nextLine();
+          if (ans.equalsIgnoreCase("clarinet")) {
+            Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Clarinet", true, 20, null));
+            text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Clarinet", 15);
+          } else if (ans.equalsIgnoreCase("trumpet")) {
+            Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Trumpet", true, 25, null));
+            text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Trumpet", 15);
+          } else if (ans.equalsIgnoreCase("trombone")) {
+            Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Trombone", true, 25, null));
+            text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Trombone", 15);
+          } else if (ans.equalsIgnoreCase("saxophone")) {
+            Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Saxophone", true, 25, new Effect("Aggitated", 2, 0, -20, 0)));
+            text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Saxophone", 15);
+          } else if (ans.equalsIgnoreCase("oboe")) {
+            Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Oboe", true, 15, new Effect("Ruptured Eardrum", 2, 5, 5, 0)));
+            text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Flute", 15);
+          } else {
+
+          }
+          Thread.sleep(1000);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
@@ -298,6 +318,7 @@ public class Game {
              if(ans.equalsIgnoreCase("27, 05, 17") || ans.equalsIgnoreCase(" 27, 05, 17") || ans.equalsIgnoreCase("27 05 17")) {
                Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "STRAWBERRY WATERMELON PRIME", isTesting, null, finished, ans));
                text.slowTextSpeed("You slowly twist the locker 27, and then 05 and finally 17. \n the lock opens. as you open the locker you see at the top shelf a shiny pink bottle.\n STRAWBERRY WATTERMELON tm. Prime", 15);
+               Thread.sleep(1000);
              }
            }
          }catch (Exception e) {
