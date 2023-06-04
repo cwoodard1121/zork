@@ -23,14 +23,19 @@ public class Pickup extends Command {
         for (int i = 0; i < groundItems.size(); i++) {
             Item item = groundItems.get(i);
             hasItem = true;
+            String command = "";
+            for (int j = 0; j < args.length; j++) {
+                command+=args[j] + " ";
+            }
+            command = command.substring(0, command.length()-1);
             if (isSpecifiedItem) {
-                for (int j = 0; j < args.length; j++) {
-                    if (item.getName().equalsIgnoreCase(args[j])) {
+                
+                    if (item.getName().equalsIgnoreCase(command)) {
                         player.getInventory().addItem(item);
                         player.getCurrentRoom().removeFromGround(item);
                         itemList = item.getName() + ", ";
                     }
-                }
+                
             } else {
                 player.getInventory().addItem(item);
                 player.getCurrentRoom().removeFromGround(item);
