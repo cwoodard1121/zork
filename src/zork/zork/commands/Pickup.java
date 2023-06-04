@@ -27,11 +27,6 @@ public class Pickup extends Command {
             for (int j = 0; j < args.length; j++) {
                 command+=args[j] + " ";
             }
-            command = command.substring(0, command.length()-1);
-            if(command.substring(0, 2).equals("up")){
-                        command = command.substring(3);
-            }
-            
             if (isSpecifiedItem) {
                     if (item.getName().equalsIgnoreCase(command)) {
                         player.getInventory().addItem(item);
