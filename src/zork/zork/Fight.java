@@ -53,6 +53,8 @@ public class Fight {
 
         SoundHandler.stopSound("would_boss.wav");
         SoundHandler.startAfterInterruption();
+        Game.getGame().getPlayer().setInWeaponMenu(false);
+        Game.getGame().getPlayer().setInItemMenu(false);
         return didPlayerWin;
        
         

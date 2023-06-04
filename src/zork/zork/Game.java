@@ -946,7 +946,9 @@ public class Game {
                               
                             }
                           } else {
+                            System.out.println("you have no money");
                             finishedOrder = false;
+                            break;
                           }
                           
                           if(finishedOrder){
@@ -1101,6 +1103,32 @@ public class Game {
         unionFacultyCloset.addItemGround(new Item(2, "Free Prime Coupon", false, null, false));
         //faculty room
         final Room unionFacultyRoom = new Room ("Placeholder Description for unionFacultyRoom", "unionfacultyroom"); roomMap.put(unionFacultyRoom.getRoomName(), unionFacultyRoom);
+        unionFacultyRoom.setRunnable(new Runnable(){
+          
+          @Override
+          public void run() {
+            try{
+            Graphics text = new Graphics();
+            text.slowTextSpeed("TTC worker: HEY YOUR NOT SUPPOSE TO BE HERE!", 7);
+                Inventory i = new Inventory(2600);
+                i.addItem(new Weapon(12,"Broom", false, 8, null));
+                final Enemy TTCWORKER = new Enemy(null, unionFacultyRoom, 150, i, 80, "ShopKeeper", 25);
+                Fight f = new Fight(TTCWORKER);
+                boolean won = f.fight();
+                if(won){
+                  Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(TTCWORKER);
+                  text.slowTextSpeed("The innocent TTC worker falls to the ground defeated", 7);
+                  text.slowTextSpeed("You notice a key falling from his pocket to the ground", 7);
+                  unionFacultyRoom.addItemGround(new Item(2, "Closet Key", false, null, false));
+                  
+                }
+
+          
+            }catch(Exception e){
+              //aklsdjalsd
+            }
+          }
+        });
 
         //exits
         final Exit  unionShopAreaExitUp = new Exit("U", unionShopArea); unionPlatform.addExit( unionShopAreaExitUp);
