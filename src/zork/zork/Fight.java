@@ -43,6 +43,9 @@ public class Fight {
         didPlayerWin = fightingResults();
         if(didPlayerWin){
             expGain();
+            System.out.println("You got " + enemy.getMoney() + " from " + enemy.getName());
+            Game.getGame().getPlayer().setMoney(Game.getGame().getPlayer().getMoney() + enemy.getMoney());
+
             
         }else{
             System.out.println("lost");
@@ -73,7 +76,8 @@ public class Fight {
                     text.slowTextSpeed(" > Strength: " + player.getStrength() + " -> " + statIncrease[0] + "\n > Health: " + player.getMaxHealth() + " -> " + statIncrease[1] + "\n > Speed: " + player.getSpeed() + " -> " + statIncrease[2], 20);
                     Thread.sleep(100);
                     player.setStrength(statIncrease[0]); player.setMaxHealth(statIncrease[1]); player.setSpeed(statIncrease[2]);
-                } if(player.getExp() <= 100) {
+                } 
+                if(player.getExp() <= 100) {
                     leveledUp = true;
                 }
             }
