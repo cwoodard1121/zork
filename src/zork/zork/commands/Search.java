@@ -14,8 +14,9 @@ public class Search extends Command {
         String str = "";
         if(Game.getGame().getPlayer().getCurrentRoom().getGroundItems().size() == 0) return "You searched and found... nothing.";
         for (Item e : Game.getGame().getPlayer().getCurrentRoom().getGroundItems()) {
-            str = str + e.getName();
+            str = str + e.getName() + ", ";
         }
+        str = str.substring(0, str.length()-2);
         return str;
     }
 

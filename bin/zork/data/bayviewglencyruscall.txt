@@ -15,11 +15,11 @@ Click
  | Cyrus: Hello recruit, you have made it to bayview   |
  | glen. Your mission is to fetch the STRAWBERRY       |
  | WATERMELON tm. prime flavour. its located in my     |
- | locker but I have seem to have forgotten the        |
- | password. I will remotely unlock as many doors as   |
- | I can. I remember leaving parts of my code across   |
- | the school so I could always find it if I forgot    | 
- | my code. You must find my code and open my locker   |
+ | locker but i can't tell you my password.            |
+ | Sorry you never know who's listening...             |
+ | I left parts of my code across the school, I'm      |
+ | confident you'll figure it out. just look around    | 
+ |                                                     |
  ~
  |_____________________________________________________|
 
