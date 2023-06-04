@@ -225,22 +225,22 @@ public class BlackJack {
         
         boolean validBet = false;
         double bet = 0;
-        System.out.print("Please enter bet: (MIN: $" + MIN_BET + ")");
+        System.out.print("Please enter bet (MIN: $" + MIN_BET + ")" );
         
         while(!validBet){
         try{
             bet = Integer.parseInt(in.nextLine());
 
             if(bet> wallet){
-                System.out.print("Please enter bet: (MAX: $" + wallet + ")");
+                System.out.print("Please enter bet(MAX: $" + wallet + "):" );
             }else if(bet < MIN_BET){
-                System.out.print("Please enter bet: (MIN: $" + MIN_BET + ")");
+                System.out.print("Please enter bet (MIN: $" + MIN_BET + "):" );
             }else{
                 validBet = true;
             }
         }catch(NumberFormatException ex){
             System.out.println("Invalid bet");
-            System.out.print("Please enter bet: (MIN: $" + MIN_BET + ")");
+            System.out.print("Please enter bet (MIN: $" + MIN_BET + "):" );
         }
 
     }

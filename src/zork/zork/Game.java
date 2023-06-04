@@ -984,7 +984,8 @@ public class Game {
               try{
                 Scanner in = new Scanner(System.in);
                 Graphics text = new Graphics();
-                text.slowTextSpeed("Hey kid, wanna try your luck in blackjack? y/n", 0);
+                text.slowTextSpeed("You get approached by a gambling addict", 7);
+                text.slowTextSpeed("Hey kid, wanna try your luck in blackjack? y/n", 7);
                 String d = in.nextLine();
                 if(d.equalsIgnoreCase("y")){
                   BlackJack n = new BlackJack();
@@ -1006,27 +1007,70 @@ public class Game {
          
           @Override
           public void run() {
+            try{
             ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
             boolean hasCoupon = false;
+            Graphics text = new Graphics();
+            text.slowTextSpeed("ShopKeeper: I heard about your little prime quest... I'll give you my only prime for a BAJILLION DOLLARS HAHAHAH", 7);
               for(int i = 0; i<ar.size(); i++){
                   if(ar.get(i).getName().equals("Free Prime Coupon"))
                     hasCoupon = true;
                   
               }
               if(hasCoupon){
-                //run the bossfight
+                Inventory i = new Inventory(2600);
+                i.addItem(new Weapon(12,"Metal Bat", false, 18, null));
+                final Enemy SHOPKEEPER = new Enemy(null, unionScamsMarket, 150, i, 80, "ShopKeeper", 200);
+                Fight f = new Fight(SHOPKEEPER);
+                boolean won = f.fight();
+                if(won){
+                  Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(SHOPKEEPER);
+                  text.slowTextSpeed("As the shopkeeper falls, you see a prime fall out of his pocket and onto the ground.", 7);
+                  unionScamsMarket.addItemGround(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
+                }
               }
-           
+            }catch(Exception e){
+              //aklsdjalsd
+            }
           }
         });
         //hallway
         final Room unionHallway = new Room ("Placeholder Description for unionHallway", "unionhallway"); roomMap.put(unionHallway.getRoomName(), unionHallway);
         //Guide room
         final Room unionGuideRoom = new Room ("Placeholder Description for unionGuideRoom", "unionguideroom"); roomMap.put(unionGuideRoom.getRoomName(), unionGuideRoom);
+
         //washroom
         final Room unionWashroom = new Room ("Placeholder Description for unionWashroom", "unionwashroom"); roomMap.put(unionWashroom.getRoomName(), unionWashroom);
+        unionWashroom.setRunnable(new Runnable(){
+         
+          @Override
+          public void run() {
+            try{
+            Graphics text = new Graphics();
+            text.slowTextSpeed("On the ground you spot a 20$ bill and pick it up... sweet", 0);
+            Game.getGame().getPlayer().setMoney(Game.getGame().getPlayer().getMoney() + 20);
+           
+            }catch(Exception e){
+              //aklsdjalsd
+            }
+          }
+        });
         //sinkRoom
         final Room unionSinkRoom = new Room ("Placeholder Description for unionSinkRoom", "unionsinkroom"); roomMap.put(unionSinkRoom.getRoomName(), unionSinkRoom);
+          unionSinkRoom.setRunnable(new Runnable(){
+          
+            @Override
+            public void run() {
+              try{
+              Graphics text = new Graphics();
+              text.slowTextSpeed("as you gaze at the lonely sink in the corner, you feel like playing a good game of soccer with cyrus when this is all over", 7);
+
+            
+              }catch(Exception e){
+                //aklsdjalsd
+              }
+            }
+          });
         //Maintenance room
         final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         //faculty closet
