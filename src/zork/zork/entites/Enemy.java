@@ -10,14 +10,16 @@ public class Enemy extends Entity {
     private double moneyDroped;
     private int speed;
     private String name;
+    private int exp;
 
 
 
-    public Enemy(Location location, Room currentRoom, int health, Inventory inventory, int money, String name){
+    public Enemy(Location location, Room currentRoom, int health, Inventory inventory, int money, String name, int exp){
 
         super(location, currentRoom, health, inventory);
         this.moneyDroped = money;
         this.name = name;
+        this.exp = exp;
     }
 
 
@@ -51,6 +53,11 @@ public class Enemy extends Entity {
 
     public String getName() {
         return name;
+    }
+
+
+    public int getExp() {
+        return exp;
     }
 
 }

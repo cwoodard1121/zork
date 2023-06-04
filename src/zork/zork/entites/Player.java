@@ -15,13 +15,16 @@ public class Player extends Entity {
 
     private int primeCounter;
     private int speed;
-    
+    private int exp;
+    private int level;
     private boolean isInItemMenu;
     private boolean isInWeaponMenu;
     private Weapon currentWeapon;
     private Item currentItem;
     private boolean isChoosingMenu = true;
     private boolean isInFight;
+    private int strength;
+    private int maxHealth = 100;
 
 
     private String name;
@@ -89,7 +92,13 @@ public class Player extends Entity {
         this.isInWeaponMenu = isInWeaponMenu;
     }
 
-   
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
 
 
     public boolean isCurrentMove() {
@@ -142,6 +151,13 @@ public class Player extends Entity {
         super.setHealth(health);
     }
 
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
 
     public Inventory getInventory() {
        return super.getInventory();
@@ -159,6 +175,22 @@ public class Player extends Entity {
 
     public void setPrimeCounter(int primeCounter) {
         this.primeCounter = primeCounter;
+    }
+
+    public void addExp(int exp) {
+        this.exp += exp;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void addLevel(int level) {
+        this.level += level;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public void gameOver(){
