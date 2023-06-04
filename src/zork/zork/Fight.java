@@ -127,6 +127,10 @@ public class Fight {
         text.slowTextSpeed(enemy.getName() + " used" + " " + eWeapon.getName(), 7);
         Thread.sleep(1000);
         eDamage = (int)((Math.random() * 0.5 + 0.8) * (eDamage)); // Create a damage range of 0.8x and 1.2x damage
+        if ((int)(Math.random()*16 + 1) == 16) {
+            eDamage = eDamage * 2;
+            System.out.println("CRITICAL HIT!!!");
+        }
         playerHealth-= eDamage;
         text.slowTextSpeed("It delt " + eDamage + " Damage", 7);
         Thread.sleep(1000);
@@ -244,6 +248,10 @@ public class Fight {
                 text.slowTextSpeed(Game.getGame().getPlayer().getName() + " used" + " " + pWeapon.getName(), 7);
                 Thread.sleep(1000);
                 pDamge = (int)((Math.random() * 0.5 + 0.8) * (pDamge)); // Create a damage range of 0.8x and 1.2x damage
+                if ((int)(Math.random()*16 + 1) == 16) {
+                    pDamge = pDamge * 2;
+                    System.out.println("CRITICAL HIT!!!");
+                }
                 enemyHealth -= pDamge;
                 text.slowTextSpeed("It delt " + pDamge + " Damage", 7);
                 Thread.sleep(1000);
@@ -389,7 +397,7 @@ public class Fight {
         System.out.println("|                                                     |");
         NameLength = Game.getGame().getPlayer().getName().length();
         spaceBetweenLine = "";
-        HealthPercent = (int)((playerHealth / playerTotalHealth)) * 20;
+        HealthPercent = (int)((playerHealth / playerTotalHealth)*20);
         int playerTotalHealthInt = (int)(playerTotalHealth);
         HealthBar = "";
         for (int i = 1; i < 21 ; i++) {
