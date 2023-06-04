@@ -42,7 +42,7 @@ public class Pickup extends Command {
         else if (isSpecifiedItem && hasItem)
             return "There are no items of the name " + itemList; 
         else if (hasItem) 
-            return "You have picked up" + itemList;
+            return "You have picked up " + itemList;
         else
             return "There are no items in this room";
     }
