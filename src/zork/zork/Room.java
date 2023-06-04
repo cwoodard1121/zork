@@ -29,9 +29,9 @@ public class Room {
     onEnter.run();
   }
 
-  public void setLocked(boolean isLocked) {
+  public void setLocked(boolean isLockedKey) {
     System.out.println(isLocked + " setting locked to this");
-    this.isLocked = isLocked;
+    this.isLocked = isLockedKey;
   }
 
   public ArrayList<Exit> getExits() {

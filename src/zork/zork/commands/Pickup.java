@@ -10,21 +10,22 @@ public class Pickup extends Command {
 
     public Pickup(String name) {
         super(name);
-        addAlias("Pick");
+        addAlias("pick");
     }
-
     @Override
     public String runCommand(String... args) {
         Player player = Game.getGame().getPlayer();
         ArrayList<Item> groundItems = player.getCurrentRoom().getGroundItems();
+        if(groundItems.size() == 0) return "There are no items in the room.";
         boolean hasItem = false;
         String itemList = "";
         boolean isSpecifiedItem = args.length > 0;
-        for (Item item : groundItems) {
+        for (int i = 0; i < groundItems.size(); i++) {
+            Item item = groundItems.get(i);
             hasItem = true;
             if (isSpecifiedItem) {
-                for (int i = 0; i < args.length; i++) {
-                    if (item.getName().equalsIgnoreCase(args[i])) {
+                for (int j = 0; j < args.length; j++) {
+                    if (item.getName().equalsIgnoreCase(args[j])) {
                         player.getInventory().addItem(item);
                         player.getCurrentRoom().removeFromGround(item);
                         itemList = item.getName() + ", ";

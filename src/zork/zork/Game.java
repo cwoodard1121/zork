@@ -176,7 +176,7 @@ public class Game {
  
       final boolean[] hasEnteredLobby = new boolean[]{false};
       final Room bayviewGlenLobby = new Room ("Placeholder Description for bayviewGlenLobby", "bayviewglenlobby"); roomMap.put(bayviewGlenLobby.getRoomName(), bayviewGlenLobby);  // north exit outside for later looking south when walking in
-      bayviewGlenLobby.addItemGround(new Item(0, null, isTesting, null, finished));
+      bayviewGlenLobby.addItemGround(new Item(0, "", isTesting, null, finished));
       
       final Room bayviewGlenOutsideLobby = new Room ("Placeholder Description for bayviewGlenOutsideLobby", "bayviewglenoutsidelobby"); roomMap.put(bayviewGlenOutsideLobby.getRoomName(), bayviewGlenOutsideLobby);
       final Room bayviewGlenHallwayCafeteria = new Room ("Placeholder Description for bayviewGlenHallwayCafeteria", "bayviewglenhallwaycafeteria"); roomMap.put(bayviewGlenHallwayCafeteria.getRoomName(), bayviewGlenHallwayCafeteria); // to the east from lobby
@@ -252,18 +252,40 @@ public class Game {
               renderer.showCutScene(1500, "\\bin\\zork\\data\\bayviewglencyruscall.txt", 35);
             } catch (Exception e) {
               handleException(e);
+            }
               bayviewGlenHallwayTheatreFront.setLocked(false);
               bayviewGlenUpperGym.setLocked(false);
               bayviewGlenG11CommonArea.setLocked(false);
               bayviewGlenHallwayPrepGym.setLocked(false);
               bayviewGlenPrepGym.setLocked(false);
               bayviewGlenCafeteriaDiningArea.setLocked(false);
-
-            }
           }
         }
       });
 
+
+      bayviewGlenMathWing.setRunnable(() -> {
+        Scanner in = new Scanner(System.in);
+        Graphics text = new Graphics();
+        try {
+        text.slowTextSpeed("You see Cyrus's Locker, would you like to open it Y/N", 15);
+          String ans = in.nextLine();
+          if(ans.equalsIgnoreCase("y")) {
+            text.slowTextSpeed("What is the code? format: XX, XX, XX", 15);
+            ans = in.nextLine();
+            if(ans.equalsIgnoreCase("27, 05, 17") || ans.equalsIgnoreCase(" 27, 05, 17") || ans.equalsIgnoreCase("27 05 17")) {
+              Game.getGame().getPlayer().getInventory().addItem(new Item(1, "STRAWBERRY WATERMELON PRIME", isTesting, null, finished));
+              text.slowTextSpeed("You slowly twist the locker 27, and then 05 and finally 17. \n the lock opens. as you open the locker you see at the top shelf a shiny pink bottle.\n STRAWBERRY WATTERMELON tm. Prime", 15);
+            }
+          }
+        }catch (Exception e) {
+          System.out.println("SlowTextSpeedNoWork");
+        }
+
+      });
+        
+
+      
 
       //BVG EXITS
       final Exit bayviewGlenOutsideLobbyExitNorth = new Exit("N",bayviewGlenOutsideLobby); bayviewGlenLobby.addExit(bayviewGlenOutsideLobbyExitNorth); 
@@ -563,7 +585,7 @@ public class Game {
         //Maintenance room
         final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         //faculty closet
-        final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
+        final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true, "Placeholder Locked Message for Union Facility Closet"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
         //faculty room
         final Room unionFacultyRoom = new Room ("Placeholder Description for unionFacultyRoom", "unionfacultyroom"); roomMap.put(unionFacultyRoom.getRoomName(), unionFacultyRoom);
 
