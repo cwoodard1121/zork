@@ -22,11 +22,14 @@ public class Go extends Command {
             for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
                 if(e.getDirection().equalsIgnoreCase(direction)) {
                     try {
-                    if (!e.getAdjacentRoom().isLocked()) {        
+                    if (!e.getAdjacentRoom().isLocked() && !e.getIsExitLocked()) {        
                         Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
                         e.getAdjacentRoom().printAscii();                    
                         return e.getAdjacentRoom().getDescription();
                     } else {
+                        if(e.hasLockedDescription()){
+                            return e.getLockedDescription();
+                        }
                         return e.getAdjacentRoom().getLockedMessage();
                     }
                     } catch (Exception ignored) {

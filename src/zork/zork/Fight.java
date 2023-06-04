@@ -190,7 +190,7 @@ public class Fight {
             }
         }
         } catch (Exception e) {
-            System.err.println("Marco fix the index out of bounds exception line 173");
+            
         }
     }
 
