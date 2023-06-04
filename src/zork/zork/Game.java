@@ -1526,14 +1526,17 @@ public class Game {
               }
               if(hasCoupon){
                 Inventory i = new Inventory(2600);
-                i.addItem(new Weapon(12,"Metal Bat", false, 18, null));
+                i.addItem(new Weapon(12,"Metal Bat", false, 18, new Effect("Concussion", 4, 0, -2, 0)));
                 final Enemy SHOPKEEPER = new Enemy(null, unionScamsMarket, 150, i, 80, "ShopKeeper", 200);
                 Fight f = new Fight(SHOPKEEPER);
+                text.slowTextSpeed("WHAT IS THAT, A FREE PRIME COUPON??!?!? YOU SCAMMER THATS MY JOB!", 7);
                 boolean won = f.fight();
+                
                 if(won){
                   Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(SHOPKEEPER);
-                  text.slowTextSpeed("As the shopkeeper falls, you see a prime fall out of his pocket and onto the ground.", 7);
+                  text.slowTextSpeed("As the shopkeeper falls, you see a prime and fall out of his pocket and onto the ground. He also drops his metal bat", 7);
                   unionScamsMarket.addItemGround(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
+                  unionScamsMarket.addItemGround(new Weapon(12,"Metal Bat", false, 18, new Effect("Concussion", 4, 0, -2, 0)));
                 }
               }
             }catch(Exception e){
@@ -1614,32 +1617,70 @@ public class Game {
            e.printStackTrace();
          }
        });
-        //Maintenance room
-        final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
+        
         //faculty closet
         final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true, "is locked, prob need a key"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
         unionFacultyCloset.addItemGround(new Item(2, "Free Prime Coupon", false, null, false));
         //faculty room
         final Room unionFacultyRoom = new Room ("Placeholder Description for unionFacultyRoom", "unionfacultyroom"); roomMap.put(unionFacultyRoom.getRoomName(), unionFacultyRoom);
+        boolean[] e = {false};
         unionFacultyRoom.setRunnable(new Runnable(){
           
           @Override
           public void run() {
             try{
-            Graphics text = new Graphics();
-            text.slowTextSpeed("TTC worker: HEY YOUR NOT SUPPOSE TO BE HERE!", 7);
-                Inventory i = new Inventory(2600);
-                i.addItem(new Weapon(12,"Broom", false, 8, null));
-                final Enemy TTCWORKER = new Enemy(null, unionFacultyRoom, 30, i, 20, "ShopKeeper", 25);
-                Fight f = new Fight(TTCWORKER);
-                boolean won = f.fight();
-                if(won){
-                  Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(TTCWORKER);
-                  text.slowTextSpeed("The innocent TTC worker falls to the ground defeated", 7);
-                  text.slowTextSpeed("You notice a key falling from his pocket to the ground", 7);
-                  unionFacultyRoom.addItemGround(new Item(2, "Closet Key", false, null, false));
-                  
+              if(!e[0]){
+              Graphics text = new Graphics();
+              text.slowTextSpeed("TTC worker: HEY YOUR NOT SUPPOSE TO BE HERE!", 7);
+                  Inventory i = new Inventory(2600);
+                  i.addItem(new Weapon(12,"Broom", false, 8, null));
+                  final Enemy TTCWORKER = new Enemy(null, unionFacultyRoom, 30, i, 20, "ShopKeeper", 25);
+                  Fight f = new Fight(TTCWORKER);
+                  boolean won = f.fight();
+                  if(won){
+                    Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(TTCWORKER);
+                    text.slowTextSpeed("The innocent TTC worker falls to the ground defeated", 7);
+                    text.slowTextSpeed("You notice a key falling from his pocket to the ground", 7);
+                    unionFacultyRoom.addItemGround(new Item(2, "Closet Key", false, null, false));
+                    e[0] = true;
+                  }
+                 
+              }
+
+          
+            }catch(Exception e){
+              //aklsdjalsd
+            }
+          }
+        });
+
+        //Maintenance room
+        final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
+        unionMaintenanceRoom.setRunnable(new Runnable(){
+            
+          @Override
+          public void run() {
+            try{
+              boolean hasKey = false;
+              ArrayList<Item> arr = Game.getGame().getPlayer().getInventory().getItems();
+              for(int i = 0; i<arr.size(); i++){
+                if(arr.get(i).getName().equalsIgnoreCase("Closet Key")){
+                  hasKey = true;
                 }
+              }
+              Graphics text = new Graphics();
+              if(hasKey){
+                text.slowTextSpeed("You rush to the closet door in the room, key in hand", 7);
+                text.slowTextSpeed("Using the key, you unlock the door", 7);
+                unionFacultyCloset.setLocked(false);
+                for(int i = 0; i<arr.size(); i++){
+                  if(arr.get(i).getName().equalsIgnoreCase("Closet Key")){
+                    arr.remove(i);
+                  }
+                }
+                hasKey = false;
+              }
+              
 
           
             }catch(Exception e){
