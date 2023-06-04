@@ -876,7 +876,7 @@ public class Game {
                             text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                             text.slowTextSpeed("> Boston Cream Donut - 4$", 7);
                             text.slowTextSpeed("> French Vanilla - 2$", 7);
-                            text.slowTextSpeed("> Toasted Bagal With Cream Cheese - 7$", 7);
+                            text.slowTextSpeed("> Toasted Bagel With Cream Cheese - 7$", 7);
                             String b = in.nextLine();
                             double pMoney = Game.getGame().getPlayer().getMoney();
                             if(b.equalsIgnoreCase("boston cream donut")){
@@ -901,11 +901,11 @@ public class Game {
                                 }else{
                                   text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
                                 }
-                            }else if(b.equalsIgnoreCase("Toasted Bagal With Cream Cheese")){
+                            }else if(b.equalsIgnoreCase("Toasted Bagel With Cream Cheese")){
                                 if((pMoney - 7)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=7);
                                   Game.getGame().getPlayer().getInventory().addItem(
-                                    new Item(2, "Toasted Bagal With Cream Cheese", false, 
+                                    new Item(2, "Toasted Bagel With Cream Cheese", false, 
                                     new Effect("Super Delicous", 0, 0, -8, 30), false)
                                     );
                                     finishedOrder = true;
