@@ -154,6 +154,8 @@ public class Game {
       final Room rolexStairwell = new Room("A sign at the top of the stairs says 'to offices', a sign at the bottom says 'emergency exit'.", "rolexstairwell");
       final Room sketchyAlley = new Room("You stand outside the emergency exit of the Rolex Canada Building. This alley looks like it leads back to St. Clair Avenue West.", "sketchyalley"); roomMap.put(sketchyAlley.getRoomName(), sketchyAlley);
       final Room stClairAboveStreetcar = new Room("South of a sketchy alley, you stand on a sidewalk above a streetcar stop.", "stclairabovestreetcar"); roomMap.put(stClairAboveStreetcar.getRoomName(), stClairAboveStreetcar);
+      final Room wetCement2 = new Room("You just stepped into wet cement! You'd better get out of there before you get stuck.", "wetcement!2"); roomMap.put(wetCement2.getRoomName(), wetCement2);
+      final Room streetcar = new Room ("You have entered the streetcar. You look young enough to be under 13.", "streetcar"); roomMap.put(streetcar.getRoomName(), streetcar);
 
 
 
@@ -560,6 +562,11 @@ public class Game {
       final Exit rolexStairwellExitEast = new Exit("E", rolexStairwell); sketchyAlley.addExit(rolexStairwellExitEast);
       final Exit stClairAboveStreetCarExitSouth = new Exit("S", stClairAboveStreetcar); sketchyAlley.addExit(stClairAboveStreetCarExitSouth);
       final Exit sketchyAlleyExitNorth = new Exit ("N", sketchyAlley); stClairAboveStreetcar.addExit(sketchyAlleyExitNorth);
+      final Exit wetCementExitEast = new Exit ("E", wetCement2); stClairAboveStreetcar.addExit(wetCementExitEast);
+      final Exit stClairAboveStreetcarExitWest = new Exit ("W", stClairAboveStreetcar); wetCement2.addExit(stClairAboveStreetcarExitWest);
+      final Exit streetcarExitSouth = new Exit ("S", streetcar); stClairAboveStreetcar.addExit(streetcarExitSouth);
+      final Exit stClairAboveStreetCarExitNorth = new Exit ("N", stClairAboveStreetcar); streetcar.addExit(stClairAboveStreetCarExitNorth);
+
 
       
 
@@ -709,7 +716,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("bayviewglenlobby"));
+    this.player.setCurrentRoom(roomMap.get("stclairstation"));
     this.player.getInventory().addItem(new Weapon(5, "Big Rock", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     try {
