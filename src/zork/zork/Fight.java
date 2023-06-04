@@ -44,6 +44,9 @@ public class Fight {
         if(didPlayerWin){
             System.out.println("won");
             expGain();
+            System.out.println("You got " + enemy.getMoney() + " from " + enemy.getName());
+            Game.getGame().getPlayer().setMoney(Game.getGame().getPlayer().getMoney() + enemy.getMoney());
+
             
         }else{
             System.out.println("lost");

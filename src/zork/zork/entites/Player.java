@@ -25,6 +25,7 @@ public class Player extends Entity {
     private boolean isInFight;
     private int strength;
     private int maxHealth = 100;
+    private double money;
 
 
     private String name;
@@ -196,6 +197,14 @@ public class Player extends Entity {
     public void gameOver(){
       
         //tell them they died and give them their health back and set their room to a spawnpoint
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
     }
     
 }

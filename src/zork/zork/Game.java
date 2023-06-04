@@ -637,29 +637,56 @@ public class Game {
         final Room unionPlatform = new Room ("Placeholder Description for unionPlatform", "unionplatform"); roomMap.put(unionPlatform.getRoomName(), unionPlatform);
         //unionShopArea
         final Room unionShopArea = new Room ("Placeholder Description for unionShopArea", "unionshoparea"); roomMap.put(unionShopArea.getRoomName(), unionShopArea);
+          Inventory i = new Inventory(2600);
+          i.addItem(new Weapon(12,"Crow bar", false, 10, null));
+          final Enemy PRIME_THEIF = new Enemy(null, unionShopArea, 20, i, 20, "Prime Theif", 8);
+          unionShopArea.addEnemies(PRIME_THEIF); 
+          unionShopArea.setRunnable(new Runnable(){
+
+                ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
+                @Override
+                public void run() {
+                  try { 
+                    
+                    Fight f = new Fight(PRIME_THEIF);
+                    Graphics text = new Graphics();
+                    text.slowTextSpeed("HEY YOU... I heard that your on a prime quest so i know you have some. NOW GIVE IT TOO ME!!!!", 12);
+                    boolean won = f.fight();
+                    if(won) {
+                        Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(PRIME_THEIF);
+                    }
+                  } catch (Exception e) {
+                    // TODO: handle exception
+                  }
+                }
+
+             
+            });
+
         //unionTimHortons
         final Room unionTimHortons = new Room ("Placeholder Description for unionTimHortons", "uniontimhortons"); roomMap.put(unionTimHortons.getRoomName(), 
         unionTimHortons);
         //Main area
         final Room unionMainArea = new Room ("Placeholder Description for unionMainArea", "unionmainarea"); roomMap.put(unionMainArea.getRoomName(), unionMainArea);
-          //cutscene
-          // boolean[] hasEnteredMainArea = {false};
-          // unionMainArea.setRunnable(new Runnable(){
-            
-          //   ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
-          //   @Override
-          //   public void run() {
-          //     if (!hasEnteredMainArea[0]) {
-          //       hasEnteredMainArea[0] = true;
-          //       try {
-          //         renderer.showCutScene(1100, "\\bin\\zork\\data\\unioncyruscall.txt");
-          //       } catch (Exception e) {
-          //         handleException(e);
-          //       }
-          //     }
-          //   }
-          
-        // });
+            if(!isTesting){
+              boolean[] hasEnteredMainArea = {false};
+              unionMainArea.setRunnable(new Runnable(){
+                
+                ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
+                @Override
+                public void run() {
+                  if (!hasEnteredMainArea[0]) {
+                    hasEnteredMainArea[0] = true;
+                    try {
+                      renderer.showCutScene(1100, "\\bin\\zork\\data\\unioncyruscall.txt", 15);
+                    } catch (Exception e) {
+                      handleException(e);
+                    }
+                  }
+                }
+              
+            });
+              }
         //union Corner
         final Room unionCorner = new Room ("Placeholder Description for unionCorner", "unioncorner"); roomMap.put(unionCorner.getRoomName(), unionCorner);
         //scams Market
@@ -835,7 +862,7 @@ public class Game {
             System.out.println("Sorry that name is already taken, Please enter another name: ");
           } else if (result.equalsIgnoreCase("marco")){
             System.out.println("Sorry that name is already taken, Please enter another name: ");
-          } else if (result.equalsIgnoreCase("jch")){
+          } else if (result.equalsIgnoreCase("jch shampoo")){
             System.out.println("your funniest person alive award is being sent to your location");
             hasChosenName = true;
             Game.getGame().getPlayer().setName(result);
