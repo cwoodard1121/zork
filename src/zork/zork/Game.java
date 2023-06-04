@@ -256,14 +256,13 @@ public class Game {
               renderer.showCutScene(1500, "\\bin\\zork\\data\\bayviewglencyruscall.txt", 35);
             } catch (Exception e) {
               handleException(e);
-              bayviewGlenHallwayTheatreFront.setLocked(false);
-              bayviewGlenUpperGym.setLocked(false);
-              bayviewGlenG11CommonArea.setLocked(false);
-              bayviewGlenHallwayPrepGym.setLocked(false);
-              bayviewGlenPrepGym.setLocked(false);
-              bayviewGlenCafeteriaDiningArea.setLocked(false);
-
             }
+            bayviewGlenHallwayTheatreFront.setLocked(false);
+            bayviewGlenUpperGym.setLocked(false);
+            bayviewGlenG11CommonArea.setLocked(false);
+            bayviewGlenHallwayPrepGym.setLocked(false);
+            bayviewGlenPrepGym.setLocked(false);
+            bayviewGlenCafeteriaDiningArea.setLocked(false);
           }
         }
       });
@@ -683,7 +682,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("stclairandyonge"));
+    this.player.setCurrentRoom(roomMap.get("bayviewglenlobby"));
     this.player.getInventory().addItem(new Weapon(5, "Big Rock", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     try {
@@ -747,7 +746,7 @@ public class Game {
         while(!hasChosenName) {
           result = in.nextLine().toLowerCase();
           if(result.length() > 16) {
-            System.out.print("Please enter a name between 1-16 Characters");
+            System.out.print("Please enter a name between 1-16 Characters: ");
           } else if (result.equalsIgnoreCase("cameron")) { 
             System.out.print("Sorry that name is already taken, Please enter another name: ");
           } else if (result.equalsIgnoreCase("cagasuge")) { 
