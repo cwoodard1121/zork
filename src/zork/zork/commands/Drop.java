@@ -17,7 +17,12 @@ public class Drop extends Command {
         for(int i = 0; i < game.getPlayer().getInventory().getItemCount(); i++) {
             zork.Inventory inventory = game.getPlayer().getInventory();
             Player player = game.getPlayer();
-            if (args[0].equalsIgnoreCase(inventory.getItem(i).getName())) {
+            String command = "";
+            for (int j = 0; j < args.length; j++) {
+                command+=args[j] + " ";
+            }
+            command = command.substring(0, command.length()-1);
+            if (command.equalsIgnoreCase(inventory.getItem(i).getName())) {
                 int weight = inventory.getCurrentWeight();
                 weight = weight - inventory.getItem(i).getWeight();
                 player.getInventory().setCurrentWeight(weight);
@@ -29,7 +34,7 @@ public class Drop extends Command {
                 return "You dropped your " + getItemName + " on the ground";
             }
         }
-        return "You do not have a " + args[0];
+        return "You do not have that in your inventory";
         
 
 

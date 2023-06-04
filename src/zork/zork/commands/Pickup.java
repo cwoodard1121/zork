@@ -28,11 +28,10 @@ public class Pickup extends Command {
                 command+=args[j] + " ";
             }
             if (isSpecifiedItem) {
-                
                     if (item.getName().equalsIgnoreCase(command)) {
                         player.getInventory().addItem(item);
                         player.getCurrentRoom().removeFromGround(item);
-                        itemList = item.getName() + ", ";
+                        itemList = item.getName();
                     }
                 
             } else {
