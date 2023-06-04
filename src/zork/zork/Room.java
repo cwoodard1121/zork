@@ -12,7 +12,7 @@ public class Room {
   private String roomName;
   private String description;
   private ArrayList<Item> groundItems = new ArrayList<>();
-  private ArrayList<Enemy> enemies = new ArrayList<>();
+  public volatile ArrayList<Enemy> enemies = new ArrayList<>();
   private ArrayList<Exit> exits = new ArrayList<>();
   private boolean isSubway;
   private String displayName;

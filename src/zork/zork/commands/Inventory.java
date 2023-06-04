@@ -14,7 +14,7 @@ public class Inventory extends Command {
     public String runCommand(String... args) {
         String ans = "";
         for (Item item : Game.getGame().getPlayer().getInventory().getItems()) {
-            ans += item.getName() + ", ";
+            ans += " > " + item.getName() + "\n";
         }
         return ans;
     }    
