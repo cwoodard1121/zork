@@ -884,6 +884,29 @@ public class Game {
               }
         //union Corner
         final Room unionCorner = new Room ("Placeholder Description for unionCorner", "unioncorner"); roomMap.put(unionCorner.getRoomName(), unionCorner);
+      
+          
+          unionMainArea.setRunnable(new Runnable(){
+            
+            ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
+            @Override
+            public void run() {
+              try{
+                Scanner in = new Scanner(System.in);
+                Graphics text = new Graphics();
+                text.slowTextSpeed("Hey kid, wanna try your luck in blackjack? y/n", 0);
+                String d = in.nextLine();
+                if(d.equalsIgnoreCase("y")){
+                  
+                }
+              }catch (Exception e){
+                //ajsdasda
+              }
+              
+            }
+          
+        });
+          
         //scams Market
         final Room unionScamsMarket = new Room ("Placeholder Description for unionScamsMarket", "unionscamsmarket"); roomMap.put(unionScamsMarket.getRoomName(), unionScamsMarket);
         unionScamsMarket.setRunnable(new Runnable(){
