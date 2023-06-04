@@ -601,14 +601,14 @@ public class Game {
         //Main area
         final Room unionMainArea = new Room ("Placeholder Description for unionMainArea", "unionmainarea"); roomMap.put(unionMainArea.getRoomName(), unionMainArea);
           //cutscene
-          // boolean[] hasEnteredMainLobby = {false};
+          // boolean[] hasEnteredMainArea = {false};
           // unionMainArea.setRunnable(new Runnable(){
             
           //   ArrayList<Item> ar = Game.getGame().getPlayer().getInventory().getItems();
           //   @Override
           //   public void run() {
-          //     if (!hasEnteredMainLobby[0]) {
-          //       hasEnteredMainLobby[0] = true;
+          //     if (!hasEnteredMainArea[0]) {
+          //       hasEnteredMainArea[0] = true;
           //       try {
           //         renderer.showCutScene(1100, "\\bin\\zork\\data\\unioncyruscall.txt");
           //       } catch (Exception e) {
@@ -714,7 +714,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("stclairstation"));
+    this.player.setCurrentRoom(roomMap.get("unionplatform"));
     this.player.getInventory().addItem(new Weapon(5, "Big Rock", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     try {
