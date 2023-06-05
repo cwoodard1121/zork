@@ -28,7 +28,7 @@ public class Pickup extends Command {
                 command+=args[j] + " ";
             }
             if (isSpecifiedItem) {
-                    if (item.getName().equalsIgnoreCase(command)) {
+                    if (command.contains(item.getName().toLowerCase())) {
                         player.getInventory().addItem(item);
                         player.getCurrentRoom().removeFromGround(item);
                         itemList = item.getName();
