@@ -43,7 +43,7 @@ public class Fight {
         didPlayerWin = fightingResults();
         if(didPlayerWin){
             expGain();
-            System.out.println("You got " + enemy.getMoney() + " from " + enemy.getName());
+            System.out.println("You got " + enemy.getMoney() + "$ from " + enemy.getName());
             Game.getGame().getPlayer().setMoney(Game.getGame().getPlayer().getMoney() + enemy.getMoney());
 
             
@@ -292,7 +292,12 @@ public class Fight {
             }else{
                 Item item = askItem();
                 if(item != null){
-                    playerHealth += item.getEffect().getHealth();
+                    if(playerHealth + item.getEffect().getHealth()>Game.getGame().getPlayer().getMaxHealth()){
+                        playerHealth = Game.getGame().getPlayer().getMaxHealth();
+                    }else{
+                        playerHealth += item.getEffect().getHealth();
+                    }
+                   
                     playerSpeed += item.getEffect().getSpeedChange();
                     text.slowTextSpeed("health up by " + item.getEffect().getHealth() + " and speed went up by " + item.getEffect().getSpeedChange(), 7);
                     Thread.sleep(1000);

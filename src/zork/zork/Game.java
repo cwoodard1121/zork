@@ -1363,6 +1363,7 @@ public class Game {
       final Exit eglintonSubwayExitWest = new Exit("W", eglintonSubway); eglintonStation.addExit(eglintonSubwayExitWest);
       final Exit eglintonStationExitEast = new Exit("E", eglintonStation); eglintonSubway.addExit(eglintonStationExitEast);
       final Exit stClairSubwayExitSouth = new Exit("S", stClairSubway); eglintonSubway.addExit(stClairSubwayExitSouth);
+      final Exit eglintonShuttleBusExitNorth = new Exit("N", eglintonShuttleBus); yorkMillsShuttleBus.addExit(eglintonShuttleBusExitNorth);
 
       //ST. CLAIR AREA EXITS
       final Exit eglintonSubwayExitNorth = new Exit("N", eglintonSubway); stClairSubway.addExit(eglintonSubwayExitNorth);

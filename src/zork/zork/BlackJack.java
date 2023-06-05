@@ -50,12 +50,14 @@ public class BlackJack {
             
             if(wallet< MIN_BET){
                 stillPlaying = false;
+                Game.getGame().getPlayer().setMoney(wallet);
                 System.out.println("have fun on the streets");
             }else{
+                Game.getGame().getPlayer().setMoney(wallet);
                 stillPlaying = playAgain();
             }
         }
-        Game.getGame().getPlayer().setMoney(wallet);
+        
         
 
 
@@ -69,6 +71,7 @@ public class BlackJack {
         while(!complete){
         try{
         System.out.println("Do you want to play again? (1) Yes (2) No");
+        System.out.println("Money Avaliable: " + Game.getGame().getPlayer().getMoney());
         int answer = Integer.parseInt(in.nextLine());
 
         if(answer == 1){
