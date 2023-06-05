@@ -39,7 +39,11 @@ public class Fight {
         player.setInFight(true);     
         boolean didPlayerWin = false;
         SoundHandler.stop();
-        SoundHandler.playSound("would_boss.wav",true);
+        if(enemy.getName().equalsIgnoreCase("ksi-prime")) {
+            SoundHandler.playSound("kids_arent_alright.wav",true);
+        } else {
+            SoundHandler.playSound("would_boss.wav",true);
+        }
         didPlayerWin = fightingResults();
         if(didPlayerWin){
             expGain();
@@ -50,8 +54,11 @@ public class Fight {
         }else{
             System.out.println("lost");
         }
-
-        SoundHandler.stopSound("would_boss.wav");
+        if(enemy.getName().equalsIgnoreCase("ksi-prime")) {
+            SoundHandler.stopSound("kids_arent_alright.wav");
+        } else {
+            SoundHandler.stopSound("would_boss.wav");
+        }
         SoundHandler.startAfterInterruption();
         Game.getGame().getPlayer().setInWeaponMenu(false);
         Game.getGame().getPlayer().setInItemMenu(false);
