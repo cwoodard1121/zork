@@ -1,7 +1,7 @@
                    *St. Clair Subway*
  _______________________________________________________
- | Southbound to   |                 | Northbound to   |
- | Vaughn          |                 | Finch           |
+ | South to        |                 | Northbound to   |
+ | Summerhill      |                 | Finch           |
  |                 |                 |                 |
  |        |        |                 |        ^        |
  |        |        |                 |      / | \      |

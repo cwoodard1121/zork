@@ -194,10 +194,107 @@ public class Game {
       //YORK MILLS AREA ROOMS
       final Room yorkMillsBusTerminal = new Room("The bus","yorkmillsbusterminal"); roomMap.put(yorkMillsBusTerminal.getRoomName(),yorkMillsBusTerminal);
       final Room facultyRoom = new Room("A staff room with a few tables", "facultyroom"); roomMap.put(facultyRoom.getRoomName(), facultyRoom);
-      final Room gatewayNewsstands = new Room("*Implement shopkeeper* Hello, would you like to purchase anything?", "gatewaynewsstands"); roomMap.put(gatewayNewsstands.getRoomName(), gatewayNewsstands);
+      
       final Room yorkMillsSubwayHallway = new Room("A Hallway is ahead leading to the Subway, Chuck Page plays some guitar for passersby.","yorkmillssubwayhallway"); roomMap.put(yorkMillsSubwayHallway.getRoomName(), yorkMillsSubwayHallway);
       final Room yorkMillsSubway = new Room("Please come back later, unscheduled maintenance has just been scheduled, shuttlebuses are available.", "yorkmillssubway","york mills subway",true,"Placeholder Locked Message");
       final Room yorkMillsBus = new Room("This 95A bus will lead you east to Bayview Glen, or West to York Mills Station.", "yorkmillsbus");
+
+      final Room gatewayNewsstands = new Room("Hello, would you like to purchase anything?", "gatewaynewsstands"); roomMap.put(gatewayNewsstands.getRoomName(), gatewayNewsstands);
+            gatewayNewsstands.setRunnable(new Runnable(){
+                public void run(){
+                  try {
+                    Graphics text = new Graphics();
+                    Scanner in = new Scanner(System.in);
+                    text.slowTextSpeed("Hello, would you like to purchase anything? y/n", 7);
+                    String a = in.nextLine();
+                    if(a.equalsIgnoreCase("y")){
+                      boolean finishedOrder = false;
+                        while(!finishedOrder){
+                          if(Game.getGame().getPlayer().getMoney() >= 1){
+                            text.slowTextSpeed("What would you like to buy?", 7);
+                            text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
+                            text.slowTextSpeed("> Gummy Bears - 1$", 7);
+                            text.slowTextSpeed("> Snickers Bar - 2$", 7);
+                            text.slowTextSpeed("> Rusty Scissors - 5$", 7);
+                            String b = in.nextLine();
+                            double pMoney = Game.getGame().getPlayer().getMoney();
+                            if(b.equalsIgnoreCase("gummy bears")){
+                                if((pMoney - 10)>= 0){
+                                  Game.getGame().getPlayer().setMoney(pMoney-=10);
+                                  Game.getGame().getPlayer().getInventory().addItem(
+                                    new Item(2, "Gummy Bears", false, 
+                                    new Effect("Health up", 0, 0, 4, 10), false)
+                                    );
+                                    finishedOrder = true;
+                                }else{
+                                  text.slowTextSpeed("Im Sorry, Your too broke LMAO", 7); //CHANGE LATER
+                                  break;
+
+                                }
+                            }else if(b.equalsIgnoreCase("a snickers bar")){
+                                if((pMoney - 8)>= 0){
+                                  Game.getGame().getPlayer().setMoney(pMoney-=8);
+                                  Game.getGame().getPlayer().getInventory().addItem(
+                                    new Item(2, "A Snickers Bar", false, 
+                                    new Effect("Health Up", 0, 0, 0, 15), false)
+                                    );
+                                    finishedOrder = true;
+                                }else{
+                                  text.slowTextSpeed("Im Sorry, Your too broke LMAO", 7); //CHANGE LATER
+                                  break;
+                                }
+                            }else if(b.equalsIgnoreCase("rusty scissors")){
+                                if((pMoney - 5)>= 0){
+                                  Game.getGame().getPlayer().setMoney(pMoney-=5);
+                                  Effect scissorBleeding = new Effect("Bleeding", 2, 3, 1, 0);
+                                  Game.getGame().getPlayer().getInventory().addItem( new Weapon(1, "Rusty Scissors", false, 20, scissorBleeding));
+                                    
+                                    
+                                    finishedOrder = true;
+                                }else{
+                                  
+                                  text.slowTextSpeed("Im Sorry, Your too broke LMAO", 7); //CHANGE LATER
+                                  break;
+                                }
+                            }else{
+                              
+                              
+                                text.slowTextSpeed("Sorry, That item is not avaliable right now. Please pick another", 7);
+                              
+                              
+                            }
+                          }else{
+                            System.out.println("YOU HAVE NO MONEY. YOURE TOO POOR");
+                            finishedOrder = false;
+                            break;
+                          }
+                          
+                          if(finishedOrder){
+                            while(true){
+                              text.slowTextSpeed("Would you like anything else? y/n", 7);
+                              String c = in.nextLine();
+                              if(c.equalsIgnoreCase("y")){
+                                finishedOrder = false;
+                                break;
+                              }else if(c.equalsIgnoreCase("n")){
+                                finishedOrder = true;
+                                text.slowTextSpeed("Thank you, come again!", 7);
+                                break;
+                              }
+                            }
+                          }
+                        }
+                    }else{
+                      text.slowTextSpeed("ok come back soon", 7);
+                    }
+                    
+                  } catch (Exception e) {
+                    // TODO: handle exception
+                  }
+                }
+            });
+      
+      
       
 
 
@@ -281,7 +378,7 @@ public class Game {
                               
                             }
                           }else{
-                            System.out.println("YOU HAVE NO MONEY. YOURE TOO POOR FOR THE DON");
+                            System.out.println("YOU HAVE NO MONEY. YOURE TOO POOR");
                             finishedOrder = false;
                             break;
                           }
@@ -361,6 +458,7 @@ public class Game {
                                   Game.getGame().getPlayer().setMoney(pMoney-=10);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "BLUE RASPBERRY PRIME", false, "Blue", true, "circlek"));
                                   eglintonSubway.setLocked(false);
+                                  yorkMillsSubway.setLocked(false);
                                   
         
                                     
@@ -415,15 +513,16 @@ public class Game {
       boolean[] hasFoughtHomeless = new boolean[]{false};
       Inventory homelessInventory = new Inventory(5);
       
-      homelessInventory.addItem(new Weapon(5, "uncut nails",false, 5,null));
+      homelessInventory.addItem(new Weapon(5, "lead pipe",false, 5,null));
     
-      Enemy homeless = new Enemy(null, yongeEglintonMall, 25, homelessInventory, 10, "Homeless dude", 1);
+      Enemy homeless = new Enemy(null, yongeEglintonMall, 25, homelessInventory, 10, "Homeless dude", 30);
       yongeEglintonMall.setRunnable(() -> {
         if(!hasFoughtHomeless[0]) {
       
         Fight homelessFight = new Fight(homeless);
         if(homelessFight.fight()) {
           Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(homeless);
+          game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Lead Pipe", false, 23, null));
           hasFoughtHomeless[0] = true;
         } else {
           System.out.println("didnt win. homeless dude steals all ur stuff");
@@ -464,7 +563,7 @@ public class Game {
       
       driverInventory.addItem(new Weapon(5, "Presto Card",false, 10,null));
      
-      Enemy driver = new Enemy(null, streetcar, 20, driverInventory, 10, "TTC Driver", 10);
+      Enemy driver = new Enemy(null, streetcar, 20, driverInventory, 10, "TTC Driver", 40);
       streetcar.setRunnable(() -> {
         if(!hasFoughtDriver[0]) {
         
@@ -676,7 +775,7 @@ public class Game {
       
       employeeInventory.addItem(new Weapon(5, "Ballpoint Pen",false, 10,null));
      
-      Enemy employee = new Enemy(null, officeRoom, 30, employeeInventory, 30, "Disgruntled Employee", 10);
+      Enemy employee = new Enemy(null, officeRoom, 40, employeeInventory, 30, "Disgruntled Employee", 20);
       officeRoom.setRunnable(() -> {
         if(!hasFoughtEmployee[0]) {
         
@@ -693,16 +792,16 @@ public class Game {
       boolean[] hasFoughtSmoker = new boolean[]{false};
       Inventory smokerInventory = new Inventory(5);
       Effect smokerBurning = new Effect("Burning", 2, 5, -5, 0);
-      Item lighter = new Weapon(5, "lighter",true, 10, smokerBurning);
+      Item lighter = new Weapon(5, "lighter",true, 25, smokerBurning);
       
       smokerInventory.addItem(lighter);
-      // make crackhead
-      Enemy smoker = new Enemy(null, rolexStairwell, 30, smokerInventory, 0, "Smoker", 10);
+      
+      Enemy smoker = new Enemy(null, rolexStairwell, 30, smokerInventory, 10, "Smoker", 20);
       
       rolexStairwell.setRunnable(() -> {
         Graphics text = new Graphics();
         if(!hasFoughtSmoker[0]) {
-        // fight crackhead
+    
         Fight smokerFight = new Fight(smoker);
         if(smokerFight.fight()) {
           Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(smoker);
@@ -731,7 +830,7 @@ public class Game {
                   try {
                     Graphics text = new Graphics();
                     Scanner in = new Scanner(System.in);
-                    text.slowTextSpeed("Please, take this PRIME. It means nothing to me now.", 7);
+                    text.slowTextSpeed("Please, take this PRIME? It means nothing to me now. y/n", 7);
                     String a = in.nextLine();
                     if(a.equalsIgnoreCase("y")){
                       boolean finishedOrder = false;
@@ -866,16 +965,17 @@ public class Game {
        Inventory mutatedFood = new Inventory(6);
        mutatedFood.addItem(new Weapon(3, "Acid Shot", false, 10, null));
        mutatedFood.addItem(new Weapon(3, "Rotted Chunk", false, 3, new Effect("Poison", 3, 6, 2, 0)));
-       final Enemy mutatedFoodEnemy = new Enemy(null, bayviewGlenKitchen, 50, mutatedFood , 5, "MutatedFood", 75);
+       final Enemy mutatedFoodEnemy = new Enemy(null, bayviewGlenKitchen, 50, mutatedFood , 10, "MutatedFood", 75);
        bayviewGlenKitchen.enemies.add(mutatedFoodEnemy);
        bayviewGlenKitchen.setRunnable(() -> {
           if(bayviewGlenKitchen.enemies.contains(mutatedFoodEnemy)) {
             Fight f = new Fight(mutatedFoodEnemy);
             boolean won = f.fight();
-            Effect mysteryHealth = new Effect("Weird lookin' piece of meat", 1, 0, 0, 20);
+            Effect mysteryHealth = new Effect("Weird lookin' piece of meat", 1, 0, 0, 30);
             if(won) {
               bayviewGlenKitchen.enemies.remove(mutatedFoodEnemy);
               Game.getGame().getPlayer().getInventory().addItem(new Item(5, "mystery food", true, mysteryHealth, false));
+              
 
             }
           }
@@ -941,6 +1041,7 @@ public class Game {
               
               boolean won = f.fight();
               if(won) {
+              
               Game.getGame().getPlayer().getInventory().addItem(new Item(5, "Swedish Meatball", true, meatballHealth, false));
               Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(cyrus_meatball);
              }
@@ -1115,7 +1216,7 @@ public class Game {
        Inventory questionMark = new Inventory(10);
        questionMark.addItem(new Weapon(3, "White Noise", false, 10, new Effect("Confusion", 20, 2, 0, 0)));
        questionMark.addItem(new Weapon(3, "the FIST", false, 20, null));
-       final Enemy questionMarkEnemy = new Enemy(null, bayviewGlenPrepStaffRoom, 175, questionMark , 10, "?????", 100);
+       final Enemy questionMarkEnemy = new Enemy(null, bayviewGlenPrepStaffRoom, 150, questionMark , 10, "?????", 100);
        bayviewGlenPrepStaffRoom.addEnemies(questionMarkEnemy);
        bayviewGlenPrepStaffRoom.setRunnable(() -> {
           Graphics text = new Graphics();
@@ -1132,6 +1233,7 @@ public class Game {
                 Fight f = new Fight(questionMarkEnemy);
                 boolean won = f.fight();
                 if (won) {
+                  
                   text.slowTextSpeed(" ??? - Ok you beat me \n You - WHO ARE YOU??? \n ??? - I- *Cough cough* am.. \n You - WHO? \n ??? - dead \n", 20);
                   Game.getGame().getPlayer().getInventory().addItem(new Key("G11CommonAreaKey", "golden key", 1));
                   hasGottenFirstKey[0] = true;
@@ -1485,6 +1587,8 @@ public class Game {
               boolean won = f.fight();
               if (won) {
                 Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(theifEnemy);
+                Effect electricalProblems = new Effect("Grant's electrical problems", 5, 9, 0, 0);
+                game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Robotics club prototype", false, 40, electricalProblems));
                 text.slowTextSpeed("You see a black rectangle on the ground \n its OWENS PHONE! \n its on the ground", 20);
                 bayviewGlenG12CommonArea.addItemGround(owensIphone);
               }
@@ -1527,7 +1631,7 @@ public class Game {
           cyrusRobot.addItem(new Weapon(3, "Lazer Beam", false, 25, null));
           cyrusRobot.addItem(new Weapon(3, "Missile", false, 20, null));
           cyrusRobot.addItem(new Weapon(3, "Pocket Atomic Bomb", false, 0, new Effect("Radiation Poisoning", 10, 10, 0, 0)));
-          final Enemy cyrusRobotEnemy = new Enemy(null, bayviewGlenArtRoom, 250, cyrusRobot , 0, "Cyrus-Robot", 60);
+          final Enemy cyrusRobotEnemy = new Enemy(null, bayviewGlenArtRoom, 150, cyrusRobot , 0, "Cyrus-Robot", 60);
           bayviewGlenArtRoom.addEnemies(cyrusRobotEnemy);
 
 
@@ -1578,7 +1682,7 @@ public class Game {
 
         Inventory gymGuy = new Inventory(6);
         gymGuy.addItem(new Weapon(3, "Fist", false, 15, null));
-        final Enemy gymGuyEnemy = new Enemy(null, bayviewGlenKitchen, 200, gymGuy , 0, "Gym Guy", 150);
+        final Enemy gymGuyEnemy = new Enemy(null, bayviewGlenWeightRoom, 80, gymGuy , 10, "Gym Guy", 150);
         bayviewGlenWeightRoom.enemies.add(gymGuyEnemy);
  
         bayviewGlenWeightRoom.setRunnable(() -> {
@@ -1595,6 +1699,7 @@ public class Game {
                boolean won = f.fight();
                if(won) {
                  bayviewGlenWeightRoom.enemies.remove(gymGuyEnemy);
+                 game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Dumbell", false, 30, null));
                }
                text.slowTextSpeed("You press the button, you hear a big clunk downstairs.", 20);
                artRoomLightsOn[0] = true;
@@ -1675,6 +1780,8 @@ public class Game {
       final Exit eglintonStationExitEast = new Exit("E", eglintonStation); eglintonSubway.addExit(eglintonStationExitEast);
       final Exit stClairSubwayExitSouth = new Exit("S", stClairSubway); eglintonSubway.addExit(stClairSubwayExitSouth);
       final Exit eglintonShuttleBusExitNorth = new Exit("N", eglintonShuttleBus); yorkMillsShuttleBus.addExit(eglintonShuttleBusExitNorth);
+      final Exit yorkMillsSubwayExitNorth = new Exit("N", yorkMillsSubway); eglintonSubway.addExit(yorkMillsSubwayExitNorth);
+      final Exit eglintonSubwayExitSouth = new Exit("S", eglintonSubway); yorkMillsSubway.addExit(eglintonSubwayExitSouth);
 
       //ST. CLAIR AREA EXITS
       final Exit eglintonSubwayExitNorth = new Exit("N", eglintonSubway); stClairSubway.addExit(eglintonSubwayExitNorth);
@@ -1730,8 +1837,8 @@ public class Game {
       final Exit streetcarExitEast = new Exit("E", streetcar); stClairWestStation.addExit(streetcarExitEast);
       final Exit onTheRunExitWest = new Exit("W", onTheRun); stClairWestStation.addExit(onTheRunExitWest);
       final Exit stClairWestStationExitEast = new Exit("E", stClairWestStation); onTheRun.addExit(stClairWestStationExitEast);
-      final Exit stClairWestSubwayExitDown = new Exit("D", stClairSubway); stClairStation.addExit(stClairWestSubwayExitDown);
-      final Exit stClairWestStationExitUp = new Exit ("U", stClairStation); stClairSubway.addExit(stClairWestStationExitUp);
+      final Exit stClairWestSubwayExitDown = new Exit("D", stClairWestSubway); stClairWestStation.addExit(stClairWestSubwayExitDown);
+      final Exit stClairWestStationExitUp = new Exit ("U", stClairWestStation); stClairWestSubway.addExit(stClairWestStationExitUp);
 
       
 
@@ -1785,7 +1892,7 @@ public class Game {
                   if(!fightDone[0]){
                     Inventory i = new Inventory(2600);
                     i.addItem(new Weapon(12,"Crow bar", false, 10, null));
-                    final Enemy PRIME_THEIF = new Enemy(null, unionShopArea, 20, i, 20, "Prime Theif", 8);
+                    final Enemy PRIME_THEIF = new Enemy(null, unionShopArea, 50, i, 20, "Prime Theif", 8);
                     unionShopArea.addEnemies(PRIME_THEIF); 
                     try { 
                       
@@ -1995,7 +2102,7 @@ public class Game {
               }
               if(hasCoupon){
                 Inventory i = new Inventory(2600);
-                i.addItem(new Weapon(12,"Metal Bat", false, 18, new Effect("Concussion", 4, 0, -2, 0)));
+                i.addItem(new Weapon(12,"Metal Bat", false, 40, new Effect("Concussion", 4, 0, -2, 0)));
                 final Enemy SHOPKEEPER = new Enemy(null, unionScamsMarket, 150, i, 80, "ShopKeeper", 200);
                 Fight f = new Fight(SHOPKEEPER);
                 text.slowTextSpeed("WHAT IS THAT, A FREE PRIME COUPON??!?!? YOU SCAMMER THATS MY JOB!", 7);
@@ -2058,7 +2165,7 @@ public class Game {
 
           
         //Maintenance room
-        final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
+        
         //faculty closet
         final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true, "is locked, prob need a key"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
         unionFacultyCloset.addItemGround(new Item(2, "Free Prime Coupon", false, null, false));
@@ -2205,7 +2312,8 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("stclairsubway"));
+    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
+    this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {
