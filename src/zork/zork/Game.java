@@ -106,14 +106,14 @@ public class Game {
         if(!hasFoughtCEO[0]) {
           //TODO: CHANGE YELLOW TO REAL FALVOR
           Inventory i = new Inventory(5);
-          i.addItem(new Prime(5, "YELLOW PRIME",false , "YELLOW", false, "CEO"));
-          i.addItem(new Weapon(0, "YELLOW PRIME", false, 20, null));
+          i.addItem(new Prime(5, "TROPICAL PUNCH PRIME",false , "YELLOW", false, "CEO"));
+          i.addItem(new Weapon(0, "TROPICAL PUNCH TIME", false, 20, null));
           Enemy CEO = new Enemy(null, sheppardYongeOffice, 100, i, 0, "CEO", 500);
           Fight f = new Fight(CEO);
           if(f.fight()) {
             Graphics g = getRenderer();
             try {
-              g.slowTextSpeed("You won. You got the yellow prime. The crazy CEO decides to quit his job and become a bitcoin trader.", 50);
+              g.slowTextSpeed("You won. You got the tropical punch prime. The crazy CEO decides to quit his job and trade bitcoin.", 50);
               g.slowTextSpeed("The elevator beeps. It's time to go back down.", 50);
               Thread.sleep(2000);
             } catch (InterruptedException e) {
