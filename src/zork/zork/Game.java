@@ -2396,7 +2396,7 @@ public class Game {
                         if(a.equalsIgnoreCase("y")){
                           boolean finishedOrder = false;
                             while(!finishedOrder){
-                              if(Game.getGame().getPlayer().getMoney() >= 1){
+                              if(Game.getGame().getPlayer().getMoney() >= 6){
                                 text.slowTextSpeed("What would you like to buy?", 7);
                                 text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                                 text.slowTextSpeed("> Runny Nutella Cookie - 10$", 7);
@@ -2446,7 +2446,9 @@ public class Game {
                                   
                                 }
                               } else {
+                                text.slowTextSpeed("Im sorry, you cant afford anything on the menu", 0);
                                 finishedOrder = false;
+                                break;
                               }
                               
                               if(finishedOrder){
@@ -2475,6 +2477,35 @@ public class Game {
                     }
                 });
           final Room japanNationalStadium = new Room ("Placeholder Description for japanNationalStadium", "japannationalstadium"); roomMap.put(japanNationalStadium.getRoomName(), japanNationalStadium);
+              japanNationalStadium.setRunnable(new Runnable(){
+                
+                @Override
+                public void run() {
+                  try{
+                    Graphics text = new Graphics();
+                    text.slowTextSpeed("So, you finally arrive, i've been expecting you " + Game.getGame().getPlayer().getName(), 7);
+                    text.slowTextSpeed("to get my final prime, you have to kill me for it", 7);
+                    text.slowTextSpeed("Time for your final fight", 60);
+                    Inventory t = new Inventory(12020);
+                    t.addItem(new Weapon(0,"Boxing Gloves", false, 45, null));
+                    t.addItem(new Weapon(0, "Bad podcast", false, 25, new Effect("Embaressement", 2, 10, 0, 0)));
+                    t.addItem(new Weapon(0, "Horrible diss track", false, 20, new Effect("Bleeding Ears", 4, 8, 2, 0)));
+                    final Enemy LOGAN_PAUL = new Enemy(null, japanNationalStadium, 500, t, 800, "Logan Paul", 0);
+                    Fight f = new Fight(LOGAN_PAUL);
+                    boolean didWin = f.fight();
+                      if(didWin){
+                        Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(LOGAN_PAUL);
+                        renderer.showCutScene(1100, "\\bin\\zork\\data\\finalcutscene.txt", 15);
+                        
+                        //cutscence with logan paul dieing and you getting the prime, then bringing all the primes back to cyrus and playing soccor with him
+                      }
+        
+                
+                  }catch(Exception e){
+                    //aklsdjalsd
+                  }
+                }
+              });
           //exits
           final Exit japanNationalStadiumPlazaExitNorth = new Exit("N",japanNationalStadiumPlaza); HoleInTheGroundJapan.addExit(japanNationalStadiumPlazaExitNorth);
           final Exit japanNationalStadiumExitNorth = new Exit("N",japanNationalStadium); japanNationalStadiumPlaza.addExit(japanNationalStadiumExitNorth);
@@ -2521,7 +2552,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("unionplatform"));
+    this.player.setCurrentRoom(roomMap.get("holeinthegroundjapan"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
