@@ -362,6 +362,11 @@ public class Game {
                                 if((pMoney - 50)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=50);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "ICE POP PRIME", false, "ICE", true, "foodcourt"));
+                                  try {
+                                    renderer.showCutScene(1500, "\\bin\\zork\\data\\foodcourtcyruscall.txt", 15);
+                                  } catch (Exception e) {
+                                    handleException(e);
+                                  }
                                     
                                     
                                     finishedOrder = true;
@@ -459,6 +464,11 @@ public class Game {
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "BLUE RASPBERRY PRIME", false, "Blue", true, "circlek"));
                                   eglintonSubway.setLocked(false);
                                   yorkMillsSubway.setLocked(false);
+                                  try {
+                                    renderer.showCutScene(1500, "\\bin\\zork\\data\\circlekcyruscall.txt", 15);
+                                  } catch (Exception e) {
+                                    handleException(e);
+                                  }
                                   
         
                                     
@@ -922,6 +932,8 @@ public class Game {
       final Room bloorYongeSubway = new Room("This was the next station available that wasn't under construction", "blooryongesubway"); roomMap.put(bloorYongeSubway.getRoomName(), bloorYongeSubway);
       final Room dundasSubway = new Room("The first station that's not undergoing a police investigation.", "dundassubway"); roomMap.put(dundasSubway.getRoomName(), dundasSubway);
       final Room lawrenceSubway = new Room("You fell asleep and ended up at Lawrence station. Yuck. Better get out of here fast.", "lawrencesubway"); roomMap.put(lawrenceSubway.getRoomName(), lawrenceSubway);
+      final Room bloorYongeStation = new Room ("You'd rather not be here, given it's line 2 and all, but you know you must carry on in the name of PRIME", "blooryongestation"); roomMap.put(bloorYongeStation.getRoomName(), bloorYongeStation);
+      final Room bloorYongeLine2 = new Room(" Caution tape blocks of the westward tunnel. I suppose the only way forward is to scarborough.", "blooryongeline2"); roomMap.put(bloorYongeLine2.getRoomName(), bloorYongeLine2);
 
 
       
@@ -930,9 +942,8 @@ public class Game {
 
       //ELLESMERE AREA ROOMS
 
-      final Room ellesmereStationUnderground = new Room("Tap presto to enter subway.", "ellesmerestationunderground", "Ellesmere Station Entrance");
-      final Room ellesmereSubwayNorthbound = new Room("Northbound to McCowan","ellesmeresubwaynorthbound","Ellesmere Station Track Northbound");
-      final Room ellesmereSubwaySouthbound = new Room("Southbound to Kennedy","ellesmeresubwaysouthbound","Ellesmere Station Track Southbound");
+      final Room ellesmereStationUnderground = new Room("The Scarborough effect has set on. You now have the 'crippling fear' effect.", "ellesmerestationunderground", "Ellesmere Station Entrance"); roomMap.put(ellesmereStationUnderground.getRoomName(), ellesmereStationUnderground);
+      final Room ellesmereSubway = new Room("You can't stand this place already, and exit the subway.","ellesmeresubway"); roomMap.put(ellesmereSubway.getRoomName(), ellesmereSubway);
       
 
        //BAYVIEW GLEN INDEPENDENT SCHOOL ROOMS
@@ -1857,6 +1868,9 @@ public class Game {
 
 
       //ELLESMERE AREA EXITS
+      final Exit ellesmereSubwayExitEast = new Exit("E", ellesmereSubway); bloorYongeLine2.addExit(ellesmereSubwayExitEast);
+      final Exit bloorYongeLine2ExitWest = new Exit("W", bloorYongeLine2); ellesmereSubway.addExit(bloorYongeLine2ExitWest);
+      
       
       
       
@@ -2378,6 +2392,11 @@ public class Game {
       final Exit bloorYongeSubwayExitSouth = new Exit("S", bloorYongeSubway); lawrenceSubway.addExit(bloorYongeSubwayExitSouth);
       final Exit yongeSheppardLine1ExitNorth = new Exit("N", sheppardYongeLine1); lawrenceSubway.addExit(yongeSheppardLine1ExitNorth);
       final Exit lawrenceSubwayExitSouth = new Exit("S", lawrenceSubway); sheppardYongeLine1.addExit(lawrenceSubwayExitSouth);
+      final Exit bloorYongeStationExitUp = new Exit("U", bloorYongeStation); bloorYongeSubway.addExit(bloorYongeStationExitUp);
+      final Exit bloorYongeSubwayExitDown = new Exit("D", bloorYongeSubway); bloorYongeStation.addExit(bloorYongeSubwayExitDown);
+      final Exit bloorYongeLine2ExitEast = new Exit("E", bloorYongeLine2); bloorYongeStation.addExit(bloorYongeLine2ExitEast);
+      final Exit bloorYongeStationExitWest = new Exit("W", bloorYongeStation); bloorYongeLine2.addExit(bloorYongeStationExitWest);
+
 
           //Tokyo Japan
           final Room HoleInTheGroundJapan = new Room ("Placeholder Description for HoleInTheGroundJapan", "holeinthegroundjapan"); roomMap.put(HoleInTheGroundJapan.getRoomName(), HoleInTheGroundJapan);
@@ -2518,7 +2537,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("unionplatform"));
+    this.player.setCurrentRoom(roomMap.get("eglintonstreet"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
