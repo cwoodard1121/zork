@@ -2279,8 +2279,108 @@ public class Game {
       final Exit bloorYongeSubwayExitSouth = new Exit("S", bloorYongeSubway); lawrenceSubway.addExit(bloorYongeSubwayExitSouth);
       final Exit yongeSheppardLine1ExitNorth = new Exit("N", sheppardYongeLine1); lawrenceSubway.addExit(yongeSheppardLine1ExitNorth);
       final Exit lawrenceSubwayExitSouth = new Exit("S", lawrenceSubway); sheppardYongeLine1.addExit(lawrenceSubwayExitSouth);
-      
-          }
+
+          //Tokyo Japan
+          final Room HoleInTheGroundJapan = new Room ("Placeholder Description for HoleInTheGroundJapan", "holeinthegroundjapan"); roomMap.put(HoleInTheGroundJapan.getRoomName(), HoleInTheGroundJapan);
+          final Room japanNationalStadiumPlaza = new Room ("Placeholder Description for japanNationalStadiumPlaza", "japannationalstadiumplaza"); roomMap.put(japanNationalStadiumPlaza.getRoomName(), japanNationalStadiumPlaza);
+          final Room japanTimHortons = new Room ("Placeholder Description for japanTimHortons", "japantimhortons"); roomMap.put(japanTimHortons.getRoomName(), japanTimHortons);
+                  japanTimHortons.setRunnable(new Runnable(){
+                    public void run(){
+                      try {
+                        Graphics text = new Graphics();
+                        Scanner in = new Scanner(System.in);
+                        text.slowTextSpeed("Konichiwa! Welcome to Tim Hortons, Would you like to buy anything? y/n", 7);
+                        String a = in.nextLine();
+                        if(a.equalsIgnoreCase("y")){
+                          boolean finishedOrder = false;
+                            while(!finishedOrder){
+                              if(Game.getGame().getPlayer().getMoney() >= 1){
+                                text.slowTextSpeed("What would you like to buy?", 7);
+                                text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
+                                text.slowTextSpeed("> Runny Nutella Cookie - 10$", 7);
+                                text.slowTextSpeed("> Donut Sushi - 6$", 7);
+                                text.slowTextSpeed("> Toasted Bagel With Cream Cheese - 15$", 7);
+                                String b = in.nextLine();
+                                double pMoney = Game.getGame().getPlayer().getMoney();
+                                if(b.equalsIgnoreCase("runny nutella cookie")){
+                                    if((pMoney - 10)>= 0){
+                                      Game.getGame().getPlayer().setMoney(pMoney-=10);
+                                      Game.getGame().getPlayer().getInventory().addItem(
+                                        new Item(2, "Runny Nutella Cookie", false, 
+                                        new Effect("Health up + Sugar Rush", 0, 0, 4, 35), false)
+                                        );
+                                        finishedOrder = true;
+                                    }else{
+                                      text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
+                                    }
+                                }else if(b.equalsIgnoreCase("Donut Sushi")){
+                                    if((pMoney - 6)>= 0){
+                                      Game.getGame().getPlayer().setMoney(pMoney-=6);
+                                      Game.getGame().getPlayer().getInventory().addItem(
+                                        new Item(2, "Donut Sushi", false, 
+                                        new Effect("Health Up", 0, 0, 0, 18), false)
+                                        );
+                                        finishedOrder = true;
+                                    }else{
+                                      text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
+                                    }
+                                }else if(b.equalsIgnoreCase("Toasted Bagel With Cream Cheese")){
+                                    if((pMoney - 15)>= 0){
+                                      Game.getGame().getPlayer().setMoney(pMoney-=15);
+                                      Game.getGame().getPlayer().getInventory().addItem(
+                                        new Item(2, "Toasted Bagel With Cream Cheese", false, 
+                                        new Effect("Super Delicous", 0, 0, -2, 60), false)
+                                        );
+                                        finishedOrder = true;
+                                    }else{
+                                      
+                                      text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
+                                    }
+                                }else{
+                                  
+                                  
+                                    text.slowTextSpeed("Sorry, That item is not avaliable right now. Please pick another", 7);
+                                  
+                                  
+                                }
+                              } else {
+                                finishedOrder = false;
+                              }
+                              
+                              if(finishedOrder){
+                                while(true){
+                                  text.slowTextSpeed("Would you like anything else? y/n", 7);
+                                  String c = in.nextLine();
+                                  if(c.equalsIgnoreCase("y")){
+                                    finishedOrder = false;
+                                    break;
+                                  }else if(c.equalsIgnoreCase("n")){
+                                    finishedOrder = true;
+                                    text.slowTextSpeed("Thank you, come again!", 7);
+                                    break;
+                                  }
+                                }
+                              }
+                            }
+                        }else{
+                          text.slowTextSpeed("ok come back soon", 7);
+                        }
+                        
+                      } catch (Exception e) {
+                        // TODO: handle exception
+                      }
+
+                    }
+                });
+          final Room japanNationalStadium = new Room ("Placeholder Description for japanNationalStadium", "japannationalstadium"); roomMap.put(japanNationalStadium.getRoomName(), japanNationalStadium);
+          //exits
+          final Exit japanNationalStadiumPlazaExitNorth = new Exit("N",japanNationalStadiumPlaza); HoleInTheGroundJapan.addExit(japanNationalStadiumPlazaExitNorth);
+          final Exit japanNationalStadiumExitNorth = new Exit("N",japanNationalStadium); japanNationalStadiumPlaza.addExit(japanNationalStadiumExitNorth);
+          final Exit japanTimHortonsExitEast = new Exit("E",japanTimHortons); japanNationalStadiumPlaza.addExit(japanTimHortonsExitEast);
+          final Exit HoleInTheGroundJapanExitSouth = new Exit("S",HoleInTheGroundJapan); japanNationalStadiumPlaza.addExit(HoleInTheGroundJapanExitSouth);
+          final Exit japanNationalStadiumPlazaExitWest = new Exit("W",japanNationalStadiumPlaza); japanTimHortons.addExit(japanNationalStadiumPlazaExitWest);
+          final Exit japanNationalStadiumPlazaExitSouth = new Exit("S",japanNationalStadiumPlaza); japanNationalStadium.addExit(japanNationalStadiumPlazaExitSouth);
+        }
 
           
     
@@ -2319,7 +2419,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
+    this.player.setCurrentRoom(roomMap.get("unionplatform"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));

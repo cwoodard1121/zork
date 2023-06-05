@@ -12,10 +12,13 @@ public class Inventory extends Command {
     }
     @Override
     public String runCommand(String... args) {
-        String ans = "";
+        
         for (Item item : Game.getGame().getPlayer().getInventory().getItems()) {
-            ans += " > " + item.getName() + "\n";
+            System.out.println("> " + item.getName());
+           
         }
-        return ans;
+        System.out.println("Health: " + Game.getGame().getPlayer().getHealth() +"/" + Game.getGame().getPlayer().getMaxHealth());
+        System.out.println("Money: " + Game.getGame().getPlayer().getMoney());
+        return "";
     }    
 }

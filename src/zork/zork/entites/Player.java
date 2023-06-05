@@ -143,7 +143,7 @@ public class Player extends Entity {
         return isInItemMenu;
     } 
 
-    public int getHealth() {
+    public int getHealth(){
         return super.getHealth();
     }
 
@@ -204,6 +204,10 @@ public class Player extends Entity {
 
     public void setMoney(double money) {
         this.money = money;
+    }
+
+    public boolean isInItemMenu() {
+        return isInItemMenu;
     }
     
 }
