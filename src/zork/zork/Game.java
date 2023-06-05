@@ -100,10 +100,11 @@ public class Game {
       // Create a room object and use the description as the constructor parameter.
 
       // SHEPPARD YONGE
+      final Room sheppardYongeSecretRoom = new Room("There are windows on your left and right and an elevator gets you in, and up.","sheppardyongesecretroom");
       final Room sheppardYongeLine1 = new Room("Going south will lead you to York Mills, North to Finch is under maintainence.","sheppardyongeline1"); roomMap.put(sheppardYongeLine1.getRoomName(),sheppardYongeLine1);
       final Room sheppardYongeLine4 = new Room("Going east will lead you to Bayview. Going west will lead you into a tunnel.","sheppardyongeline4"); roomMap.put(sheppardYongeLine4.getRoomName(),sheppardYongeLine4);
       final Room sheppardYongeLine4StreetHallway = new Room("The escalator is stopped. The door to the street is nearby.","sheppardyongeline4streethallway"); roomMap.put(sheppardYongeLine4StreetHallway.getRoomName(),sheppardYongeLine4StreetHallway);
-      final Room sheppardYongeLine1HallwayBeforeStreet = new Room("stuff","sheppardyongeline1hallwaybeforestreet");
+      final Room sheppardYongeLine1HallwayBeforeStreet = new Room("Line 1 Harlandale Avenue","sheppardyongeline1hallwaybeforestreet");
       
       
       /*
@@ -117,6 +118,9 @@ public class Game {
       Enemy crackHead = new Enemy(null, sheppardYongeLine4StreetHallway, 25, crackHeadInventory, 0, "Crackhead", 1);
       sheppardYongeLine4StreetHallway.setRunnable(() -> {
         if(!hasFoughtCrackhead[0]) {
+          try {
+         Game.getGame().getRenderer().slowTextSpeed("You see a crackhead yelling at innocent TTC Passengers. He wants your prime.",20);
+          } catch (InterruptedException e) {}
         // fight crackhead
         Fight crackHeadFight = new Fight(crackHead);
         if(crackHeadFight.fight()) {
@@ -1289,7 +1293,7 @@ public class Game {
            Scanner in = new Scanner(System.in);
            Graphics text = new Graphics();
            if (bayviewGlenWeightRoom.enemies.contains(gymGuyEnemy)) {
-             text.slowTextSpeed("You see a Guy benching in the gym. Behind him you see a big green button, do you press it? Y/N: ", 20);
+             text.slowTextSpeed("You see a Guy benching 2 plates. Behind him you see a big green button, do you press it? Y/N: ", 20);
              String ans = in.nextLine();
              if(ans.equalsIgnoreCase("y")) {
                text.slowTextSpeed("You go to press the button, \n Gym guy - HEY, you wanna press that button you gotta get through me \n You - Try me", 20);
@@ -1334,9 +1338,11 @@ public class Game {
 
       // SHEPPARD YONGE EXITS
 
-      final Exit sheppardYongeLine1ExitNorth = new Exit("U", sheppardYongeLine4StreetHallway); sheppardYongeLine1.addExit(sheppardYongeLine1ExitNorth);
+      final Exit sheppardYongeLine1ExitNorth = new Exit("U", sheppardYongeLine4StreetHallway); sheppardYongeLine4.addExit(sheppardYongeLine1ExitNorth);
       final Exit sheppardYongeLine1ExitSouth = new Exit("S", sheppardYongeLine1HallwayBeforeStreet); sheppardYongeLine1.addExit(sheppardYongeLine1ExitSouth);
-      final Exit sheppardYongeLine4ExitDown = new Exit("U", sheppardYongeLine1); sheppardYongeLine4.addExit(sheppardYongeLine4ExitDown);
+      final Exit sheppardYongeHallwayB4StreetExitWest = new Exit("W",sheppardYongeSecretRoom); sheppardYongeLine4StreetHallway.addExit(sheppardYongeHallwayB4StreetExitWest);
+      final Exit sheppardYongeLine4ExitDown = new Exit("D", sheppardYongeLine1); sheppardYongeLine4.addExit(sheppardYongeLine4ExitDown);
+      final Exit sheppardYongeLine1ExitUp = new Exit("U", sheppardYongeLine4); sheppardYongeLine1.addExit(sheppardYongeLine1ExitUp);
       
 
 
@@ -1732,7 +1738,6 @@ public class Game {
 
           
         //Maintenance room
-        final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         //faculty closet
         final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true, "is locked, prob need a key"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
         unionFacultyCloset.addItemGround(new Item(2, "Free Prime Coupon", false, null, false));
@@ -1863,7 +1868,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("stclairsubway"));
+    this.player.setCurrentRoom(roomMap.get("sheppardyongeline1"));
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {

@@ -1,7 +1,7 @@
 package zork.commands;
 
 import zork.Command;
-import zork.Game;
+import zork.Utils;
 
 public class Start extends Command {
     public Start(String name) {
@@ -10,7 +10,9 @@ public class Start extends Command {
 
     @Override
     public String runCommand(String... args) {
-        return "Starting Game...";
+        Utils.SoundHandler.startAfterInterruption();
+        Utils.SoundHandler.skip();
+        return "";
     }
 
     

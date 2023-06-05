@@ -2,6 +2,7 @@ package zork.commands;
 
 import zork.Command;
 import zork.Game;
+import zork.Utils.SoundHandler;
 
 public class Stop extends Command{
     public Stop (String name) {
@@ -10,8 +11,8 @@ public class Stop extends Command{
 
     @Override
     public String runCommand(String... args) {
-      Game.finished = true;
-      return "Exiting game...";  
+      SoundHandler.stop();
+      return "music stopped";
     }
 
     
