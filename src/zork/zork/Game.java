@@ -2495,6 +2495,8 @@ public class Game {
                         renderer.showCutScene(1100, "\\bin\\zork\\data\\finalcutscene.txt", 15);
                         
                         //cutscence with logan paul dieing and you getting the prime, then bringing all the primes back to cyrus and playing soccor with him
+                      }else{
+                        Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                       }
         
                 
@@ -2549,7 +2551,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("holeinthegroundjapan"));
+    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
