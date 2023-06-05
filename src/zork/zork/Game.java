@@ -885,7 +885,7 @@ public class Game {
              text.slowTextSpeed("What is the code? format: XX, XX, XX", 15);
              ans = in.nextLine();
              if(ans.equalsIgnoreCase("27, 05, 17") || ans.equalsIgnoreCase(" 27, 05, 17") || ans.equalsIgnoreCase("27 05 17")) {
-               Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "STRAWBERRY WATERMELON PRIME", isTesting, null, finished, ans));
+               Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "Strawberry Watermelon Prime", isTesting, "pink", finished, ans));
                text.slowTextSpeed("You slowly twist the locker 27, and then 05 and finally 17. \n the lock opens. as you open the locker you see at the top shelf a shiny pink bottle.\n STRAWBERRY WATTERMELON tm. Prime", 15);
                Thread.sleep(1000);
              }
@@ -1314,10 +1314,24 @@ public class Game {
  
       });
        
-       
+      // PICKERING AREA ROOMS
+
+      final Room pickeringKingstonAndRougemount = new Room ("You leave the go bus and step into the greatest city in Canada: Pickering!", "pickeringkingstonandrougemount"); roomMap.put(pickeringKingstonAndRougemount.getRoomName(), pickeringKingstonAndRougemount);
+      final Room pickeringCameronsHouse = new Room ("Home sweet home. use this as an area to store things if you run out of carrying capacity. or don't I couldn't really care less.", "pickeringcameronshouse"); roomMap.put(pickeringCameronsHouse.getRoomName(), pickeringCameronsHouse);
+      final Room pickeringCircleK = new Room ("You enter the beautiful pickering circle K", "pickeringcirclek"); roomMap.put(pickeringCircleK.getRoomName(), pickeringCircleK);
+
+      // PICKERING EXITS
+
+      final Exit pickeringCameronsHouseExitNorth = new Exit("N",pickeringCameronsHouse); pickeringKingstonAndRougemount.addExit(pickeringCameronsHouseExitNorth);
+      final Exit pickeringCircleKExitEast = new Exit("E",pickeringCircleK); pickeringKingstonAndRougemount.addExit(pickeringCircleKExitEast);
+      final Exit pickeringKingstonAndRougemountExitSouth = new Exit("S",pickeringKingstonAndRougemount); pickeringCameronsHouse.addExit(pickeringKingstonAndRougemountExitSouth);
+      final Exit pickeringKingstonAndRougemountExitWest = new Exit("W",pickeringKingstonAndRougemount); pickeringCircleK.addExit(pickeringKingstonAndRougemountExitWest); 
+
       //YORK MILLS AREA EXITS
 
       final Exit yorkMillsSubwayHallwayExitDown = new Exit("D",yorkMillsSubwayHallway); yorkMillsBusTerminal.addExit(yorkMillsSubwayHallwayExitDown);
+      final Exit pickeringKingstonAndRougemountExitNorth = new Exit("N", pickeringKingstonAndRougemount); yorkMillsBusTerminal.addExit(pickeringKingstonAndRougemountExitNorth);
+      final Exit yorkMillsBusTerminalExitSouth = new Exit("S", yorkMillsBusTerminal); pickeringKingstonAndRougemount.addExit(yorkMillsBusTerminalExitSouth);
       final Exit yorkMillsBusSubwayHallwayExitNorth = new Exit("N", yorkMillsSubwayHallway); yorkMillsSubway.addExit(yorkMillsBusSubwayHallwayExitNorth);
       final Exit yorkMillsBusTerminalExitUp = new Exit("U", yorkMillsBusTerminal); yorkMillsSubwayHallway.addExit(yorkMillsBusTerminalExitUp);
       final Exit gatewayNewsstandsExitEast = new Exit("E", gatewayNewsstands); yorkMillsSubwayHallway.addExit(gatewayNewsstandsExitEast);
@@ -1451,6 +1465,20 @@ public class Game {
       //Union
         //unionPlatform code
         final Room unionPlatform = new Room ("You look around you and see a stairway leading upwards. It looks like its the only way forward", "unionplatform"); roomMap.put(unionPlatform.getRoomName(), unionPlatform);
+        unionPlatform.setRunnable(() -> {
+         if(Game.getGame().getPlayer().getPrimeCounter() == 8) {
+          Graphics text = new Graphics();
+          try {
+            renderer.showCutScene(1500, "\\bin\\zork\\data\\uniongobuscyruscall.txt", 15);
+          } catch (Exception e) {
+            
+          }
+         }
+
+
+        });
+        
+        
         //unionShopArea
         final Room unionShopArea = new Room ("The shopping area in union seems desolated with most of the shops closed. However to the east you see a Tim Hortons cafe and another room to the north", "unionshoparea"); roomMap.put(unionShopArea.getRoomName(), unionShopArea);
           
