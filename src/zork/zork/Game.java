@@ -605,6 +605,7 @@ public class Game {
         Graphics text = new Graphics();
         Scanner in = new Scanner(System.in);
         try {
+          if (artRoomLightsOn[2] == false) {
           text.slowTextSpeed("You take a moment to walk around the stage, taking it all in. Huh thats? strange you notice a blue button in the back corner...\nDo you press it? Y/N ", 20);
           String ans = in.nextLine();
           if(ans.equalsIgnoreCase("Y")) {
@@ -613,9 +614,11 @@ public class Game {
           } else {
             return;
           }
+        }
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
+        
        });
        
        final Room bayviewGlenHallwayTheatreBack = new Room ("You walk into a hallway behind the theatre, you see the grade 11 common area to the east", "bayviewglenhallwaytheatreback"); roomMap.put(bayviewGlenHallwayTheatreBack.getRoomName(), bayviewGlenHallwayTheatreBack);
@@ -704,7 +707,7 @@ public class Game {
               
             } else if (ans.equalsIgnoreCase("oboe")) {
               Game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Oboe", true, 15, new Effect("Ruptured Eardrum", 2, 5, 5, 0)));
-              text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Flute", 15);
+              text.slowTextSpeed(Game.getGame().getPlayer().getName() + " Got the Oboe", 15);
               hasChosenInstrument[0] = true; Thread.sleep(1000);
               
             } if (ans.equalsIgnoreCase("none")){ 
@@ -967,7 +970,7 @@ public class Game {
        final Exit bayviewGlenHallwayTheatreBackExitSouth = new Exit("S",bayviewGlenHallwayTheatreBack); bayviewGlenTheatre.addExit(bayviewGlenHallwayTheatreBackExitSouth);
  
        final Exit bayviewGlenTheatreExitNorth = new Exit("N",bayviewGlenTheatre); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenTheatreExitNorth);
-       final Exit bayviewGlenDramaRoomExitSouth = new Exit("S",bayviewGlenDramaRoom); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenDramaRoomExitSouth);
+       final Exit bayviewGlenDramaRoomExitSouth = new Exit("S",bayviewGlenDramaRoom, "Door is locked", true); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenDramaRoomExitSouth);
        final Exit bayviewGlenG11CommonAreaExitEast = new Exit("E",bayviewGlenG11CommonArea); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenG11CommonAreaExitEast);
        final Exit bayviewGlenOutsideWestExitWestFour = new Exit("W",bayviewGlenOutsideWest); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenOutsideWestExitWestFour);
        final Exit bayviewGlenMathWingExitUp = new Exit("U",bayviewGlenMathWing); bayviewGlenHallwayTheatreBack.addExit(bayviewGlenMathWingExitUp);
@@ -1161,7 +1164,7 @@ public class Game {
             learningCommonsSubAreaState[0] = 1;
           } else if (learningCommonsSubAreaState[0] == 1) {
               if(Game.getGame().getPlayer().getInventory().getItems().contains(owensIphone)) {
-                text.slowTextSpeed(" Owen - Did you get my phone? \n You - Yes here it is \n Owen - Thank you!, now i'll hold up my end of the deal \n You - Thank you ", 20);
+                text.slowTextSpeed(" Owen - Did you get my phone? \n You - Yes here it is \n Owen - Thank you!, now i'll hold up my end of the deal \n You - Thank you \n NOTE ADDED TO INVENTORY", 20);
                 Game.getGame().getPlayer().getInventory().getItems().remove(owensIphone);
                 Game.getGame().getPlayer().getInventory().addItem(new Item(1, "#2 - 05", false, null, false));
                 learningCommonsSubAreaState[0] = 2;
@@ -1272,7 +1275,7 @@ public class Game {
                   Graphics text = new Graphics();
                   bayviewGlen1stFloorBelowG11CommonAreaExitDown.setIsExitLocked(false);
                   try {
-                    text.slowTextSpeed("You use the rat's key to unlock the bottem door", 20);
+                    text.slowTextSpeed("You use the rat's key to unlock the bottom door", 20);
                   } catch (InterruptedException e) {
                     e.printStackTrace();
                   }
@@ -1737,7 +1740,8 @@ public class Game {
           });
 
           
-        //Maintenance room
+      
+        
         //faculty closet
         final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true, "is locked, prob need a key"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
         unionFacultyCloset.addItemGround(new Item(2, "Free Prime Coupon", false, null, false));
