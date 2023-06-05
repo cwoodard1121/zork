@@ -1,7 +1,7 @@
                    * Eglinton Subway *
  _______________________________________________________
- | Southbound to   |                 | Northbound to   |
- | Vaughn          |      North      | Finch           |
+ | South to        |                 |    North to     |
+ | St. Clair       |      North      |    York Mills   |
  |                 |        ^        |                 |
  |        |        |                 |        ^        |
  |        |        |                 |      / | \      |
