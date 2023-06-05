@@ -106,14 +106,14 @@ public class Game {
         if(!hasFoughtCEO[0]) {
           //TODO: CHANGE YELLOW TO REAL FALVOR
           Inventory i = new Inventory(5);
-          i.addItem(new Prime(5, "YELLOW PRIME",false , "YELLOW", false, "CEO"));
-          i.addItem(new Weapon(0, "YELLOW PRIME", false, 20, null));
+          i.addItem(new Prime(5, "TROPICAL",false , "TROPICAL", false, "CEO"));
+          i.addItem(new Weapon(0, "TROPICAL", false, 20, null));
           Enemy CEO = new Enemy(null, sheppardYongeOffice, 100, i, 0, "CEO", 500);
           Fight f = new Fight(CEO);
           if(f.fight()) {
             Graphics g = getRenderer();
             try {
-              g.slowTextSpeed("You won. You got the yellow prime. The crazy CEO decides to quit his job and become a bitcoin trader.", 50);
+              g.slowTextSpeed("You won. You got the tropical prime. The crazy CEO decides to quit his job and become a bitcoin trader.", 50);
               g.slowTextSpeed("The elevator beeps. It's time to go back down.", 50);
               Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -944,6 +944,119 @@ public class Game {
 
       final Room ellesmereStationUnderground = new Room("The Scarborough effect has set on. You now have the 'crippling fear' effect.", "ellesmerestationunderground", "Ellesmere Station Entrance"); roomMap.put(ellesmereStationUnderground.getRoomName(), ellesmereStationUnderground);
       final Room ellesmereSubway = new Room("You can't stand this place already, and exit the subway.","ellesmeresubway"); roomMap.put(ellesmereSubway.getRoomName(), ellesmereSubway);
+      final Room sketchyStreetCorner = new Room("Just outside of the subway station, you are greeted by a sketchy street corner.", "sketchystreetcorner"); roomMap.put(sketchyStreetCorner.getRoomName(), sketchyStreetCorner);
+      boolean[] hasFoughtThug = new boolean[]{false};
+      Inventory thugInventory = new Inventory(5);
+      
+      thugInventory.addItem(new Weapon(5, "Socket Wrench",false, 20,null));
+     
+      Enemy thug = new Enemy(null, sketchyStreetCorner, 20, thugInventory, 10, "Thug", 40);
+      sketchyStreetCorner.setRunnable(() -> {
+        if(!hasFoughtThug[0]) {
+        
+        Fight thugFight = new Fight(thug);
+        if(thugFight.fight()) {
+          Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(thug);
+          Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "ORANGE PRIME", false, "ORANGE", false, "sketchystreetcorner"));
+          hasFoughtThug[0] = true;
+        } else {
+          System.out.println("You won't be messing with him again.");
+        }
+      }
+      });
+      
+      final Room krispyKreme = new Room("A sort of reward for braving the streets of scarborough. A place of salvation: Krispy Kreme", "krispykreme"); roomMap.put(krispyKreme.getRoomName(), krispyKreme);
+                  krispyKreme.setRunnable(new Runnable(){
+                    public void run(){
+                      try {
+                        Graphics text = new Graphics();
+                        Scanner in = new Scanner(System.in);
+                        text.slowTextSpeed("Please, indulge in our one-of-a-kind donuts, its sure to please you. y/n", 7);
+                        String a = in.nextLine();
+                        if(a.equalsIgnoreCase("y")){
+                          boolean finishedOrder = false;
+                            while(!finishedOrder){
+                              if(Game.getGame().getPlayer().getMoney() >= 3){
+                                text.slowTextSpeed("What would you like to buy?", 7);
+                                text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
+                                text.slowTextSpeed("> Classic Donut - 3$", 7);
+                                text.slowTextSpeed("> Chocolate Donut - 4$", 7);
+                                text.slowTextSpeed("> Donut Mega pack - 10$", 7);
+                                String b = in.nextLine().toLowerCase();
+                                double pMoney = Game.getGame().getPlayer().getMoney();
+                                if(b.contains("classic donut")){
+                                    if((pMoney - 3)>= 0){
+                                      Game.getGame().getPlayer().setMoney(pMoney-=3);
+                                      Game.getGame().getPlayer().getInventory().addItem(
+                                        new Item(2, "Classic Donut", false, 
+                                        new Effect("Krispy Kreme's creaming effect", 0, 0, 4, 35), false)
+                                        );
+                                        finishedOrder = true;
+                                    }else{
+                                      text.slowTextSpeed("Im Sorry, Your too broke for Kreme's LMAO", 7); //CHANGE LATER
+                                    }
+                                }else if(b.contains("chocolate donut")){
+                                    if((pMoney - 4)>= 0){
+                                      Game.getGame().getPlayer().setMoney(pMoney-=4);
+                                      Game.getGame().getPlayer().getInventory().addItem(
+                                        new Item(2, "Chocolate Donut", false, 
+                                        new Effect("Health Up", 0, 0, 0, 40), false)
+                                        );
+                                        finishedOrder = true;
+                                    }else{
+                                      text.slowTextSpeed("Im Sorry, Your too broke for Kreme's LMAO", 7); //CHANGE LATER
+                                    }
+                                }else if(b.contains("donut mega pack")){
+                                    if((pMoney - 15)>= 0){
+                                      Game.getGame().getPlayer().setMoney(pMoney-=15);
+                                      Game.getGame().getPlayer().getInventory().addItem(
+                                        new Item(2, "Donut Mega Pack", false, 
+                                        new Effect("Bussin on god", 0, 0, -2, 70), false)
+                                        );
+                                        finishedOrder = true;
+                                    }else{
+                                      
+                                      text.slowTextSpeed("Im Sorry, Your too broke for Kreme's LMAO", 7); //CHANGE LATER
+                                    }
+                                }else{
+                                  
+                                  
+                                    text.slowTextSpeed("Sorry, That item is not avaliable right now. Please pick another", 7);
+                                  
+                                  
+                                }
+                              } else {
+                                text.slowTextSpeed("Im sorry, you cant afford anything on the menu", 0);
+                                finishedOrder = false;
+                                break;
+                              }
+                              
+                              if(finishedOrder){
+                                while(true){
+                                  text.slowTextSpeed("Would you like anything else? y/n", 7);
+                                  String c = in.nextLine();
+                                  if(c.equalsIgnoreCase("y")){
+                                    finishedOrder = false;
+                                    break;
+                                  }else if(c.equalsIgnoreCase("n")){
+                                    finishedOrder = true;
+                                    text.slowTextSpeed("Thank you, come again!", 7);
+                                    break;
+                                  }
+                                }
+                              }
+                            }
+                        }else{
+                          text.slowTextSpeed("ok come back soon", 7);
+                        }
+                        
+                      } catch (Exception e) {
+                        // TODO: handle exception
+                      }
+
+                    }
+                });
+
       
 
        //BAYVIEW GLEN INDEPENDENT SCHOOL ROOMS
@@ -1870,6 +1983,13 @@ public class Game {
       //ELLESMERE AREA EXITS
       final Exit ellesmereSubwayExitEast = new Exit("E", ellesmereSubway); bloorYongeLine2.addExit(ellesmereSubwayExitEast);
       final Exit bloorYongeLine2ExitWest = new Exit("W", bloorYongeLine2); ellesmereSubway.addExit(bloorYongeLine2ExitWest);
+      final Exit sketchyStreetCornerExitEast = new Exit("E", sketchyStreetCorner); ellesmereStationUnderground.addExit(sketchyStreetCornerExitEast);
+      final Exit ellesmereStationUndergroundExitWest = new Exit("W", ellesmereStationUnderground); sketchyStreetCorner.addExit(ellesmereStationUndergroundExitWest);
+      final Exit krispyKremeExitEast = new Exit("E", krispyKreme); sketchyStreetCorner.addExit(krispyKremeExitEast);
+      final Exit sketchyStreetCornerExitWest = new Exit("W", sketchyStreetCorner); krispyKreme.addExit(sketchyStreetCornerExitWest);
+      final Exit ellesmereStationUndergroundExitUp = new Exit("U", ellesmereStationUnderground); ellesmereSubway.addExit(ellesmereStationUndergroundExitUp);
+      final Exit ellesmereSubwayExitDown = new Exit("D", ellesmereSubway); ellesmereStationUnderground.addExit(ellesmereSubwayExitDown);
+      
       
       
       
@@ -2211,7 +2331,7 @@ public class Game {
                 if(won){
                   Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(SHOPKEEPER);
                   text.slowTextSpeed("As the shopkeeper falls, you see a prime and fall out of his pocket and onto the ground. He also drops his metal bat", 7);
-                  unionScamsMarket.addItemGround(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
+                  Game.getGame().getPlayer().getInventory().addItem(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
                   unionScamsMarket.addItemGround(new Weapon(12,"Metal Bat", false, 18, new Effect("Concussion", 4, 0, -2, 0)));
                 }
               }
@@ -2621,7 +2741,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("eglintonstreet"));
+    this.player.setCurrentRoom(roomMap.get("ellesmeresubway"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
