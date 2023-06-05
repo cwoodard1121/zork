@@ -2,10 +2,10 @@
  _______________________________________________________
  |                                                     |
  |                                                     |
+ |                                        ^            |
+ | <-- West To St. Clair West           North          |
  |                                                     |
- | <-- West To St. Clair West                          |
  |                                                     |
- |                      East to Streetcar platform --> |
  |                                                     |
  |                                                     |
  |                                                     |
