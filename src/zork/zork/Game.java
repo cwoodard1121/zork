@@ -1766,7 +1766,7 @@ public class Game {
                     }else if(b.equalsIgnoreCase("prime") && Game.getGame().getPlayer().getPrimeCounter() == 7){
                         if((pMoney - 10)>= 0){
                           Game.getGame().getPlayer().setMoney(pMoney-=10);
-                          Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "BLUE RASPBERRY PRIME", false, "Blue", true, "circlek"));
+                          Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "META MOON PRIME", false, "Blue", true, "circlek"));
                           eglintonSubway.setLocked(false);
                           
 
@@ -1964,25 +1964,7 @@ public class Game {
       //Union
         //unionPlatform code
         final Room unionPlatform = new Room ("You look around you and see a stairway leading upwards. It looks like its the only way forward", "unionplatform"); roomMap.put(unionPlatform.getRoomName(), unionPlatform);
-        unionPlatform.setRunnable(() -> {
-         if(Game.getGame().getPlayer().getPrimeCounter() == 8) {
-          Graphics text = new Graphics();
-          Scanner in = new Scanner(System.in);
-          try {
-            renderer.showCutScene(1500, "\\bin\\zork\\data\\uniongobuscyruscall.txt", 15);
-            text.slowTextSpeed("No going back now, would you like to leave for pearson? Y/N:", 50);
-            String ans = in.nextLine(); 
-            if(ans.equalsIgnoreCase("y")) {
-              text.slowTextSpeed("Alright, lets get this show on the road", 20);
-              renderer.showCutScene(1500, "\\bin\\zork\\data\\gotoukcutscene.txt", 15);
-            }
-          } catch (Exception e) {
-            
-          }
-         }
-
-
-        });
+        
         
         
         //unionShopArea
@@ -2365,7 +2347,76 @@ public class Game {
         final Exit stClairWestSubwayExitWest = new Exit("W", stClairWestSubway); unionPlatform.addExit(stClairWestSubwayExitWest);
 
 
+        //UK Rooms
+        final boolean[] hasBeatenKsi = new boolean[]{false};
+        final Room UKOutsideKsiHouse = new Room ("Placeholder Description for UKOutsideKsiHouse", "ukoutsideksihouse"); roomMap.put(UKOutsideKsiHouse.getRoomName(), UKOutsideKsiHouse);
+        final Room ksiHouse = new Room ("Placeholder Description for ksiHouse", "ksihouse"); roomMap.put(ksiHouse.getRoomName(), ksiHouse);
 
+        Inventory KSI1ndForm = new Inventory(1000);
+        KSI1ndForm.addItem(new Weapon(10, "Prime Branded Sword", false, 15, null));
+        KSI1ndForm.addItem(new Weapon(25, "Prime Branded Gun", false, 20, new Effect("Bullet Wound", 3, 10, 10, 0)));
+
+        Inventory KSI2ndForm = new Inventory(1000);
+        KSI2ndForm.addItem(new Weapon(10, "Meta Moon Prime", false, 0, new Effect("Moon Sickness", 2, 20, 0, 0)));
+        KSI2ndForm.addItem(new Weapon(25, "Ice Pop Prime", false, 0, new Effect("Frozen", 3, 0, 100, 0)));
+        KSI2ndForm.addItem(new Weapon(30, "Orange Prime", false, 0, null));
+        KSI2ndForm.addItem(new Weapon(35, "Blue Rasperry Prime", false, 0, null));
+        KSI2ndForm.addItem(new Weapon(20, "Grape Prime", false, 0, new Effect("Medicinal Taste", 3, 15, 0, 0)));
+        KSI2ndForm.addItem(new Weapon(10, "Lemon Lime Prime", false, 0, new Effect("Lemon Acid", 10, 5, 0, 0)));
+        KSI2ndForm.addItem(new Weapon(30, "Strawberry Watermelon Prime", false, 0, null));
+        KSI2ndForm.addItem(new Weapon(40, "Tropical Punch Prime", false, 0, null));
+
+        final Enemy KSI1ndFormEnemy = new Enemy(null, ksiHouse, 150, KSI1ndForm , 0, "KSI", 0);
+        final Enemy KSI2ndFormEnemy = new Enemy(null, ksiHouse, 500, KSI2ndForm , 0, "KSI-PRIME", 0);
+       bayviewGlen2ndFloorUpperHallway.addEnemies(rogueEconTestEnemy);
+        ksiHouse.setRunnable(() -> {
+          if (!hasBeatenKsi[0]) {
+            Graphics text = new Graphics();
+            try {
+              text.slowTextSpeed("You enter Ksi's House... The silence unerves you", 25);
+              text.slowTextSpeed(" KSI: Hello. I've been expecting you... \n You: Show yourself! \n KSI: You, trying to take over my company, pathetic \n You: Im stronger than you think \n KSI: We'll see about that!!!", 25);
+              Fight f = new Fight(KSI1ndFormEnemy);
+              boolean won = f.fight();
+              if (won) {
+                text.slowTextSpeed(" KSI: H-H-HOW?? \n You: I'm Simply better \n KSI: N-NO! I won't go down like this!! \n > You see KSI pull out a Syringe full of a mixture of all 8 prime flavors \n KSI: This power may kill me, but I need to try \n > You see KSI inject himself with the Primes \n KSI: Ready for round two? \n > You see KSI's body changing to a unrecognizable form, he charges at you with pure rage in his eyes.", 50);
+                Fight f2 = new Fight(KSI2ndFormEnemy);
+                won = f2.fight();
+                if(won) {
+                  text.slowTextSpeed(" KSI: You are.. much stronger then i thought..., Curse you cyrus, couldn't even fight me himself. *Cough Cough \n KSI: Well I guess thats it- \n YOU HAVE DEFEATED KSI... But whats this? you feel the ground below you start to shake... \n A hole opens up below you and you start falling... \n an you keep on falling for another 42 minutes. \n ", 25);
+                }
+              }
+            
+            } catch (InterruptedException e1) {
+              e1.printStackTrace();
+            }
+            
+          }
+        });
+
+        unionPlatform.setRunnable(() -> {
+          if(Game.getGame().getPlayer().getPrimeCounter() == 8) {
+           Graphics text = new Graphics();
+           Scanner in = new Scanner(System.in);
+           try {
+             renderer.showCutScene(1500, "\\bin\\zork\\data\\uniongobuscyruscall.txt", 15);
+             text.slowTextSpeed("No going back now, would you like to leave for pearson? Y/N:", 50);
+             String ans = in.nextLine(); 
+             if(ans.equalsIgnoreCase("y")) {
+               text.slowTextSpeed("Alright, lets get this show on the road", 20);
+               renderer.showCutScene(1500, "\\bin\\zork\\data\\gotoukcutscene.txt", 15);
+               Game.getGame().getPlayer().setCurrentRoom(UKOutsideKsiHouse);
+             }
+           } catch (Exception Exception) {
+             
+           }
+          }
+ 
+ 
+         });
+
+        final Exit unionPlatformExitSouthTwo = new Exit("S",unionPlatform); UKOutsideKsiHouse.addExit(unionPlatformExitSouthTwo);
+        final Exit ksiHouseExitNorth = new Exit("N",ksiHouse); UKOutsideKsiHouse.addExit(ksiHouseExitNorth);
+        final Exit UKOutsideKsiHouseExitSouth = new Exit("S",UKOutsideKsiHouse); ksiHouse.addExit(UKOutsideKsiHouseExitSouth);
 
         //MISCELLANEOUS ROOMS EXITS
       final Exit summerhillSubwayExitSouth = new Exit("S", summerhillSubway); stClairSubway.addExit(summerhillSubwayExitSouth);

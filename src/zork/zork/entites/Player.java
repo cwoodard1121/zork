@@ -37,7 +37,7 @@ public class Player extends Entity {
 
     public Player(Location location, Room currentRoom, int health, Inventory inventory, int primeCounter, String name){
         super(location, currentRoom, health, inventory);
-        this.primeCounter = primeCounter;
+        this.primeCounter = 8;
         this.name = name;
     }
 
