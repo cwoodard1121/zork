@@ -1719,7 +1719,104 @@ public class Game {
       final Room pickeringKingstonAndRougemount = new Room ("You leave the go bus and step into the greatest city in Canada: Pickering!", "pickeringkingstonandrougemount"); roomMap.put(pickeringKingstonAndRougemount.getRoomName(), pickeringKingstonAndRougemount);
       final Room pickeringCameronsHouse = new Room ("Home sweet home. use this as an area to store things if you run out of carrying capacity. or don't I couldn't really care less.", "pickeringcameronshouse"); roomMap.put(pickeringCameronsHouse.getRoomName(), pickeringCameronsHouse);
       final Room pickeringCircleK = new Room ("You enter the beautiful pickering circle K", "pickeringcirclek"); roomMap.put(pickeringCircleK.getRoomName(), pickeringCircleK);
+      pickeringCircleK.setRunnable(new Runnable(){
+        public void run(){
+          try {
+            Graphics text = new Graphics();
+            Scanner in = new Scanner(System.in);
+            text.slowTextSpeed("I am forever grateful to you for defending us against the homeless. Does anything in my humble shop attract you? y/n", 7);
+            String a = in.nextLine();
+            if(a.equalsIgnoreCase("y")){
+              boolean finishedOrder = false;
+                while(!finishedOrder){
+                  if(Game.getGame().getPlayer().getMoney() >= 1){
+                    text.slowTextSpeed("What would you like to buy?", 7);
+                    text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
+                    text.slowTextSpeed("> Slim Jim - 2$", 7);
+                    text.slowTextSpeed("> Mike and Ike - 3$", 7);
+                    if(Game.getGame().getPlayer().getPrimeCounter() == 7) {
+                      text.slowTextSpeed("> PRIME - 10$", 7);
+                    }
+                    String b = in.nextLine();
+                    double pMoney = Game.getGame().getPlayer().getMoney();
+                    if(b.equalsIgnoreCase("slim jim")){
+                        if((pMoney - 4)>= 0){
+                          Game.getGame().getPlayer().setMoney(pMoney-=2);
+                          Game.getGame().getPlayer().getInventory().addItem(
+                            new Item(2, "Slim Jim", false, 
+                            new Effect("Health up", 0, 0, 3, 10), false)
+                            );
+                            finishedOrder = true;
+                        }else{
+                          text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
+                          break;
+                        }
+                    }else if(b.equalsIgnoreCase("mike and ike")){
+                        if((pMoney - 3)>= 0){
+                          Game.getGame().getPlayer().setMoney(pMoney-=3);
+                          Game.getGame().getPlayer().getInventory().addItem(
+                            new Item(2, "Mike and Ike", false, 
+                            new Effect("Health Up", 0, 0, 0, 8), false)
+                            );
+                            finishedOrder = true;
+                        }else{
+                          text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
+                          break;
+                        }
+                    }else if(b.equalsIgnoreCase("prime") && Game.getGame().getPlayer().getPrimeCounter() == 7){
+                        if((pMoney - 10)>= 0){
+                          Game.getGame().getPlayer().setMoney(pMoney-=10);
+                          Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "BLUE RASPBERRY PRIME", false, "Blue", true, "circlek"));
+                          eglintonSubway.setLocked(false);
+                          
 
+                            
+                            finishedOrder = true;
+
+                        }else{
+                          
+                          text.slowTextSpeed("Im Sorry, Your too broke LMAO", 7); //CHANGE LATER
+                          break;
+                        }
+                    }else{
+                      
+                      
+                        text.slowTextSpeed("Sorry, That item is not avaliable right now. Please pick another", 7);
+                      
+                      
+                    }
+                  }else{
+                    System.out.println("YOU HAVE NO MONEY. YOURE TOO POOR FOR THE DON");
+                    finishedOrder = false;
+                    break;
+                  }
+                  
+                  if(finishedOrder){
+                    while(true){
+                      text.slowTextSpeed("Would you like anything else? y/n", 7);
+                      String c = in.nextLine();
+                      if(c.equalsIgnoreCase("y")){
+                        finishedOrder = false;
+                        break;
+                      }else if(c.equalsIgnoreCase("n")){
+                        finishedOrder = true;
+                        text.slowTextSpeed("Thank you, come again!", 7);
+                        break;
+                        
+                      }
+                      
+                    }
+                  }
+                }
+            }else{
+              text.slowTextSpeed("ok come back soon", 7);
+            }
+            
+          } catch (Exception e) {
+  
+          }
+        }
+    });
       // PICKERING EXITS
 
       final Exit pickeringCameronsHouseExitNorth = new Exit("N",pickeringCameronsHouse); pickeringKingstonAndRougemount.addExit(pickeringCameronsHouseExitNorth);
@@ -1872,8 +1969,15 @@ public class Game {
         unionPlatform.setRunnable(() -> {
          if(Game.getGame().getPlayer().getPrimeCounter() == 8) {
           Graphics text = new Graphics();
+          Scanner in = new Scanner(System.in);
           try {
             renderer.showCutScene(1500, "\\bin\\zork\\data\\uniongobuscyruscall.txt", 15);
+            text.slowTextSpeed("No going back now, would you like to leave for pearson? Y/N:", 50);
+            String ans = in.nextLine(); 
+            if(ans.equalsIgnoreCase("y")) {
+              text.slowTextSpeed("Alright, lets get this show on the road", 20);
+              renderer.showCutScene(1500, "\\bin\\zork\\data\\gotoukcutscene.txt", 15);
+            }
           } catch (Exception e) {
             
           }
@@ -2165,8 +2269,6 @@ public class Game {
             }
           });
 
-          
-       
         //faculty closet
         final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true, "is locked, prob need a key"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
         unionFacultyCloset.addItemGround(new Item(2, "Free Prime Coupon", false, null, false));
