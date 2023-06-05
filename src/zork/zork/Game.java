@@ -924,7 +924,7 @@ public class Game {
       final Room lawrenceSubway = new Room("You fell asleep and ended up at Lawrence station. Yuck. Better get out of here fast.", "lawrencesubway"); roomMap.put(lawrenceSubway.getRoomName(), lawrenceSubway);
 
 
-
+      
 
 
 
@@ -1724,7 +1724,7 @@ public class Game {
           try {
             Graphics text = new Graphics();
             Scanner in = new Scanner(System.in);
-            text.slowTextSpeed("I am forever grateful to you for defending us against the homeless. Does anything in my humble shop attract you? y/n", 7);
+            text.slowTextSpeed("Welcome to beautiful Pickering, can I help you today? y/n", 7);
             String a = in.nextLine();
             if(a.equalsIgnoreCase("y")){
               boolean finishedOrder = false;
@@ -1962,8 +1962,6 @@ public class Game {
 
      
       //Union
-
-      final Room unionPearsonExpress = new Room("West leads to Toronto Pearson International Airport", "unionpearsonexpress", "Union Pearson Express", true, "WHere do you think you're going? You haven't enough PRIME to board this train!"); roomMap.put(unionPearsonExpress.getRoomName(), unionPearsonExpress); //If you've been locked out, we need to make prime counter large enough so that u can pass thru.
         //unionPlatform code
         final Room unionPlatform = new Room ("You look around you and see a stairway leading upwards. It looks like its the only way forward", "unionplatform"); roomMap.put(unionPlatform.getRoomName(), unionPlatform);
         unionPlatform.setRunnable(() -> {
@@ -2365,8 +2363,7 @@ public class Game {
         final Exit unionMaintenanceRoomExitWest = new Exit("W",unionMaintenanceRoom); unionFacultyRoom.addExit(unionMaintenanceRoomExitWest);
         final Exit unionPlatFormExitSouth = new Exit("S", unionPlatform); stClairWestSubway.addExit(unionPlatFormExitSouth);
         final Exit stClairWestSubwayExitWest = new Exit("W", stClairWestSubway); unionPlatform.addExit(stClairWestSubwayExitWest);
-        final Exit unionPearsonExpressExitSouth = new Exit("S", unionPearsonExpress); unionPlatform.addExit(unionPearsonExpressExitSouth);
-        final Exit unionPlatformExitNorth = new Exit("N", unionPlatform); unionPearsonExpress.addExit(unionPlatformExitNorth);
+
 
 
 
