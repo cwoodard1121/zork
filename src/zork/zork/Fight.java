@@ -124,12 +124,14 @@ public class Fight {
                                     text.slowTextSpeed(enemy.getName() + " Died! YOU WIN!!!", 7);
                                     Game.getGame().getPlayer().setInFight(false);
                                     isTotalHealth = false;
+                                    Game.getGame().getPlayer().setHealth(playerHealth);
                                     return true;
                         }else if(playerHealth<= 0){
                                     text.slowTextSpeed(enemy.getName() + " Won! YOU DIED!!!", 7);
                                     Game.getGame().getPlayer().gameOver();
                                     Game.getGame().getPlayer().setInFight(false);
                                     isTotalHealth = false;
+                                    Game.getGame().getPlayer().setHealth(playerHealth);
                                     return false;
                         }
                         
@@ -264,9 +266,9 @@ public class Fight {
                         
                         while( Game.getGame().getPlayer().getIsItemMenu() == false && Game.getGame().getPlayer().isInWeaponMenu() == false){
                             String answer = in.nextLine().toLowerCase();
-                            if(answer.equals("weapon"))
+                            if(answer.contains("weapon"))
                                 Game.getGame().getPlayer().setInWeaponMenu(true);
-                            else if(answer.equals("item"))
+                            else if(answer.contains("item"))
                                 Game.getGame().getPlayer().setInItemMenu(true);
                             else
                             
@@ -343,7 +345,7 @@ public class Fight {
                 }
                 
                 for (int i = 0; i < arr.size(); i++) {
-                    if(arr.get(i).getName().equalsIgnoreCase(answer)){
+                    if(answer.contains(arr.get(i).getName().toLowerCase())){
                         return arr.get(i);
                     }
                 }
@@ -383,7 +385,7 @@ public class Fight {
             }
             
             for (int i = 0; i < arr.size(); i++) {
-                if(arr.get(i).getName().equalsIgnoreCase(answer)){
+                if(answer.contains(arr.get(i).getName().toLowerCase())){
                     return arr.get(i);
                 }
             }
