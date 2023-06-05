@@ -315,7 +315,8 @@ public class Game {
       final Room eglintonSubway = new Room ("South leads to St. Clair station, North leads to York Mills Station", "eglintonsubway",true, "come back when maintenance is completed"); roomMap.put(eglintonSubway.getRoomName(), eglintonSubway);
 
       final Room foodCourt = new Room ("You can hear the subway rumbling in the background", "foodcourt"); roomMap.put(foodCourt.getRoomName(), foodCourt);
-            foodCourt.setRunnable(new Runnable(){
+          boolean[] boughtPrime1 = {false};    
+        foodCourt.setRunnable(new Runnable(){
                 public void run(){
                   try {
                     Graphics text = new Graphics();
@@ -324,13 +325,14 @@ public class Game {
                     String a = in.nextLine();
                     if(a.equalsIgnoreCase("y")){
                       boolean finishedOrder = false;
+                      
                         while(!finishedOrder){
                           if(Game.getGame().getPlayer().getMoney() >= 1){
                             text.slowTextSpeed("What would you like to buy?", 7);
                             text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                             text.slowTextSpeed("> A skittle - 10$", 7);
                             text.slowTextSpeed("> A peanut - 2$", 7);
-                            text.slowTextSpeed("> PRIME - 50$", 7);
+                            if(!boughtPrime1[0])text.slowTextSpeed("> PRIME - 50$", 7);
                             String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
                             if(b.contains("a skittle")){
@@ -358,7 +360,7 @@ public class Game {
                                   text.slowTextSpeed("Im Sorry, Your too broke LMAO", 7); //CHANGE LATER
                                   break;
                                 }
-                            }else if(b.contains("prime")){
+                            }else if(b.contains("prime") && !boughtPrime1[0]){
                                 if((pMoney - 50)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=50);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "ICE POP PRIME", false, "ICE", true, "foodcourt"));
@@ -366,8 +368,8 @@ public class Game {
                                     renderer.showCutScene(1500, "\\bin\\zork\\data\\foodcourtcyruscall.txt", 15);
                                   } catch (Exception e) {
                                     handleException(e);
-                                  }
-                                    
+                                  }   
+                                    boughtPrime1[0] = true;
                                     
                                     finishedOrder = true;
                                 }else{
@@ -414,7 +416,7 @@ public class Game {
             });
 
       
-
+            boolean boughtPrime2[] = {false};
       final Room circleK = new Room ("", "circlek"); roomMap.put(circleK.getRoomName(), circleK);
             circleK.setRunnable(new Runnable(){
                 public void run(){
@@ -431,7 +433,7 @@ public class Game {
                             text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                             text.slowTextSpeed("> Slim Jim - 2$", 7);
                             text.slowTextSpeed("> Mike and Ike - 3$", 7);
-                            text.slowTextSpeed("> PRIME - 10$", 7);
+                            if(!boughtPrime2[0])text.slowTextSpeed("> PRIME - 10$", 7);
                             String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
                             if(b.contains("slim jim")){
@@ -458,7 +460,7 @@ public class Game {
                                   text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                                   break;
                                 }
-                            }else if(b.contains("prime")){
+                            }else if(b.contains("prime") && !boughtPrime2[0]){
                                 if((pMoney - 10)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=10);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "BLUE RASPBERRY PRIME", false, "Blue", true, "circlek"));
@@ -470,7 +472,7 @@ public class Game {
                                     handleException(e);
                                   }
                                   
-        
+                                    boughtPrime2[0] = true;
                                     
                                     finishedOrder = true;
 
@@ -835,7 +837,8 @@ public class Game {
       final Room stClairWestSubway = new Room ("'Probably one of the nicer subway stations', you think to yourself. ", "stclairwestsubway"); roomMap.put(stClairWestSubway.getRoomName(), stClairWestSubway);
 
       final Room onTheRun = new Room("Stepping into the dank and small convenience store, a wall of candy and slim jims greet your eyes.", "ontherun"); roomMap.put(onTheRun.getRoomName(), onTheRun);
-            onTheRun.setRunnable(new Runnable(){
+          boolean[] boughtPrime3 = {false};    
+        onTheRun.setRunnable(new Runnable(){
                 public void run(){
                   try {
                     Graphics text = new Graphics();
@@ -850,7 +853,7 @@ public class Game {
                             text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                             text.slowTextSpeed("> Slim Jim - 2$", 7);
                             text.slowTextSpeed("> Mike and Ike - 3$", 7);
-                            text.slowTextSpeed("> PRIME - 0$", 7);
+                            if(!boughtPrime3[0])text.slowTextSpeed("> PRIME - 0$", 7);
                             String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
                             if(b.contains("slim jim")){
@@ -875,7 +878,7 @@ public class Game {
                                 }else{
                                   text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                                 }
-                            }else if(b.contains("prime")){
+                            }else if(b.contains("prime") && !boughtPrime3[0]){
                                 if((pMoney - 0)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=0);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "GRAPE PRIME", false, "Purple", true, "On The Run"));
@@ -886,6 +889,7 @@ public class Game {
                                   
                                   text.slowTextSpeed("Im Sorry, Your too broke LMAO", 7); //CHANGE LATER
                                 }
+                                boughtPrime3[0] = true;
                             }else{
                               
                               
@@ -1730,6 +1734,7 @@ public class Game {
       final Room pickeringKingstonAndRougemount = new Room ("You leave the go bus and step into the greatest city in Canada: Pickering!", "pickeringkingstonandrougemount"); roomMap.put(pickeringKingstonAndRougemount.getRoomName(), pickeringKingstonAndRougemount);
       final Room pickeringCameronsHouse = new Room ("Home sweet home. use this as an area to store things if you run out of carrying capacity. or don't I couldn't really care less.", "pickeringcameronshouse"); roomMap.put(pickeringCameronsHouse.getRoomName(), pickeringCameronsHouse);
       final Room pickeringCircleK = new Room ("You enter the beautiful pickering circle K", "pickeringcirclek"); roomMap.put(pickeringCircleK.getRoomName(), pickeringCircleK);
+      boolean[] boughtPrime4 = {false};
       pickeringCircleK.setRunnable(new Runnable(){
         public void run(){
           try {
@@ -1745,7 +1750,7 @@ public class Game {
                     text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                     text.slowTextSpeed("> Slim Jim - 2$", 7);
                     text.slowTextSpeed("> Mike and Ike - 3$", 7);
-                    if(Game.getGame().getPlayer().getPrimeCounter() == 7) {
+                    if(Game.getGame().getPlayer().getPrimeCounter() == 7 && !boughtPrime4[0]) {
                       text.slowTextSpeed("> PRIME - 10$", 7);
                     }
                     String b = in.nextLine().toLowerCase();
@@ -1774,12 +1779,12 @@ public class Game {
                           text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                           break;
                         }
-                    }else if(b.contains("prime") && Game.getGame().getPlayer().getPrimeCounter() == 7){
+                    }else if(b.contains("prime") && Game.getGame().getPlayer().getPrimeCounter() == 7 && !boughtPrime4[0]){
                         if((pMoney - 10)>= 0){
                           Game.getGame().getPlayer().setMoney(pMoney-=10);
                           Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "META MOON PRIME", false, "Blue", true, "circlek"));
                           eglintonSubway.setLocked(false);
-                          
+                          boughtPrime4[0] = true;
 
                             
                             finishedOrder = true;
@@ -2621,8 +2626,8 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("eglintonstreet"));
-    this.player.setMoney(5);
+    this.player.setCurrentRoom(roomMap.get("foodcourt"));
+    this.player.setMoney(100);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {
