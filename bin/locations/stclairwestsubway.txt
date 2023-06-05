@@ -1,8 +1,8 @@
                 * St. CLair West Subway *
  _______________________________________________________
- | Southbound to   |                 | Northbound to   |
- | Vaughn          |                 | Finch           |
- |                 |                 |                 |
+ | A long journey  |                 | Northbound to   |
+ | South awaits you|                 | Finch           |
+ |       ...       |                 |                 |
  |        |        |                 |        ^        |
  |        |        |                 |      / | \      |
  |        |        |                 |        |        |
@@ -17,6 +17,6 @@
  |      \ | /      |                 |        |        |         
  |        v        |                 |        |        |
  |                 |                 |                 |
- |                 |                 |                 |
- |                 |                 |                 |
+ |      South      |                 |                 |
+ |        v        |                 |                 |
  |_____________________________________________________|
