@@ -31,7 +31,7 @@ public class Use extends Command {
                 try {
                     
                 
-                    if(arr2.get(i).getName().equalsIgnoreCase(command)){
+                    if(command.contains(arr2.get(i).getName().toLowerCase())){
                         if(p.getHealth() + arr2.get(i).getEffect().getHealth()>Game.getGame().getPlayer().getMaxHealth()){
                             p.setHealth(Game.getGame().getPlayer().getMaxHealth());
                         }else{
@@ -41,7 +41,7 @@ public class Use extends Command {
                     }
 
                 } catch (Exception e) {
-                    System.out.println("You can use that item right now");
+                    System.out.println("You cant use that item right now");
                 }
             }
         

@@ -216,9 +216,9 @@ public class Game {
                             text.slowTextSpeed("> Gummy Bears - 1$", 7);
                             text.slowTextSpeed("> Snickers Bar - 2$", 7);
                             text.slowTextSpeed("> Rusty Scissors - 5$", 7);
-                            String b = in.nextLine();
+                            String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
-                            if(b.equalsIgnoreCase("gummy bears")){
+                            if(b.contains("gummy bears")){
                                 if((pMoney - 10)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=10);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -231,7 +231,7 @@ public class Game {
                                   break;
 
                                 }
-                            }else if(b.equalsIgnoreCase("a snickers bar")){
+                            }else if(b.contains("a snickers bar")){
                                 if((pMoney - 8)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=8);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -243,7 +243,7 @@ public class Game {
                                   text.slowTextSpeed("Im Sorry, Your too broke LMAO", 7); //CHANGE LATER
                                   break;
                                 }
-                            }else if(b.equalsIgnoreCase("rusty scissors")){
+                            }else if(b.contains("rusty scissors")){
                                 if((pMoney - 5)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=5);
                                   Effect scissorBleeding = new Effect("Bleeding", 2, 3, 1, 0);
@@ -331,9 +331,9 @@ public class Game {
                             text.slowTextSpeed("> A skittle - 10$", 7);
                             text.slowTextSpeed("> A peanut - 2$", 7);
                             text.slowTextSpeed("> PRIME - 50$", 7);
-                            String b = in.nextLine();
+                            String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
-                            if(b.equalsIgnoreCase("a skittle")){
+                            if(b.contains("a skittle")){
                                 if((pMoney - 10)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=10);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -346,7 +346,7 @@ public class Game {
                                   break;
 
                                 }
-                            }else if(b.equalsIgnoreCase("a peanut")){
+                            }else if(b.contains("a peanut")){
                                 if((pMoney - 8)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=8);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -358,7 +358,7 @@ public class Game {
                                   text.slowTextSpeed("Im Sorry, Your too broke LMAO", 7); //CHANGE LATER
                                   break;
                                 }
-                            }else if(b.equalsIgnoreCase("prime")){
+                            }else if(b.contains("prime")){
                                 if((pMoney - 50)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=50);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "ICE POP PRIME", false, "ICE", true, "foodcourt"));
@@ -432,9 +432,9 @@ public class Game {
                             text.slowTextSpeed("> Slim Jim - 2$", 7);
                             text.slowTextSpeed("> Mike and Ike - 3$", 7);
                             text.slowTextSpeed("> PRIME - 10$", 7);
-                            String b = in.nextLine();
+                            String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
-                            if(b.equalsIgnoreCase("slim jim")){
+                            if(b.contains("slim jim")){
                                 if((pMoney - 4)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=2);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -446,7 +446,7 @@ public class Game {
                                   text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                                   break;
                                 }
-                            }else if(b.equalsIgnoreCase("mike and ike")){
+                            }else if(b.contains("mike and ike")){
                                 if((pMoney - 3)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=3);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -458,7 +458,7 @@ public class Game {
                                   text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                                   break;
                                 }
-                            }else if(b.equalsIgnoreCase("prime")){
+                            }else if(b.contains("prime")){
                                 if((pMoney - 10)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=10);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "BLUE RASPBERRY PRIME", false, "Blue", true, "circlek"));
@@ -604,9 +604,9 @@ public class Game {
                             text.slowTextSpeed("> Plain Donut - 3$", 7);
                             text.slowTextSpeed("> Watered down tea - 1$", 7);
                             text.slowTextSpeed("> 'Fresh' ham sandwich - 5$", 7);
-                            String b = in.nextLine();
+                            String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
-                            if(b.equalsIgnoreCase("plain donut")){
+                            if(b.contains("plain donut")){
                                 if((pMoney - 3)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=3);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -618,7 +618,7 @@ public class Game {
                                   text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                                   break;
                                 }
-                            }else if(b.equalsIgnoreCase("Watered down tea")){
+                            }else if(b.contains("watered down tea")){
                                 if((pMoney - 1)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=1);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -631,7 +631,7 @@ public class Game {
                                   break;
 
                                 }
-                            }else if(b.equalsIgnoreCase("'Fresh' ham sandwich")){
+                            }else if(b.contains("fresh ham sandwich")){
                                 if((pMoney - 5)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=5);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -700,9 +700,9 @@ public class Game {
                             text.slowTextSpeed("> Big Mac - 4$", 7);
                             text.slowTextSpeed("> McCafe Coffee - 2$", 7);
                             text.slowTextSpeed("> Happy Meal - 7$", 7);
-                            String b = in.nextLine();
+                            String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
-                            if(b.equalsIgnoreCase("big mac")){
+                            if(b.contains("big mac")){
                                 if((pMoney - 4)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=4);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -715,7 +715,7 @@ public class Game {
                                   break;
 
                                 }
-                            }else if(b.equalsIgnoreCase("McCafe Coffee")){
+                            }else if(b.contains("mccafe coffee")){
                                 if((pMoney - 2)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=2);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -728,7 +728,7 @@ public class Game {
                                   break;
 
                                 }
-                            }else if(b.equalsIgnoreCase("Happy Meal")){
+                            }else if(b.contains("happy meal")){
                                 if((pMoney - 7)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=7);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -851,9 +851,9 @@ public class Game {
                             text.slowTextSpeed("> Slim Jim - 2$", 7);
                             text.slowTextSpeed("> Mike and Ike - 3$", 7);
                             text.slowTextSpeed("> PRIME - 0$", 7);
-                            String b = in.nextLine();
+                            String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
-                            if(b.equalsIgnoreCase("slim jim")){
+                            if(b.contains("slim jim")){
                                 if((pMoney - 2)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=2);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -864,7 +864,7 @@ public class Game {
                                 }else{
                                   text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                                 }
-                            }else if(b.equalsIgnoreCase("mike and ike")){
+                            }else if(b.contains("mike and ike")){
                                 if((pMoney - 3)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=3);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -875,7 +875,7 @@ public class Game {
                                 }else{
                                   text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                                 }
-                            }else if(b.equalsIgnoreCase("prime")){
+                            }else if(b.contains("prime")){
                                 if((pMoney - 0)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=0);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "GRAPE PRIME", false, "Purple", true, "On The Run"));
@@ -1748,9 +1748,9 @@ public class Game {
                     if(Game.getGame().getPlayer().getPrimeCounter() == 7) {
                       text.slowTextSpeed("> PRIME - 10$", 7);
                     }
-                    String b = in.nextLine();
+                    String b = in.nextLine().toLowerCase();
                     double pMoney = Game.getGame().getPlayer().getMoney();
-                    if(b.equalsIgnoreCase("slim jim")){
+                    if(b.contains("slim jim")){
                         if((pMoney - 4)>= 0){
                           Game.getGame().getPlayer().setMoney(pMoney-=2);
                           Game.getGame().getPlayer().getInventory().addItem(
@@ -1762,7 +1762,7 @@ public class Game {
                           text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                           break;
                         }
-                    }else if(b.equalsIgnoreCase("mike and ike")){
+                    }else if(b.contains("mike and ike")){
                         if((pMoney - 3)>= 0){
                           Game.getGame().getPlayer().setMoney(pMoney-=3);
                           Game.getGame().getPlayer().getInventory().addItem(
@@ -1774,10 +1774,10 @@ public class Game {
                           text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                           break;
                         }
-                    }else if(b.equalsIgnoreCase("prime") && Game.getGame().getPlayer().getPrimeCounter() == 7){
+                    }else if(b.contains("prime") && Game.getGame().getPlayer().getPrimeCounter() == 7){
                         if((pMoney - 10)>= 0){
                           Game.getGame().getPlayer().setMoney(pMoney-=10);
-                          Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "BLUE RASPBERRY PRIME", false, "Blue", true, "circlek"));
+                          Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "META MOON PRIME", false, "Blue", true, "circlek"));
                           eglintonSubway.setLocked(false);
                           
 
@@ -1978,25 +1978,7 @@ public class Game {
       //Union
         //unionPlatform code
         final Room unionPlatform = new Room ("You look around you and see a stairway leading upwards. It looks like its the only way forward", "unionplatform"); roomMap.put(unionPlatform.getRoomName(), unionPlatform);
-        unionPlatform.setRunnable(() -> {
-         if(Game.getGame().getPlayer().getPrimeCounter() == 8) {
-          Graphics text = new Graphics();
-          Scanner in = new Scanner(System.in);
-          try {
-            renderer.showCutScene(1500, "\\bin\\zork\\data\\uniongobuscyruscall.txt", 15);
-            text.slowTextSpeed("No going back now, would you like to leave for pearson? Y/N:", 50);
-            String ans = in.nextLine(); 
-            if(ans.equalsIgnoreCase("y")) {
-              text.slowTextSpeed("Alright, lets get this show on the road", 20);
-              renderer.showCutScene(1500, "\\bin\\zork\\data\\gotoukcutscene.txt", 15);
-            }
-          } catch (Exception e) {
-            
-          }
-         }
-
-
-        });
+        
         
         
         //unionShopArea
@@ -2050,9 +2032,9 @@ public class Game {
                             text.slowTextSpeed("> Boston Cream Donut - 4$", 7);
                             text.slowTextSpeed("> French Vanilla - 2$", 7);
                             text.slowTextSpeed("> Toasted Bagel With Cream Cheese - 7$", 7);
-                            String b = in.nextLine();
+                            String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
-                            if(b.equalsIgnoreCase("boston cream donut")){
+                            if(b.contains("boston cream donut")){
                                 if((pMoney - 4)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=4);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -2063,7 +2045,7 @@ public class Game {
                                 }else{
                                   text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
                                 }
-                            }else if(b.equalsIgnoreCase("French Vanilla")){
+                            }else if(b.contains("french vanilla")){
                                 if((pMoney - 2)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=2);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -2074,7 +2056,7 @@ public class Game {
                                 }else{
                                   text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
                                 }
-                            }else if(b.equalsIgnoreCase("Toasted Bagel With Cream Cheese")){
+                            }else if(b.contains("toasted bagel with cream cheese")){
                                 if((pMoney - 7)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=7);
                                   Game.getGame().getPlayer().getInventory().addItem(
@@ -2282,10 +2264,10 @@ public class Game {
           });
 
         //faculty closet
-        final Room unionFacultyCloset = new Room ("Placeholder Description for unionFacultyCloset", "unionfacultycloset", true, "is locked, prob need a key"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
+        final Room unionFacultyCloset = new Room ("You feel the walls closing in, in this cramped room.", "unionfacultycloset", true, "is locked, prob need a key"); roomMap.put(unionFacultyCloset.getRoomName(), unionFacultyCloset);
         unionFacultyCloset.addItemGround(new Item(2, "Free Prime Coupon", false, null, false));
         //faculty room
-        final Room unionFacultyRoom = new Room ("Placeholder Description for unionFacultyRoom", "unionfacultyroom"); roomMap.put(unionFacultyRoom.getRoomName(), unionFacultyRoom);
+        final Room unionFacultyRoom = new Room ("a nice office where ttc works are safe, until now i guess", "unionfacultyroom"); roomMap.put(unionFacultyRoom.getRoomName(), unionFacultyRoom);
         boolean[] e = {false};
         unionFacultyRoom.setRunnable(new Runnable(){
           
@@ -2318,7 +2300,7 @@ public class Game {
         });
 
         //Maintenance room
-        final Room unionMaintenanceRoom = new Room ("Placeholder Description for unionMaintenanceRoom", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
+        final Room unionMaintenanceRoom = new Room ("A dusty room which makes sense, to the north you see a closet and to the east a staff room", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         unionMaintenanceRoom.setRunnable(new Runnable(){
             
           @Override
@@ -2379,7 +2361,76 @@ public class Game {
         final Exit stClairWestSubwayExitWest = new Exit("W", stClairWestSubway); unionPlatform.addExit(stClairWestSubwayExitWest);
 
 
+        //UK Rooms
+        final boolean[] hasBeatenKsi = new boolean[]{false};
+        final Room UKOutsideKsiHouse = new Room ("Placeholder Description for UKOutsideKsiHouse", "ukoutsideksihouse"); roomMap.put(UKOutsideKsiHouse.getRoomName(), UKOutsideKsiHouse);
+        final Room ksiHouse = new Room ("Placeholder Description for ksiHouse", "ksihouse"); roomMap.put(ksiHouse.getRoomName(), ksiHouse);
 
+        Inventory KSI1ndForm = new Inventory(1000);
+        KSI1ndForm.addItem(new Weapon(10, "Prime Branded Sword", false, 15, null));
+        KSI1ndForm.addItem(new Weapon(25, "Prime Branded Gun", false, 20, new Effect("Bullet Wound", 3, 10, 10, 0)));
+
+        Inventory KSI2ndForm = new Inventory(1000);
+        KSI2ndForm.addItem(new Weapon(10, "Meta Moon Prime", false, 0, new Effect("Moon Sickness", 2, 20, 0, 0)));
+        KSI2ndForm.addItem(new Weapon(25, "Ice Pop Prime", false, 0, new Effect("Frozen", 3, 0, 100, 0)));
+        KSI2ndForm.addItem(new Weapon(30, "Orange Prime", false, 0, null));
+        KSI2ndForm.addItem(new Weapon(35, "Blue Rasperry Prime", false, 0, null));
+        KSI2ndForm.addItem(new Weapon(20, "Grape Prime", false, 0, new Effect("Medicinal Taste", 3, 15, 0, 0)));
+        KSI2ndForm.addItem(new Weapon(10, "Lemon Lime Prime", false, 0, new Effect("Lemon Acid", 10, 5, 0, 0)));
+        KSI2ndForm.addItem(new Weapon(30, "Strawberry Watermelon Prime", false, 0, null));
+        KSI2ndForm.addItem(new Weapon(40, "Tropical Punch Prime", false, 0, null));
+
+        final Enemy KSI1ndFormEnemy = new Enemy(null, ksiHouse, 150, KSI1ndForm , 0, "KSI", 0);
+        final Enemy KSI2ndFormEnemy = new Enemy(null, ksiHouse, 500, KSI2ndForm , 0, "KSI-PRIME", 0);
+       bayviewGlen2ndFloorUpperHallway.addEnemies(rogueEconTestEnemy);
+        ksiHouse.setRunnable(() -> {
+          if (!hasBeatenKsi[0]) {
+            Graphics text = new Graphics();
+            try {
+              text.slowTextSpeed("You enter Ksi's House... The silence unerves you", 25);
+              text.slowTextSpeed(" KSI: Hello. I've been expecting you... \n You: Show yourself! \n KSI: You, trying to take over my company, pathetic \n You: Im stronger than you think \n KSI: We'll see about that!!!", 25);
+              Fight f = new Fight(KSI1ndFormEnemy);
+              boolean won = f.fight();
+              if (won) {
+                text.slowTextSpeed(" KSI: H-H-HOW?? \n You: I'm Simply better \n KSI: N-NO! I won't go down like this!! \n > You see KSI pull out a Syringe full of a mixture of all 8 prime flavors \n KSI: This power may kill me, but I need to try \n > You see KSI inject himself with the Primes \n KSI: Ready for round two? \n > You see KSI's body changing to a unrecognizable form, he charges at you with pure rage in his eyes.", 50);
+                Fight f2 = new Fight(KSI2ndFormEnemy);
+                won = f2.fight();
+                if(won) {
+                  text.slowTextSpeed(" KSI: You are.. much stronger then i thought..., Curse you cyrus, couldn't even fight me himself. *Cough Cough \n KSI: Well I guess thats it- \n YOU HAVE DEFEATED KSI... But whats this? you feel the ground below you start to shake... \n A hole opens up below you and you start falling... \n an you keep on falling for another 42 minutes. \n ", 25);
+                }
+              }
+            
+            } catch (InterruptedException e1) {
+              e1.printStackTrace();
+            }
+            
+          }
+        });
+
+        unionPlatform.setRunnable(() -> {
+          if(Game.getGame().getPlayer().getPrimeCounter() == 8) {
+           Graphics text = new Graphics();
+           Scanner in = new Scanner(System.in);
+           try {
+             renderer.showCutScene(1500, "\\bin\\zork\\data\\uniongobuscyruscall.txt", 15);
+             text.slowTextSpeed("No going back now, would you like to leave for pearson? Y/N:", 50);
+             String ans = in.nextLine(); 
+             if(ans.equalsIgnoreCase("y")) {
+               text.slowTextSpeed("Alright, lets get this show on the road", 20);
+               renderer.showCutScene(1500, "\\bin\\zork\\data\\gotoukcutscene.txt", 15);
+               Game.getGame().getPlayer().setCurrentRoom(UKOutsideKsiHouse);
+             }
+           } catch (Exception Exception) {
+             
+           }
+          }
+ 
+ 
+         });
+
+        final Exit unionPlatformExitSouthTwo = new Exit("S",unionPlatform); UKOutsideKsiHouse.addExit(unionPlatformExitSouthTwo);
+        final Exit ksiHouseExitNorth = new Exit("N",ksiHouse); UKOutsideKsiHouse.addExit(ksiHouseExitNorth);
+        final Exit UKOutsideKsiHouseExitSouth = new Exit("S",UKOutsideKsiHouse); ksiHouse.addExit(UKOutsideKsiHouseExitSouth);
 
         //MISCELLANEOUS ROOMS EXITS
       final Exit summerhillSubwayExitSouth = new Exit("S", summerhillSubway); stClairSubway.addExit(summerhillSubwayExitSouth);
@@ -2399,9 +2450,9 @@ public class Game {
 
 
           //Tokyo Japan
-          final Room HoleInTheGroundJapan = new Room ("Placeholder Description for HoleInTheGroundJapan", "holeinthegroundjapan"); roomMap.put(HoleInTheGroundJapan.getRoomName(), HoleInTheGroundJapan);
-          final Room japanNationalStadiumPlaza = new Room ("Placeholder Description for japanNationalStadiumPlaza", "japannationalstadiumplaza"); roomMap.put(japanNationalStadiumPlaza.getRoomName(), japanNationalStadiumPlaza);
-          final Room japanTimHortons = new Room ("Placeholder Description for japanTimHortons", "japantimhortons"); roomMap.put(japanTimHortons.getRoomName(), japanTimHortons);
+          final Room HoleInTheGroundJapan = new Room ("Around you are large buildings yet no people. I wonder where they are?", "holeinthegroundjapan"); roomMap.put(HoleInTheGroundJapan.getRoomName(), HoleInTheGroundJapan);
+          final Room japanNationalStadiumPlaza = new Room ("Another empty area, at least theres a tims to the east, you should probobly stock up. also to the north is a stadium where you can hear people cheering", "japannationalstadiumplaza"); roomMap.put(japanNationalStadiumPlaza.getRoomName(), japanNationalStadiumPlaza);
+          final Room japanTimHortons = new Room ("A very nice tim hortons no good food though", "japantimhortons"); roomMap.put(japanTimHortons.getRoomName(), japanTimHortons);
                   japanTimHortons.setRunnable(new Runnable(){
                     public void run(){
                       try {
@@ -2412,15 +2463,15 @@ public class Game {
                         if(a.equalsIgnoreCase("y")){
                           boolean finishedOrder = false;
                             while(!finishedOrder){
-                              if(Game.getGame().getPlayer().getMoney() >= 1){
+                              if(Game.getGame().getPlayer().getMoney() >= 6){
                                 text.slowTextSpeed("What would you like to buy?", 7);
                                 text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                                 text.slowTextSpeed("> Runny Nutella Cookie - 10$", 7);
                                 text.slowTextSpeed("> Donut Sushi - 6$", 7);
                                 text.slowTextSpeed("> Toasted Bagel With Cream Cheese - 15$", 7);
-                                String b = in.nextLine();
+                                String b = in.nextLine().toLowerCase();
                                 double pMoney = Game.getGame().getPlayer().getMoney();
-                                if(b.equalsIgnoreCase("runny nutella cookie")){
+                                if(b.contains("runny nutella cookie")){
                                     if((pMoney - 10)>= 0){
                                       Game.getGame().getPlayer().setMoney(pMoney-=10);
                                       Game.getGame().getPlayer().getInventory().addItem(
@@ -2431,7 +2482,7 @@ public class Game {
                                     }else{
                                       text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
                                     }
-                                }else if(b.equalsIgnoreCase("Donut Sushi")){
+                                }else if(b.contains("donut sushi")){
                                     if((pMoney - 6)>= 0){
                                       Game.getGame().getPlayer().setMoney(pMoney-=6);
                                       Game.getGame().getPlayer().getInventory().addItem(
@@ -2442,7 +2493,7 @@ public class Game {
                                     }else{
                                       text.slowTextSpeed("Im Sorry, Your too broke for tims LMAO", 7); //CHANGE LATER
                                     }
-                                }else if(b.equalsIgnoreCase("Toasted Bagel With Cream Cheese")){
+                                }else if(b.contains("toasted bagel with cream cheese")){
                                     if((pMoney - 15)>= 0){
                                       Game.getGame().getPlayer().setMoney(pMoney-=15);
                                       Game.getGame().getPlayer().getInventory().addItem(
@@ -2462,7 +2513,9 @@ public class Game {
                                   
                                 }
                               } else {
+                                text.slowTextSpeed("Im sorry, you cant afford anything on the menu", 0);
                                 finishedOrder = false;
+                                break;
                               }
                               
                               if(finishedOrder){
@@ -2490,7 +2543,38 @@ public class Game {
 
                     }
                 });
-          final Room japanNationalStadium = new Room ("Placeholder Description for japanNationalStadium", "japannationalstadium"); roomMap.put(japanNationalStadium.getRoomName(), japanNationalStadium);
+          final Room japanNationalStadium = new Room ("Your final fight, goodluck", "japannationalstadium"); roomMap.put(japanNationalStadium.getRoomName(), japanNationalStadium);
+              japanNationalStadium.setRunnable(new Runnable(){
+                
+                @Override
+                public void run() {
+                  try{
+                    Graphics text = new Graphics();
+                    text.slowTextSpeed("So, you finally arrive, i've been expecting you " + Game.getGame().getPlayer().getName(), 7);
+                    text.slowTextSpeed("to get my final prime, you have to kill me for it", 7);
+                    text.slowTextSpeed("Time for your final fight", 60);
+                    Inventory t = new Inventory(12020);
+                    t.addItem(new Weapon(0,"Boxing Gloves", false, 45, null));
+                    t.addItem(new Weapon(0, "Bad podcast", false, 25, new Effect("Embaressement", 2, 10, 0, 0)));
+                    t.addItem(new Weapon(0, "Horrible diss track", false, 20, new Effect("Bleeding Ears", 4, 8, 2, 0)));
+                    final Enemy LOGAN_PAUL = new Enemy(null, japanNationalStadium, 500, t, 800, "Logan Paul", 0);
+                    Fight f = new Fight(LOGAN_PAUL);
+                    boolean didWin = f.fight();
+                      if(didWin){
+                        Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(LOGAN_PAUL);
+                        renderer.showCutScene(1100, "\\bin\\zork\\data\\finalcutscene.txt", 15);
+                        
+                        //cutscence with logan paul dieing and you getting the prime, then bringing all the primes back to cyrus and playing soccor with him
+                      }else{
+                        Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+                      }
+        
+                
+                  }catch(Exception e){
+                    //aklsdjalsd
+                  }
+                }
+              });
           //exits
           final Exit japanNationalStadiumPlazaExitNorth = new Exit("N",japanNationalStadiumPlaza); HoleInTheGroundJapan.addExit(japanNationalStadiumPlazaExitNorth);
           final Exit japanNationalStadiumExitNorth = new Exit("N",japanNationalStadium); japanNationalStadiumPlaza.addExit(japanNationalStadiumExitNorth);

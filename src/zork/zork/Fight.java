@@ -128,10 +128,9 @@ public class Fight {
                                     return true;
                         }else if(playerHealth<= 0){
                                     text.slowTextSpeed(enemy.getName() + " Won! YOU DIED!!!", 7);
-                                    Game.getGame().getPlayer().gameOver();
                                     Game.getGame().getPlayer().setInFight(false);
                                     isTotalHealth = false;
-                                    Game.getGame().getPlayer().setHealth(playerHealth);
+                                    Game.getGame().getPlayer().setHealth(Game.getGame().getPlayer().getMaxHealth());
                                     return false;
                         }
                         
