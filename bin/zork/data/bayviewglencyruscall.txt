@@ -5,7 +5,7 @@ Ring Ring
 
 Ring Ring
 
-@
+&
 
 Click
 ~
@@ -23,8 +23,8 @@ Click
  ~
  |_____________________________________________________|
 
- @
+ &
 ~
 ...
-@
+&
 Good luck recruit, and may KSI have mercy on your soul.
