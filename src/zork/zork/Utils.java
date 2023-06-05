@@ -251,7 +251,6 @@ public static class SoundHandler {
         playSound("subway.wav",false);
     }
 
-
     /**
      * plays title music
      */

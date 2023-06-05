@@ -106,14 +106,14 @@ public class Game {
         if(!hasFoughtCEO[0]) {
           //TODO: CHANGE YELLOW TO REAL FALVOR
           Inventory i = new Inventory(5);
-          i.addItem(new Prime(5, "TROPICAL",false , "TROPICAL", false, "CEO"));
-          i.addItem(new Weapon(0, "TROPICAL", false, 20, null));
+          i.addItem(new Prime(5, "TROPICAL PUNCH PRIME",false , "YELLOW", false, "CEO"));
+          i.addItem(new Weapon(0, "TROPICAL PUNCH TIME", false, 20, null));
           Enemy CEO = new Enemy(null, sheppardYongeOffice, 100, i, 0, "CEO", 500);
           Fight f = new Fight(CEO);
           if(f.fight()) {
             Graphics g = getRenderer();
             try {
-              g.slowTextSpeed("You won. You got the tropical prime. The crazy CEO decides to quit his job and become a bitcoin trader.", 50);
+              g.slowTextSpeed("You won. You got the yellow prime. The crazy CEO decides to quit his job and become a bitcoin trader.", 50);
               g.slowTextSpeed("The elevator beeps. It's time to go back down.", 50);
               Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -315,7 +315,8 @@ public class Game {
       final Room eglintonSubway = new Room ("South leads to St. Clair station, North leads to York Mills Station", "eglintonsubway",true, "come back when maintenance is completed"); roomMap.put(eglintonSubway.getRoomName(), eglintonSubway);
 
       final Room foodCourt = new Room ("You can hear the subway rumbling in the background", "foodcourt"); roomMap.put(foodCourt.getRoomName(), foodCourt);
-            foodCourt.setRunnable(new Runnable(){
+          boolean[] boughtPrime1 = {false};    
+        foodCourt.setRunnable(new Runnable(){
                 public void run(){
                   try {
                     Graphics text = new Graphics();
@@ -324,13 +325,14 @@ public class Game {
                     String a = in.nextLine();
                     if(a.equalsIgnoreCase("y")){
                       boolean finishedOrder = false;
+                      
                         while(!finishedOrder){
                           if(Game.getGame().getPlayer().getMoney() >= 1){
                             text.slowTextSpeed("What would you like to buy?", 7);
                             text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                             text.slowTextSpeed("> A skittle - 10$", 7);
                             text.slowTextSpeed("> A peanut - 2$", 7);
-                            text.slowTextSpeed("> PRIME - 50$", 7);
+                            if(!boughtPrime1[0])text.slowTextSpeed("> PRIME - 50$", 7);
                             String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
                             if(b.contains("a skittle")){
@@ -358,7 +360,7 @@ public class Game {
                                   text.slowTextSpeed("Im Sorry, Your too broke LMAO", 7); //CHANGE LATER
                                   break;
                                 }
-                            }else if(b.contains("prime")){
+                            }else if(b.contains("prime") && !boughtPrime1[0]){
                                 if((pMoney - 50)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=50);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "ICE POP PRIME", false, "ICE", true, "foodcourt"));
@@ -366,8 +368,8 @@ public class Game {
                                     renderer.showCutScene(1500, "\\bin\\zork\\data\\foodcourtcyruscall.txt", 15);
                                   } catch (Exception e) {
                                     handleException(e);
-                                  }
-                                    
+                                  }   
+                                    boughtPrime1[0] = true;
                                     
                                     finishedOrder = true;
                                 }else{
@@ -414,7 +416,7 @@ public class Game {
             });
 
       
-
+            boolean boughtPrime2[] = {false};
       final Room circleK = new Room ("", "circlek"); roomMap.put(circleK.getRoomName(), circleK);
             circleK.setRunnable(new Runnable(){
                 public void run(){
@@ -431,7 +433,7 @@ public class Game {
                             text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                             text.slowTextSpeed("> Slim Jim - 2$", 7);
                             text.slowTextSpeed("> Mike and Ike - 3$", 7);
-                            text.slowTextSpeed("> PRIME - 10$", 7);
+                            if(!boughtPrime2[0])text.slowTextSpeed("> PRIME - 10$", 7);
                             String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
                             if(b.contains("slim jim")){
@@ -458,7 +460,7 @@ public class Game {
                                   text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                                   break;
                                 }
-                            }else if(b.contains("prime")){
+                            }else if(b.contains("prime") && !boughtPrime2[0]){
                                 if((pMoney - 10)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=10);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "BLUE RASPBERRY PRIME", false, "Blue", true, "circlek"));
@@ -470,7 +472,7 @@ public class Game {
                                     handleException(e);
                                   }
                                   
-        
+                                    boughtPrime2[0] = true;
                                     
                                     finishedOrder = true;
 
@@ -835,7 +837,8 @@ public class Game {
       final Room stClairWestSubway = new Room ("'Probably one of the nicer subway stations', you think to yourself. ", "stclairwestsubway"); roomMap.put(stClairWestSubway.getRoomName(), stClairWestSubway);
 
       final Room onTheRun = new Room("Stepping into the dank and small convenience store, a wall of candy and slim jims greet your eyes.", "ontherun"); roomMap.put(onTheRun.getRoomName(), onTheRun);
-            onTheRun.setRunnable(new Runnable(){
+          boolean[] boughtPrime3 = {false};    
+        onTheRun.setRunnable(new Runnable(){
                 public void run(){
                   try {
                     Graphics text = new Graphics();
@@ -850,7 +853,7 @@ public class Game {
                             text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                             text.slowTextSpeed("> Slim Jim - 2$", 7);
                             text.slowTextSpeed("> Mike and Ike - 3$", 7);
-                            text.slowTextSpeed("> PRIME - 0$", 7);
+                            if(!boughtPrime3[0])text.slowTextSpeed("> PRIME - 0$", 7);
                             String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
                             if(b.contains("slim jim")){
@@ -875,7 +878,7 @@ public class Game {
                                 }else{
                                   text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                                 }
-                            }else if(b.contains("prime")){
+                            }else if(b.contains("prime") && !boughtPrime3[0]){
                                 if((pMoney - 0)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=0);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "GRAPE PRIME", false, "Purple", true, "On The Run"));
@@ -886,6 +889,7 @@ public class Game {
                                   
                                   text.slowTextSpeed("Im Sorry, Your too broke LMAO", 7); //CHANGE LATER
                                 }
+                                boughtPrime3[0] = true;
                             }else{
                               
                               
@@ -1843,6 +1847,7 @@ public class Game {
       final Room pickeringKingstonAndRougemount = new Room ("You leave the go bus and step into the greatest city in Canada: Pickering!", "pickeringkingstonandrougemount"); roomMap.put(pickeringKingstonAndRougemount.getRoomName(), pickeringKingstonAndRougemount);
       final Room pickeringCameronsHouse = new Room ("Home sweet home. use this as an area to store things if you run out of carrying capacity. or don't I couldn't really care less.", "pickeringcameronshouse"); roomMap.put(pickeringCameronsHouse.getRoomName(), pickeringCameronsHouse);
       final Room pickeringCircleK = new Room ("You enter the beautiful pickering circle K", "pickeringcirclek"); roomMap.put(pickeringCircleK.getRoomName(), pickeringCircleK);
+      boolean[] boughtPrime4 = {false};
       pickeringCircleK.setRunnable(new Runnable(){
         public void run(){
           try {
@@ -1858,7 +1863,7 @@ public class Game {
                     text.slowTextSpeed("You have " + Game.getGame().getPlayer().getMoney() + "$" , 0);
                     text.slowTextSpeed("> Slim Jim - 2$", 7);
                     text.slowTextSpeed("> Mike and Ike - 3$", 7);
-                    if(Game.getGame().getPlayer().getPrimeCounter() == 7) {
+                    if(Game.getGame().getPlayer().getPrimeCounter() == 7 && !boughtPrime4[0]) {
                       text.slowTextSpeed("> PRIME - 10$", 7);
                     }
                     String b = in.nextLine().toLowerCase();
@@ -1887,12 +1892,12 @@ public class Game {
                           text.slowTextSpeed("Im Sorry, Your too broke", 7); //CHANGE LATER
                           break;
                         }
-                    }else if(b.contains("prime") && Game.getGame().getPlayer().getPrimeCounter() == 7){
+                    }else if(b.contains("prime") && Game.getGame().getPlayer().getPrimeCounter() == 7 && !boughtPrime4[0]){
                         if((pMoney - 10)>= 0){
                           Game.getGame().getPlayer().setMoney(pMoney-=10);
                           Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "META MOON PRIME", false, "Blue", true, "circlek"));
                           eglintonSubway.setLocked(false);
-                          
+                          boughtPrime4[0] = true;
 
                             
                             finishedOrder = true;
@@ -2483,49 +2488,27 @@ public class Game {
 
         //UK Rooms
         final boolean[] hasBeatenKsi = new boolean[]{false};
-        final Room UKOutsideKsiHouse = new Room ("Placeholder Description for UKOutsideKsiHouse", "ukoutsideksihouse"); roomMap.put(UKOutsideKsiHouse.getRoomName(), UKOutsideKsiHouse);
-        final Room ksiHouse = new Room ("Placeholder Description for ksiHouse", "ksihouse"); roomMap.put(ksiHouse.getRoomName(), ksiHouse);
+        final Room UKOutsideKsiHouse = new Room ("You stare at the huge house of KSI", "ukoutsideksihouse"); roomMap.put(UKOutsideKsiHouse.getRoomName(), UKOutsideKsiHouse);
+        final Room ksiHouse = new Room ("You finally stop falling and wake up in Japan", "ksihouse"); roomMap.put(ksiHouse.getRoomName(), ksiHouse);
 
         Inventory KSI1ndForm = new Inventory(1000);
         KSI1ndForm.addItem(new Weapon(10, "Prime Branded Sword", false, 15, null));
         KSI1ndForm.addItem(new Weapon(25, "Prime Branded Gun", false, 20, new Effect("Bullet Wound", 3, 10, 10, 0)));
 
         Inventory KSI2ndForm = new Inventory(1000);
-        KSI2ndForm.addItem(new Weapon(10, "Meta Moon Prime", false, 0, new Effect("Moon Sickness", 2, 20, 0, 0)));
-        KSI2ndForm.addItem(new Weapon(25, "Ice Pop Prime", false, 0, new Effect("Frozen", 3, 0, 100, 0)));
-        KSI2ndForm.addItem(new Weapon(30, "Orange Prime", false, 0, null));
-        KSI2ndForm.addItem(new Weapon(35, "Blue Rasperry Prime", false, 0, null));
-        KSI2ndForm.addItem(new Weapon(20, "Grape Prime", false, 0, new Effect("Medicinal Taste", 3, 15, 0, 0)));
-        KSI2ndForm.addItem(new Weapon(10, "Lemon Lime Prime", false, 0, new Effect("Lemon Acid", 10, 5, 0, 0)));
-        KSI2ndForm.addItem(new Weapon(30, "Strawberry Watermelon Prime", false, 0, null));
-        KSI2ndForm.addItem(new Weapon(40, "Tropical Punch Prime", false, 0, null));
+        KSI2ndForm.addItem(new Weapon(10, "Meta Moon Prime", false, 10, new Effect("Moon Sickness", 2, 20, 0, 0)));
+        KSI2ndForm.addItem(new Weapon(25, "Ice Pop Prime", false, 25, new Effect("Frozen", 3, 0, 100, 0)));
+        KSI2ndForm.addItem(new Weapon(30, "Orange Prime", false, 30, null));
+        KSI2ndForm.addItem(new Weapon(35, "Blue Rasperry Prime", false, 35, null));
+        KSI2ndForm.addItem(new Weapon(20, "Grape Prime", false, 20, new Effect("Medicinal Taste", 3, 15, 0, 0)));
+        KSI2ndForm.addItem(new Weapon(10, "Lemon Lime Prime", false, 10, new Effect("Lemon Acid", 10, 5, 0, 0)));
+        KSI2ndForm.addItem(new Weapon(30, "Strawberry Watermelon Prime", false, 30, null));
+        KSI2ndForm.addItem(new Weapon(40, "Tropical Punch Prime", false, 40, null));
 
         final Enemy KSI1ndFormEnemy = new Enemy(null, ksiHouse, 150, KSI1ndForm , 0, "KSI", 0);
         final Enemy KSI2ndFormEnemy = new Enemy(null, ksiHouse, 500, KSI2ndForm , 0, "KSI-PRIME", 0);
        bayviewGlen2ndFloorUpperHallway.addEnemies(rogueEconTestEnemy);
-        ksiHouse.setRunnable(() -> {
-          if (!hasBeatenKsi[0]) {
-            Graphics text = new Graphics();
-            try {
-              text.slowTextSpeed("You enter Ksi's House... The silence unerves you", 25);
-              text.slowTextSpeed(" KSI: Hello. I've been expecting you... \n You: Show yourself! \n KSI: You, trying to take over my company, pathetic \n You: Im stronger than you think \n KSI: We'll see about that!!!", 25);
-              Fight f = new Fight(KSI1ndFormEnemy);
-              boolean won = f.fight();
-              if (won) {
-                text.slowTextSpeed(" KSI: H-H-HOW?? \n You: I'm Simply better \n KSI: N-NO! I won't go down like this!! \n > You see KSI pull out a Syringe full of a mixture of all 8 prime flavors \n KSI: This power may kill me, but I need to try \n > You see KSI inject himself with the Primes \n KSI: Ready for round two? \n > You see KSI's body changing to a unrecognizable form, he charges at you with pure rage in his eyes.", 50);
-                Fight f2 = new Fight(KSI2ndFormEnemy);
-                won = f2.fight();
-                if(won) {
-                  text.slowTextSpeed(" KSI: You are.. much stronger then i thought..., Curse you cyrus, couldn't even fight me himself. *Cough Cough \n KSI: Well I guess thats it- \n YOU HAVE DEFEATED KSI... But whats this? you feel the ground below you start to shake... \n A hole opens up below you and you start falling... \n an you keep on falling for another 42 minutes. \n ", 25);
-                }
-              }
-            
-            } catch (InterruptedException e1) {
-              e1.printStackTrace();
-            }
-            
-          }
-        });
+        
 
         unionPlatform.setRunnable(() -> {
           if(Game.getGame().getPlayer().getPrimeCounter() == 8) {
@@ -2539,6 +2522,8 @@ public class Game {
                text.slowTextSpeed("Alright, lets get this show on the road", 20);
                renderer.showCutScene(1500, "\\bin\\zork\\data\\gotoukcutscene.txt", 15);
                Game.getGame().getPlayer().setCurrentRoom(UKOutsideKsiHouse);
+               UKOutsideKsiHouse.printAscii();
+               
              }
            } catch (Exception Exception) {
              
@@ -2702,8 +2687,42 @@ public class Game {
           final Exit HoleInTheGroundJapanExitSouth = new Exit("S",HoleInTheGroundJapan); japanNationalStadiumPlaza.addExit(HoleInTheGroundJapanExitSouth);
           final Exit japanNationalStadiumPlazaExitWest = new Exit("W",japanNationalStadiumPlaza); japanTimHortons.addExit(japanNationalStadiumPlazaExitWest);
           final Exit japanNationalStadiumPlazaExitSouth = new Exit("S",japanNationalStadiumPlaza); japanNationalStadium.addExit(japanNationalStadiumPlazaExitSouth);
+          
+          ksiHouse.setRunnable(() -> {
+            Graphics text = new Graphics();
+            if (!hasBeatenKsi[0]) {
+              try {
+                text.slowTextSpeed("You enter Ksi's House... The silence unerves you", 25);
+                text.slowTextSpeed(" KSI: Hello. I've been expecting you... \n You: Show yourself! \n KSI: You, trying to take over my company, pathetic \n You: Im stronger than you think \n KSI: We'll see about that!!!", 25);
+                Fight f = new Fight(KSI1ndFormEnemy);
+                boolean won = f.fight();
+                if (won) {
+                  text.slowTextSpeed(" KSI: H-H-HOW?? \n You: I'm Simply better \n KSI: N-NO! I won't go down like this!! \n > You see KSI pull out a Syringe full of a mixture of all 8 prime flavors \n KSI: This power may kill me, but I need to try \n > You see KSI inject himself with the Primes \n KSI: Ready for round two? \n > You see KSI's body changing to a unrecognizable form, he charges at you with pure rage in his eyes.", 50);
+                  Fight f2 = new Fight(KSI2ndFormEnemy);
+                  won = f2.fight();
+                  if(won) {
+                    text.slowTextSpeed(" KSI: You are.. much stronger then i thought..., Curse you cyrus, couldn't even fight me himself. *Cough Cough \n KSI: Well I guess thats it- \n YOU HAVE DEFEATED KSI... But whats this? you feel the ground below you start to shake... \n A hole opens up below you and you start falling... \n an you keep on falling for another 42 minutes. \n ", 25);
+                    hasBeatenKsi[0] = true;
+                    Game.getGame().getPlayer().setCurrentRoom(HoleInTheGroundJapan);
+                  }
+                }
+              
+              } catch (Exception e1) {
+                e1.printStackTrace();
+              }
+              
+            } else {
+              try {
+                text.slowTextSpeed(" As you enter the house you immediatly remember the gaping hole that is there. You fall and keep falling for another 42 minutes", 25);
+              } catch (InterruptedException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+              }
+              Game.getGame().getPlayer().setCurrentRoom(HoleInTheGroundJapan);
+            }
+          });
         }
-
+        
           
     
     
@@ -2741,7 +2760,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("ellesmeresubway"));
+    this.player.setCurrentRoom(roomMap.get("eglintonstreet"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
