@@ -978,7 +978,8 @@ public class Game {
       final Room lawrenceSubway = new Room("You fell asleep and ended up at Lawrence station. Yuck. Better get out of here fast.", "lawrencesubway"); roomMap.put(lawrenceSubway.getRoomName(), lawrenceSubway);
       final Room bloorYongeStation = new Room ("You'd rather not be here, given it's line 2 and all, but you know you must carry on in the name of PRIME", "blooryongestation"); roomMap.put(bloorYongeStation.getRoomName(), bloorYongeStation);
       final Room bloorYongeLine2 = new Room(" Caution tape blocks of the westward tunnel. I suppose the only way forward is to scarborough.", "blooryongeline2"); roomMap.put(bloorYongeLine2.getRoomName(), bloorYongeLine2);
-
+      final Room yorkMillsAndDonMills = new Room("North goes to don mills. Take the 25b.","yorkmillsanddonmills"); roomMap.put(yorkMillsAndDonMills.getRoomName(), yorkMillsAndDonMills);
+      final Room donMillsSubway = new Room("This is the only way to sheppard yonge.","donmillssubway"); roomMap.put(donMillsSubway.getRoomName(), donMillsSubway);
 
       
 
@@ -986,7 +987,7 @@ public class Game {
 
       //ELLESMERE AREA ROOMS
 
-      final Room ellesmereStationUnderground = new Room("The Scarborough effect has set on. You now have the 'crippling fear' effect.", "ellesmerestationunderground", "Ellesmere Station Entrance"); roomMap.put(ellesmereStationUnderground.getRoomName(), ellesmereStationUnderground);
+      final Room ellesmereStationUnderground = new Room("The Scarborough effect has set in. You now have the 'crippling fear' effect.", "ellesmerestationunderground", "Ellesmere Station Entrance"); roomMap.put(ellesmereStationUnderground.getRoomName(), ellesmereStationUnderground);
       final Room ellesmereSubway = new Room("You can't stand this place already, and exit the subway.","ellesmeresubway"); roomMap.put(ellesmereSubway.getRoomName(), ellesmereSubway);
       final Room sketchyStreetCorner = new Room("Just outside of the subway station, you are greeted by a sketchy street corner.", "sketchystreetcorner"); roomMap.put(sketchyStreetCorner.getRoomName(), sketchyStreetCorner);
       boolean[] hasFoughtThug = new boolean[]{false};
@@ -1121,7 +1122,6 @@ public class Game {
        final Room bayviewGlenHallwayPrepGym = new Room("you enter a Hallway, gyms to your left and right, oo which one to choose", "bayviewglenhallwayprepgym", false, "Since you know the gym is probably locked maybe the hallway by the gym isn't. you were dead wrong"); roomMap.put(bayviewGlenHallwayPrepGym.getRoomName(), bayviewGlenHallwayPrepGym);
        
        final Room bayviewGlenHallwayTheatreFront = new Room("Hallway next to the theatre, you gase at the theatre through the doorway, the seats, the curtain. Then you realize the door is closed and none of that makes any sense.", "bayviewglenhallwaytheatrefront", false, "the door is locked, you try to barge in but its locked so that doesnt make any sense."); roomMap.put(bayviewGlenHallwayTheatreFront.getRoomName(), bayviewGlenHallwayTheatreFront);
-       
        
        
        final Room bayviewGlenOutsideHallwayTheatreFront = new Room ("Parking lot outside of bayview glen, There is a door leading into the school to your south", "bayviewglenoutsidehallwaytheatrefront"); roomMap.put(bayviewGlenOutsideHallwayTheatreFront.getRoomName(), bayviewGlenOutsideHallwayTheatreFront);
@@ -2013,7 +2013,12 @@ public class Game {
       final Exit bayviewGlenYorkMillsExitEast = new Exit("E", bayviewGlenYorkMills); yorkMillsBus.addExit(bayviewGlenYorkMillsExitEast);
       final Exit yorkMillsBusExitWest = new Exit("W", yorkMillsBus); bayviewGlenYorkMills.addExit(yorkMillsBusExitWest);
       final Exit bayviewGlenDeckExitNorth = new Exit("N", bayviewGlenDeck); bayviewGlenYorkMills.addExit(bayviewGlenDeckExitNorth);
-
+      final Exit donMillsExitEast = new Exit("E",yorkMillsAndDonMills); bayviewGlenYorkMills.addExit(donMillsExitEast);
+      final Exit bayviewGlenExitWest = new Exit("W",bayviewGlenYorkMills); yorkMillsAndDonMills.addExit(bayviewGlenExitWest);
+      final Exit donMillsStationExitNorth = new Exit("N",donMillsSubway); yorkMillsAndDonMills.addExit(donMillsStationExitNorth);
+      final Exit donMillsAndYorkMillsExitSouth = new Exit("S",yorkMillsAndDonMills); donMillsSubway.addExit(donMillsAndYorkMillsExitSouth);
+      final Exit donMillsSheppardExitWest = new Exit("W",sheppardYongeLine4); donMillsSubway.addExit(donMillsSheppardExitWest);
+      final Exit sheppardYongeExitEast = new Exit("E",donMillsSubway); sheppardYongeLine4.addExit(sheppardYongeExitEast);
 
       // SHEPPARD YONGE EXITS
 
