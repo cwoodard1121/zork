@@ -832,7 +832,7 @@ public class Game {
       
       employeeInventory.addItem(new Weapon(5, "Ballpoint Pen",false, 10,null));
      
-      Enemy employee = new Enemy(null, officeRoom, 40, employeeInventory, 30, "Disgruntled Employee", 20);
+      Enemy employee = new Enemy(null, officeRoom, 45, employeeInventory, 30, "Disgruntled Employee", 30);
       officeRoom.setRunnable(() -> {
         if(!hasFoughtEmployee[0]) {
         
@@ -849,8 +849,8 @@ public class Game {
 
       boolean[] hasFoughtSmoker = new boolean[]{false};
       Inventory smokerInventory = new Inventory(5);
-      Effect smokerBurning = new Effect("Burning", 2, 5, -5, 0);
-      Item lighter = new Weapon(5, "lighter",true, 25, smokerBurning);
+      Effect smokerBurning = new Effect("Burning", 3, 5, -5, 0);
+      Item lighter = new Weapon(5, "lighter",true, 20, smokerBurning);
       
       smokerInventory.addItem(lighter);
       
@@ -908,7 +908,7 @@ public class Game {
                                   Game.getGame().getPlayer().setMoney(pMoney-=2);
                                   Game.getGame().getPlayer().getInventory().addItem(
                                     new Item(2, "Slim Jim", false, 
-                                    new Effect("Health up", 0, 0, 3, 10), false)
+                                    new Effect("Health up", 0, 0, 3, 15), false)
                                     );
                                     finishedOrder = true;
                                 }else{
@@ -929,6 +929,12 @@ public class Game {
                                 if((pMoney - 0)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=0);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "GRAPE PRIME", false, "Purple", true, "On The Run"));
+                                  try {
+                                    renderer.showCutScene(1100, "\\bin\\zork\\data\\stclairwestcyruscall.txt", 15);
+                                  } catch (Exception e) {
+                                    handleException(e);
+                                  }
+                                  
         
                                     
                                     finishedOrder = true;
@@ -1766,7 +1772,7 @@ public class Game {
       
 
        Inventory theif = new Inventory(10);
-       theif.addItem(new Weapon(3, "Knife", false, 12, new Effect("Bleeding", 20, 2, 5, 0)));
+       theif.addItem(new Weapon(3, "Knife", false, 15, new Effect("Bleeding",4, 2, 5, 0)));
        final Enemy theifEnemy = new Enemy(null, bayviewGlenG12CommonArea, 80, theif , 0, "Theif", 60);
        bayviewGlenG12CommonArea.addEnemies(theifEnemy);
        bayviewGlenG12CommonArea.setRunnable(() -> {
@@ -1778,8 +1784,8 @@ public class Game {
               boolean won = f.fight();
               if (won) {
                 Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(theifEnemy);
-                Effect grantsElectricalProblems = new Effect("Grant's electrical problems", 5, 9, 0, 0);
-                game.getGame().getPlayer().getInventory().addItem(new Weapon(70, "Robotics club prototype", false, 32, grantsElectricalProblems));
+                Effect grantsElectricalProblems = new Effect("Grant's electrical problems", 3, 9, 0, 0);
+                game.getGame().getPlayer().getInventory().addItem(new Weapon(70, "Robotics club prototype", false, 3, grantsElectricalProblems));
                 text.slowTextSpeed("You see a black rectangle on the ground \n its OWENS PHONE! \n its on the ground", 20);
                 bayviewGlenG12CommonArea.addItemGround(owensIphone);
               }else{
