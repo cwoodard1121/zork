@@ -290,7 +290,7 @@ public class Game {
                                 if((pMoney - 5)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=5);
                                   Effect scissorBleeding = new Effect("Bleeding", 2, 3, 1, 0);
-                                  Game.getGame().getPlayer().getInventory().addItem( new Weapon(1, "Rusty Scissors", false, 20, scissorBleeding));
+                                  Game.getGame().getPlayer().getInventory().addItem( new Weapon(15, "Rusty Scissors", false, 20, scissorBleeding));
                                     
                                     
                                     finishedOrder = true;
@@ -383,7 +383,7 @@ public class Game {
                                   Game.getGame().getPlayer().setMoney(pMoney-=10);
                                   Game.getGame().getPlayer().getInventory().addItem(
                                     new Item(2, "A Skittle", false, 
-                                    new Effect("Health up", 0, 0, 4, 20), false)
+                                    new Effect("Health up", 0, 0, 4, 5), false)
                                     );
                                     finishedOrder = true;
                                 }else{
@@ -568,7 +568,7 @@ public class Game {
       boolean[] hasFoughtHomeless = new boolean[]{false};
       Inventory homelessInventory = new Inventory(5);
       
-      homelessInventory.addItem(new Weapon(5, "lead pipe",false, 5,null));
+      homelessInventory.addItem(new Weapon(15, "lead pipe",false, 5,null));
     
       Enemy homeless = new Enemy(null, yongeEglintonMall, 25, homelessInventory, 10, "Homeless dude", 30);
       yongeEglintonMall.setRunnable(() -> {
@@ -1142,7 +1142,7 @@ public class Game {
        bayviewGlenCafeteriaFoodArea.addItemGround(new Item(0, null, true, new Effect("Healing", 0, 0, 0, 30), false));
        final Room bayviewGlenOutsideCafeteria = new Room ("You are outside of the cafeteria, the giant glass wall is directly south of you.", "bayviewglenoutsidecafeteria"); roomMap.put(bayviewGlenOutsideCafeteria.getRoomName(), bayviewGlenOutsideCafeteria);
        final Room bayviewGlenKitchen = new Room("You enter the kitchen of bayview glen. You wonder if your supposed to be in here", "bayviewglenkitchen"); roomMap.put(bayviewGlenKitchen.getRoomName(), bayviewGlenKitchen);
-       bayviewGlenKitchen.addItemGround(new Weapon(4, "Knife", finished, 12, new Effect("bleeding", 1, 2, 2, 0)));
+       bayviewGlenKitchen.addItemGround(new Weapon(10, "Knife", finished, 12, new Effect("bleeding", 1, 2, 2, 0)));
        Inventory mutatedFood = new Inventory(6);
        mutatedFood.addItem(new Weapon(3, "Acid Shot", false, 10, null));
        mutatedFood.addItem(new Weapon(3, "Rotted Chunk", false, 3, new Effect("Poison", 3, 6, 2, 0)));
@@ -1778,8 +1778,8 @@ public class Game {
               boolean won = f.fight();
               if (won) {
                 Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(theifEnemy);
-                Effect electricalProblems = new Effect("Grant's electrical problems", 5, 9, 0, 0);
-                game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Robotics club prototype", false, 40, electricalProblems));
+                Effect grantsElectricalProblems = new Effect("Grant's electrical problems", 5, 9, 0, 0);
+                game.getGame().getPlayer().getInventory().addItem(new Weapon(70, "Robotics club prototype", false, 32, grantsElectricalProblems));
                 text.slowTextSpeed("You see a black rectangle on the ground \n its OWENS PHONE! \n its on the ground", 20);
                 bayviewGlenG12CommonArea.addItemGround(owensIphone);
               }else{
@@ -1942,7 +1942,7 @@ public class Game {
                           Game.getGame().getPlayer().setMoney(pMoney-=2);
                           Game.getGame().getPlayer().getInventory().addItem(
                             new Item(2, "Slim Jim", false, 
-                            new Effect("Health up", 0, 0, 3, 10), false)
+                            new Effect("Health up", 1, 0, 3, 10), false)
                             );
                             finishedOrder = true;
                         }else{
