@@ -2843,11 +2843,11 @@ public class Game {
       e.printStackTrace();
     }
     this.player.setCurrentRoom(roomMap.get("holeinthegroundjapan"));
-    this.player.setMoney(500);
+    this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {
-      this.player.getInventory().addItem(new Weapon(90, "Ban Hammer", false, 1000000, null));
+      this.player.getInventory().addItem(new Weapon(0, "Ban Hammer", false, 1000000, null));
     }
     try {
       player.getCurrentRoom().printAscii();
