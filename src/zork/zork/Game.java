@@ -1010,6 +1010,11 @@ public class Game {
         if(thugFight.fight()) {
           Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(thug);
           Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "ORANGE PRIME", false, "ORANGE", false, "sketchystreetcorner"));
+          try {
+            renderer.showCutScene(1100, "\\bin\\zork\\data\\thugcyruscall.txt", 15);
+          } catch (Exception e) {
+            handleException(e);
+          }
           hasFoughtThug[0] = true;
         } else {
           System.out.println("You won't be messing with him again.");
