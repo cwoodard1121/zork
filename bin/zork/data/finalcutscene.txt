@@ -237,16 +237,14 @@ God like Prime has been added to your Inventory
  |                                                     |
  |_____________________________________________________|
  &
+ ~
  _______________________________________________________
- |Cyrus: You got my Prime recruit, i didnt really think|
- ~                                                     
+ |Cyrus: You got my Prime recruit, i didnt really think|            
  |You'd be able to do it. I'm proud to say that because|
- ~                                                     |
  |of you, we will now rule the world with prime. Before|
- ~                                                     |
  |That happens though, lets go play a game of footy.   |
  |_____________________________________________________|
- &
+ ~
  _______________________________________________________
  |                                                     |
  |                                                     |

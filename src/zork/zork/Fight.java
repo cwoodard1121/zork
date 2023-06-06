@@ -113,33 +113,27 @@ public class Fight {
                          playerEffect = new ArrayList<>();
                          enemyEffect  = new ArrayList<>();
                 while (true){      
-                        
+                        didSomeoneDie(true);
                     
                        
-            
                         if(enemySpeed>playerSpeed){
                             enemyTurn();
+                            if(!didSomeoneDie(false))return false;
                             playerTurn();
+                            if(didSomeoneDie(true))return true;
                         }else{
                             playerTurn();
+                            if(didSomeoneDie(true))return true;
                             enemyTurn();
+                            if(!didSomeoneDie(false))return false;
+
+                            
+                            
                         }
                         
                         // text.slowTextSpeed(Game.getGame().getPlayer().getName() + " has " + playerHealth + " health remaining", 7); 
                         // text.slowTextSpeed(enemy.getName() + " has " + enemyHealth + " health remaining", 7);  Don't need anymore, we have gui
-                        if(enemyHealth<=0){
-                                    text.slowTextSpeed(enemy.getName() + " Died! YOU WIN!!!", 7);
-                                    Game.getGame().getPlayer().setInFight(false);
-                                    isTotalHealth = false;
-                                    Game.getGame().getPlayer().setHealth(playerHealth);
-                                    return true;
-                        }else if(playerHealth<= 0){
-                                    text.slowTextSpeed(enemy.getName() + " Won! YOU DIED!!!", 7);
-                                    Game.getGame().getPlayer().setInFight(false);
-                                    isTotalHealth = false;
-                                    Game.getGame().getPlayer().setHealth(Game.getGame().getPlayer().getMaxHealth());
-                                    return false;
-                        }
+                        
                         
                         Game.getGame().getPlayer().setInWeaponMenu(false);
                         Game.getGame().getPlayer().setInItemMenu(false);
@@ -158,6 +152,34 @@ public class Fight {
 
  
     
+    private boolean didSomeoneDie(boolean checkEnemy) {
+        try {
+            
+           if(checkEnemy){
+                if(enemyHealth<=0){
+                    text.slowTextSpeed(enemy.getName() + " Died! YOU WIN!!!", 7);
+                    Game.getGame().getPlayer().setInFight(false);
+                    isTotalHealth = false;
+                    Game.getGame().getPlayer().setHealth(playerHealth);
+                    return true;
+                }
+            }else{
+                if(playerHealth<= 0){
+                    text.slowTextSpeed(enemy.getName() + " Won! YOU DIED!!!", 7);
+                    Game.getGame().getPlayer().setInFight(false);
+                    isTotalHealth = false;
+                    Game.getGame().getPlayer().setHealth(Game.getGame().getPlayer().getMaxHealth());
+                    return false;
+                }
+            }
+
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
     private void enemyTurn() {
         try{
 
