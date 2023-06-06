@@ -42,7 +42,13 @@ public class Inventory {
   }
 
   public int getCurrentWeight() {
-    return currentWeight;
+    ArrayList<Item> arr = Game.getGame().getPlayer().getInventory().getItems();
+        int weight = 0;
+        for(int i = 0; i<arr.size(); i++){
+            weight+= arr.get(i).getWeight();
+        }
+        this.currentWeight = weight;
+      return weight;
   }
 
   public void setCurrentWeight(int i) {

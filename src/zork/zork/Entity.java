@@ -1,6 +1,8 @@
 package zork;
 
 
+import java.util.ArrayList;
+
 import datatypes.Location;
 
 public abstract class Entity {
@@ -58,6 +60,16 @@ public abstract class Entity {
     public void create() {
         
     }
+
+    public int getWeight() {
+        ArrayList<Item> arr = Game.getGame().getPlayer().getInventory().getItems();
+        int weight = 0;
+        for(int i = 0; i<arr.size(); i++){
+            weight+= arr.get(i).getWeight();
+        }
+        return weight;
+    }
+
 
 
 
