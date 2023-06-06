@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import zork.Command;
 import zork.Game;
 import zork.Item;
+import zork.Constants.PlayerConstants;
 import zork.entites.Player;
 
 public class Pickup extends Command {
@@ -28,17 +29,26 @@ public class Pickup extends Command {
                 command+=args[j] + " ";
             }
             if (isSpecifiedItem) {
-                    if (command.contains(item.getName().toLowerCase())) {
+                        if (command.contains(item.getName().toLowerCase())) {
+                            if(player.getInventory().getCurrentWeight() + item.getWeight()>PlayerConstants.MAX_INVENTORY_WEIGHT){
+                                return "you are carrying too much stuff to pick that up, drop stuff somewhere";
+                            }else{
+                                player.getInventory().addItem(item);
+                                player.getCurrentRoom().removeFromGround(item);
+                                itemList = item.getName();
+                            }
+                            
+                        }
+                    
+                } else {
+                    if(player.getInventory().getCurrentWeight() + item.getWeight()>PlayerConstants.MAX_INVENTORY_WEIGHT){
+                        return "you are carrying too much stuff to pick that up, drop stuff somewhere";
+                    }else{
                         player.getInventory().addItem(item);
                         player.getCurrentRoom().removeFromGround(item);
-                        itemList = item.getName();
+                        itemList = item.getName() + ", ";
                     }
-                
-            } else {
-                player.getInventory().addItem(item);
-                player.getCurrentRoom().removeFromGround(item);
-                itemList = item.getName() + ", ";
-            }
+                }
         }  
         if (isSpecifiedItem && hasItem && itemList.length() >= 1) 
             return "You have picked up " + itemList;

@@ -99,7 +99,7 @@ public class Game {
     // for Exits use the room name + exit + Direction of exit example Room yorkMillsTerminal has as exit that goes to it in the north so we call it "yorkMillsBusTerminalExitNorth"
     if(shouldCreateRooms) {
       // Create a room object and use the description as the constructor parameter.
-
+      final Room pickeringCameronsHouse = new Room ("Home sweet home. use this as an area to store things if you run out of carrying capacity. or don't I couldn't really care less.", "pickeringcameronshouse"); roomMap.put(pickeringCameronsHouse.getRoomName(), pickeringCameronsHouse);
       // SHEPPARD YONGE ROOMS
       final Room sheppardYongeOffice = new Room("Sheppard yonge office. Prime everywhere!", "sheppardyongeoffice");
       roomMap.put(sheppardYongeOffice.getRoomName(), sheppardYongeOffice);
@@ -148,6 +148,7 @@ public class Game {
               // UNLOCK ELEVATOR
             } else {
               System.out.println("YOU DIED! YOU DONT GET TO GO UP!");
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
             }
           } catch (InterruptedException e) {
           }
@@ -190,6 +191,7 @@ public class Game {
             hasFoughtCrackhead[0] = true;
           } else {
             System.out.println("didnt win. crackhead steals all ur stuff");
+            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
           }
         }
       });
@@ -225,6 +227,7 @@ public class Game {
             }
           } else {
             System.out.println("BETTER LUCK NEXT TIME LOL!");
+            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
           }
         }
       });
@@ -578,6 +581,7 @@ public class Game {
           hasFoughtHomeless[0] = true;
         } else {
           System.out.println("didnt win. homeless dude steals all ur stuff");
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
         }
       }
       });
@@ -625,6 +629,7 @@ public class Game {
           hasFoughtDriver[0] = true;
         } else {
           System.out.println("didnt win. Your body has been kicked off the streetcar.");
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
         }
       }
       });
@@ -837,6 +842,7 @@ public class Game {
           hasFoughtEmployee[0] = true;
         } else {
           System.out.println("didnt win. Your body has been reported to security.");
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
         }
       }
       });
@@ -862,6 +868,7 @@ public class Game {
         } else {
           try {
             text.slowTextSpeed("You died. Your casket will smell like tobacco.", 20);
+            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
           } catch (Exception e) {
             // TODO: handle exception
           }
@@ -1006,6 +1013,7 @@ public class Game {
           hasFoughtThug[0] = true;
         } else {
           System.out.println("You won't be messing with him again.");
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
         }
       }
       });
@@ -1145,6 +1153,8 @@ public class Game {
               Game.getGame().getPlayer().getInventory().addItem(new Item(5, "mystery food", true, mysteryHealth, false));
               
 
+            }else{
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
             }
           }
        });
@@ -1212,6 +1222,8 @@ public class Game {
               
               Game.getGame().getPlayer().getInventory().addItem(new Item(5, "Swedish Meatball", true, meatballHealth, false));
               Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(cyrus_meatball);
+             }else{
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
              }
             }    
           }
@@ -1239,6 +1251,8 @@ public class Game {
             boolean pickedWeapon = false;
             if(won) {
               Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(musicManEnemy);
+            }else{
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
             }
           }
             
@@ -1405,6 +1419,8 @@ public class Game {
                   text.slowTextSpeed(" ??? - Ok you beat me \n You - WHO ARE YOU??? \n ??? - I- *Cough cough* am.. \n You - WHO? \n ??? - dead \n", 20);
                   Game.getGame().getPlayer().getInventory().addItem(new Key("G11CommonAreaKey", "golden key", 1));
                   hasGottenFirstKey[0] = true;
+                }else{
+                  Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                 }
               } else if (ans.equalsIgnoreCase("n")) {
                 return;
@@ -1687,6 +1703,8 @@ public class Game {
                 bayviewGlenDramaRoomExitSouth.setIsExitLocked(false);
                 dramaRoomDoorOpened[0] = true;
                 bayviewGlenHallwayTheatreBack.enemies.remove(dramaRoomDoorEnemy);
+              }else{
+                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
               }
             } else {
               return;
@@ -1759,6 +1777,8 @@ public class Game {
                 game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Robotics club prototype", false, 40, electricalProblems));
                 text.slowTextSpeed("You see a black rectangle on the ground \n its OWENS PHONE! \n its on the ground", 20);
                 bayviewGlenG12CommonArea.addItemGround(owensIphone);
+              }else{
+                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
               }
               
             } catch (Exception e) {
@@ -1817,6 +1837,8 @@ public class Game {
               text.slowTextSpeed("NOOOOOOOOOOOOOOOOOOOOOOOOO- \nCyrus Robot Was Defeated", 50);
               text.slowTextSpeed("You turn on the lights to read #3 - 17 written on the board behind you", 50);
               hasEnteredArtRoom[0] = true;
+            }else{
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
             }
           } catch (Exception e) {
             
@@ -1868,6 +1890,8 @@ public class Game {
                if(won) {
                  bayviewGlenWeightRoom.enemies.remove(gymGuyEnemy);
                  game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Dumbell", false, 30, null));
+               }else{
+                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                }
                text.slowTextSpeed("You press the button, you hear a big clunk downstairs.", 20);
                artRoomLightsOn[0] = true;
@@ -1885,7 +1909,7 @@ public class Game {
       // PICKERING AREA ROOMS
 
       final Room pickeringKingstonAndRougemount = new Room ("You leave the go bus and step into the greatest city in Canada: Pickering!", "pickeringkingstonandrougemount"); roomMap.put(pickeringKingstonAndRougemount.getRoomName(), pickeringKingstonAndRougemount);
-      final Room pickeringCameronsHouse = new Room ("Home sweet home. use this as an area to store things if you run out of carrying capacity. or don't I couldn't really care less.", "pickeringcameronshouse"); roomMap.put(pickeringCameronsHouse.getRoomName(), pickeringCameronsHouse);
+      
       final Room pickeringCircleK = new Room ("You enter the beautiful pickering circle K", "pickeringcirclek"); roomMap.put(pickeringCircleK.getRoomName(), pickeringCircleK);
       boolean[] boughtPrime4 = {false};
       pickeringCircleK.setRunnable(new Runnable(){
@@ -2161,7 +2185,7 @@ public class Game {
         
         
         //unionShopArea
-        final Room unionShopArea = new Room ("The shopping area in union seems desolated with most of the shops closed. However to the east you see a Tim Hortons cafe and another room to the north", "unionshoparea"); roomMap.put(unionShopArea.getRoomName(), unionShopArea);
+        final Room unionShopArea = new Room ("The shopping area in union seems desolated with most of the shops closed. \n However to the east you see a Tim Hortons cafe and another room to the north", "unionshoparea"); roomMap.put(unionShopArea.getRoomName(), unionShopArea);
           
           unionShopArea.setRunnable(new Runnable(){
 
@@ -2182,6 +2206,8 @@ public class Game {
                       if(won) {
                           Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(PRIME_THEIF);
                           fightDone[0] = true;
+                      }else{
+                        Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                       }
                     } catch (Exception e) {
                       // TODO: handle exception
@@ -2317,6 +2343,8 @@ public class Game {
              boolean won = f.fight();
              if(won) {
                bayviewGlen2ndFloorUpperHallway.enemies.remove(rogueEconTestEnemy);
+             }else{
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
              }
            }
            if (bayviewGlenG12CommonAreaExitDown.getIsExitLocked()) {
@@ -2392,6 +2420,8 @@ public class Game {
                   text.slowTextSpeed("As the shopkeeper falls, you see a prime and fall out of his pocket and onto the ground. He also drops his metal bat", 7);
                   Game.getGame().getPlayer().getInventory().addItem(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
                   unionScamsMarket.addItemGround(new Weapon(12,"Metal Bat", false, 18, new Effect("Concussion", 4, 0, -2, 0)));
+                }else{
+                  Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                 }
               }
             }catch(Exception e){
@@ -2433,7 +2463,7 @@ public class Game {
             public void run() {
               try{
               Graphics text = new Graphics();
-              text.slowTextSpeed("as you gaze at the lonely sink in the corner, you feel like playing a good game of soccer with cyrus when this is all over", 7);
+              text.slowTextSpeed("as you gaze at the lonely sink in the corner,\n you feel like playing a good game of soccer with cyrus when this is all over", 7);
 
             
               }catch(Exception e){
@@ -2467,6 +2497,8 @@ public class Game {
                     text.slowTextSpeed("You notice a key falling from his pocket to the ground", 7);
                     unionFacultyRoom.addItemGround(new Item(2, "Closet Key", false, null, false));
                     e[0] = true;
+                  }else{
+                    Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                   }
                  
               }
@@ -2479,7 +2511,7 @@ public class Game {
         });
 
         //Maintenance room
-        final Room unionMaintenanceRoom = new Room ("A dusty room which makes sense, to the north you see a closet and to the east a staff room", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
+        final Room unionMaintenanceRoom = new Room ("A dusty room which makes sense, \n to the north you see a closet and to the east a staff room", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         unionMaintenanceRoom.setRunnable(new Runnable(){
             
           @Override
@@ -2611,6 +2643,7 @@ public class Game {
           //Tokyo Japan
           final Room HoleInTheGroundJapan = new Room ("Around you are large buildings yet no people. I wonder where they are?", "holeinthegroundjapan"); roomMap.put(HoleInTheGroundJapan.getRoomName(), HoleInTheGroundJapan);
           final Room japanNationalStadiumPlaza = new Room ("Another empty area, at least theres a tims to the east, you should probobly stock up. also to the north is a stadium where you can hear people cheering", "japannationalstadiumplaza"); roomMap.put(japanNationalStadiumPlaza.getRoomName(), japanNationalStadiumPlaza);
+          japanNationalStadiumPlaza.addItemGround(new Item(11, "test object", false, null, false));
           final Room japanTimHortons = new Room ("A very nice tim hortons no good food though", "japantimhortons"); roomMap.put(japanTimHortons.getRoomName(), japanTimHortons);
                   japanTimHortons.setRunnable(new Runnable(){
                     public void run(){
@@ -2725,7 +2758,7 @@ public class Game {
                         
                         //cutscence with logan paul dieing and you getting the prime, then bringing all the primes back to cyrus and playing soccor with him
                       }else{
-                        Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+                        Game.getGame().getPlayer().setCurrentRoom(japanNationalStadiumPlaza);
                       }
         
                 
@@ -2814,7 +2847,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
+    this.player.setCurrentRoom(roomMap.get("holeinthegroundjapan"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));

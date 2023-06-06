@@ -38,6 +38,7 @@ public class Use extends Command {
                             p.setHealth(p.getHealth() + arr2.get(i).getEffect().getHealth());
                         }
                         Game.getGame().getPlayer().getInventory().getItems().remove(location);
+                        return "";
                     }
 
                 } catch (Exception e) {

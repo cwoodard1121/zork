@@ -22,7 +22,11 @@ public class Drop extends Command {
                 command+=args[j] + " ";
             }
             command = command.substring(0, command.length()-1);
-            if (command.equalsIgnoreCase(inventory.getItem(i).getName())) {
+            if(command.contains("fists")){
+                return "what? you know you cant take those off right?";
+            }
+
+            if (command.contains(inventory.getItem(i).getName().toLowerCase())) {
                 int weight = inventory.getCurrentWeight();
                 weight = weight - inventory.getItem(i).getWeight();
                 player.getInventory().setCurrentWeight(weight);
