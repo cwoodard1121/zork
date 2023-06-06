@@ -30,6 +30,7 @@ public class Game {
   private final Graphics renderer = new Graphics();
   public static AtomicBoolean bool = new AtomicBoolean();
   private final Gson gson = new Gson();
+  public static boolean music = false;
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
@@ -98,95 +99,137 @@ public class Game {
     // for Exits use the room name + exit + Direction of exit example Room yorkMillsTerminal has as exit that goes to it in the north so we call it "yorkMillsBusTerminalExitNorth"
     if(shouldCreateRooms) {
       // Create a room object and use the description as the constructor parameter.
-
+      final Room pickeringCameronsHouse = new Room ("Home sweet home. use this as an area to store things if you run out of carrying capacity. or don't I couldn't really care less.", "pickeringcameronshouse"); roomMap.put(pickeringCameronsHouse.getRoomName(), pickeringCameronsHouse);
       // SHEPPARD YONGE ROOMS
-      final Room sheppardYongeOffice = new Room("Sheppard yonge office. Prime everywhere!","sheppardyongeoffice"); roomMap.put(sheppardYongeOffice.getRoomName(), sheppardYongeOffice);
-      boolean[] hasFoughtCEO = new boolean[]{false};
-      sheppardYongeOffice.setRunnable(() -> {
-        if(!hasFoughtCEO[0]) {
-          //TODO: CHANGE YELLOW TO REAL FALVOR
-          Inventory i = new Inventory(5);
-          i.addItem(new Prime(5, "TROPICAL PUNCH PRIME",false , "YELLOW", false, "CEO"));
-          i.addItem(new Weapon(0, "TROPICAL PUNCH TIME", false, 20, null));
-          Enemy CEO = new Enemy(null, sheppardYongeOffice, 100, i, 0, "CEO", 500);
-          Fight f = new Fight(CEO);
-          if(f.fight()) {
-            Graphics g = getRenderer();
-            try {
-              g.slowTextSpeed("You won. You got the yellow prime. The crazy CEO decides to quit his job and become a bitcoin trader.", 50);
-              g.slowTextSpeed("The elevator beeps. It's time to go back down.", 50);
-              Thread.sleep(2000);
-            } catch (InterruptedException e) {
-              player.changeRoom(roomMap.get("sheppardyongesecretroom"));
-            }
-          } else {
-            System.out.println("BETTER LUCK NEXT TIME LOL!");
-          }
-        }
-      });
-      final Room sheppardYongeCorporateElevator = new Room("Corporate elevator, it's going up.", "sheppardyongecorporateelevator"); roomMap.put(sheppardYongeCorporateElevator.getRoomName(), sheppardYongeCorporateElevator);
+      final Room sheppardYongeOffice = new Room("Sheppard yonge office. Prime everywhere!", "sheppardyongeoffice");
+      roomMap.put(sheppardYongeOffice.getRoomName(), sheppardYongeOffice);
+      boolean[] hasFoughtCEO = new boolean[] { false };
+
+      final Room sheppardYongeCorporateElevator = new Room("Corporate elevator, it's going up.",
+          "sheppardyongecorporateelevator");
+      roomMap.put(sheppardYongeCorporateElevator.getRoomName(), sheppardYongeCorporateElevator);
       sheppardYongeCorporateElevator.setRunnable(() -> {
         Graphics g = getRenderer();
         try {
           g.slowTextSpeed("You're almost at the top. The elevator slows as it reaches the final floor.", 50);
-          Thread.sleep(2);
-          g.slowTextSpeed("You've arrived at the top! the office has prime bottles everywhere.\nRemember what the security said!", 50);
+          Thread.sleep(2000);
+          g.slowTextSpeed(
+              "You've arrived at the top! the office has prime bottles everywhere.\nRemember what the security said!",
+              50);
           Game.getGame().getPlayer().changeRoom(sheppardYongeOffice);
-        } catch (InterruptedException e) {}
+        } catch (InterruptedException e) {
+        }
       });
-      final Room sheppardYongeSecretRoom = new Room("There are windows on your left and right and an elevator gets you in, and up.","sheppardyongesecretroom");
-      boolean[] hasFoughtSecurity = new boolean[]{false};
+      final Room sheppardYongeSecretRoom = new Room(
+          "There are windows on your left and right and an elevator gets you in, and up.", "sheppardyongesecretroom");
+      boolean[] hasFoughtSecurity = new boolean[] { false };
       Inventory securityInventory = new Inventory(1);
-      Effect electricity = new Effect("Zap",2 , 5, -10, 0);
-      securityInventory.addItem(new Weapon(5, "Tazer", false, 15,electricity));
+      Effect electricity = new Effect("Zap", 2, 5, -10, 0);
+      securityInventory.addItem(new Weapon(5, "Tazer", false, 15, electricity));
       Enemy securityMan = new Enemy(null, sheppardYongeSecretRoom, 300, securityInventory, 200, "Security", 450);
-      
+
       sheppardYongeSecretRoom.setRunnable(() -> {
-        if(!hasFoughtSecurity[0]) {
+        if (!hasFoughtSecurity[0]) {
+
           try {
-            Game.getGame().getRenderer().slowTextSpeed("You see a security guard in the room. He stands between you and the corporate elevator.",50);
-            Game.getGame().getRenderer().slowTextSpeed("Your goal is to get in, and get up. He isn't letting that happen.",50); 
-            Game.getGame().getRenderer().slowTextSpeed("Time to fight.",500); 
+            Thread.sleep(3000);
+            Game.getGame().getRenderer().slowTextSpeed(
+                "You see a security guard in the room. He stands between you and the corporate elevator.", 50);
+            Game.getGame().getRenderer()
+                .slowTextSpeed("Your goal is to get in, and get up. He isn't letting that happen.", 50);
+            Game.getGame().getRenderer().slowTextSpeed("Time to fight.", 500);
             Fight securityGuardFight = new Fight(securityMan);
-            if(securityGuardFight.fight()) {
-              Game.getGame().getRenderer().slowTextSpeed("The security guard backs down.\nHe gives you his elevator keycard. \nHe says to make it quick, better listen.",50);
+            if (securityGuardFight.fight()) {
+              Game.getGame().getRenderer().slowTextSpeed(
+                  "The security guard backs down.\nHe gives you his elevator keycard. \nHe says to make it quick, better listen.",
+                  50);
               Game.getGame().getPlayer().changeRoom(roomMap.get("sheppardyongecorporateelevator"));
+              hasFoughtSecurity[0] = true;
               // UNLOCK ELEVATOR
             } else {
               System.out.println("YOU DIED! YOU DONT GET TO GO UP!");
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
             }
-          } catch (InterruptedException e) {}
+          } catch (InterruptedException e) {
+          }
         }
       });
-      final Room sheppardYongeLine1 = new Room("Going south will lead you to Lawrence, North to Finch is under maintainence.","sheppardyongeline1"); roomMap.put(sheppardYongeLine1.getRoomName(),sheppardYongeLine1);
-      final Room sheppardYongeLine4 = new Room("Going east will lead you to Bayview. Going west will lead you into a tunnel.","sheppardyongeline4"); roomMap.put(sheppardYongeLine4.getRoomName(),sheppardYongeLine4);
-      final Room sheppardYongeLine4StreetHallway = new Room("The escalator is stopped. The door to the street is nearby.","sheppardyongeline4streethallway"); roomMap.put(sheppardYongeLine4StreetHallway.getRoomName(),sheppardYongeLine4StreetHallway);
-      final Room sheppardYongeLine1HallwayBeforeStreet = new Room("TTC Harlandale Avenue. Nothing here.","sheppardyongeline1hallwaybeforestreet"); roomMap.put(sheppardYongeLine1HallwayBeforeStreet.getRoomName(), sheppardYongeLine1HallwayBeforeStreet);
-      
-      
+      roomMap.put("sheppardyongesecretroom", sheppardYongeSecretRoom);
+      final Room sheppardYongeLine1 = new Room(
+          "Going south will lead you to Lawrence, North to Finch is under maintainence.", "sheppardyongeline1");
+      roomMap.put(sheppardYongeLine1.getRoomName(), sheppardYongeLine1);
+      final Room sheppardYongeLine4 = new Room(
+          "Going east will lead you to Bayview. Going west will lead you into a tunnel.", "sheppardyongeline4");
+      roomMap.put(sheppardYongeLine4.getRoomName(), sheppardYongeLine4);
+      final Room sheppardYongeLine4StreetHallway = new Room(
+          "The escalator is stopped. The door to the street is nearby.", "sheppardyongeline4streethallway");
+      roomMap.put(sheppardYongeLine4StreetHallway.getRoomName(), sheppardYongeLine4StreetHallway);
+      final Room sheppardYongeLine1HallwayBeforeStreet = new Room("TTC Harlandale Avenue. Nothing here.",
+          "sheppardyongeline1hallwaybeforestreet");
+      roomMap.put(sheppardYongeLine1HallwayBeforeStreet.getRoomName(), sheppardYongeLine1HallwayBeforeStreet);
+
       /*
        * Example enemy and usage when entering room.
        */
-      boolean[] hasFoughtCrackhead = new boolean[]{false};
+      boolean[] hasFoughtCrackhead = new boolean[] { false };
       Inventory crackHeadInventory = new Inventory(5);
       Effect crackHeadPoison = new Effect("Poison", 5, 5, -5, 0);
-      crackHeadInventory.addItem(new Weapon(5, "Needle",false, 10,crackHeadPoison));
+      crackHeadInventory.addItem(new Weapon(5, "Needle", false, 10, crackHeadPoison));
       // make crackhead
       Enemy crackHead = new Enemy(null, sheppardYongeLine4StreetHallway, 25, crackHeadInventory, 0, "Crackhead", 1);
       sheppardYongeLine4StreetHallway.setRunnable(() -> {
-        if(!hasFoughtCrackhead[0]) {
+        if (!hasFoughtCrackhead[0]) {
           try {
-         Game.getGame().getRenderer().slowTextSpeed("You see a crackhead yelling at innocent TTC Passengers. He wants your prime.",20);
-          } catch (InterruptedException e) {}
-        // fight crackhead
-        Fight crackHeadFight = new Fight(crackHead);
-        if(crackHeadFight.fight()) {
-          Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(crackHead);
-          hasFoughtCrackhead[0] = true;
-        } else {
-          System.out.println("didnt win. crackhead steals all ur stuff");
+            Game.getGame().getRenderer()
+                .slowTextSpeed("You see a crackhead yelling at innocent TTC Passengers. He wants your prime.", 20);
+          } catch (InterruptedException e) {
+          }
+          // fight crackhead
+          Fight crackHeadFight = new Fight(crackHead);
+          if (crackHeadFight.fight()) {
+            Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(crackHead);
+            hasFoughtCrackhead[0] = true;
+          } else {
+            System.out.println("didnt win. crackhead steals all ur stuff");
+            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+          }
         }
-      }
+      });
+
+      sheppardYongeOffice.setRunnable(() -> {
+        if (!hasFoughtCEO[0]) {
+          // TODO: CHANGE YELLOW TO REAL FALVOR
+          Inventory i = new Inventory(5);
+          i.addItem(new Prime(5, "TROPICAL PUNCH PRIME", false, "YELLOW", false, "CEO"));
+          i.addItem(new Weapon(0, "TROPICAL PUNCH PRIME", false, 20, null));
+          Enemy CEO = new Enemy(null, sheppardYongeOffice, 100, i, 0, "CEO", 500);
+          Fight f = new Fight(CEO);
+          if (f.fight()) {
+            hasFoughtCEO[0] = true;
+            Graphics g = getRenderer();
+            try {
+              g.slowTextSpeed(
+                  "You won. You got the tropical punch prime. The crazy CEO decides to quit his job and trade bitcoin.",
+                  50);
+              g.slowTextSpeed("The elevator beeps. It's time to go back down.", 50);
+              Thread.sleep(2000);
+              new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                  player.changeRoom(roomMap.get("sheppardyongesecretroom"));
+                }
+
+              }).start();
+
+            } catch (InterruptedException e) {
+
+            }
+          } else {
+            System.out.println("BETTER LUCK NEXT TIME LOL!");
+            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+          }
+        }
       });
 
 
@@ -538,6 +581,7 @@ public class Game {
           hasFoughtHomeless[0] = true;
         } else {
           System.out.println("didnt win. homeless dude steals all ur stuff");
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
         }
       }
       });
@@ -585,6 +629,7 @@ public class Game {
           hasFoughtDriver[0] = true;
         } else {
           System.out.println("didnt win. Your body has been kicked off the streetcar.");
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
         }
       }
       });
@@ -797,6 +842,7 @@ public class Game {
           hasFoughtEmployee[0] = true;
         } else {
           System.out.println("didnt win. Your body has been reported to security.");
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
         }
       }
       });
@@ -822,6 +868,7 @@ public class Game {
         } else {
           try {
             text.slowTextSpeed("You died. Your casket will smell like tobacco.", 20);
+            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
           } catch (Exception e) {
             // TODO: handle exception
           }
@@ -938,7 +985,8 @@ public class Game {
       final Room lawrenceSubway = new Room("You fell asleep and ended up at Lawrence station. Yuck. Better get out of here fast.", "lawrencesubway"); roomMap.put(lawrenceSubway.getRoomName(), lawrenceSubway);
       final Room bloorYongeStation = new Room ("You'd rather not be here, given it's line 2 and all, but you know you must carry on in the name of PRIME", "blooryongestation"); roomMap.put(bloorYongeStation.getRoomName(), bloorYongeStation);
       final Room bloorYongeLine2 = new Room(" Caution tape blocks of the westward tunnel. I suppose the only way forward is to scarborough.", "blooryongeline2"); roomMap.put(bloorYongeLine2.getRoomName(), bloorYongeLine2);
-
+      final Room yorkMillsAndDonMills = new Room("North goes to don mills. Take the 25b.","yorkmillsanddonmills"); roomMap.put(yorkMillsAndDonMills.getRoomName(), yorkMillsAndDonMills);
+      final Room donMillsSubway = new Room("This is the only way to sheppard yonge.","donmillssubway"); roomMap.put(donMillsSubway.getRoomName(), donMillsSubway);
 
       
 
@@ -946,7 +994,7 @@ public class Game {
 
       //ELLESMERE AREA ROOMS
 
-      final Room ellesmereStationUnderground = new Room("The Scarborough effect has set on. You now have the 'crippling fear' effect.", "ellesmerestationunderground", "Ellesmere Station Entrance"); roomMap.put(ellesmereStationUnderground.getRoomName(), ellesmereStationUnderground);
+      final Room ellesmereStationUnderground = new Room("The Scarborough effect has set in. You now have the 'crippling fear' effect.", "ellesmerestationunderground", "Ellesmere Station Entrance"); roomMap.put(ellesmereStationUnderground.getRoomName(), ellesmereStationUnderground);
       final Room ellesmereSubway = new Room("You can't stand this place already, and exit the subway.","ellesmeresubway"); roomMap.put(ellesmereSubway.getRoomName(), ellesmereSubway);
       final Room sketchyStreetCorner = new Room("Just outside of the subway station, you are greeted by a sketchy street corner.", "sketchystreetcorner"); roomMap.put(sketchyStreetCorner.getRoomName(), sketchyStreetCorner);
       boolean[] hasFoughtThug = new boolean[]{false};
@@ -965,6 +1013,7 @@ public class Game {
           hasFoughtThug[0] = true;
         } else {
           System.out.println("You won't be messing with him again.");
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
         }
       }
       });
@@ -1083,7 +1132,6 @@ public class Game {
        final Room bayviewGlenHallwayTheatreFront = new Room("Hallway next to the theatre, you gase at the theatre through the doorway, the seats, the curtain. Then you realize the door is closed and none of that makes any sense.", "bayviewglenhallwaytheatrefront", false, "the door is locked, you try to barge in but its locked so that doesnt make any sense."); roomMap.put(bayviewGlenHallwayTheatreFront.getRoomName(), bayviewGlenHallwayTheatreFront);
        
        
-       
        final Room bayviewGlenOutsideHallwayTheatreFront = new Room ("Parking lot outside of bayview glen, There is a door leading into the school to your south", "bayviewglenoutsidehallwaytheatrefront"); roomMap.put(bayviewGlenOutsideHallwayTheatreFront.getRoomName(), bayviewGlenOutsideHallwayTheatreFront);
        final Room bayviewGlenCafeteriaFoodArea = new Room("You enter the cafeteria, the smell of the food immediatly hits your nose. But nothings been cooked here for a month. huh", "bayviewglencafeteriafoodarea"); roomMap.put(bayviewGlenCafeteriaFoodArea.getRoomName(), bayviewGlenCafeteriaFoodArea);
        bayviewGlenCafeteriaFoodArea.addItemGround(new Item(0, null, true, new Effect("Healing", 0, 0, 0, 30), false));
@@ -1105,6 +1153,8 @@ public class Game {
               Game.getGame().getPlayer().getInventory().addItem(new Item(5, "mystery food", true, mysteryHealth, false));
               
 
+            }else{
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
             }
           }
        });
@@ -1172,6 +1222,8 @@ public class Game {
               
               Game.getGame().getPlayer().getInventory().addItem(new Item(5, "Swedish Meatball", true, meatballHealth, false));
               Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(cyrus_meatball);
+             }else{
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
              }
             }    
           }
@@ -1199,6 +1251,8 @@ public class Game {
             boolean pickedWeapon = false;
             if(won) {
               Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(musicManEnemy);
+            }else{
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
             }
           }
             
@@ -1365,6 +1419,8 @@ public class Game {
                   text.slowTextSpeed(" ??? - Ok you beat me \n You - WHO ARE YOU??? \n ??? - I- *Cough cough* am.. \n You - WHO? \n ??? - dead \n", 20);
                   Game.getGame().getPlayer().getInventory().addItem(new Key("G11CommonAreaKey", "golden key", 1));
                   hasGottenFirstKey[0] = true;
+                }else{
+                  Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                 }
               } else if (ans.equalsIgnoreCase("n")) {
                 return;
@@ -1647,6 +1703,8 @@ public class Game {
                 bayviewGlenDramaRoomExitSouth.setIsExitLocked(false);
                 dramaRoomDoorOpened[0] = true;
                 bayviewGlenHallwayTheatreBack.enemies.remove(dramaRoomDoorEnemy);
+              }else{
+                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
               }
             } else {
               return;
@@ -1719,6 +1777,8 @@ public class Game {
                 game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Robotics club prototype", false, 40, electricalProblems));
                 text.slowTextSpeed("You see a black rectangle on the ground \n its OWENS PHONE! \n its on the ground", 20);
                 bayviewGlenG12CommonArea.addItemGround(owensIphone);
+              }else{
+                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
               }
               
             } catch (Exception e) {
@@ -1777,6 +1837,8 @@ public class Game {
               text.slowTextSpeed("NOOOOOOOOOOOOOOOOOOOOOOOOO- \nCyrus Robot Was Defeated", 50);
               text.slowTextSpeed("You turn on the lights to read #3 - 17 written on the board behind you", 50);
               hasEnteredArtRoom[0] = true;
+            }else{
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
             }
           } catch (Exception e) {
             
@@ -1828,6 +1890,8 @@ public class Game {
                if(won) {
                  bayviewGlenWeightRoom.enemies.remove(gymGuyEnemy);
                  game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Dumbell", false, 30, null));
+               }else{
+                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                }
                text.slowTextSpeed("You press the button, you hear a big clunk downstairs.", 20);
                artRoomLightsOn[0] = true;
@@ -1845,7 +1909,7 @@ public class Game {
       // PICKERING AREA ROOMS
 
       final Room pickeringKingstonAndRougemount = new Room ("You leave the go bus and step into the greatest city in Canada: Pickering!", "pickeringkingstonandrougemount"); roomMap.put(pickeringKingstonAndRougemount.getRoomName(), pickeringKingstonAndRougemount);
-      final Room pickeringCameronsHouse = new Room ("Home sweet home. use this as an area to store things if you run out of carrying capacity. or don't I couldn't really care less.", "pickeringcameronshouse"); roomMap.put(pickeringCameronsHouse.getRoomName(), pickeringCameronsHouse);
+      
       final Room pickeringCircleK = new Room ("You enter the beautiful pickering circle K", "pickeringcirclek"); roomMap.put(pickeringCircleK.getRoomName(), pickeringCircleK);
       boolean[] boughtPrime4 = {false};
       pickeringCircleK.setRunnable(new Runnable(){
@@ -1973,15 +2037,29 @@ public class Game {
       final Exit bayviewGlenYorkMillsExitEast = new Exit("E", bayviewGlenYorkMills); yorkMillsBus.addExit(bayviewGlenYorkMillsExitEast);
       final Exit yorkMillsBusExitWest = new Exit("W", yorkMillsBus); bayviewGlenYorkMills.addExit(yorkMillsBusExitWest);
       final Exit bayviewGlenDeckExitNorth = new Exit("N", bayviewGlenDeck); bayviewGlenYorkMills.addExit(bayviewGlenDeckExitNorth);
-
+      final Exit donMillsExitEast = new Exit("E",yorkMillsAndDonMills); bayviewGlenYorkMills.addExit(donMillsExitEast);
+      final Exit bayviewGlenExitWest = new Exit("W",bayviewGlenYorkMills); yorkMillsAndDonMills.addExit(bayviewGlenExitWest);
+      final Exit donMillsStationExitNorth = new Exit("N",donMillsSubway); yorkMillsAndDonMills.addExit(donMillsStationExitNorth);
+      final Exit donMillsAndYorkMillsExitSouth = new Exit("S",yorkMillsAndDonMills); donMillsSubway.addExit(donMillsAndYorkMillsExitSouth);
+      final Exit donMillsSheppardExitWest = new Exit("W",sheppardYongeLine4); donMillsSubway.addExit(donMillsSheppardExitWest);
+      final Exit sheppardYongeExitEast = new Exit("E",donMillsSubway); sheppardYongeLine4.addExit(sheppardYongeExitEast);
 
       // SHEPPARD YONGE EXITS
 
-      final Exit sheppardYongeLine1ExitNorth = new Exit("N", sheppardYongeLine4StreetHallway); sheppardYongeLine4.addExit(sheppardYongeLine1ExitNorth);
-      final Exit sheppardYongeLine1ExitWest = new Exit("W", sheppardYongeLine1HallwayBeforeStreet); sheppardYongeLine1.addExit(sheppardYongeLine1ExitWest);
-      final Exit sheppardYongeHallwayB4StreetExitWest = new Exit("W",sheppardYongeSecretRoom); sheppardYongeLine4StreetHallway.addExit(sheppardYongeHallwayB4StreetExitWest);
-      final Exit sheppardYongeLine4ExitDown = new Exit("D", sheppardYongeLine1); sheppardYongeLine4.addExit(sheppardYongeLine4ExitDown);
-      final Exit sheppardYongeLine1ExitUp = new Exit("U", sheppardYongeLine4); sheppardYongeLine1.addExit(sheppardYongeLine1ExitUp);
+      final Exit sheppardYongeLine1ExitNorth = new Exit("N", sheppardYongeLine4StreetHallway);
+      sheppardYongeLine4.addExit(sheppardYongeLine1ExitNorth);
+      final Exit sheppardYongeLine1ExitWest = new Exit("W", sheppardYongeLine1HallwayBeforeStreet);
+      sheppardYongeLine1.addExit(sheppardYongeLine1ExitWest);
+      final Exit sheppardYongeHallwayB4StreetExitWest = new Exit("W", sheppardYongeSecretRoom);
+      sheppardYongeLine4StreetHallway.addExit(sheppardYongeHallwayB4StreetExitWest);
+      final Exit sheppardYongeLine4StreetHallwayExitSouth = new Exit("S", sheppardYongeLine4);
+      sheppardYongeLine4StreetHallway.addExit(sheppardYongeLine4StreetHallwayExitSouth);
+      final Exit sheppardYongeSecretRoomExitEast = new Exit("E", sheppardYongeLine4StreetHallway);
+      sheppardYongeSecretRoom.addExit(sheppardYongeSecretRoomExitEast);
+      final Exit sheppardYongeLine4ExitDown = new Exit("D", sheppardYongeLine1);
+      sheppardYongeLine4.addExit(sheppardYongeLine4ExitDown);
+      final Exit sheppardYongeLine1ExitUp = new Exit("U", sheppardYongeLine4);
+      sheppardYongeLine1.addExit(sheppardYongeLine1ExitUp);
       
 
 
@@ -2107,7 +2185,7 @@ public class Game {
         
         
         //unionShopArea
-        final Room unionShopArea = new Room ("The shopping area in union seems desolated with most of the shops closed. However to the east you see a Tim Hortons cafe and another room to the north", "unionshoparea"); roomMap.put(unionShopArea.getRoomName(), unionShopArea);
+        final Room unionShopArea = new Room ("The shopping area in union seems desolated with most of the shops closed. \n However to the east you see a Tim Hortons cafe and another room to the north", "unionshoparea"); roomMap.put(unionShopArea.getRoomName(), unionShopArea);
           
           unionShopArea.setRunnable(new Runnable(){
 
@@ -2128,6 +2206,8 @@ public class Game {
                       if(won) {
                           Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(PRIME_THEIF);
                           fightDone[0] = true;
+                      }else{
+                        Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                       }
                     } catch (Exception e) {
                       // TODO: handle exception
@@ -2263,6 +2343,8 @@ public class Game {
              boolean won = f.fight();
              if(won) {
                bayviewGlen2ndFloorUpperHallway.enemies.remove(rogueEconTestEnemy);
+             }else{
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
              }
            }
            if (bayviewGlenG12CommonAreaExitDown.getIsExitLocked()) {
@@ -2338,6 +2420,8 @@ public class Game {
                   text.slowTextSpeed("As the shopkeeper falls, you see a prime and fall out of his pocket and onto the ground. He also drops his metal bat", 7);
                   Game.getGame().getPlayer().getInventory().addItem(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
                   unionScamsMarket.addItemGround(new Weapon(12,"Metal Bat", false, 18, new Effect("Concussion", 4, 0, -2, 0)));
+                }else{
+                  Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                 }
               }
             }catch(Exception e){
@@ -2379,7 +2463,7 @@ public class Game {
             public void run() {
               try{
               Graphics text = new Graphics();
-              text.slowTextSpeed("as you gaze at the lonely sink in the corner, you feel like playing a good game of soccer with cyrus when this is all over", 7);
+              text.slowTextSpeed("as you gaze at the lonely sink in the corner,\n you feel like playing a good game of soccer with cyrus when this is all over", 7);
 
             
               }catch(Exception e){
@@ -2413,6 +2497,8 @@ public class Game {
                     text.slowTextSpeed("You notice a key falling from his pocket to the ground", 7);
                     unionFacultyRoom.addItemGround(new Item(2, "Closet Key", false, null, false));
                     e[0] = true;
+                  }else{
+                    Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                   }
                  
               }
@@ -2425,7 +2511,7 @@ public class Game {
         });
 
         //Maintenance room
-        final Room unionMaintenanceRoom = new Room ("A dusty room which makes sense, to the north you see a closet and to the east a staff room", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
+        final Room unionMaintenanceRoom = new Room ("A dusty room which makes sense, \n to the north you see a closet and to the east a staff room", "unionmaintenanceroom"); roomMap.put(unionMaintenanceRoom.getRoomName(), unionMaintenanceRoom);
         unionMaintenanceRoom.setRunnable(new Runnable(){
             
           @Override
@@ -2557,6 +2643,7 @@ public class Game {
           //Tokyo Japan
           final Room HoleInTheGroundJapan = new Room ("Around you are large buildings yet no people. I wonder where they are?", "holeinthegroundjapan"); roomMap.put(HoleInTheGroundJapan.getRoomName(), HoleInTheGroundJapan);
           final Room japanNationalStadiumPlaza = new Room ("Another empty area, at least theres a tims to the east, you should probobly stock up. also to the north is a stadium where you can hear people cheering", "japannationalstadiumplaza"); roomMap.put(japanNationalStadiumPlaza.getRoomName(), japanNationalStadiumPlaza);
+          japanNationalStadiumPlaza.addItemGround(new Item(11, "test object", false, null, false));
           final Room japanTimHortons = new Room ("A very nice tim hortons no good food though", "japantimhortons"); roomMap.put(japanTimHortons.getRoomName(), japanTimHortons);
                   japanTimHortons.setRunnable(new Runnable(){
                     public void run(){
@@ -2671,7 +2758,7 @@ public class Game {
                         
                         //cutscence with logan paul dieing and you getting the prime, then bringing all the primes back to cyrus and playing soccor with him
                       }else{
-                        Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+                        Game.getGame().getPlayer().setCurrentRoom(japanNationalStadiumPlaza);
                       }
         
                 
@@ -2760,7 +2847,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("eglintonstreet"));
+    this.player.setCurrentRoom(roomMap.get("holeinthegroundjapan"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));

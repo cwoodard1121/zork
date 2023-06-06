@@ -40,7 +40,7 @@ public class Weapon extends Item {
     }
 
     public int getWeight() {
-        return weight;
+        return super.getWeight();
       }
     
     public void setWeight(int weight) {

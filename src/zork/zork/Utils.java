@@ -161,6 +161,7 @@ public static class SoundHandler {
 
 
     public static synchronized void playSong(String song) {
+        if(!Game.music) return;
         final String soundName = song;
                 try {
             
@@ -275,6 +276,7 @@ public static class SoundHandler {
      * @param loop Whether or not the sound should loop until cancelled
      */
     public static synchronized void playSound(String sound, boolean loop) {
+        if(!Game.music) return;
         stop();
         final String soundName = sound.replace(".wav", "").concat(".wav");
         Constants.SoundConstants.playSounds.put(soundName, true);
