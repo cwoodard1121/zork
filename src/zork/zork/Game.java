@@ -2809,7 +2809,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("sheppardyongeline1"));
+    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
