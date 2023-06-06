@@ -34,7 +34,7 @@ public class Game {
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
-  public static boolean isTesting = true;
+  public static boolean isTesting = false;
   public static HashMap<String, Room> roomMap; 
 
   private final Player player;
@@ -1901,11 +1901,12 @@ public class Game {
                if(won) {
                  bayviewGlenWeightRoom.enemies.remove(gymGuyEnemy);
                  game.getGame().getPlayer().getInventory().addItem(new Weapon(5, "Dumbell", false, 30, null));
+                 text.slowTextSpeed("You press the button, you hear a big clunk downstairs.", 20);
+                 artRoomLightsOn[0] = true;
                }else{
                 Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
                }
-               text.slowTextSpeed("You press the button, you hear a big clunk downstairs.", 20);
-               artRoomLightsOn[0] = true;
+              
              } else {
                return;
              }
@@ -2429,7 +2430,7 @@ public class Game {
                 if(won){
                   Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(SHOPKEEPER);
                   text.slowTextSpeed("As the shopkeeper falls, you see a prime and fall out of his pocket and onto the ground. He also drops his metal bat", 7);
-                  Game.getGame().getPlayer().getInventory().addItem(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
+                  unionScamsMarket.addItemGround(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
                   unionScamsMarket.addItemGround(new Weapon(12,"Metal Bat", false, 18, new Effect("Concussion", 4, 0, -2, 0)));
                 }else{
                   Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
@@ -2858,7 +2859,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("holeinthegroundjapan"));
+    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
