@@ -30,6 +30,7 @@ public class Game {
   private final Graphics renderer = new Graphics();
   public static AtomicBoolean bool = new AtomicBoolean();
   private final Gson gson = new Gson();
+  public static boolean music = false;
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
@@ -100,93 +101,132 @@ public class Game {
       // Create a room object and use the description as the constructor parameter.
 
       // SHEPPARD YONGE ROOMS
-      final Room sheppardYongeOffice = new Room("Sheppard yonge office. Prime everywhere!","sheppardyongeoffice"); roomMap.put(sheppardYongeOffice.getRoomName(), sheppardYongeOffice);
-      boolean[] hasFoughtCEO = new boolean[]{false};
+      final Room sheppardYongeOffice = new Room("Sheppard yonge office. Prime everywhere!", "sheppardyongeoffice");
+      roomMap.put(sheppardYongeOffice.getRoomName(), sheppardYongeOffice);
+      boolean[] hasFoughtCEO = new boolean[] { false };
+
+      final Room sheppardYongeCorporateElevator = new Room("Corporate elevator, it's going up.",
+          "sheppardyongecorporateelevator");
+      roomMap.put(sheppardYongeCorporateElevator.getRoomName(), sheppardYongeCorporateElevator);
+      sheppardYongeCorporateElevator.setRunnable(() -> {
+        Graphics g = getRenderer();
+        try {
+          g.slowTextSpeed("You're almost at the top. The elevator slows as it reaches the final floor.", 50);
+          Thread.sleep(2000);
+          g.slowTextSpeed(
+              "You've arrived at the top! the office has prime bottles everywhere.\nRemember what the security said!",
+              50);
+          Game.getGame().getPlayer().changeRoom(sheppardYongeOffice);
+        } catch (InterruptedException e) {
+        }
+      });
+      final Room sheppardYongeSecretRoom = new Room(
+          "There are windows on your left and right and an elevator gets you in, and up.", "sheppardyongesecretroom");
+      boolean[] hasFoughtSecurity = new boolean[] { false };
+      Inventory securityInventory = new Inventory(1);
+      Effect electricity = new Effect("Zap", 2, 5, -10, 0);
+      securityInventory.addItem(new Weapon(5, "Tazer", false, 15, electricity));
+      Enemy securityMan = new Enemy(null, sheppardYongeSecretRoom, 300, securityInventory, 200, "Security", 450);
+
+      sheppardYongeSecretRoom.setRunnable(() -> {
+        if (!hasFoughtSecurity[0]) {
+
+          try {
+            Thread.sleep(3000);
+            Game.getGame().getRenderer().slowTextSpeed(
+                "You see a security guard in the room. He stands between you and the corporate elevator.", 50);
+            Game.getGame().getRenderer()
+                .slowTextSpeed("Your goal is to get in, and get up. He isn't letting that happen.", 50);
+            Game.getGame().getRenderer().slowTextSpeed("Time to fight.", 500);
+            Fight securityGuardFight = new Fight(securityMan);
+            if (securityGuardFight.fight()) {
+              Game.getGame().getRenderer().slowTextSpeed(
+                  "The security guard backs down.\nHe gives you his elevator keycard. \nHe says to make it quick, better listen.",
+                  50);
+              Game.getGame().getPlayer().changeRoom(roomMap.get("sheppardyongecorporateelevator"));
+              hasFoughtSecurity[0] = true;
+              // UNLOCK ELEVATOR
+            } else {
+              System.out.println("YOU DIED! YOU DONT GET TO GO UP!");
+            }
+          } catch (InterruptedException e) {
+          }
+        }
+      });
+      roomMap.put("sheppardyongesecretroom", sheppardYongeSecretRoom);
+      final Room sheppardYongeLine1 = new Room(
+          "Going south will lead you to Lawrence, North to Finch is under maintainence.", "sheppardyongeline1");
+      roomMap.put(sheppardYongeLine1.getRoomName(), sheppardYongeLine1);
+      final Room sheppardYongeLine4 = new Room(
+          "Going east will lead you to Bayview. Going west will lead you into a tunnel.", "sheppardyongeline4");
+      roomMap.put(sheppardYongeLine4.getRoomName(), sheppardYongeLine4);
+      final Room sheppardYongeLine4StreetHallway = new Room(
+          "The escalator is stopped. The door to the street is nearby.", "sheppardyongeline4streethallway");
+      roomMap.put(sheppardYongeLine4StreetHallway.getRoomName(), sheppardYongeLine4StreetHallway);
+      final Room sheppardYongeLine1HallwayBeforeStreet = new Room("TTC Harlandale Avenue. Nothing here.",
+          "sheppardyongeline1hallwaybeforestreet");
+      roomMap.put(sheppardYongeLine1HallwayBeforeStreet.getRoomName(), sheppardYongeLine1HallwayBeforeStreet);
+
+      /*
+       * Example enemy and usage when entering room.
+       */
+      boolean[] hasFoughtCrackhead = new boolean[] { false };
+      Inventory crackHeadInventory = new Inventory(5);
+      Effect crackHeadPoison = new Effect("Poison", 5, 5, -5, 0);
+      crackHeadInventory.addItem(new Weapon(5, "Needle", false, 10, crackHeadPoison));
+      // make crackhead
+      Enemy crackHead = new Enemy(null, sheppardYongeLine4StreetHallway, 25, crackHeadInventory, 0, "Crackhead", 1);
+      sheppardYongeLine4StreetHallway.setRunnable(() -> {
+        if (!hasFoughtCrackhead[0]) {
+          try {
+            Game.getGame().getRenderer()
+                .slowTextSpeed("You see a crackhead yelling at innocent TTC Passengers. He wants your prime.", 20);
+          } catch (InterruptedException e) {
+          }
+          // fight crackhead
+          Fight crackHeadFight = new Fight(crackHead);
+          if (crackHeadFight.fight()) {
+            Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(crackHead);
+            hasFoughtCrackhead[0] = true;
+          } else {
+            System.out.println("didnt win. crackhead steals all ur stuff");
+          }
+        }
+      });
+
       sheppardYongeOffice.setRunnable(() -> {
-        if(!hasFoughtCEO[0]) {
-          //TODO: CHANGE YELLOW TO REAL FALVOR
+        if (!hasFoughtCEO[0]) {
+          // TODO: CHANGE YELLOW TO REAL FALVOR
           Inventory i = new Inventory(5);
-          i.addItem(new Prime(5, "TROPICAL PUNCH PRIME",false , "YELLOW", false, "CEO"));
-          i.addItem(new Weapon(0, "TROPICAL PUNCH TIME", false, 20, null));
+          i.addItem(new Prime(5, "TROPICAL PUNCH PRIME", false, "YELLOW", false, "CEO"));
+          i.addItem(new Weapon(0, "TROPICAL PUNCH PRIME", false, 20, null));
           Enemy CEO = new Enemy(null, sheppardYongeOffice, 100, i, 0, "CEO", 500);
           Fight f = new Fight(CEO);
-          if(f.fight()) {
+          if (f.fight()) {
+            hasFoughtCEO[0] = true;
             Graphics g = getRenderer();
             try {
-              g.slowTextSpeed("You won. You got the yellow prime. The crazy CEO decides to quit his job and become a bitcoin trader.", 50);
+              g.slowTextSpeed(
+                  "You won. You got the tropical punch prime. The crazy CEO decides to quit his job and trade bitcoin.",
+                  50);
               g.slowTextSpeed("The elevator beeps. It's time to go back down.", 50);
               Thread.sleep(2000);
+              new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                  player.changeRoom(roomMap.get("sheppardyongesecretroom"));
+                }
+
+              }).start();
+
             } catch (InterruptedException e) {
-              player.changeRoom(roomMap.get("sheppardyongesecretroom"));
+
             }
           } else {
             System.out.println("BETTER LUCK NEXT TIME LOL!");
           }
         }
-      });
-      final Room sheppardYongeCorporateElevator = new Room("Corporate elevator, it's going up.", "sheppardyongecorporateelevator"); roomMap.put(sheppardYongeCorporateElevator.getRoomName(), sheppardYongeCorporateElevator);
-      sheppardYongeCorporateElevator.setRunnable(() -> {
-        Graphics g = getRenderer();
-        try {
-          g.slowTextSpeed("You're almost at the top. The elevator slows as it reaches the final floor.", 50);
-          Thread.sleep(2);
-          g.slowTextSpeed("You've arrived at the top! the office has prime bottles everywhere.\nRemember what the security said!", 50);
-          Game.getGame().getPlayer().changeRoom(sheppardYongeOffice);
-        } catch (InterruptedException e) {}
-      });
-      final Room sheppardYongeSecretRoom = new Room("There are windows on your left and right and an elevator gets you in, and up.","sheppardyongesecretroom");
-      boolean[] hasFoughtSecurity = new boolean[]{false};
-      Inventory securityInventory = new Inventory(1);
-      Effect electricity = new Effect("Zap",2 , 5, -10, 0);
-      securityInventory.addItem(new Weapon(5, "Tazer", false, 15,electricity));
-      Enemy securityMan = new Enemy(null, sheppardYongeSecretRoom, 300, securityInventory, 200, "Security", 450);
-      
-      sheppardYongeSecretRoom.setRunnable(() -> {
-        if(!hasFoughtSecurity[0]) {
-          try {
-            Game.getGame().getRenderer().slowTextSpeed("You see a security guard in the room. He stands between you and the corporate elevator.",50);
-            Game.getGame().getRenderer().slowTextSpeed("Your goal is to get in, and get up. He isn't letting that happen.",50); 
-            Game.getGame().getRenderer().slowTextSpeed("Time to fight.",500); 
-            Fight securityGuardFight = new Fight(securityMan);
-            if(securityGuardFight.fight()) {
-              Game.getGame().getRenderer().slowTextSpeed("The security guard backs down.\nHe gives you his elevator keycard. \nHe says to make it quick, better listen.",50);
-              Game.getGame().getPlayer().changeRoom(roomMap.get("sheppardyongecorporateelevator"));
-              // UNLOCK ELEVATOR
-            } else {
-              System.out.println("YOU DIED! YOU DONT GET TO GO UP!");
-            }
-          } catch (InterruptedException e) {}
-        }
-      });
-      final Room sheppardYongeLine1 = new Room("Going south will lead you to Lawrence, North to Finch is under maintainence.","sheppardyongeline1"); roomMap.put(sheppardYongeLine1.getRoomName(),sheppardYongeLine1);
-      final Room sheppardYongeLine4 = new Room("Going east will lead you to Bayview. Going west will lead you into a tunnel.","sheppardyongeline4"); roomMap.put(sheppardYongeLine4.getRoomName(),sheppardYongeLine4);
-      final Room sheppardYongeLine4StreetHallway = new Room("The escalator is stopped. The door to the street is nearby.","sheppardyongeline4streethallway"); roomMap.put(sheppardYongeLine4StreetHallway.getRoomName(),sheppardYongeLine4StreetHallway);
-      final Room sheppardYongeLine1HallwayBeforeStreet = new Room("TTC Harlandale Avenue. Nothing here.","sheppardyongeline1hallwaybeforestreet"); roomMap.put(sheppardYongeLine1HallwayBeforeStreet.getRoomName(), sheppardYongeLine1HallwayBeforeStreet);
-      
-      
-      /*
-       * Example enemy and usage when entering room.
-       */
-      boolean[] hasFoughtCrackhead = new boolean[]{false};
-      Inventory crackHeadInventory = new Inventory(5);
-      Effect crackHeadPoison = new Effect("Poison", 5, 5, -5, 0);
-      crackHeadInventory.addItem(new Weapon(5, "Needle",false, 10,crackHeadPoison));
-      // make crackhead
-      Enemy crackHead = new Enemy(null, sheppardYongeLine4StreetHallway, 25, crackHeadInventory, 0, "Crackhead", 1);
-      sheppardYongeLine4StreetHallway.setRunnable(() -> {
-        if(!hasFoughtCrackhead[0]) {
-          try {
-         Game.getGame().getRenderer().slowTextSpeed("You see a crackhead yelling at innocent TTC Passengers. He wants your prime.",20);
-          } catch (InterruptedException e) {}
-        // fight crackhead
-        Fight crackHeadFight = new Fight(crackHead);
-        if(crackHeadFight.fight()) {
-          Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(crackHead);
-          hasFoughtCrackhead[0] = true;
-        } else {
-          System.out.println("didnt win. crackhead steals all ur stuff");
-        }
-      }
       });
 
 
@@ -1977,11 +2017,20 @@ public class Game {
 
       // SHEPPARD YONGE EXITS
 
-      final Exit sheppardYongeLine1ExitNorth = new Exit("N", sheppardYongeLine4StreetHallway); sheppardYongeLine4.addExit(sheppardYongeLine1ExitNorth);
-      final Exit sheppardYongeLine1ExitWest = new Exit("W", sheppardYongeLine1HallwayBeforeStreet); sheppardYongeLine1.addExit(sheppardYongeLine1ExitWest);
-      final Exit sheppardYongeHallwayB4StreetExitWest = new Exit("W",sheppardYongeSecretRoom); sheppardYongeLine4StreetHallway.addExit(sheppardYongeHallwayB4StreetExitWest);
-      final Exit sheppardYongeLine4ExitDown = new Exit("D", sheppardYongeLine1); sheppardYongeLine4.addExit(sheppardYongeLine4ExitDown);
-      final Exit sheppardYongeLine1ExitUp = new Exit("U", sheppardYongeLine4); sheppardYongeLine1.addExit(sheppardYongeLine1ExitUp);
+      final Exit sheppardYongeLine1ExitNorth = new Exit("N", sheppardYongeLine4StreetHallway);
+      sheppardYongeLine4.addExit(sheppardYongeLine1ExitNorth);
+      final Exit sheppardYongeLine1ExitWest = new Exit("W", sheppardYongeLine1HallwayBeforeStreet);
+      sheppardYongeLine1.addExit(sheppardYongeLine1ExitWest);
+      final Exit sheppardYongeHallwayB4StreetExitWest = new Exit("W", sheppardYongeSecretRoom);
+      sheppardYongeLine4StreetHallway.addExit(sheppardYongeHallwayB4StreetExitWest);
+      final Exit sheppardYongeLine4StreetHallwayExitSouth = new Exit("S", sheppardYongeLine4);
+      sheppardYongeLine4StreetHallway.addExit(sheppardYongeLine4StreetHallwayExitSouth);
+      final Exit sheppardYongeSecretRoomExitEast = new Exit("E", sheppardYongeLine4StreetHallway);
+      sheppardYongeSecretRoom.addExit(sheppardYongeSecretRoomExitEast);
+      final Exit sheppardYongeLine4ExitDown = new Exit("D", sheppardYongeLine1);
+      sheppardYongeLine4.addExit(sheppardYongeLine4ExitDown);
+      final Exit sheppardYongeLine1ExitUp = new Exit("U", sheppardYongeLine4);
+      sheppardYongeLine1.addExit(sheppardYongeLine1ExitUp);
       
 
 
@@ -2760,7 +2809,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("eglintonstreet"));
+    this.player.setCurrentRoom(roomMap.get("sheppardyongeline1"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
