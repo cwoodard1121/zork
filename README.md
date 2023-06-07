@@ -1,4 +1,4 @@
-This project is the final sumative project of ICS3U
+This project is the final summative project of ICS3U
 
 Made by Cameron Woodard, Ethan McMullen, Marco Carnegie, Lucca Minato
 
@@ -9,7 +9,7 @@ fight class
 Union, Japan: Items, Enemies & Effects + Ascii art + Union Cyrus call cutscene and final cutscene
 Help Command
 Effects
-Enemy's
+Enemies
 Weapons
 Imported Black Jack
 
