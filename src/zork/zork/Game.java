@@ -146,7 +146,7 @@ public class Game {
               // UNLOCK ELEVATOR
             } else {
               System.out.println("YOU DIED! YOU DONT GET TO GO UP!");
-              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
             }
           } catch (InterruptedException e) {
           }
@@ -189,7 +189,7 @@ public class Game {
             hasFoughtCrackhead[0] = true;
           } else {
             System.out.println("didnt win. crackhead steals all ur stuff");
-            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
           }
         }
       });
@@ -227,7 +227,7 @@ public class Game {
             }
           } else {
             System.out.println("BETTER LUCK NEXT TIME LOL!");
-            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
           }
         }
       });
@@ -583,7 +583,7 @@ public class Game {
           hasFoughtHomeless[0] = true;
         } else {
           System.out.println("didnt win. homeless dude steals all ur stuff");
-          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
         }
       }
       });
@@ -631,7 +631,7 @@ public class Game {
           hasFoughtDriver[0] = true;
         } else {
           System.out.println("didnt win. Your body has been kicked off the streetcar.");
-          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
         }
       }
       });
@@ -844,7 +844,7 @@ public class Game {
           hasFoughtEmployee[0] = true;
         } else {
           System.out.println("didnt win. Your body has been reported to security.");
-          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
         }
       }
       });
@@ -870,7 +870,7 @@ public class Game {
         } else {
           try {
             text.slowTextSpeed("You died. Your casket will smell like tobacco.", 20);
-            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+            Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
           } catch (Exception e) {
             // TODO: handle exception
           }
@@ -1023,7 +1023,7 @@ public class Game {
           hasFoughtThug[0] = true;
         } else {
           System.out.println("You won't be messing with him again.");
-          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+          Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
         }
       }
       });
@@ -1165,7 +1165,7 @@ public class Game {
               
 
             }else{
-              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
             }
           }
        });
@@ -1236,7 +1236,7 @@ public class Game {
               Game.getGame().getPlayer().getInventory().addItem(new Item(5, "Swedish Meatball", true, meatballHealth, false));
               Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(cyrus_meatball);
              }else{
-              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
              }
             }    
           }
@@ -1265,7 +1265,7 @@ public class Game {
             if(won) {
               Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(musicManEnemy);
             }else{
-              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
             }
           }
             
@@ -1433,7 +1433,7 @@ public class Game {
                   Game.getGame().getPlayer().getInventory().addItem(new Key("G11CommonAreaKey", "golden key", 1));
                   hasGottenFirstKey[0] = true;
                 }else{
-                  Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+                  Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
                 }
               } else if (ans.equalsIgnoreCase("n")) {
                 return;
@@ -1718,7 +1718,7 @@ public class Game {
                 dramaRoomDoorOpened[0] = true;
                 bayviewGlenHallwayTheatreBack.enemies.remove(dramaRoomDoorEnemy);
               }else{
-                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
               }
             } else {
               return;
@@ -1792,7 +1792,7 @@ public class Game {
                 text.slowTextSpeed("You see a black rectangle on the ground \n its OWENS PHONE! \n its on the ground", 20);
                 bayviewGlenG12CommonArea.addItemGround(owensIphone);
               }else{
-                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
               }
               
             } catch (Exception e) {
@@ -1852,7 +1852,7 @@ public class Game {
               text.slowTextSpeed("You turn on the lights to read #3 - 17 written on the board behind you", 50);
               hasEnteredArtRoom[0] = true;
             }else{
-              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
             }
           } catch (Exception e) {
             
@@ -1907,7 +1907,7 @@ public class Game {
                  text.slowTextSpeed("You press the button, you hear a big clunk downstairs.", 20);
                  artRoomLightsOn[0] = true;
                }else{
-                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+                Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
                }
               
              } else {
@@ -2225,7 +2225,7 @@ public class Game {
                           Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(PRIME_THEIF);
                           fightDone[0] = true;
                       }else{
-                        Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+                        Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
                       }
                     } catch (Exception e) {
                       // TODO: handle exception
@@ -2362,7 +2362,7 @@ public class Game {
              if(won) {
                bayviewGlen2ndFloorUpperHallway.enemies.remove(rogueEconTestEnemy);
              }else{
-              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+              Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
              }
            }
            if (bayviewGlenG12CommonAreaExitDown.getIsExitLocked()) {
@@ -2440,7 +2440,7 @@ public class Game {
                   player.setPrimeCounter(player.getPrimeCounter()+1);
                   unionScamsMarket.addItemGround(new Weapon(12,"Metal Bat", false, 18, new Effect("Concussion", 4, 0, -2, 0)));
                 }else{
-                  Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+                  Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
                 }
               }
             }catch(Exception e){
@@ -2517,7 +2517,7 @@ public class Game {
                     unionFacultyRoom.addItemGround(new Item(2, "Closet Key", false, null, false));
                     e[0] = true;
                   }else{
-                    Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
+                    Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
                   }
                  
               }

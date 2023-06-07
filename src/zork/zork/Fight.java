@@ -92,7 +92,7 @@ public class Fight {
                 }
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+          
         }
     }
 
@@ -139,7 +139,6 @@ public class Fight {
                 }
                 
             } catch (Exception e) {
-                e.printStackTrace();
                 return false;
             }
                 
@@ -198,7 +197,7 @@ public class Fight {
         computeEffects(true);
 
         }catch (Exception e){
-            e.printStackTrace();
+           
         }
     }
 
@@ -342,7 +341,7 @@ public class Fight {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+         
         }
     }
 

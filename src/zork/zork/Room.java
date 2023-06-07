@@ -30,7 +30,6 @@ public class Room { // Handles Rooms and the methods that go with it
   }
 
   public void setLocked(boolean isLockedKey) {
-    System.out.println(isLocked + " setting locked to this");
     this.isLocked = isLockedKey;
   }
 
