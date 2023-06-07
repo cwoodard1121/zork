@@ -113,22 +113,19 @@ public class Fight {
                          playerEffect = new ArrayList<>();
                          enemyEffect  = new ArrayList<>();
                 while (true){      
-                        didSomeoneDie(true);
                     
                        
                         if(enemySpeed>playerSpeed){
                             enemyTurn();
-                            if(!didSomeoneDie(false))return false;
+                            if(didSomeoneDie(false).equalsIgnoreCase("n"))return false;
                             playerTurn();
-                            if(didSomeoneDie(true))return true;
+                            if(didSomeoneDie(true).equalsIgnoreCase("y"))return true;
                         }else{
                             playerTurn();
-                            if(didSomeoneDie(true))return true;
+                            if(didSomeoneDie(true).equalsIgnoreCase("y"))return true;
                             enemyTurn();
-                            if(!didSomeoneDie(false))return false;
+                            if(didSomeoneDie(false).equalsIgnoreCase("n"))return false;
 
-                            
-                            
                         }
                         
                         // text.slowTextSpeed(Game.getGame().getPlayer().getName() + " has " + playerHealth + " health remaining", 7); 
@@ -152,7 +149,7 @@ public class Fight {
 
  
     
-    private boolean didSomeoneDie(boolean checkEnemy) {
+    private String didSomeoneDie(boolean checkEnemy) {
         try {
             
            if(checkEnemy){
@@ -161,7 +158,7 @@ public class Fight {
                     Game.getGame().getPlayer().setInFight(false);
                     isTotalHealth = false;
                     Game.getGame().getPlayer().setHealth(playerHealth);
-                    return true;
+                    return "y";
                 }
             }else{
                 if(playerHealth<= 0){
@@ -169,13 +166,13 @@ public class Fight {
                     Game.getGame().getPlayer().setInFight(false);
                     isTotalHealth = false;
                     Game.getGame().getPlayer().setHealth(Game.getGame().getPlayer().getMaxHealth());
-                    return false;
+                    return "n";
                 }
             }
 
-            return false;
+            return "a";
         } catch (Exception e) {
-            return false;
+            return "a";
         }
     }
 
