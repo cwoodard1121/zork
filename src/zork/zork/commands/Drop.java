@@ -25,17 +25,18 @@ public class Drop extends Command {
             if(command.contains("fists")){
                 return "what? you know you cant take those off right?";
             }
+            if(command != null && inventory.getItem(i) != null) {
+                if (command.contains(inventory.getItem(i).getName().toLowerCase())) {
+                    int weight = inventory.getCurrentWeight();
+                    weight = weight - inventory.getItem(i).getWeight();
+                    player.getInventory().setCurrentWeight(weight);
+                    Item item = inventory.getItem(i);
+                    String getItemName = inventory.getItem(i).getName();
+                    game.getPlayer().getInventory().removeItem(Game.getGame().getPlayer().getInventory().getItem(i));
+                    player.getCurrentRoom().addItemGround(item);
 
-            if (command.contains(inventory.getItem(i).getName().toLowerCase())) {
-                int weight = inventory.getCurrentWeight();
-                weight = weight - inventory.getItem(i).getWeight();
-                player.getInventory().setCurrentWeight(weight);
-                Item item = inventory.getItem(i);
-                String getItemName = inventory.getItem(i).getName();
-                game.getPlayer().getInventory().removeItem(Game.getGame().getPlayer().getInventory().getItem(i));
-                player.getCurrentRoom().addItemGround(item);
-
-                return "You dropped your " + getItemName + " on the ground";
+                    return "You dropped your " + getItemName + " on the ground";
+                }
             }
         }
         return "You do not have that in your inventory";

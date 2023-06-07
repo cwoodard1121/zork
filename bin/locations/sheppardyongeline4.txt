@@ -1,6 +1,6 @@
                   * Sheppard Yonge Line 4 *
  _______________________________________________________
- |   <- West to Bayview      |  East to Don Mills ->   |
+ |   <- West to .......      |  East to Don Mills ->   |
  |                                                     |
  |   -   -   -   -   -   -   -   -   -   -   -   -     |
  |   -   -   -   -   -   -   -   -   -   -   -   -     |
