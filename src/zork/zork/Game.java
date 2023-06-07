@@ -32,7 +32,7 @@ public class Game {
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
-  public static boolean isTesting = true;
+  public static boolean isTesting = false;
   public static HashMap<String, Room> roomMap; 
 
   private final Player player;
@@ -123,7 +123,8 @@ public class Game {
       boolean[] hasFoughtSecurity = new boolean[] { false };
       Inventory securityInventory = new Inventory(1);
       Effect electricity = new Effect("Zap", 2, 5, -10, 0);
-      securityInventory.addItem(new Weapon(5, "Tazer", false, 15, electricity));
+      securityInventory.addItem(new Weapon(5, "Tazer", false, 30, electricity));
+      securityInventory.addItem(new Weapon(10, "Tazers", false, 25, electricity));
       Enemy securityMan = new Enemy(null, sheppardYongeSecretRoom, 300, securityInventory, 200, "Security", 170);
 
       sheppardYongeSecretRoom.setRunnable(() -> {
@@ -199,7 +200,7 @@ public class Game {
           // TODO: CHANGE YELLOW TO REAL FALVOR
           Inventory i = new Inventory(5);
           i.addItem(new Prime(0, "Tropical Punch Prime", false, "YELLOW", false, "CEO"));
-          i.addItem(new Weapon(0, "Tropical Punch Prime", false, 20, null));
+          i.addItem(new Weapon(0, "Tropical Punch Prime", false, 20, new Effect("splash", 1, 1, -1, 5)));
           Enemy CEO = new Enemy(null, sheppardYongeOffice, 100, i, 0, "CEO", 200);
           Fight f = new Fight(CEO);
           if (f.fight()) {
@@ -212,7 +213,7 @@ public class Game {
               g.slowTextSpeed("The elevator beeps. It's time to go back down.", 50);
               Thread.sleep(2000);
               player.getInventory().addItem(new Prime(0, "TROPICAL PUNCH PRIME", false, "YELLOW", false, "CEO"));
-              player.setPrimeCounter(player.getPrimeCounter()+1);
+              player.setPrimeCounter(player.getPrimeCounter() + 1);
               new Thread(new Runnable() {
 
                 @Override
@@ -2868,8 +2869,8 @@ public class Game {
       e.printStackTrace();
     }
     this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
-    this.player.setPrimeCounter(8);
-    this.player.setMoney(500);
+    this.player.setPrimeCounter(0);
+    this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {
