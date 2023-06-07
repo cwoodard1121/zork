@@ -10,7 +10,7 @@ public class Stop extends Command{
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args) { // Stops the music
       SoundHandler.stop();
       return "music stopped";
     }

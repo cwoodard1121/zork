@@ -30,11 +30,11 @@ public class Game {
   private final Graphics renderer = new Graphics();
   public static AtomicBoolean bool = new AtomicBoolean();
   private final Gson gson = new Gson();
-  public static boolean music = false;
+  public static boolean music = true;
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
-  public static boolean isTesting = true;
+  public static boolean isTesting = false;
   public static HashMap<String, Room> roomMap; 
 
   private final Player player;

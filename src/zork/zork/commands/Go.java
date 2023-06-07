@@ -39,7 +39,7 @@ public class Go extends Command {
             }
             if (direction.equalsIgnoreCase("u"))
                 return "There is no room above you";
-            else if (direction.equalsIgnoreCase("d"))
+            else if (direction.equalsIgnoreCase("d")) // To display different messages for each direction
                 return "There is no room below you";    
             else 
                 return "There is no room to the " + args[0];

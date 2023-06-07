@@ -8,15 +8,15 @@ public class Up extends Command {
 
     public Up(String name) {
         super(name);
-        addAlias("u");
+        addAlias("u"); // Typing u also runs this command
     }
 
     @Override
-    public String runCommand(String... args){
+    public String runCommand(String... args){ // Command deals with up movement
         for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
             try{
             if(e.getDirection().equalsIgnoreCase("u")) {
-                if (!e.getAdjacentRoom().isLocked() && !e.getIsExitLocked()) {
+                if (!e.getAdjacentRoom().isLocked() && !e.getIsExitLocked()) { //Checks if the room is locked before moving the player
                     Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
                     e.getAdjacentRoom().printAscii();
                     return e.getAdjacentRoom().getDescription();

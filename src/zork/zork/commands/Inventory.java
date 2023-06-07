@@ -15,7 +15,7 @@ public class Inventory extends Command {
     @Override
     public String runCommand(String... args) {
         
-        for (Item item : Game.getGame().getPlayer().getInventory().getItems()) {
+        for (Item item : Game.getGame().getPlayer().getInventory().getItems()) { // Displays the players inventory including health money and current weight
             System.out.println("> " + item.getName());
            
         }
