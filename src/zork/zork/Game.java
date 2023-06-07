@@ -32,7 +32,7 @@ public class Game {
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
-  public static boolean isTesting = false;
+  public static boolean isTesting = true;
   public static HashMap<String, Room> roomMap; 
 
   private final Player player;
@@ -211,6 +211,7 @@ public class Game {
                   50);
               g.slowTextSpeed("The elevator beeps. It's time to go back down.", 50);
               Thread.sleep(2000);
+              player.getInventory().addItem(new Prime(0, "TROPICAL PUNCH PRIME", false, "YELLOW", false, "CEO"));
               new Thread(new Runnable() {
 
                 @Override
@@ -260,8 +261,8 @@ public class Game {
                             String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
                             if(b.contains("gummy bears")){
-                                if((pMoney - 10)>= 0){
-                                  Game.getGame().getPlayer().setMoney(pMoney-=10);
+                                if((pMoney - 1)>= 0){
+                                  Game.getGame().getPlayer().setMoney(pMoney-=1);
                                   Game.getGame().getPlayer().getInventory().addItem(
                                     new Item(2, "Gummy Bears", false, 
                                     new Effect("Health up", 0, 0, 4, 10), false)
@@ -2428,7 +2429,7 @@ public class Game {
                 if(won){
                   Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(SHOPKEEPER);
                   text.slowTextSpeed("As the shopkeeper falls, you see a prime and fall out of his pocket and onto the ground. He also drops his metal bat", 7);
-                  unionScamsMarket.addItemGround(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
+                  Game.getGame().getPlayer().getInventory().addItem(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
                   unionScamsMarket.addItemGround(new Weapon(12,"Metal Bat", false, 18, new Effect("Concussion", 4, 0, -2, 0)));
                 }else{
                   Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse); System.out.println("You were knocked out... You wake up in a cold sweat in pickering");
@@ -2765,6 +2766,7 @@ public class Game {
                       if(didWin){
                         Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(LOGAN_PAUL);
                         renderer.showCutScene(1100, "\\bin\\zork\\data\\finalcutscene.txt", 15);
+                        System.exit(0);
                         
                         //cutscence with logan paul dieing and you getting the prime, then bringing all the primes back to cyrus and playing soccor with him
                       }else{
@@ -2857,7 +2859,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
+    this.player.setCurrentRoom(roomMap.get("japannationalstadiumplaza"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
