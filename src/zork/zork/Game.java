@@ -32,7 +32,7 @@ public class Game {
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
-  public static boolean isTesting = false;
+  public static boolean isTesting = true;
   public static HashMap<String, Room> roomMap; 
 
   private final Player player;
@@ -2765,6 +2765,7 @@ public class Game {
                       if(didWin){
                         Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(LOGAN_PAUL);
                         renderer.showCutScene(1100, "\\bin\\zork\\data\\finalcutscene.txt", 15);
+                        System.exit(0);
                         
                         //cutscence with logan paul dieing and you getting the prime, then bringing all the primes back to cyrus and playing soccor with him
                       }else{
@@ -2857,7 +2858,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
+    this.player.setCurrentRoom(roomMap.get("japannationalstadiumplaza"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
