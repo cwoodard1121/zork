@@ -849,7 +849,7 @@ public class Game {
 
       boolean[] hasFoughtSmoker = new boolean[]{false};
       Inventory smokerInventory = new Inventory(5);
-      Effect smokerBurning = new Effect("Burning", 2, 5, -5, 0);
+      Effect smokerBurning = new Effect("Burning", 2, 10, -5, 0);
       Item lighter = new Weapon(5, "lighter",true, 25, smokerBurning);
       
       smokerInventory.addItem(lighter);
