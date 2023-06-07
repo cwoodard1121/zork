@@ -211,6 +211,7 @@ public class Game {
                   50);
               g.slowTextSpeed("The elevator beeps. It's time to go back down.", 50);
               Thread.sleep(2000);
+              player.getInventory().addItem(new Prime(0, "TROPICAL PUNCH PRIME", false, "YELLOW", false, "CEO"));
               new Thread(new Runnable() {
 
                 @Override
@@ -260,8 +261,8 @@ public class Game {
                             String b = in.nextLine().toLowerCase();
                             double pMoney = Game.getGame().getPlayer().getMoney();
                             if(b.contains("gummy bears")){
-                                if((pMoney - 10)>= 0){
-                                  Game.getGame().getPlayer().setMoney(pMoney-=10);
+                                if((pMoney - 1)>= 0){
+                                  Game.getGame().getPlayer().setMoney(pMoney-=1);
                                   Game.getGame().getPlayer().getInventory().addItem(
                                     new Item(2, "Gummy Bears", false, 
                                     new Effect("Health up", 0, 0, 4, 10), false)
