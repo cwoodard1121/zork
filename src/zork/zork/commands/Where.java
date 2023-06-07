@@ -9,7 +9,7 @@ public class Where extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args) { // Says the name of the room
         return Game.getGame().getPlayer().getCurrentRoom().getDisplayName();
     }
 
