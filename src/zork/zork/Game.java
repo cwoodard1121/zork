@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.swing.SortOrder;
-import javax.swing.event.SwingPropertyChangeSupport;
 
 import com.google.gson.Gson;
 
@@ -30,11 +28,11 @@ public class Game {
   private final Graphics renderer = new Graphics();
   public static AtomicBoolean bool = new AtomicBoolean();
   private final Gson gson = new Gson();
-  public static boolean music = false;
+  public static boolean music = true;
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
-  public static boolean isTesting = true;
+  public static boolean isTesting = false;
   public static HashMap<String, Room> roomMap; 
 
   private final Player player;
@@ -2847,7 +2845,7 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("holeinthegroundjapan"));
+    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
     this.player.setMoney(5);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
@@ -2901,15 +2899,14 @@ public class Game {
         hasStart = true;
         if(!isTesting) {
           SoundHandler.stopSound("mainmenu.wav");
-          SoundHandler.playSound("cutscene.wav", true);
+          SoundHandler.playSound("cutscene.wav", false);
         try {
           renderer.showCutScene(1500, "\\bin\\zork\\data\\cutscene.txt", 75);
         } catch (Exception e) {
           handleException(e);
         }
       }
-        SoundHandler.startRadio();
-        SoundHandler.startAfterInterruption();
+
         boolean hasChosenName = false;
         System.out.print("Please enter your name: ");
         while(!hasChosenName) {
@@ -2944,6 +2941,19 @@ public class Game {
         System.out.println("Please enter a valid command");
     }
    }
+   try {
+    new Thread(() -> {
+      try {
+        Thread.sleep(279000);
+        // dont ask
+        SoundHandler.startRadio();
+        SoundHandler.startAfterInterruption();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }).start();
+
+  } catch (Exception e){}
   }
 
   /**
