@@ -1,7 +1,7 @@
                   * York Mills Subway *
  _______________________________________________________
- |   South to      |                 | Northbound to   |
- |   Eglinton      |      North      | Finch           |
+ |   South to      |                 |                 |
+ |   Eglinton      |      North      |                 |
  |                 |        ^        |                 |
  |        |        |                 |        ^        |
  |        |        |                 |      / | \      |
