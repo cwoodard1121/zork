@@ -2428,7 +2428,7 @@ public class Game {
                 if(won){
                   Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(SHOPKEEPER);
                   text.slowTextSpeed("As the shopkeeper falls, you see a prime and fall out of his pocket and onto the ground. He also drops his metal bat", 7);
-                  unionScamsMarket.addItemGround(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
+                  Game.getGame().getPlayer().getInventory().addItem(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
                   unionScamsMarket.addItemGround(new Weapon(12,"Metal Bat", false, 18, new Effect("Concussion", 4, 0, -2, 0)));
                 }else{
                   Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
