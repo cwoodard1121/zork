@@ -1,0 +1,15 @@
+Drop --- Drops Specified Item (Ex: drop key)
+Inventory/I --- Shows you your inventory, health, weight, money, and level
+Look --- shows you your current room
+Pickup --- Picks up specified items or all items you can (Ex pick up key or pick up)
+Search --- Searchs the room for items on the ground
+Skip --- Skips song in the PRIMEQUEST OST
+Help --- Displays avaliable commands
+N/North --- Goes to the room in the North if there is one
+S/South --- Goes to the room in the South if there is one
+W/West --- Goes to the room in the West if there is one
+E/East --- Goes to the room in the East if there is one
+D/Down --- Goes to the room below you if there is one
+U/Up --- Goes to the room above you if there is one
+Stop --- Stops Music
+Start --- Starts Music
