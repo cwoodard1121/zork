@@ -1,7 +1,7 @@
                    * Eglinton Subway *
  _______________________________________________________
- | South to        |                 |  Northbound to  |
- | St. Clair       |      East -->   |      Finch      |
+ | South to        |                 |                 |
+ | St. Clair       |      East -->   |                 |
  |                 |                 |                 |
  |        |        |                 |        ^        |
  |        |        |                 |      / | \      |
