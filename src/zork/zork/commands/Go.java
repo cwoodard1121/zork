@@ -16,7 +16,7 @@ public class Go extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args) { // Does the same thing as Direction Commands.
         if(args.length > 0) {
             String direction = args[0].substring(0, 1);
             for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {

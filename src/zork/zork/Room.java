@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import zork.entites.Enemy;
 
-public class Room {
+public class Room { // Handles Rooms and the methods that go with it
 
   private String lockedMessage = "";
   private String roomName;
@@ -219,7 +219,11 @@ public class Room {
   }
 
   public String getDescription() {
-    return description;
+    String groundItems = "\n Ground Items: \n";
+    for (Item i : this.getGroundItems()) {
+      groundItems = groundItems + " > " + i.getName() + "\n";
+    }
+    return description + groundItems;
   }
 
   public void setDescription(final String description) {
