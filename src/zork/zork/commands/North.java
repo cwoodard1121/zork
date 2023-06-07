@@ -8,15 +8,15 @@ public class North extends Command {
 
     public North(String name) {
         super(name);
-        addAlias("n");
+        addAlias("n"); // adds N to work with this command aswell
     }
 
     @Override
-    public String runCommand(String... args){
+    public String runCommand(String... args){ // Command that deals with north movement
         for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
             try{
             if(e.getDirection().equalsIgnoreCase("n")) {
-                if (!e.getAdjacentRoom().isLocked() && !e.getIsExitLocked()) {
+                if (!e.getAdjacentRoom().isLocked() && !e.getIsExitLocked()) { // Checks if its locked before letting you in
                     Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
                     e.getAdjacentRoom().printAscii();
                     return e.getAdjacentRoom().getDescription();

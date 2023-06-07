@@ -12,7 +12,7 @@ public class Use extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args) { // Adds the ability to use items that heal you outside of battle
         String command = "";
         for (int i = 0; i < args.length; i++) {
             command+=args[i] + " ";
