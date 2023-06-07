@@ -9,7 +9,7 @@ public class Weapon extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args) { // Sets you in the weapon menu during a fight
         if(Game.getGame().getPlayer().isInFight() == true){
             Game.getGame().getPlayer().setChoosingMenu(false);
             Game.getGame().getPlayer().setInWeaponMenu(true);

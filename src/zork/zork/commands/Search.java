@@ -10,7 +10,7 @@ public class Search extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args) { // Displays the ground items in the room
         String str = "";
         if(Game.getGame().getPlayer().getCurrentRoom().getGroundItems().size() == 0) return "You searched and found... nothing.";
         for (Item e : Game.getGame().getPlayer().getCurrentRoom().getGroundItems()) {

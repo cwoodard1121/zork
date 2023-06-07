@@ -12,7 +12,7 @@ public class Look extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args) { // Prints the ascii, room name and the description
         try {
             Game.getGame().getPlayer().getCurrentRoom().printAscii();
         } catch (IOException e) {

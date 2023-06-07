@@ -9,7 +9,7 @@ public class Item extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args) { // Command to go into the ITEM menu in battle
         if(Game.getGame().getPlayer().isInFight() == true){
         Game.getGame().getPlayer().setItemMenu(true);
         Game.getGame().getPlayer().setChoosingMenu(false);

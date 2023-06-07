@@ -9,7 +9,7 @@ public class Name extends Command {
     }
 
     @Override
-    public String runCommand(String... args) {
+    public String runCommand(String... args) { // Returns the player's name
         return "Your name is" + Game.getGame().getPlayer().getName();
     }
 

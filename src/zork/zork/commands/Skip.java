@@ -10,7 +10,7 @@ public class Skip extends Command {
     }
 
     @Override
-    public String runCommand(String... args) throws InterruptedException {
+    public String runCommand(String... args) throws InterruptedException { // Skips the song currently playing
         Utils.SoundHandler.skip();
         return "Skipped!";
     }

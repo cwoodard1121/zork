@@ -8,15 +8,15 @@ public class Down extends Command {
 
     public Down(String name) {
         super(name);
-        addAlias("d");
+        addAlias("d"); // Allows d to also run this command
     }
 
     @Override
-    public String runCommand(String... args){
+    public String runCommand(String... args){ // Command allows for down direction
         for(Exit e : Game.getGame().getPlayer().getCurrentRoom().getExits()) {
             try{
             if(e.getDirection().equalsIgnoreCase("d")) {
-                if (!e.getAdjacentRoom().isLocked() && !e.getIsExitLocked()) {
+                if (!e.getAdjacentRoom().isLocked() && !e.getIsExitLocked()) { // Changes room, if the room or exit is locked doesnt change room.
                     Game.getGame().getPlayer().changeRoom(e.getAdjacentRoom());
                     e.getAdjacentRoom().printAscii();
                     return e.getAdjacentRoom().getDescription();
