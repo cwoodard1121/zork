@@ -28,7 +28,7 @@ public class Game {
   private final Graphics renderer = new Graphics();
   public static AtomicBoolean bool = new AtomicBoolean();
   private final Gson gson = new Gson();
-  public static boolean music = false;
+  public static boolean music = true;
   public static Game game = new Game();
   public static boolean finished = false;
   public static boolean shouldCreateRooms = true;
@@ -212,6 +212,7 @@ public class Game {
               g.slowTextSpeed("The elevator beeps. It's time to go back down.", 50);
               Thread.sleep(2000);
               player.getInventory().addItem(new Prime(0, "TROPICAL PUNCH PRIME", false, "YELLOW", false, "CEO"));
+              player.setPrimeCounter(player.getPrimeCounter()+1);
               new Thread(new Runnable() {
 
                 @Override
@@ -406,6 +407,7 @@ public class Game {
                                 if((pMoney - 50)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=50);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(0, "Ice Pop Prime", false, "ICE", true, "foodcourt"));
+                                  player.setPrimeCounter(player.getPrimeCounter()+1);
                                   try {
                                     renderer.showCutScene(1500, "\\bin\\zork\\data\\foodcourtcyruscall.txt", 15);
                                   } catch (Exception e) {
@@ -506,6 +508,7 @@ public class Game {
                                 if((pMoney - 10)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=10);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(0, "Blue Raspberry Prime", false, "Blue", true, "circlek"));
+                                  player.setPrimeCounter(player.getPrimeCounter()+1);
                                   eglintonSubway.setLocked(false);
                                   yorkMillsSubway.setLocked(false);
                                   try {
@@ -928,6 +931,7 @@ public class Game {
                                 if((pMoney - 0)>= 0){
                                   Game.getGame().getPlayer().setMoney(pMoney-=0);
                                   Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "GRAPE PRIME", false, "Purple", true, "On The Run"));
+                                  player.setPrimeCounter(player.getPrimeCounter()+1);
                                   try {
                                     renderer.showCutScene(1100, "\\bin\\zork\\data\\stclairwestcyruscall.txt", 15);
                                   } catch (Exception e) {
@@ -1015,6 +1019,7 @@ public class Game {
         if(thugFight.fight()) {
           Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(thug);
           Game.getGame().getPlayer().getInventory().addItem(new Prime(1, "Orange Prime", false, "ORANGE", false, "sketchystreetcorner"));
+          player.setPrimeCounter(player.getPrimeCounter()+1);
           hasFoughtThug[0] = true;
         } else {
           System.out.println("You won't be messing with him again.");
@@ -1475,6 +1480,7 @@ public class Game {
              ans = in.nextLine();
              if(ans.equalsIgnoreCase("27, 05, 17") || ans.equalsIgnoreCase(" 27, 05, 17") || ans.equalsIgnoreCase("27 05 17")) {
                Game.getGame().getPlayer().getInventory().addItem(new Prime(0, "Strawberry Watermelon Prime", isTesting, "pink", finished, ans));
+               player.setPrimeCounter(player.getPrimeCounter()+1);
                text.slowTextSpeed("You slowly twist the locker 27, and then 05 and finally 17. \n the lock opens. as you open the locker you see at the top shelf a shiny pink bottle.\n STRAWBERRY WATTERMELON tm. Prime", 15);
                Thread.sleep(1000);
              }
@@ -1969,6 +1975,7 @@ public class Game {
                         if((pMoney - 10)>= 0){
                           Game.getGame().getPlayer().setMoney(pMoney-=10);
                           Game.getGame().getPlayer().getInventory().addItem(new Prime(0, "Meta Moon Prime", false, "Blue", true, "circlek"));
+                          player.setPrimeCounter(player.getPrimeCounter()+1);
                           renderer.showCutScene(1500, "\\bin\\zork\\data\\pickeringgotprime.txt", 15);
                           eglintonSubway.setLocked(false);
                           boughtPrime4[0] = true;
@@ -2430,6 +2437,7 @@ public class Game {
                   Game.getGame().getPlayer().getCurrentRoom().getEnemies().remove(SHOPKEEPER);
                   text.slowTextSpeed("As the shopkeeper falls, you see a prime and fall out of his pocket and onto the ground. He also drops his metal bat", 7);
                   Game.getGame().getPlayer().getInventory().addItem(new Prime(0, "Lemonade Prime", false, "Yellow", false, "unionscamsmarket"));
+                  player.setPrimeCounter(player.getPrimeCounter()+1);
                   unionScamsMarket.addItemGround(new Weapon(12,"Metal Bat", false, 18, new Effect("Concussion", 4, 0, -2, 0)));
                 }else{
                   Game.getGame().getPlayer().setCurrentRoom(pickeringCameronsHouse);
@@ -2859,8 +2867,9 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    this.player.setCurrentRoom(roomMap.get("japannationalstadiumplaza"));
-    this.player.setMoney(5);
+    this.player.setCurrentRoom(roomMap.get("yorkmillsbusterminal"));
+    this.player.setPrimeCounter(8);
+    this.player.setMoney(500);
     this.player.getInventory().addItem(new Weapon(0, "Fists", false, 5, 
       new Effect("Bleeding", 2, 2, 5, 0)));
     if (isTesting) {
