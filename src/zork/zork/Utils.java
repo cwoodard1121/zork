@@ -180,7 +180,6 @@ public static class SoundHandler {
 
                     clip.stop();
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
     }
 
@@ -302,7 +301,6 @@ public static class SoundHandler {
                     startAfterInterruption();
 
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
             
